@@ -26,13 +26,17 @@ const artigosLista = files.map(file => {
   const body = match[2].trim();
   
   const getValue = (key) => {
-    const regex = new RegExp(`^${key}:\\s*(.*)$`, 'm');
+    // Regex que pega o valor da chave atual até encontrar a próxima chave ou o final do arquivo
+    const regex = new RegExp(`^${key}:\\s*([\\s\\S]*?)(?=\\n\\w+:|$)`, 'm');
     const m = frontmatter.match(regex);
     if (m) {
       let val = m[1].trim();
+      // Se for uma string multi-linha (folded YAML), remove as quebras de linha e espaços extras
+      val = val.replace(/\r?\n\s*/g, ' ');
+      // Remove aspas se existirem
       if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
       else if (val.startsWith("'") && val.endsWith("'")) val = val.slice(1, -1);
-      return val;
+      return val.trim();
     }
     return '';
   };

@@ -339,23 +339,29 @@
         articlesGrid.innerHTML = '';
         
         // 3. Renderizar todos os cards vindos do CMS
+        const now = new Date();
         articlesList.forEach(article => {
-          const card = document.createElement('div');
-          card.className = 'article-card';
-          card.setAttribute('data-category', article.category);
-          card.setAttribute('data-title', article.title);
-          
-          // Formatar Data ISO para Extenso
           let dataFormatada = article.date;
           if (article.date && article.date.includes('T')) {
-            const dataObj = new Date(article.date);
+            const articleDateObj = new Date(article.date);
+            
+            // Pular renderização se o artigo for programado para o futuro
+            if (articleDateObj > now) {
+              return;
+            }
+            
             const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-            dataFormatada = `${dataObj.getDate()} de ${meses[dataObj.getMonth()]}, ${dataObj.getFullYear()}`;
+            dataFormatada = `${articleDateObj.getDate()} de ${meses[articleDateObj.getMonth()]}, ${articleDateObj.getFullYear()}`;
           }
 
           // Calcular Tempo de Leitura Dinamicamente
           const totalWords = (article.body || '').split(/\s+/).length;
           const readingTime = Math.max(1, Math.ceil(totalWords / 200));
+          
+          const card = document.createElement('div');
+          card.className = 'article-card';
+          card.setAttribute('data-category', article.category);
+          card.setAttribute('data-title', article.title);
           
           card.innerHTML = `
             <div class="article-img-wrapper">

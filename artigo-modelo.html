@@ -363,10 +363,20 @@
               // 2. Atualizar Meta
               const metaDiv = document.querySelector('.article-header-meta');
               if (metaDiv) {
+                let dataFormatada = article.date;
+                if (article.date && article.date.includes('T')) {
+                  const dataObj = new Date(article.date);
+                  const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+                  dataFormatada = `${dataObj.getDate()} de ${meses[dataObj.getMonth()]}, ${dataObj.getFullYear()}`;
+                }
+                
+                const totalWords = (article.body || '').split(/\\s+/).length;
+                const readingTime = Math.max(1, Math.ceil(totalWords / 200));
+
                 metaDiv.innerHTML = `
                   <span>✍️ <strong>Por:</strong> Equipe Contabilidade Camilo</span>
-                  <span>📅 <strong>Publicado em:</strong> ${article.date}</span>
-                  <span style="color: var(--secondary-color); font-weight: 600;">⏱️ ${article.reading_time || '4 min de leitura'}</span>
+                  <span>📅 <strong>Publicado em:</strong> ${dataFormatada}</span>
+                  <span style="color: var(--secondary-color); font-weight: 600;">⏱️ ${readingTime} min de leitura</span>
                 `;
               }
               

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contabilidade digital e consultiva para empresas em Jundiaí e todo o Brasil. Abertura de empresas, gestão fiscal, folha de pagamento e planejamento tributário com mais de 17 anos de experiência.">
+  <title>Contabilidade em Jundiaí e Gestão Digital para PMEs | Contabilidade Camilo</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  "name": "Contabilidade Camilo",
+  "url": "https://contabilidadecamilo.com.br",
+  "telephone": "+55-11-94491-3323",
+  "email": "contato@contabilidadecamilo.com.br",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Praça Getúlio Vargas, 19 - Sala 01, Vila Progresso",
+    "addressLocality": "Jundiaí",
+    "addressRegion": "SP",
+    "postalCode": "13202-259",
+    "addressCountry": "BR"
+  },
+  "areaServed": ["Jundiaí", "Brasil"],
+  "priceRange": "$$"
+}
+</script>
+</head>
+
+<body>
+  <!-- Header Fixo -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <span class="logo-text">Contabilidade <strong>Camilo</strong></span>
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li class="dropdown">
+            <a href="index.html#solucoes" class="nav-link">Soluções <span class="caret">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="abertura-de-empresas.html">Abertura de Empresas</a></li>
+              <li><a href="servicos-contabeis.html">Gestão Contábil, Fiscal & Tributária</a></li>
+              <li><a href="departamento-pessoal.html">Departamento Pessoal & eSocial</a></li>
+              <li><a href="planejamento-estrategico.html">Planejamento Estratégico & BPO Financeiro</a></li>
+              <li><a href="certificado-digital.html">Emissão de Certificado Digital</a></li>
+              <li><a href="troca-de-contador.html">Troca de Contador & Regularização</a></li>
+            </ul>
+          </li>
+          <li><a href="sobre-nos.html" class="nav-link">Sobre Nós</a></li>
+          <li><a href="noticias-e-artigos.html" class="nav-link">Notícias & Artigos</a></li>
+          <li><a href="contato.html" class="nav-link">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions" style="display: flex; gap: 0.5rem; align-items: center;">
+        <a href="https://onvio.com.br/clientcenter/pt/auth?r=%2Fhome" target="_blank" rel="noopener noreferrer"
+          class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Portal do Cliente</a>
+        <a href="https://onvio.com.br/login/#/" target="_blank" rel="noopener noreferrer" class="btn-secondary"
+          style="padding: 0.5rem 1rem; font-size: 0.9rem;">Portal do Empregado</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="app">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="hero-badge"
+            style="display: inline-block; background: rgba(255,255,255,0.1); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.9rem; font-weight: 500; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 0.5px;">
+            17 Anos de Excelência em Gestão Contábil
+          </div>
+          <h1>Contabilidade e Serviços Financeiros<br>para <span>você e para sua empresa</span></h1>
+          <p>Descomplicamos a gestão fiscal, tributária e financeira com atendimento humanizado e 100% digital em todo o
+            Brasil. Soluções sob medida para o seu momento e para o seu negócio.</p>
+          <div class="hero-actions" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button onclick="abrirModal('para-voce')" class="btn-primary">PARA VOCÊ</button>
+            <button onclick="abrirModal('abra-empresa')" class="btn-primary">ABRA SUA EMPRESA</button>
+            <button onclick="abrirModal('troque-contador')" class="btn-secondary">TROQUE DE CONTADOR</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Soluções Section -->
+    <section id="solucoes" class="services-section bg-fluid-pattern">
+      <div class="container">
+        <div class="section-header">
+          <h2>Nossas Soluções</h2>
+          <p>Um portfólio completo para tirar a burocracia do seu caminho.</p>
+        </div>
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-building-2">
+                <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
+                <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
+                <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" />
+                <path d="M10 6h4" />
+                <path d="M10 10h4" />
+                <path d="M10 14h4" />
+                <path d="M10 18h4" />
+              </svg>
+            </div>
+            <h3>Abertura e Legalização</h3>
+            <p>Abra seu CNPJ com rapidez ou traga sua empresa para a Contabilidade Camilo sem complicações. Orientação
+              total na escolha da natureza jurídica e CNAEs ideais para o seu negócio.</p>
+            <a href="/abertura-de-empresas.html" class="service-link">Saiba mais &rarr;</a>
+          </div>
+          <!-- Service 2 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-calculator">
+                <rect width="16" height="20" x="4" y="2" rx="2" />
+                <line x1="8" x2="16" y1="6" y2="6" />
+                <line x1="16" x2="16" y1="14" y2="18" />
+                <path d="M16 10h.01" />
+                <path d="M12 10h.01" />
+                <path d="M8 10h.01" />
+                <path d="M12 14h.01" />
+                <path d="M8 14h.01" />
+                <path d="M12 18h.01" />
+                <path d="M8 18h.01" />
+              </svg>
+            </div>
+            <h3>Gestão Contábil, Fiscal & Tributária</h3>
+            <p>Escrituração analítica, balancetes, DRE, apuração do Simples Nacional ou Lucro Presumido e entrega
+              rigorosa de todas as obrigações acessórias (ECD, ECF, DEFIS).</p>
+            <a href="/servicos-contabeis.html" class="service-link">Saiba mais &rarr;</a>
+          </div>
+          <!-- Service 3 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-users">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h3>Departamento Pessoal & eSocial</h3>
+            <p>Processamento de folha de pagamento, pró-labore, admissões, rescisões e cumprimento cravado de prazos do
+              eSocial e e-FGTS Digital, blindando sua empresa contra riscos trabalhistas.</p>
+            <a href="/departamento-pessoal.html" class="service-link">Saiba mais &rarr;</a>
+          </div>
+          <!-- Service 4 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-line-chart">
+                <path d="M3 3v18h18" />
+                <path d="m19 9-5 5-4-4-3 3" />
+              </svg>
+            </div>
+            <h3>Estratégia & BPO Financeiro</h3>
+            <p>Análise de enquadramento anual para pagar o menor imposto legal e terceirização da gestão financeira para
+              você focar nas vendas.</p>
+            <a href="/planejamento-estrategico.html" class="service-link">Saiba mais &rarr;</a>
+          </div>
+          <!-- Service 5 (Novo) -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-file-badge">
+                <path d="M12 22h6a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3" />
+                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                <path d="M5 17a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                <path d="M7 16.5 8 22l-3-1-3 1 1-5.5" />
+              </svg>
+            </div>
+            <h3>Emissão de Certificado Digital</h3>
+            <p>Emissão e renovação rápida de Certificado Digital (e-CPF e e-CNPJ) A1 ou A3 com validação presencial ou
+              por videoconferência com total segurança.</p>
+            <a href="/certificado-digital.html" class="service-link">Saiba mais &rarr;</a>
+          </div>
+          <!-- Service 6 (Novo) -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-arrow-left-right">
+                <path d="M8 3 4 7l4 4" />
+                <path d="M4 7h16" />
+                <path d="m16 21 4-4-4-4" />
+                <path d="M20 17H4" />
+              </svg>
+            </div>
+            <h3>Troca de Contador & Regularização</h3>
+            <p>Migre a contabilidade da sua empresa sem dores de cabeça ou multas. Cuidamos de todo o processo de
+              transição e regularização junto aos órgãos fiscais.</p>
+            <a href="/troca-de-contador.html" class="service-link">Saiba mais &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Planos / Valores -->
+    <section class="pricing-section">
+      <div class="container">
+        <div class="pricing-card">
+          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop"
+            alt="Especialista em Gestão" class="pricing-image">
+          <div class="pricing-content">
+            <h3>Planos a partir de</h3>
+            <div class="pricing-price">
+              <span class="pricing-currency">R$</span>
+              199<span class="pricing-period">/mês*</span>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Contabilidade digital completa e humanizada para
+              empresas de Serviços.</p>
+            <a href="https://wa.me/5511944913323" class="btn-primary"
+              style="padding: 1rem 3rem; border-radius: 50px; font-size: 1.1rem;">Falar com Especialista</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testemunhos (Social Proof) -->
+    <section class="testimonials-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 style="font-size: 2.2rem; color: var(--primary-color);">O que dizem os nossos clientes</h2>
+        </div>
+        <div class="testimonials-grid" style="display: block; margin: 0 auto; max-width: 1200px;">
+          <!-- Elfsight Google Reviews -->
+          <script src="https://elfsightcdn.com/platform.js" async></script>
+          <div class="elfsight-app-7da8252b-31b2-4a85-a4ac-9a5381ccad1d" data-elfsight-app-lazy></div>
+        </div>
+      </div>
+    </section>
+    <!-- Calculadoras Preview -->
+    <section class="calculators-preview-section" style="padding: 5rem 0; background-color: var(--primary-color); color: white;">
+      <div class="container">
+        <div class="section-header">
+          <h2 style="color: white;">Calculadoras Inteligentes</h2>
+          <p style="color: rgba(255,255,255,0.9);">Descubra o melhor regime tributário e planeje seus custos com nossas ferramentas interativas (Em breve).
+          </p>
+        </div>
+        <div class="services-grid">
+          
+          <div class="service-card">
+            <h3>Simples Nacional & Fator R</h3>
+            <p>Simule alíquotas e descubra se sua empresa pode economizar até 60% em impostos.</p>
+          </div>
+          <div class="service-card">
+            <h3>Imposto de Renda (IR)</h3>
+            <p>Ferramenta de simulação e cálculo da declaração de IRPF.</p>
+          </div>
+          <div class="service-card">
+            <h3>Cálculo de INSS</h3>
+            <p>Simulador de contribuição e retenção do INSS.</p>
+          </div>
+        
+          <div class="service-card" style="grid-column: 1 / -1; margin: 2rem auto 0 auto; max-width: 650px; padding: 2.5rem; background-color: #f8fafc; border: 2px solid var(--secondary-color); text-align: center;">
+            <h3 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 1rem;">Diagnóstico Fiscal da Empresa</h3>
+            <p style="font-size: 0.95rem; margin-bottom: 1.5rem; color: var(--text-color);">Análise prévia e gratuita: preencha os dados abaixo para que nossa equipe identifique possíveis pendências ou oportunidades de economia tributária. Enviaremos o relatório detalhado diretamente no seu e-mail ou WhatsApp em até 24 horas úteis.</p>
+            <form id="diagnostico-form" class="diagnostico-form" style="display: grid; grid-template-columns: 1fr; gap: 0.5rem; text-align: left;">
+              <div class="form-group">
+                <label for="diag-nome" style="display: block; margin-bottom: 0.25rem; font-weight: 600; text-transform: none;">Nome Completo</label>
+                <input type="text" id="diag-nome" required style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 8px;">
+              </div>
+              <div class="form-group">
+                <label for="diag-cnpj" style="display: block; margin-bottom: 0.25rem; font-weight: 600; text-transform: none;">CNPJ da Empresa</label>
+                <input type="text" id="diag-cnpj" required style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 8px;">
+              </div>
+              <div class="form-group">
+                <label for="diag-regime" style="display: block; margin-bottom: 0.25rem; font-weight: 600; text-transform: none;">Regime Tributário Atual</label>
+                <select id="diag-regime" required style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 8px; background: white;">
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="Simples Nacional">Simples Nacional</option>
+                  <option value="Lucro Presumido">Lucro Presumido</option>
+                  <option value="Lucro Real">Lucro Real</option>
+                  <option value="Não Sei Responder">Não Sei Responder</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="diag-whatsapp" style="display: block; margin-bottom: 0.25rem; font-weight: 600; text-transform: none;">WhatsApp para contato</label>
+                <input type="tel" id="diag-whatsapp" required style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 8px;">
+              </div>
+              <div class="form-group" style="grid-column: 1 / -1; text-align: center; margin-top: 1rem;">
+                <button type="submit" class="btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem; width: 100%; max-width: 400px; border: none; cursor: pointer;">Solicitar Diagnóstico Gratuito</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Guia Rápido & Glossário -->
+    <section class="glossary-section" style="padding: 5rem 0; background-color: white;">
+      <div class="container">
+        <div class="section-header">
+          <h2>Guia Rápido & Glossário Contábil</h2>
+          <p>Tudo o que você precisa saber sobre a rotina fiscal, tributária e trabalhista da sua empresa, de forma simples e sem juridiquês.</p>
+        </div>
+        
+        <div class="glossary-grid" style="display: grid; gap: 2rem;">
+          
+          <!-- Coluna 1 -->
+          <div class="glossary-column">
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.2rem; border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; display: flex; align-items: flex-end; min-height: 3.5rem; width: fit-content;">Perfis Empresariais, Profissionais & Regimes Tributários</h3>
+            
+            <div class="accordion">
+              <!-- Item 1 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">1. Microempreendedor Individual (MEI)</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">A categoria mais simplificada de empresa no Brasil, criada para formalizar pequenos negócios e autônomos com um CNPJ próprio e tributação reduzida.</div>
+                <div class="accordion-content">
+                  <p>O Microempreendedor Individual (MEI) permite que profissionais autônomos tenham acesso a um CNPJ de forma rápida, emitam notas fiscais e contem com a cobertura de benefícios previdenciários.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>Limite de Faturamento:</strong> Até R$ 81.000,00 por ano (ou proporcional aos meses de atividade no ano de abertura).</li>
+                    <li><strong>Tributação Unificada:</strong> Pagamento mensal fixo através da guia DAS (Documento de Arrecadação do Simples Nacional).</li>
+                    <li><strong>Funcionários:</strong> Permite a contratação de até 1 empregado recebendo o salário mínimo ou o piso da categoria.</li>
+                    <li><strong>Direitos Garantidos:</strong> Aposentadoria por idade, auxílio-doença, salário-maternidade e auxílio-reclusão para dependentes.</li>
+                  </ul>
+                  <p>⚠️ <strong>Quando Migrar?</strong> Se a sua empresa faturar mais de R$ 81 mil/ano ou precisar contratar mais funcionários, a Contabilidade Camilo realiza a migração do MEI para ME de forma segura e sem multas.</p>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">2. Microempresa (ME)</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">A estrutura ideal para empresas em crescimento que faturam até R$ 360 mil por ano, permitindo maior flexibilidade de atividades e contratação de equipe.</div>
+                <div class="accordion-content">
+                  <p>A Microempresa (ME) é o enquadramento porte indicado para negócios que superaram o limite do MEI ou exercem atividades que exigem registro comercial mais amplo.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>Limite de Faturamento:</strong> Até R$ 360.000,00 anuais.</li>
+                    <li><strong>Quadro de Funcionários:</strong> Permite contratar até 9 funcionários (no comércio e serviços) ou até 19 (na indústria).</li>
+                    <li><strong>Regimes Tributários Opções:</strong> Pode optar pelo Simples Nacional, Lucro Presumido ou Lucro Real.</li>
+                    <li><strong>Atividades Permitidas:</strong> Praticamente todas as atividades econômicas podem ser registradas como ME, incluindo sociedades entre dois ou mais sócios.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">3. Empresa de Pequeno Porte (EPP)</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">Porte empresarial voltado a negócios estruturados com faturamento bruto anual de até R$ 4,8 milhões, garantindo incentivos fiscais e de crédito.</div>
+                <div class="accordion-content">
+                  <p>A Empresa de Pequeno Porte (EPP) abrange negócios de médio porte no mercado nacional.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>Faturamento Anual:</strong> Entre R$ 360.000,01 e R$ 4.800.000,00.</li>
+                    <li><strong>Benefícios Legais:</strong> Vantagens em licitações públicas, facilidade de acesso a linhas de crédito bancárias e possibilidade de permanência no Simples Nacional.</li>
+                    <li><strong>Gestão Contábil:</strong> Exige acompanhamento contábil analítico frequente (DRE, Balanço e DFC) para otimização da carga tributária.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Item 4 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">4. Empreendedor / Empresário</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">Definição legal e prática da pessoa física que organiza recursos, assume os riscos do negócio e lidera uma atividade econômica formal.</div>
+                <div class="accordion-content">
+                  <p>Ser um empresário formalizado significa transformar seu trabalho em um ativo juridicamente protegido.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>Proteção Patrimonial:</strong> Com formatos como a SLU (Sociedade Limitada Unipessoal) ou LTDA, o patrimônio pessoal dos sócios fica separado das obrigações da empresa.</li>
+                    <li><strong>Pró-Labore vs. Distribuição de Lucros:</strong> O empresário recebe seu salário (Pró-labore, com incidência de INSS/IRRF) e pode retirar o lucro acumulado isento de Imposto de Renda.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Item 5 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">5. Profissional Autônomo</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">Trabalhador que atua sem vínculo empregatício utilizando apenas o seu CPF, necessitando de controle rigoroso para evitar pagamentos excessivos de impostos.</div>
+                <div class="accordion-content">
+                  <p>O profissional autônomo presta serviços diretamente a pessoas físicas ou jurídicas sem constituir uma empresa (CNPJ).</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>Arrecadação Fiscal:</strong> Tributado através do Carnê-Leão (tabela progressiva do IRPF que pode chegar a 27,5%), acrescido de ISS municipal e INSS autônomo (20%).</li>
+                    <li><strong>Comparativo Contábil:</strong> Em 90% dos casos, quando o faturamento mensal do autônomo ultrapassa R$ 5.000, abrir um CNPJ (PJ) reduz a carga tributária pela metade em relação à atuação via CPF.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Item 6 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">6. Profissional Liberal</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">Profissional com formação universitária ou técnica regulamentada por conselho de classe (médicos, advogados, contadores, engenheiros) que pode atuar como CPF ou PJ.</div>
+                <div class="accordion-content">
+                  <p>Diferente do autônomo genérico, o profissional liberal possui vínculo com um conselho profissional regulamentador (CRM, OAB, CRC, CREA, etc.).</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>Formas de Atuação:</strong> Pode trabalhar como empregado CLT, prestador autônomo (CPF) ou abrindo sua própria PJ.</li>
+                    <li><strong>Planejamento Tributário:</strong> A abertura de uma Sociedade Unipessoal ou Simples Nacional com a regra do Fator R traz expressiva economia de impostos para profissionais liberais.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h3 style="color: var(--primary-color); margin-top: 2rem; margin-bottom: 1.5rem; font-size: 1.2rem; border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; display: inline-block;">Regimes Tributários e Legislação</h3>
+
+              <!-- Item 7 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">7. Simples Nacional</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">O regime tributário mais buscado por micro e pequenas empresas, que unifica até 8 impostos em uma única guia de pagamento (DAS).</div>
+                <div class="accordion-content">
+                  <p>O Simples Nacional foi criado para desburocratizar a vida do micro e pequeno empresário brasileiro.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>Impostos Unificados:</strong> Reúne IRPJ, CSLL, PIS, COFINS, CPP (Previdência), IPI, ICMS e ISS em um só documento.</li>
+                    <li><strong>Tabela de Anexos:</strong> Dividido em 5 Anexos (Comércio, Indústria e Serviços). As alíquotas são progressivas de acordo com o faturamento acumulado nos últimos 12 meses.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Item 8 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">8. Fator R no Simples Nacional</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">A regra tributária que permite a empresas de serviços migrarem do Anexo V para o Anexo III, reduzindo a alíquota inicial de impostos de 15,5% para apenas 6%.</div>
+                <div class="accordion-content">
+                  <p>O Fator R é um cálculo mensal realizado pela contabilidade que compara os custos da folha de pagamento com o faturamento da empresa.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>A Regra dos 28%:</strong> Se as despesas com folha de pagamento (incluindo salários, encargos e o Pró-labore dos sócios) representarem 28% ou mais do faturamento bruto dos últimos 12 meses, a empresa ganha o direito de pagar impostos pelo Anexo III (alíquota inicial de 6%).</li>
+                    <li><strong>Aplicação Prática:</strong> A Contabilidade Camilo ajusta o seu Pró-labore na medida exata para você enquadrar sua empresa no Anexo III e economizar até 60% em impostos legalmente.</li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Coluna 2 -->
+          <div class="glossary-column">
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.2rem; border-bottom: 2px solid var(--secondary-color); padding-bottom: 0.5rem; display: flex; align-items: flex-end; min-height: 3.5rem; width: fit-content;">Guias Práticos, Obrigações & Siglas Fiscais</h3>
+            
+            <div class="accordion">
+              <!-- Item 9 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">9. Abertura e Encerramento de Empresa</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">O passo a passo seguro para dar vida ao seu CNPJ ou encerrar uma empresa inativa sem deixar pendências fiscais no CPF dos sócios.</div>
+                <div class="accordion-content">
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>Abertura:</strong> Envolve consulta prévia de viabilidade de endereço na Prefeitura, elaboração do Contrato Social, registro na Junta Comercial (JUCESP), emissão do CNPJ na Receita Federal e obtenção de Alvará e Licenças.</li>
+                    <li><strong>Encerramento:</strong> O encerramento correto exige o distrato social e a baixa nos órgãos governamentais, garantindo que a empresa encerrada não continue gerando multas por declarações omissas.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Item 10 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">10. Emissão de Nota Fiscal (NFS-e e NF-e)</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">Orientações fundamentais para emitir notas de serviços e produtos em conformidade com as exigências municipais e estaduais.</div>
+                <div class="accordion-content">
+                  <p>A nota fiscal é o documento oficial que comprova o faturamento do seu negócio.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>NFS-e (Serviços):</strong> Emitida no portal da Prefeitura ou em emissor nacional, exige o correto enquadramento do código de serviço e alíquota de ISS.</li>
+                    <li><strong>NF-e (Mercadorias):</strong> Exige credenciamento na SEFAZ estadual, Certificado Digital e sistema emissor adequado.</li>
+                  </ul>
+                  <p>⚠️ <strong>Dica:</strong> Emitir notas fiscais com códigos errados pode levar à tributação duplicada de impostos.</p>
+                </div>
+              </div>
+
+              <!-- Item 11 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">11. Declaração do Imposto de Renda Pessoa Física (DIRPF)</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">Como declarar seus rendimentos, pró-labore e lucros distribuídos da sua empresa sem cair na malha fina da Receita Federal.</div>
+                <div class="accordion-content">
+                  <p>Sócios e empresários possuem regras específicas na declaração anual do IRPF.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>O que declarar:</strong> O valor recebido a título de Pró-labore (Rendimento Tributável) e a Distribuição de Lucros (Rendimento Isento e Não Tributável).</li>
+                    <li><strong>Cruzamento de Dados:</strong> A Receita Federal cruza os dados do IRPF com a contabilidade da empresa (DEFIS/ECD/ECF). Ter uma escrituração contábil em dia garante a comprovação da isenção dos lucros distribuídos.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Item 12 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">12. Certidão Negativa de Débitos (CND)</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">O documento que atesta a saúde fiscal da empresa, indispensável para obter empréstimos, participar de licitações e fechar contratos.</div>
+                <div class="accordion-content">
+                  <p>A CND comprova que a empresa não possui pendências tributárias ou previdenciárias junto aos órgãos públicos.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>Tipos de CND:</strong> Federal (Receita/PGFN), Estadual (SEFAZ), Municipal (Prefeitura) e Trabalhista (CNDT).</li>
+                    <li><strong>Monitoramento Contínuo:</strong> A Contabilidade Camilo realiza a varredura constante das certidões para garantir que sua empresa esteja sempre apta a operar.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Item 13 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">13. Guia DAS (Documento de Arrecadação do Simples)</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">O boleto mensal de recolhimento tributário do Simples Nacional com vencimento todo dia 20.</div>
+                <div class="accordion-content">
+                  <p>O DAS unifica a arrecadação de impostos da empresa.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>Vencimento:</strong> Deve ser pago mensalmente até o dia 20 (ou próximo dia útil).</li>
+                    <li><strong>Atrasos:</strong> Em caso de atraso, incidem juros diários e multa. A guia pode ser recalculada no portal do Simples Nacional ou através do nosso suporte contábil.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Item 14 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">14. DASN-SIMEI (Declaração Anual do MEI)</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">A declaração anual obrigatória que todo MEI deve entregar até 31 de maio informando o faturamento do ano anterior.</div>
+                <div class="accordion-content">
+                  <p>O preenchimento da DASN-SIMEI é obrigatório mesmo para MEIs que não tiveram faturamento no ano.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>O que informar:</strong> Receita bruta total do ano anterior (separando venda de mercadorias e prestação de serviços) e se houve empregado contratado.</li>
+                    <li><strong>Penas por Atraso:</strong> Multa por atraso na entrega e risco de bloqueio do CNPJ e perda do benefício do INSS.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Item 15 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">15. GFIP e eSocial</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">As plataformas e declarações oficiais para envio de dados trabalhistas, folha de pagamento e recolhimento do FGTS.</div>
+                <div class="accordion-content">
+                  <p>A gestão do Departamento Pessoal passou por uma modernização total com o eSocial e o FGTS Digital.</p>
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li>O eSocial unificou o envio de dados de admissões, férias, desligamentos e segurança do trabalho (SST).</li>
+                    <li>A Contabilidade Camilo garante o cumprimento rigoroso de todos os prazos trabalhistas para blindar sua empresa contra autuações e processos.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Item 16 -->
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  <span class="accordion-title">16. RAIS e SAT/RAT</span>
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-summary-text">Siglas cruciais da rotina de RH que impactam diretamente o abono salarial dos colaboradores e o custo do seguro de acidentes na folha.</div>
+                <div class="accordion-content">
+                  <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                    <li><strong>RAIS:</strong> Relação Anual de Informações Sociais, fundamental para garantir o pagamento do PIS/PASEP aos funcionários.</li>
+                    <li><strong>SAT/RAT:</strong> Seguro de Acidente de Trabalho. Uma alíquota tributária que varia entre 1% e 3% sobre a folha de pagamento, calculada conforme o grau de risco da atividade da empresa.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Seção YouTube -->
+    <section class="youtube-section" style="padding: 5rem 0; background-color: #f8fafc;">
+      <div class="container">
+        <div class="section-header">
+          <h2 style="font-size: 2.2rem; color: var(--primary-color);">Nosso Canal no YouTube</h2>
+          <p>Acompanhe as últimas dicas e atualizações contábeis.</p>
+        </div>
+        <div id="youtube-feed"
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+          <!-- Os vídeos serão injetados aqui pelo main.js -->
+          <p style="text-align: center; grid-column: 1 / -1;">Carregando últimos vídeos...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Contato na Home -->
+    <section id="contato" class="service-details"
+      style="background-color: var(--primary-color); color: white; padding: 5rem 0;">
+      <div class="container">
+        <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+
+          <!-- Info Card -->
+          <div class="contact-info">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; color: white;">Informações de Contato</h2>
+            <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;"><strong>CONTABILIDADE CAMILO S/S
+                LTDA</strong><br>CNPJ: 31.970.463/0001-00</p>
+
+            <div class="info-block" style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+              <div style="color: var(--secondary-color);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-map-pin">
+                  <path
+                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 15 4 10a8 8 0 0 1 16 0" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div>
+                <h4 style="font-size: 1.2rem; margin-bottom: 0.25rem; color: white;">Endereço</h4>
+                <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.4;">Praça Getúlio Vargas, 19 - Sala 01<br>Vila
+                  Progresso - Jundiaí/SP | CEP 13202-259</p>
+              </div>
+            </div>
+
+            <div class="info-block" style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+              <div style="color: var(--secondary-color);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-phone">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </div>
+              <div>
+                <h4 style="font-size: 1.2rem; margin-bottom: 0.25rem; color: white;">Atendimento & Telefones</h4>
+                <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.4;">Presencial sob agendamento.<br>(11)
+                  94491-3323 / (11) 4587-0548</p>
+              </div>
+            </div>
+
+            <div class="info-block" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+              <div style="color: var(--secondary-color);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-mail">
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+              </div>
+              <div>
+                <h4 style="font-size: 1.2rem; margin-bottom: 0.25rem; color: white;">E-mail Oficial</h4>
+                <p style="color: rgba(255, 255, 255, 0.8);">contato@contabilidadecamilo.com.br</p>
+              </div>
+            </div>
+
+            <h4 style="font-size: 1.2rem; margin-bottom: 1rem; color: white;">Nossas Redes Sociais</h4>
+            <div class="social-icons" style="display: flex; gap: 1rem;">
+
+                <a href="https://br.linkedin.com/company/contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: white; transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='var(--secondary-color)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='white'; this.style.transform='translateY(0)'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+
+                <a href="https://www.facebook.com/contabilidadecamilo/" target="_blank" rel="noopener noreferrer" style="color: white; transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='var(--secondary-color)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='white'; this.style.transform='translateY(0)'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                </a>
+
+                <a href="https://www.instagram.com/contabilidadecamilo/" target="_blank" rel="noopener noreferrer" style="color: white; transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='var(--secondary-color)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='white'; this.style.transform='translateY(0)'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+
+                <a href="https://www.youtube.com/@contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: white; transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='var(--secondary-color)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='white'; this.style.transform='translateY(0)'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                </a>
+
+                <a href="https://www.tiktok.com/@contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: white; transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='var(--secondary-color)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='white'; this.style.transform='translateY(0)'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 448 512" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+                </a>
+              </div>
+          </div>
+
+          <!-- Formulário Embed -->
+          <div class="contact-form-container">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; color: var(--primary-color);">Envie uma Mensagem</h2>
+            <form action="#" method="POST">
+              <div class="form-group">
+                <label for="nome">Seu Nome *</label>
+                <input type="text" id="nome" class="form-control" placeholder="Digite seu nome completo" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Seu E-mail *</label>
+                <input type="email" id="email" class="form-control" placeholder="Digite seu melhor e-mail" required>
+              </div>
+              <div class="form-group">
+                <label for="servico">Serviço de Interesse</label>
+                <select id="servico" class="form-control">
+                  <option>Abertura de Empresa</option>
+                  <option>Troca de Contador</option>
+                  <option>Assessoria Contábil e Fiscal (Mensal)</option>
+                  <option>Departamento Pessoal</option>
+                  <option>Planejamento Estratégico e BPO</option>
+                  <option>Emissão de Certificado Digital</option>
+                  <option>Outros assuntos</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="mensagem">Sua Mensagem *</label>
+                <textarea id="mensagem" class="form-control" placeholder="Escreva um pouco sobre o que busca..."
+                  required></textarea>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Ao informar meus dados, eu concordo com a <a href="politica-de-privacidade.html" target="_blank" style="text-decoration: underline; color: var(--primary-color);">Política de Privacidade</a> e com os <a href="termos-de-uso.html" target="_blank" style="text-decoration: underline; color: var(--primary-color);">Termos de Uso</a>.</p>
+              <button type="submit" class="btn-primary btn-submit">
+                Enviar via WhatsApp
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-send">
+                  <line x1="22" x2="11" y1="2" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Institucional -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <span class="logo-text-footer">Contabilidade <strong>Camilo</strong></span>
+        <p>Há mais de <span class="anos-experiencia">17</span> anos auxiliando na elaboração de estratégias para seu
+          negócio.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Soluções Rápidas</h4>
+        <ul>
+          <li><a href="abertura-de-empresas.html">Abertura de Empresa</a></li>
+          <li><a href="servicos-contabeis.html">Gestão Contábil, Fiscal & Tributária</a></li>
+          <li><a href="departamento-pessoal.html">Departamento Pessoal & eSocial</a></li>
+          <li><a href="planejamento-estrategico.html">Planejamento Estratégico & BPO Financeiro</a></li>
+          <li><a href="certificado-digital.html">Emissão de Certificado Digital</a></li>
+          <li><a href="troca-de-contador.html">Troca de Contador & Regularização</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contato</h4>
+        <p>📍 Jundiaí/SP e todo Território Nacional</p>
+        <p>✉️ contato@contabilidadecamilo.com.br</p>
+        <p> </p>
+        <div class="social-icons" style="display: flex; gap: 1rem; margin-top: 1rem;">
+
+                <a href="https://br.linkedin.com/company/contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+
+                <a href="https://www.facebook.com/contabilidadecamilo/" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                </a>
+
+                <a href="https://www.instagram.com/contabilidadecamilo/" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+
+                <a href="https://www.youtube.com/@contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                </a>
+
+                <a href="https://www.tiktok.com/@contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 448 512" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+                </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="current-year"></span> Contabilidade Camilo. Todos os direitos reservados. | <a
+          href="politica-de-privacidade.html" target="_blank" style="color:var(--text-light)">Política de Privacidade</a> | <a
+          href="termos-de-uso.html" target="_blank" style="color:var(--text-light)">Termos de Uso</a></p>
+    </div>
+  </footer>
+
+  <!-- Botões Flutuantes -->
+  <a href="https://wa.me/5511944913323" class="fab-whatsapp" aria-label="Falar no WhatsApp">
+    <!-- Ícone do WhatsApp (Lucide) -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle">
+      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+    </svg>
+  </a>
+
+  <button id="btn-back-to-top" class="fab-back-to-top" aria-label="Voltar ao topo">
+    <!-- Ícone Chevron Up (Lucide) -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up">
+      <path d="m18 15-6-6-6 6" />
+    </svg>
+  </button>
+
+  <!-- Modais de Captura -->
+  <div id="modal-overlay" class="modal-overlay" onclick="fecharModal()"></div>
+
+  <div id="modal-form" class="modal-container">
+    <div class="modal-header" style="display:flex; flex-direction:column; gap:0.5rem; position:relative;">
+      <button class="modal-close" style="position:absolute; right:1.5rem; top:1.5rem;"
+        onclick="fecharModal()">×</button>
+      <h3 style="color:var(--primary-color); font-size:1.4rem; font-weight:600; margin-bottom: 0;">Contabilidade <span
+          style="color:var(--secondary-color)">Camilo</span></h3>
+      <p style="color:var(--text-color); font-size:1.05rem; margin-bottom: 1rem;">Atendimento para todo o Brasil</p>
+      <p style="color:var(--text-light); font-size:1rem; margin-bottom:0;">Preencha seus dados e aguarde o contato do
+        nosso time!</p>
+    </div>
+    <div class="modal-body">
+      <form action="https://formsubmit.co/contato@contabilidadecamilo.com.br" method="POST" class="custom-modal-form">
+        <!-- Next param ensures formsubmit doesn't show a captcha by default if paid or configured, but usually we just add basic fields -->
+        <input type="hidden" name="_next" value="http://localhost:3000/index.html?sucesso=true">
+        <input type="hidden" name="_subject" value="Novo Contato via Capa do Site!">
+        <input type="hidden" name="_captcha" value="false">
+
+        <div class="form-group">
+          <input type="text" id="modal-nome" name="nome" placeholder="Nome *" required>
+        </div>
+        <div class="form-group">
+          <input type="tel" id="modal-celular" name="celular" placeholder="Celular *" required>
+        </div>
+        <div class="form-group">
+          <input type="email" id="modal-email" name="email" placeholder="Email *" required>
+        </div>
+        <div class="form-group">
+          <select id="modal-selecao" name="selecao" required>
+            <option value="">Selecione</option>
+            <!-- Opções injetadas via JS -->
+          </select>
+        </div>
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="modal-concordo" required>
+          <label for="modal-concordo">Eu concordo em receber comunicações.</label>
+        </div>
+        <p class="modal-terms">Ao informar meus dados, eu concordo com a <a href="politica-de-privacidade.html"
+            target="_blank">Política de Privacidade</a> e com os <a href="termos-de-uso.html" target="_blank">Termos de
+            Uso</a>.</p>
+        <button type="submit" class="btn-primary modal-submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>

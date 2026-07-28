@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notícias & Artigos Fiscais | Contabilidade Camilo em Jundiaí</title>
+  <meta name="description" content="Central de Conhecimento e Legislação Tributária. Artigos sobre Simples Nacional, Reforma Tributária, eSocial e BPO Financeiro produzidos por quem tem mais de 17 anos de autoridade." />
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Notícias & Artigos - Contabilidade Camilo",
+    "url": "https://contabilidadecamilo.com.br/noticias-e-artigos.html",
+    "description": "Central de Conhecimento e Atualizações Fisco-Tributárias para empresas e empreendedores no Brasil.",
+    "publisher": {
+      "@type": "AccountingService",
+      "name": "Contabilidade Camilo"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Header Fixo -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="index.html" target="_blank" rel="noopener noreferrer" class="logo">
+        <span class="logo-text">Contabilidade <strong>Camilo</strong></span>
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" target="_blank" rel="noopener noreferrer" class="nav-link">Home</a></li>
+          <li class="dropdown">
+            <a href="index.html#solucoes" target="_blank" rel="noopener noreferrer" class="nav-link">Soluções <span class="caret">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="abertura-de-empresas.html" target="_blank" rel="noopener noreferrer">Abertura de Empresas</a></li>
+              <li><a href="servicos-contabeis.html" target="_blank" rel="noopener noreferrer">Gestão Contábil, Fiscal & Tributária</a></li>
+              <li><a href="departamento-pessoal.html" target="_blank" rel="noopener noreferrer">Departamento Pessoal & eSocial</a></li>
+              <li><a href="planejamento-estrategico.html" target="_blank" rel="noopener noreferrer">Planejamento Estratégico & BPO Financeiro</a></li>
+              <li><a href="certificado-digital.html" target="_blank" rel="noopener noreferrer">Emissão de Certificado Digital</a></li>
+              <li><a href="troca-de-contador.html" target="_blank" rel="noopener noreferrer">Troca de Contador & Regularização</a></li>
+            </ul>
+          </li>
+          <li><a href="sobre-nos.html" target="_blank" rel="noopener noreferrer" class="nav-link">Sobre Nós</a></li>
+          <li><a href="noticias-e-artigos.html" class="nav-link active">Notícias & Artigos</a></li>
+          <li><a href="contato.html" target="_blank" rel="noopener noreferrer" class="nav-link">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions" style="display: flex; gap: 0.5rem; align-items: center;">
+        <a href="https://onvio.com.br/clientcenter/pt/auth?r=%2Fhome" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Portal do Cliente</a>
+        <a href="https://onvio.com.br/login/#/" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Portal do Empregado</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="app">
+    <!-- Internal Hero Section -->
+    <section class="internal-hero" style="background: linear-gradient(135deg, #0f1e36 0%, #1a3258 100%); padding: 5rem 0 4rem; color: white; text-align: center;">
+      <div class="container">
+        <div style="display: inline-block; background: rgba(255,255,255,0.1); padding: 0.35rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 500; margin-bottom: 1.2rem; border: 1px solid rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 0.5px;">
+          Central de Conhecimento & Legislação
+        </div>
+        <h1 style="font-size: 2.8rem; margin-bottom: 1rem; color: white;">Notícias & <span style="color: var(--secondary-color);">Artigos</span></h1>
+        <p style="max-width: 750px; margin: 0 auto; font-size: 1.1rem; opacity: 0.9; line-height: 1.6;">
+          Análises tributárias, orientações fiscais e conformidade legal explicadas de forma simples e cirúrgica por quem tem mais de <span class="anos-experiencia">17</span> anos de autoridade contábil.
+        </p>
+      </div>
+    </section>
+
+    <!-- Search & Filter Section -->
+    <section class="articles-search-section" style="padding: 3rem 0 1.5rem; background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      <div class="container">
+        <div class="search-filter-wrapper" style="max-width: 850px; margin: 0 auto; text-align: center;">
+          
+          <!-- Lupa e Caixinha de Pesquisa -->
+          <div class="search-box" style="position: relative; margin-bottom: 1.8rem;">
+            <input type="text" id="searchInput" placeholder="Pesquisar por assunto, lei, imposto ou palavra-chave (ex: Simples Nacional, IRPF, eSocial)..." style="width: 100%; padding: 1.1rem 1.5rem 1.1rem 3.4rem; border-radius: 50px; border: 2px solid #cbd5e1; font-size: 1rem; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(0,0,0,0.05); outline: none; color: var(--text-color);">
+            <span style="position: absolute; left: 1.3rem; top: 50%; transform: translateY(-50%); font-size: 1.3rem;">🔍</span>
+          </div>
+
+          <!-- Botões das Tags de Categorias (Gerados Dinamicamente via JS com Contagem em Tempo Real) -->
+          <div class="filter-tags" id="filterTags" style="display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap;">
+            <!-- O motor Jamstack injeta as categorias automaticamente aqui -->
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Grid / Mosaico de Artigos -->
+    <section class="articles-list-section" style="padding: 3.5rem 0 5rem; background: #ffffff;">
+      <div class="container">
+        
+        <div class="articles-grid" id="articlesGrid">
+          
+          <!-- Card 1 -->
+          <div class="article-card" data-category="Simples Nacional" data-title="Tabela do Simples Nacional 2026 Novas regras e limites de faturamento para empresas">
+            <div class="article-img-wrapper">
+              <span class="article-category-badge">Simples Nacional</span>
+              <img src="/corporate_business.jpg" alt="Empresários analisando a nova tabela do Simples Nacional">
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>📅 25 de Julho, 2026</span>
+                <span class="article-meta-time">⏱️ 4 min de leitura</span>
+              </div>
+              <h3 class="article-title">Tabela do Simples Nacional 2026: Novas regras e limites de faturamento para empresas</h3>
+              <p class="article-summary">
+                Confira como ficam as alíquotas, anexos de partilha e o sublimite de faturamento para micro e pequenas empresas neste exercício fiscal, evitando surpresas na emissão de notas.
+              </p>
+              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="article-card" data-category="Tributário & Impostos" data-title="Reforma Tributária IBS e CBS O impacto na prestação de serviços e como sua empresa deve se preparar">
+            <div class="article-img-wrapper">
+              <span class="article-category-badge">Tributário & Impostos</span>
+              <img src="/strategic_planning.png" alt="Planejamento estratégico para a Reforma Tributária">
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>📅 18 de Julho, 2026</span>
+                <span class="article-meta-time">⏱️ 6 min de leitura</span>
+              </div>
+              <h3 class="article-title">Reforma Tributária (IBS e CBS): O impacto na prestação de serviços e como sua empresa deve se preparar</h3>
+              <p class="article-summary">
+                Entenda a substituição gradual do PIS, COFINS e ISS pelo sistema de IVA dual. Saiba como o período de transição afeta o fluxo de caixa do seu negócio B2B.
+              </p>
+              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="article-card" data-category="Trabalhista & eSocial" data-title="eSocial e Férias 2026 Prazos rigorosos de envio e penalidades que todo empregador precisa evitar">
+            <div class="article-img-wrapper">
+              <span class="article-category-badge">Trabalhista & eSocial</span>
+              <img src="/dp_team.png" alt="Equipe de Departamento Pessoal gerenciando eventos do eSocial">
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>📅 10 de Julho, 2026</span>
+                <span class="article-meta-time">⏱️ 5 min de leitura</span>
+              </div>
+              <h3 class="article-title">eSocial e Férias 2026: Prazos rigorosos de envio e penalidades que todo empregador precisa evitar</h3>
+              <p class="article-summary">
+                As novas diretrizes de cruzamento eletrônico da Receita e do Ministério do Trabalho não toleram atrasos nos avisos de férias e SST. Veja o checklist obrigatório do DP.
+              </p>
+              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="article-card" data-category="Gestão Empresarial" data-title="BPO Financeiro vs Contabilidade Tradicional Por que terceirizar o financeiro aumenta a lucratividade">
+            <div class="article-img-wrapper">
+              <span class="article-category-badge">Gestão Empresarial</span>
+              <img src="/mei_entrepreneur.png" alt="Empreendedora otimizando lucros através do BPO Financeiro">
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>📅 02 de Julho, 2026</span>
+                <span class="article-meta-time">⏱️ 4 min de leitura</span>
+              </div>
+              <h3 class="article-title">BPO Financeiro vs. Contabilidade Tradicional: Por que terceirizar o financeiro aumenta a lucratividade</h3>
+              <p class="article-summary">
+                Descubra a diferença entre apenas apurar guias de impostos e ter especialistas cuidando de todo o seu fluxo de caixa, contas a pagar, receber e conciliação bancária diária.
+              </p>
+              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="article-card" data-category="Imposto de Renda" data-title="Distribuição de Lucros Isenta no IRPF 2026 Requisitos contábeis obrigatórios para sócios">
+            <div class="article-img-wrapper">
+              <span class="article-category-badge">Imposto de Renda</span>
+              <img src="/Contabilidade-Camilo-Fundo0.jpg" alt="Especialistas analisando isenção na distribuição de lucros">
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>📅 22 de Junho, 2026</span>
+                <span class="article-meta-time">⏱️ 5 min de leitura</span>
+              </div>
+              <h3 class="article-title">Distribuição de Lucros Isenta no IRPF 2026: Requisitos contábeis obrigatórios para sócios</h3>
+              <p class="article-summary">
+                Para retirar lucro isento de imposto na pessoa física, a empresa precisa manter a escrituração contábil rigorosa e estar sem débitos tributários. Conheça as regras.
+              </p>
+              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="article-card" data-category="Tributário & Impostos" data-title="Planejamento Tributário para Clínicas Médicas e Profissionais da Saúde Como reduzir o IRPJ legalmente">
+            <div class="article-img-wrapper">
+              <span class="article-category-badge">Tributário & Impostos</span>
+              <img src="/switch_accountant.png" alt="Consulta contábil para médicos e clínicas">
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>📅 14 de Junho, 2026</span>
+                <span class="article-meta-time">⏱️ 7 min de leitura</span>
+              </div>
+              <h3 class="article-title">Planejamento Tributário para Clínicas Médicas e Profissionais da Saúde: Como reduzir o IRPJ legalmente</h3>
+              <p class="article-summary">
+                A equiparação hospitalar e a correta opção de regime podem gerar economias expressivas no IRPJ e CSLL para clínicas. Veja como aplicamos essa tese com segurança.
+              </p>
+              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Mensagem de "Nenhum resultado encontrado" (Invisível no início) -->
+        <div id="noResultsMsg" style="display: none; text-align: center; padding: 4rem 1rem; background: #f8fafc; border-radius: 16px; border: 2px dashed #cbd5e1; margin-top: 2rem;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">📭</div>
+          <h3 style="color: var(--primary-color); font-size: 1.4rem; margin-bottom: 0.5rem;">Nenhum artigo encontrado</h3>
+          <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 1.5rem;">
+            Não encontramos nenhum conteúdo para a sua busca. Tente buscar por outros termos fiscais ou limpe os filtros para ver toda a biblioteca.
+          </p>
+          <button id="clearFiltersBtn" class="btn-primary" style="padding: 0.8rem 2rem;">Limpar Busca e Filtros</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Box de Conversão (CTA de Fundo de Funil) -->
+    <section class="articles-cta-section" style="padding: 2rem 0 5rem; background: #ffffff;">
+      <div class="container">
+        <div class="cta-conversion-box" style="background: linear-gradient(135deg, #0f1e36 0%, #1a3258 100%); border-radius: 20px; padding: 3.5rem 2.5rem; text-align: center; color: white; border: 2px solid rgba(212, 175, 55, 0.4); box-shadow: 0 15px 40px rgba(15, 30, 54, 0.2);">
+          <div style="display: inline-block; background: rgba(212, 175, 55, 0.2); color: var(--secondary-color); padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1.2rem;">
+            Consultoria Consultiva de Alta Performance
+          </div>
+          <h2 style="font-size: 2.2rem; color: white; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Sua empresa precisa de orientação técnica especializada sobre estes assuntos?
+          </h2>
+          <p style="font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto 2.5rem; line-height: 1.6;">
+            Não arrisque a segurança fiscal e o patrimônio do seu negócio. Fale direto com a nossa equipe de especialistas e garanta conformidade legal com <span class="anos-experiencia">17</span> anos de excelência.
+          </p>
+          <div style="display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;">
+            <a href="https://wa.me/5511944913323?text=Ol%C3%A1!%20Acessei%20a%20Central%20de%20Not%C3%ADcias%20e%20Artigos%20no%20site%20de%20voc%C3%AAs%20e%20gostaria%20de%20conversar%20com%20um%20especialista%20para%20receber%20orienta%C3%A7%C3%A3o%20t%C3%A9cnica%20sobre%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener noreferrer" class="btn-primary" style="background: #25D366; border-color: #25D366; color: white; padding: 1rem 2rem; font-size: 1.05rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <span>💬 Falar com um Especialista no WhatsApp</span>
+            </a>
+            <a href="troca-de-contador.html" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 1rem 2rem; font-size: 1.05rem;">
+              Conhecer Planos e Trocar de Contador
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-col">
+        <a href="index.html" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-bottom: 1.2rem;">
+          <img src="/logo_contabilidade_camilo_1784258679276.png" alt="Contabilidade Camilo" style="max-height: 55px; width: auto; display: block;">
+        </a>
+        <p style="color:var(--text-light); font-size:0.95rem;">
+          Há mais de <span class="anos-experiencia">17</span> anos oferecendo soluções contábeis, tributárias e de gestão empresarial com excelência, tecnologia e atendimento humanizado em Jundiaí e região.
+        </p>
+        <p style="color:var(--secondary-color); font-weight:600; margin-top:1rem;">
+          CRC/SP: 2EB000788/O-4
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Acesso Rápido</h4>
+        <ul class="footer-links">
+          <li><a href="index.html" target="_blank" rel="noopener noreferrer">Home</a></li>
+          <li><a href="sobre-nos.html" target="_blank" rel="noopener noreferrer">Sobre Nós</a></li>
+          <li><a href="noticias-e-artigos.html" target="_blank" rel="noopener noreferrer">Notícias & Artigos</a></li>
+          <li><a href="contato.html" target="_blank" rel="noopener noreferrer">Contato</a></li>
+          <li><a href="troca-de-contador.html" target="_blank" rel="noopener noreferrer">Troque de Contador</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Especialidades</h4>
+        <ul class="footer-links">
+          <li><a href="abertura-de-empresas.html" target="_blank" rel="noopener noreferrer">Abertura de Empresas</a></li>
+          <li><a href="servicos-contabeis.html" target="_blank" rel="noopener noreferrer">Gestão Contábil & Fiscal</a></li>
+          <li><a href="departamento-pessoal.html" target="_blank" rel="noopener noreferrer">Departamento Pessoal & eSocial</a></li>
+          <li><a href="planejamento-estrategico.html" target="_blank" rel="noopener noreferrer">BPO Financeiro & Planejamento</a></li>
+          <li><a href="certificado-digital.html" target="_blank" rel="noopener noreferrer">Certificado Digital</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Fale Conosco</h4>
+        <p style="color:var(--text-light); font-size:0.95rem; margin-bottom:0.5rem;">
+          📍 Praça Getúlio Vargas, 19 - Sala 01<br>Vila Progresso, Jundiaí - SP
+        </p>
+        <p style="color:var(--text-light); font-size:0.95rem; margin-bottom:0.5rem;">
+          📞 (11) 94491-3323
+        </p>
+        <p style="color:var(--text-light); font-size:0.95rem; margin-bottom:1rem;">
+          ✉️ contato@contabilidadecamilo.com.br
+        </p>
+        <div class="social-links" style="display:flex; gap:1rem; flex-wrap: wrap;">
+          <a href="https://br.linkedin.com/company/contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/contabilidadecamilo/" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/contabilidadecamilo/" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 448 512" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="current-year"></span> Contabilidade Camilo. Todos os direitos reservados. | <a href="politica-de-privacidade.html" target="_blank" style="color:var(--text-light)">Política de Privacidade</a> | <a href="termos-de-uso.html" target="_blank" style="color:var(--text-light)">Termos de Uso</a></p>
+    </div>
+  </footer>
+
+  <script type="module" src="/main.js"></script>
+
+  <!-- Script do Motor Jamstack: Varredura Automática e Filtros em Tempo Real -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('searchInput');
+      const articleCards = document.querySelectorAll('.article-card');
+      const noResultsMsg = document.getElementById('noResultsMsg');
+      const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+      const articlesGrid = document.getElementById('articlesGrid');
+      const filterTagsContainer = document.getElementById('filterTags');
+
+      let currentCategory = 'all';
+      let currentQuery = '';
+
+      // ==========================================
+      // 1. MOTOR JAMSTACK: VARREDURA E GERADOR DE FILTROS
+      // ==========================================
+      const categoryCounts = {};
+      let totalArticles = 0;
+
+      // Varrer todos os cards publicados e catalogar categorias
+      articleCards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (cat) {
+          categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+          totalArticles++;
+        }
+      });
+
+      // Construir e renderizar os botões dinamicamente no topo
+      if (filterTagsContainer) {
+        filterTagsContainer.innerHTML = ''; // Limpar container
+
+        // Botão "Todas as Categorias" com contagem total
+        const allBtn = document.createElement('button');
+        allBtn.className = 'tag-btn active';
+        allBtn.setAttribute('data-filter', 'all');
+        allBtn.innerHTML = `Todas as Categorias <strong>(${totalArticles})</strong>`;
+        filterTagsContainer.appendChild(allBtn);
+
+        // Botões para cada categoria descoberta (ordenadas por ordem alfabética)
+        Object.keys(categoryCounts).sort().forEach(cat => {
+          const btn = document.createElement('button');
+          btn.className = 'tag-btn';
+          btn.setAttribute('data-filter', cat);
+          btn.innerHTML = `${cat} <strong>(${categoryCounts[cat]})</strong>`;
+          filterTagsContainer.appendChild(btn);
+        });
+      }
+
+      // Re-selecionar botões gerados para atrelar os eventos de clique
+      const tagButtons = document.querySelectorAll('.tag-btn');
+
+      // ==========================================
+      // 2. LÓGICA DE FILTRAGEM INSTANTÂNEA
+      // ==========================================
+      function filterArticles() {
+        let visibleCount = 0;
+
+        articleCards.forEach(card => {
+          const category = card.getAttribute('data-category') || '';
+          const titleEl = card.querySelector('.article-title');
+          const title = (card.getAttribute('data-title') || (titleEl ? titleEl.textContent : '')).toLowerCase();
+          const summaryEl = card.querySelector('.article-summary');
+          const summary = summaryEl ? summaryEl.textContent.toLowerCase() : '';
+
+          const matchesCategory = (currentCategory === 'all') || (category === currentCategory);
+          const matchesQuery = (currentQuery === '') || title.includes(currentQuery) || summary.includes(currentQuery) || category.toLowerCase().includes(currentQuery);
+
+          if (matchesCategory && matchesQuery) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Exibir/ocultar aviso de resultado vazio
+        if (visibleCount === 0) {
+          if (noResultsMsg) noResultsMsg.style.display = 'block';
+          if (articlesGrid) articlesGrid.style.display = 'none';
+        } else {
+          if (noResultsMsg) noResultsMsg.style.display = 'none';
+          if (articlesGrid) articlesGrid.style.display = 'grid';
+        }
+      }
+
+      // Atrelar evento de clique aos botões de categoria
+      tagButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tagButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategory = btn.getAttribute('data-filter');
+          filterArticles();
+        });
+      });
+
+      // Evento na barra de busca (digitação)
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentQuery = e.target.value.toLowerCase().trim();
+          filterArticles();
+        });
+      }
+
+      // Evento no botão Limpar Filtros
+      if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', () => {
+          currentCategory = 'all';
+          currentQuery = '';
+          if (searchInput) searchInput.value = '';
+          tagButtons.forEach(b => b.classList.remove('active'));
+          const allBtn = document.querySelector('.tag-btn[data-filter="all"]');
+          if (allBtn) allBtn.classList.add('active');
+          filterArticles();
+        });
+      }
+    });
+  </script>
+  
+  <!-- Botões Flutuantes -->
+  <a href="https://wa.me/5511944913323?text=Ol%C3%A1!%20Acessei%20o%20site%20da%20Contabilidade%20Camilo%20e%20gostaria%20de%20conversar%20com%20um%20especialista." class="fab-whatsapp" aria-label="Falar no WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
+  </a>
+
+  <button id="btn-back-to-top" class="fab-back-to-top" aria-label="Voltar ao topo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6" /></svg>
+  </button>
+</body>
+</html>

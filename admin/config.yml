@@ -9,16 +9,23 @@ public_folder: "/" # Como o HTML lerá o caminho dessas imagens
 locale: 'pt' # Define o painel de administração 100% em Português-BR
 
 collections:
-  - name: "artigos"
+  - name: "banco_artigos"
     label: "Notícias & Artigos"
-    folder: "artigos" # Pasta onde os novos arquivos estáticos serão gerados
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "Título do Artigo", name: "title", widget: "string", required: true }
-      - { label: "Categoria", name: "category", widget: "select", options: ["Simples Nacional", "Tributário & Impostos", "Trabalhista & eSocial", "Gestão Empresarial", "Imposto de Renda", "Outros"], default: "Tributário & Impostos" }
-      - { label: "Data de Publicação", name: "date", widget: "datetime", format: "DD de MMMM, YYYY", required: true }
-      - { label: "Tempo de Leitura", name: "reading_time", widget: "string", default: "4 min de leitura", required: false, hint: "Ex: '5 min de leitura'" }
-      - { label: "Imagem de Capa (Recomendado: 1200x630px JPG)", name: "image", widget: "image", required: true }
-      - { label: "Resumo (Chamada curta para o card)", name: "summary", widget: "text", required: true }
-      - { label: "Corpo do Artigo", name: "body", widget: "markdown", required: true, hint: "Use o editor visual para formatar texto, adicionar subtítulos e listas!" }
+    files:
+      - name: "dados_artigos"
+        label: "Publicações Oficiais"
+        file: "artigos.json"
+        description: "Adicione, edite ou remova os artigos do site aqui."
+        fields:
+          - name: artigos_lista
+            label: "Lista de Artigos"
+            widget: list
+            fields:
+              - { label: "Título do Artigo", name: "title", widget: "string", required: true }
+              - { label: "URL Amigável (Slug - sem acentos ou espaços)", name: "slug", widget: "string", required: true, hint: "ex: artigo-simples-nacional-2026" }
+              - { label: "Categoria", name: "category", widget: "select", options: ["Simples Nacional", "Tributário & Impostos", "Trabalhista & eSocial", "Gestão Empresarial", "Imposto de Renda", "Outros"], default: "Tributário & Impostos" }
+              - { label: "Data de Publicação", name: "date", widget: "string", required: true, hint: "Ex: 25 de Julho, 2026" }
+              - { label: "Tempo de Leitura", name: "reading_time", widget: "string", default: "4 min de leitura", required: false, hint: "Ex: '5 min de leitura'" }
+              - { label: "Imagem de Capa (Recomendado: 1200x630px JPG)", name: "image", widget: "image", required: true }
+              - { label: "Resumo (Chamada curta para o card)", name: "summary", widget: "text", required: true }
+              - { label: "Corpo do Artigo", name: "body", widget: "markdown", required: true, hint: "Use o editor visual para formatar texto, adicionar subtítulos e listas!" }

@@ -311,132 +311,136 @@
           </a>
           <a href="https://www.tiktok.com/@contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 448 512" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
+            <div class="footer-bottom">
       <p>&copy; <span id="current-year"></span> Contabilidade Camilo. Todos os direitos reservados. | <a href="politica-de-privacidade.html" target="_blank" style="color:var(--text-light)">Política de Privacidade</a> | <a href="termos-de-uso.html" target="_blank" style="color:var(--text-light)">Termos de Uso</a></p>
     </div>
   </footer>
 
   <script type="module" src="/main.js"></script>
 
-  <!-- Script do Motor Jamstack: Varredura Automática e Filtros em Tempo Real -->
+  <!-- Script do Motor Jamstack Dinâmico (Conectado ao Decap CMS via artigos.json) -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       const searchInput = document.getElementById('searchInput');
-      const articleCards = document.querySelectorAll('.article-card');
-      const noResultsMsg = document.getElementById('noResultsMsg');
-      const clearFiltersBtn = document.getElementById('clearFiltersBtn');
-      const articlesGrid = document.getElementById('articlesGrid');
+      const articlesGrid = document.querySelector('.articles-grid');
       const filterTagsContainer = document.getElementById('filterTags');
+      const noResultsMsg = document.getElementById('noResultsMsg');
 
-      let currentCategory = 'all';
-      let currentQuery = '';
-
-      // ==========================================
-      // 1. MOTOR JAMSTACK: VARREDURA E GERADOR DE FILTROS
-      // ==========================================
-      const categoryCounts = {};
-      let totalArticles = 0;
-
-      // Varrer todos os cards publicados e catalogar categorias
-      articleCards.forEach(card => {
-        const cat = card.getAttribute('data-category');
-        if (cat) {
-          categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
-          totalArticles++;
-        }
-      });
-
-      // Construir e renderizar os botões dinamicamente no topo
-      if (filterTagsContainer) {
-        filterTagsContainer.innerHTML = ''; // Limpar container
-
-        // Botão "Todas as Categorias" com contagem total
-        const allBtn = document.createElement('button');
-        allBtn.className = 'tag-btn active';
-        allBtn.setAttribute('data-filter', 'all');
-        allBtn.innerHTML = `Todas as Categorias <strong>(${totalArticles})</strong>`;
-        filterTagsContainer.appendChild(allBtn);
-
-        // Botões para cada categoria descoberta (ordenadas por ordem alfabética)
-        Object.keys(categoryCounts).sort().forEach(cat => {
-          const btn = document.createElement('button');
-          btn.className = 'tag-btn';
-          btn.setAttribute('data-filter', cat);
-          btn.innerHTML = `${cat} <strong>(${categoryCounts[cat]})</strong>`;
-          filterTagsContainer.appendChild(btn);
+      try {
+        // 1. Mágica do Jamstack: Buscar o banco de dados atualizado gerado pelo CMS
+        const response = await fetch('/artigos.json');
+        if (!response.ok) throw new Error('Não foi possível carregar os artigos.');
+        
+        const data = await response.json();
+        const articlesList = data.artigos_lista || [];
+        
+        // 2. Limpar a vitrine estática para dar lugar ao conteúdo vivo do CMS 
+        // (Nota: Os cards originais continuam salvos no código HTML para SEO, mas a visualização agora é 100% dinâmica)
+        articlesGrid.innerHTML = '';
+        
+        // 3. Renderizar todos os cards vindos do CMS
+        articlesList.forEach(article => {
+          const card = document.createElement('div');
+          card.className = 'article-card';
+          card.setAttribute('data-category', article.category);
+          card.setAttribute('data-title', article.title);
+          
+          card.innerHTML = `
+            <div class="article-img-wrapper">
+              <span class="article-category-badge">${article.category}</span>
+              <img src="${article.image}" alt="${article.title}">
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span>📅 ${article.date}</span>
+                <span class="article-meta-time">⏱️ ${article.reading_time || '4 min de leitura'}</span>
+              </div>
+              <h3 class="article-title">${article.title}</h3>
+              <p class="article-summary">${article.summary}</p>
+              <a href="artigo-modelo.html?id=${article.slug}" class="article-read-more">Ler Artigo Completo &rarr;</a>
+            </div>
+          `;
+          articlesGrid.appendChild(card);
         });
-      }
+        
+        // Recarregar a lista de cards na DOM
+        const articleCards = document.querySelectorAll('.article-card');
 
-      // Re-selecionar botões gerados para atrelar os eventos de clique
-      const tagButtons = document.querySelectorAll('.tag-btn');
-
-      // ==========================================
-      // 2. LÓGICA DE FILTRAGEM INSTANTÂNEA
-      // ==========================================
-      function filterArticles() {
-        let visibleCount = 0;
-
+        // 4. Gerar Botões Dinâmicos de Categoria
+        const categoriesCount = { 'all': articleCards.length };
         articleCards.forEach(card => {
-          const category = card.getAttribute('data-category') || '';
-          const titleEl = card.querySelector('.article-title');
-          const title = (card.getAttribute('data-title') || (titleEl ? titleEl.textContent : '')).toLowerCase();
-          const summaryEl = card.querySelector('.article-summary');
-          const summary = summaryEl ? summaryEl.textContent.toLowerCase() : '';
-
-          const matchesCategory = (currentCategory === 'all') || (category === currentCategory);
-          const matchesQuery = (currentQuery === '') || title.includes(currentQuery) || summary.includes(currentQuery) || category.toLowerCase().includes(currentQuery);
-
-          if (matchesCategory && matchesQuery) {
-            card.style.display = 'flex';
-            visibleCount++;
-          } else {
-            card.style.display = 'none';
+          const cat = card.getAttribute('data-category');
+          if(cat) {
+            categoriesCount[cat] = (categoriesCount[cat] || 0) + 1;
           }
         });
 
-        // Exibir/ocultar aviso de resultado vazio
-        if (visibleCount === 0) {
-          if (noResultsMsg) noResultsMsg.style.display = 'block';
-          if (articlesGrid) articlesGrid.style.display = 'none';
-        } else {
-          if (noResultsMsg) noResultsMsg.style.display = 'none';
-          if (articlesGrid) articlesGrid.style.display = 'grid';
+        // Limpar o container
+        filterTagsContainer.innerHTML = '';
+        
+        // Adicionar botão 'Todas'
+        const allBtn = document.createElement('button');
+        allBtn.className = 'tag-btn active';
+        allBtn.setAttribute('data-filter', 'all');
+        allBtn.innerHTML = `Todas as Notícias <span class="tag-count">${categoriesCount['all']}</span>`;
+        filterTagsContainer.appendChild(allBtn);
+        // Adicionar demais botões encontrados
+        Object.keys(categoriesCount).forEach(cat => {
+          if(cat !== 'all') {
+            const btn = document.createElement('button');
+            btn.className = 'tag-btn';
+            btn.setAttribute('data-filter', cat);
+            btn.innerHTML = `${cat} <span class="tag-count">${categoriesCount[cat]}</span>`;
+            filterTagsContainer.appendChild(btn);
+          }
+        });
+
+        const tagButtons = document.querySelectorAll('.tag-btn');
+
+        // 5. Motor de Filtragem Dupla (Busca + Tags)
+        function filterArticles() {
+          const searchTerm = searchInput.value.toLowerCase().trim();
+          const activeTag = document.querySelector('.tag-btn.active').getAttribute('data-filter');
+          let visibleCount = 0;
+
+          articleCards.forEach(card => {
+            const title = card.getAttribute('data-title').toLowerCase();
+            const category = card.getAttribute('data-category');
+            
+            const matchesSearch = title.includes(searchTerm);
+            const matchesTag = activeTag === 'all' || category === activeTag;
+
+            if (matchesSearch && matchesTag) {
+              card.style.display = 'flex';
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          noResultsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
         }
-      }
 
-      // Atrelar evento de clique aos botões de categoria
-      tagButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
+        // 6. Eventos
+        searchInput.addEventListener('input', filterArticles);
+
+        tagButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            tagButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filterArticles();
+          });
+        });
+
+        document.getElementById('clearFiltersBtn').addEventListener('click', () => {
+          searchInput.value = '';
           tagButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentCategory = btn.getAttribute('data-filter');
+          document.querySelector('[data-filter="all"]').classList.add('active');
           filterArticles();
         });
-      });
 
-      // Evento na barra de busca (digitação)
-      if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-          currentQuery = e.target.value.toLowerCase().trim();
-          filterArticles();
-        });
-      }
-
-      // Evento no botão Limpar Filtros
-      if (clearFiltersBtn) {
-        clearFiltersBtn.addEventListener('click', () => {
-          currentCategory = 'all';
-          currentQuery = '';
-          if (searchInput) searchInput.value = '';
-          tagButtons.forEach(b => b.classList.remove('active'));
-          const allBtn = document.querySelector('.tag-btn[data-filter="all"]');
-          if (allBtn) allBtn.classList.add('active');
-          filterArticles();
-        });
+      } catch (error) {
+        console.error("Erro ao carregar o banco de dados de artigos:", error);
       }
     });
   </script>

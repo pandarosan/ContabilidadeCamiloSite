@@ -333,16 +333,79 @@
 
   <script type="module" src="/main.js"></script>
 
-  <!-- Script Dinâmico da Etapa 2: Captura Título e Monta Mensagem WhatsApp -->
+  <!-- Leitor de Markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- Script Dinâmico da Etapa 3: Injeção de Conteúdo do CMS -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const articleTitleEl = document.getElementById('articleTitle');
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const articleId = urlParams.get('id');
+
+      if (articleId) {
+        try {
+          const response = await fetch('/artigos.json');
+          if (response.ok) {
+            const data = await response.json();
+            const articlesList = data.artigos_lista || [];
+            
+            const article = articlesList.find(a => a.slug === articleId);
+            
+            if (article) {
+              // 1. Atualizar SEO e Títulos
+              document.title = article.title + " | Contabilidade Camilo";
+              const titleEl = document.getElementById('articleTitle');
+              if (titleEl) titleEl.textContent = article.title;
+              
+              const badgeEl = document.querySelector('.article-category-badge');
+              if (badgeEl) badgeEl.textContent = article.category;
+              
+              // 2. Atualizar Meta
+              const metaDiv = document.querySelector('.article-header-meta');
+              if (metaDiv) {
+                metaDiv.innerHTML = `
+                  <span>✍️ <strong>Por:</strong> Equipe Contabilidade Camilo</span>
+                  <span>📅 <strong>Publicado em:</strong> ${article.date}</span>
+                  <span style="color: var(--secondary-color); font-weight: 600;">⏱️ ${article.reading_time || '4 min de leitura'}</span>
+                `;
+              }
+              
+              // 3. Resumo no Cabeçalho
+              const summaryEl = document.querySelector('.article-read-header p');
+              if (summaryEl) summaryEl.textContent = article.summary;
+              
+              // 4. Imagem de Capa
+              const imgWrapper = document.querySelector('.article-cover-wrapper img');
+              if (imgWrapper) {
+                imgWrapper.src = article.image;
+                imgWrapper.alt = article.title;
+              }
+              
+              // 5. Corpo do Artigo (Markdown -> HTML)
+              const bodyContainer = document.querySelector('.article-body');
+              if (bodyContainer) {
+                const shareBar = document.querySelector('.share-bar') ? document.querySelector('.share-bar').outerHTML : '';
+                const ctaBox = document.querySelector('.article-callout-box') ? document.querySelector('.article-callout-box').outerHTML : '';
+                
+                bodyContainer.innerHTML = marked.parse(article.body) + (ctaBox) + shareBar;
+              }
+            }
+          }
+        } catch (error) {
+          console.error("Erro ao carregar o artigo do CMS:", error);
+        }
+      }
+
+      // 6. Atualizar link do WhatsApp com o título correto (dinâmico ou estático)
+      const finalTitleEl = document.getElementById('articleTitle');
       const waButton = document.getElementById('cta-whatsapp-btn');
       
-      if (articleTitleEl && waButton) {
-        const titleText = articleTitleEl.textContent.trim();
-        const customMessage = `Olá! Li o artigo "${titleText}" no site de vocês e gostaria de conversar com um especialista para receber orientação técnica sobre este assunto.`;
-        waButton.href = `https://wa.me/5511944913323?text=${encodeURIComponent(customMessage)}`;
+      if (finalTitleEl && waButton) {
+        setTimeout(() => { // Aguarda a injeção do DOM se houver
+          const titleText = finalTitleEl.textContent.trim();
+          const customMessage = `Olá! Li o artigo "${titleText}" no site de vocês e gostaria de conversar com um especialista para receber orientação técnica sobre este assunto.`;
+          waButton.href = `https://wa.me/5511944913323?text=${encodeURIComponent(customMessage)}`;
+        }, 300);
       }
     });
   </script>

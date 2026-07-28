@@ -19,9 +19,10 @@ const artigosLista = files.map(file => {
   const content = fs.readFileSync(path.join(artigosDir, file), 'utf8');
   const articleData = JSON.parse(content);
   
-  // A mágica: Injeta o slug automaticamente baseado no nome do arquivo
-  // Assim o usuário não precisa preencher "slug" no CMS!
-  articleData.slug = file.replace('.json', '');
+  // A mágica: Injeta o slug automaticamente baseado no nome do arquivo (se o usuário não preencheu)
+  if (!articleData.slug || articleData.slug.trim() === '') {
+    articleData.slug = file.replace('.json', '');
+  }
   
   return articleData;
 });

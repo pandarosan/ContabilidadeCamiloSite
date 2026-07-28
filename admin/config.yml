@@ -13,8 +13,6 @@ collections:
     label: "Notícias & Artigos"
     folder: "artigos"
     create: true
-    extension: "json"
-    format: "json"
     slug: "{{slug}}"
     fields:
       - { label: "Título do Artigo", name: "title", widget: "string", required: true }

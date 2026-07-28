@@ -13,19 +13,47 @@ if (!fs.existsSync(artigosDir)) {
   fs.mkdirSync(artigosDir);
 }
 
-const files = fs.readdirSync(artigosDir).filter(f => f.endsWith('.json'));
+const files = fs.readdirSync(artigosDir).filter(f => f.endsWith('.md'));
 
 const artigosLista = files.map(file => {
   const content = fs.readFileSync(path.join(artigosDir, file), 'utf8');
-  const articleData = JSON.parse(content);
+  
+  // Parse simples de Markdown + Frontmatter
+  const match = content.match(/---\n([\\s\\S]*?)\n---\n([\\s\\S]*)/);
+  if (!match) return null;
+  
+  const frontmatter = match[1];
+  const body = match[2].trim();
+  
+  const getValue = (key) => {
+    const regex = new RegExp(`^${key}:\\s*(.*)$`, 'm');
+    const m = frontmatter.match(regex);
+    if (m) {
+      let val = m[1].trim();
+      if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
+      else if (val.startsWith("'") && val.endsWith("'")) val = val.slice(1, -1);
+      return val;
+    }
+    return '';
+  };
+
+  const articleData = {
+    title: getValue('title'),
+    category: getValue('category'),
+    date: getValue('date'),
+    image: getValue('image'),
+    summary: getValue('summary'),
+    slug: getValue('slug'),
+    body: body
+  };
   
   // A mágica: Injeta o slug automaticamente baseado no nome do arquivo (se o usuário não preencheu)
   if (!articleData.slug || articleData.slug.trim() === '') {
-    articleData.slug = file.replace('.json', '');
+    articleData.slug = file.replace('.md', '');
   }
   
   return articleData;
-});
+}).filter(a => a !== null);
 
 // Ordenar do mais novo pro mais velho
 artigosLista.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -35,4 +63,6 @@ const finalOutput = {
 };
 
 fs.writeFileSync(outputFile, JSON.stringify(finalOutput, null, 2));
-console.log('Build de artigos completo!');
+console.log('Build de artigos completo usando Markdown!');
+
+

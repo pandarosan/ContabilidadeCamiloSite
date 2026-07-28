@@ -354,7 +354,7 @@
           }
 
           // Calcular Tempo de Leitura Dinamicamente
-          const totalWords = (article.body || '').split(/\\s+/).length;
+          const totalWords = (article.body || '').split(/\s+/).length;
           const readingTime = Math.max(1, Math.ceil(totalWords / 200));
           
           card.innerHTML = `

@@ -370,7 +370,7 @@
                   dataFormatada = `${dataObj.getDate()} de ${meses[dataObj.getMonth()]}, ${dataObj.getFullYear()}`;
                 }
                 
-                const totalWords = (article.body || '').split(/\\s+/).length;
+                const totalWords = (article.body || '').split(/\s+/).length;
                 const readingTime = Math.max(1, Math.ceil(totalWords / 200));
 
                 metaDiv.innerHTML = `

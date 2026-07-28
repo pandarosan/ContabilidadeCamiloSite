@@ -18,8 +18,8 @@ const files = fs.readdirSync(artigosDir).filter(f => f.endsWith('.md'));
 const artigosLista = files.map(file => {
   const content = fs.readFileSync(path.join(artigosDir, file), 'utf8');
   
-  // Parse simples de Markdown + Frontmatter
-  const match = content.match(/---\n([\\s\\S]*?)\n---\n([\\s\\S]*)/);
+  // Parse simples de Markdown + Frontmatter (suporta Windows CRLF e Linux LF)
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)/);
   if (!match) return null;
   
   const frontmatter = match[1];

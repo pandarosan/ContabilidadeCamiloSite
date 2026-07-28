@@ -13,12 +13,13 @@ collections:
     label: "Notícias & Artigos"
     folder: "artigos"
     create: true
+    extension: "json"
+    format: "json"
     slug: "{{slug}}"
     fields:
       - { label: "Título do Artigo", name: "title", widget: "string", required: true }
-      - { label: "URL Amigável (Slug)", name: "slug", widget: "string", required: true, hint: "A URL é gerada sozinha a partir do título, mas você pode editá-la aqui se quiser encurtar." }
       - { label: "Categoria", name: "category", widget: "select", options: ["Simples Nacional", "Tributário & Impostos", "Trabalhista & eSocial", "Gestão Empresarial", "Imposto de Renda", "Outros"], default: "Tributário & Impostos" }
-      - { label: "Data de Publicação", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "DD/MM/YYYY", timeFormat: false, required: true, hint: "Use o calendário para programar ou alterar a data. Por padrão é preenchido com o dia de hoje." }
+      - { label: "Data de Publicação", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "DD/MM/YYYY", timeFormat: false, required: true, default: "", hint: "Use o calendário para programar. Por padrão, a data de hoje já é registrada, mas você pode clicar em 'Agora' caso fique em branco." }
       - { label: "Imagem de Capa (Recomendado: 1200x630px JPG)", name: "image", widget: "image", required: true }
       - { label: "Resumo (Chamada curta para o card)", name: "summary", widget: "text", required: true }
       - { label: "Corpo do Artigo", name: "body", widget: "markdown", required: true, hint: "Use o editor visual para formatar texto, adicionar subtítulos e listas!" }

@@ -17,7 +17,13 @@ const files = fs.readdirSync(artigosDir).filter(f => f.endsWith('.json'));
 
 const artigosLista = files.map(file => {
   const content = fs.readFileSync(path.join(artigosDir, file), 'utf8');
-  return JSON.parse(content);
+  const articleData = JSON.parse(content);
+  
+  // A mágica: Injeta o slug automaticamente baseado no nome do arquivo
+  // Assim o usuário não precisa preencher "slug" no CMS!
+  articleData.slug = file.replace('.json', '');
+  
+  return articleData;
 });
 
 // Ordenar do mais novo pro mais velho

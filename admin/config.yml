@@ -18,7 +18,7 @@ collections:
       - { label: "Título do Artigo", name: "title", widget: "string", required: true }
       - { label: "URL Amigável (Slug)", name: "slug", widget: "string", required: false, hint: "Deixe VAZIO para a máquina gerar automaticamente a partir do Título. Preencha apenas se quiser personalizar (ex: meu-artigo-123)." }
       - { label: "Categoria", name: "category", widget: "select", options: ["Simples Nacional", "Tributário & Impostos", "Trabalhista & eSocial", "Gestão Empresarial", "Imposto de Renda", "Outros"], default: "Tributário & Impostos" }
-      - { label: "Data de Publicação", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "DD/MM/YYYY", timeFormat: false, required: true, hint: "O dia de hoje já é preenchido automaticamente ao abrir. Use o calendário para alterar." }
+      - { label: "Data de Publicação", name: "date", widget: "datetime", required: true, hint: "O dia e horário de hoje já são preenchidos automaticamente. Use o calendário para alterar se desejar." }
       - { label: "Imagem de Capa (Recomendado: 1200x630px JPG)", name: "image", widget: "image", required: true }
       - { label: "Resumo (Chamada curta para o card)", name: "summary", widget: "text", required: true }
       - { label: "Corpo do Artigo", name: "body", widget: "markdown", required: true, hint: "Use o editor visual para formatar texto, adicionar subtítulos e listas!" }

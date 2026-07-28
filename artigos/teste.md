@@ -1,9 +1,9 @@
 ---
-title: "teste"
-category: "Tributário & Impostos"
+title: teste
+category: Tributário & Impostos
 date: 2026-07-28
-image: "/img/contabilidade-camilo-fundo.jpg"
-summary: "teste resumo"
+image: /img/corporate_business.jpg
+summary: teste resumo
 ---
 texto grande
 

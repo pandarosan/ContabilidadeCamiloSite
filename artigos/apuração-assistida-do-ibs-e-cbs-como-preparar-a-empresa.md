@@ -2,13 +2,10 @@
 title: "Apuração assistida do IBS e CBS: como preparar a empresa"
 category: Tributário & Impostos
 date: 2026-07-28
-image: /img/contabilidade-camilo-fundo.jpg
-summary: A apuração assistida do IBS e da CBS muda a rotina fiscal das empresas
-  porque os documentos fiscais eletrônicos deixam de ser apenas registros da
-  operação e passam a alimentar a apuração dos novos tributos sobre consumo. Na
-  prática, NF-e, NFS-e, eventos fiscais, notas de crédito, notas de débito e
-  dados cadastrais terão impacto direto sobre débitos, créditos, pagamento e
-  fluxo de caixa.
+image: /img/corporate_business.jpg
+summary: Descubra a diferença entre apenas apurar guias de impostos e ter
+  especialistas cuidando de todo o seu fluxo de caixa, contas a pagar, receber e
+  conciliação bancária diária.
 ---
 # O que é a apuração assistida do IBS e CBS?
 

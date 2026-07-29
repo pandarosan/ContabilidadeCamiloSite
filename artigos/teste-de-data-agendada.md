@@ -2,7 +2,7 @@
 title: teste de data agendada
 category: Outros
 date: 2026-08-08T16:53:00.000-03:00
-image: /img/logo_contabilidade_camilo_1784258679276.png
+image: /img/contabilidade-camilo-logo.jpg
 summary: Descubra a diferença entre apenas apurar guias de impostos e ter
   especialistas cuidando de todo o seu fluxo de caixa, contas a pagar, receber e
   conciliação bancária diária.

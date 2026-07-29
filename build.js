@@ -22,12 +22,12 @@ const artigosLista = files.map(file => {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)/);
   if (!match) return null;
   
-  const frontmatter = match[1];
+  const frontmatter = match[1] + '\n__END__:';
   const body = match[2].trim();
   
   const getValue = (key) => {
     // Regex que pega o valor da chave atual até encontrar a próxima chave ou o final do arquivo
-    const regex = new RegExp(`^${key}:\\s*([\\s\\S]*?)(?=\\n\\w+:|$)`, 'm');
+    const regex = new RegExp(`^${key}:\\s*([\\s\\S]*?)(?=\\n\\w+:)`, 'm');
     const m = frontmatter.match(regex);
     if (m) {
       let val = m[1].trim();

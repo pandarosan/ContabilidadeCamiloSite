@@ -848,10 +848,12 @@ textarea.form-control {
 
 .footer-bottom {
   text-align: center;
-  padding: 1.5rem;
+  padding: 1.5rem 2rem;
   background-color: var(--primary-color);
   color: white;
   font-size: 0.875rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* FAB - Floating Action Buttons */
@@ -1345,7 +1347,8 @@ textarea.form-control {
   flex-grow: 1;
   opacity: 0.9;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

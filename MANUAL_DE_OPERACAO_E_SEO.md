@@ -39,10 +39,21 @@ Para o cliente e sua agência de marketing, manter o site atualizado é simples,
    * Através da integração com ferramentas modernas sem banco de dados (como *Decap CMS* ou *Netlify CMS*), o usuário acessa um link seguro na web (ex: `/admin`), digita seu login e senha e entra em um editor visual similar ao Word.
    * Basta clicar em *"Novo Artigo"*, digitar o título, escolher ou criar uma tag de categoria, fazer o upload da foto de capa e clicar em **"Publicar"**.
    * O próprio gerenciador gera o arquivo em plano de fundo e atualiza a central automaticamente.
-2. **Abordagem B (Publicação Concierge / Equipe Técnica):**
    * O texto e a imagem são enviados para o suporte técnico ou agência, que duplica o modelo estático (`artigo-modelo.html`), insere as informações em 2 minutos e publica diretamente nos arquivos do servidor com máximo controle de qualidade e formatação.
 
-### 3.2. 🎨 Diretrizes Oficiais para Imagens de Capa (Padrão Canva)
+### 3.2. ⚠️ Regras Importantes de Preenchimento (Formatação e SEO)
+
+Para garantir que o artigo seja publicado corretamente e seja bem ranqueado pelo Google, siga rigorosamente as regras abaixo no painel:
+
+1. **Data de Publicação (Obrigatório):**
+   * **ATENÇÃO:** É **OBRIGATÓRIO** clicar em "Agora" ou no ícone do calendário para preencher a data e a hora. Sem isso, o sistema apresentará erro (exibindo `Invalid Date`) e a postagem não funcionará.
+2. **Uso de Títulos (H1, H2, H3):**
+   * **Título 1 (H1):** NUNCA utilize no corpo do texto. O Título 1 é o título principal do artigo e já é inserido automaticamente no topo da página pelo sistema.
+   * **Título 2 (H2):** Use para os **Tópicos Principais** do seu artigo.
+   * **Título 3 (H3):** Use para **Subtópicos** dentro de um Tópico Principal (H2).
+   * *Por que isso importa?* Os robôs do Google usam essa "escadinha" (hierarquia) para entender o esqueleto do seu texto. Usar os títulos corretamente aumenta drasticamente suas chances de aparecer na primeira página!
+
+### 3.3. 🎨 Diretrizes Oficiais para Imagens de Capa (Padrão Canva)
 Para garantir que o site se mantenha sempre rápido, elegante e perfeito para compartilhamento em redes sociais, todas as imagens criadas (no Canva ou no Photoshop) devem seguir estas regras de ouro:
 
 | Critério | Recomendação Oficial | Motivo Técnico / Benefício |
@@ -53,12 +64,12 @@ Para garantir que o site se mantenha sempre rápido, elegante e perfeito para co
 | **Peso Máximo** | Até **150 KB** *(Ideal: abaixo de 100 KB)* | Garante nota 100 no Google PageSpeed e carregamento instantâneo em redes móveis 4G/5G. |
 | **Comportamento Visual** | `object-fit: cover; border-radius: 20px;` | O site possui proteção CSS nativa: ele enquadra e corta suavemente as bordas da imagem para preencher a moldura sem **nunca achatar ou distorcer** a foto. |
 
-### 3.3. ❓ Por que o link não mostra pré-visualização no LinkedIn durante o desenvolvimento?
+### 3.4. ❓ Por que o link não mostra pré-visualização no LinkedIn durante o desenvolvimento?
 * Quando clicamos no botão **"in LinkedIn"** em ambiente local (`localhost:3000`), a caixa de postagem do LinkedIn pode abrir em branco.
 * **Explicação:** Os robôs de varredura do LinkedIn e do WhatsApp ficam em servidores externos (nos EUA) e precisam acessar o link pela internet pública para ler as *Meta Tags* da foto e do título. Como o endereço local (`localhost`) só existe dentro do computador de teste, o robô não consegue acessar a página (erro 404), descartando o link como proteção anti-spam.
 * **Garantia:** Nosso código já possui o pacote completo de meta tags **Open Graph (`og:title`, `og:image`, `og:url`)**. Assim que o site for publicado ao vivo no domínio oficial do escritório, os cards aparecerão instantaneamente em todas as redes sociais!
 
-### 3.4. 🔐 Governança, LOGs e Rastreabilidade de Usuários
+### 3.5. 🔐 Governança, LOGs e Rastreabilidade de Usuários
 A arquitetura Jamstack com Decap CMS oferece um nível de governança e segurança infinitamente superior aos painéis tradicionais (como WordPress), graças à sua integração nativa com o **GitHub** (o maior sistema de versionamento de código do mundo).
 * **LOG Indestrutível:** O "Administrador Master" (Agência/TI) possui acesso ao painel do GitHub, onde **absolutamente toda ação é registrada permanentemente**.
 * **Rastreabilidade Exata:** Cada vez que qualquer usuário clica em "Publicar", "Editar" ou "Excluir" no painel do Decap CMS, um *Commit* (Registro Oficial) é criado. Esse registro mostra exatamente **QUEM** foi o usuário (e-mail), **A HORA E O SEGUNDO** exatos da ação, e **QUAL ARQUIVO/TEXTO** foi alterado.

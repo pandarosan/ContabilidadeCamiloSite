@@ -1,9 +1,12 @@
 ---
-title: "Reforma Tributária (IBS e CBS): O impacto na prestação de serviços e como sua empresa deve se preparar"
-category: "Tributário & Impostos"
-date: 2026-07-21T00:00:00.000Z
-image: "/strategic_planning.png"
-summary: "Entenda a substituição gradual do PIS, COFINS e ISS pelo sistema de IVA dual. Saiba como o período de transição afeta o fluxo de caixa do seu negócio B2B."
+title: "Reforma Tributária (IBS e CBS): O impacto na prestação de serviços e
+  como sua empresa deve se preparar"
+category: Tributário & Impostos
+date: 2026-09-05T21:00:00.000-03:00
+image: /strategic_planning.png
+summary: Entenda a substituição gradual do PIS, COFINS e ISS pelo sistema de IVA
+  dual. Saiba como o período de transição afeta o fluxo de caixa do seu negócio
+  B2B.
 ---
 ## Entenda a substituição gradual do PIS, COFINS e ISS pelo sistema de IVA dual.
 

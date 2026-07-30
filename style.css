@@ -1594,6 +1594,7 @@ textarea.form-control {
 .btn-share {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
   border-radius: 50px;
@@ -1601,6 +1602,7 @@ textarea.form-control {
   font-weight: 600;
   text-decoration: none;
   transition: transform 0.2s, box-shadow 0.2s;
+  min-width: 140px;
 }
 
 .btn-share:hover {
@@ -1610,12 +1612,12 @@ textarea.form-control {
 
 .btn-share-wa {
   background: #25D366;
-  color: white;
+  color: white !important;
 }
 
 .btn-share-li {
   background: #0A66C2;
-  color: white;
+  color: white !important;
 }
 
 .btn-share-copy {

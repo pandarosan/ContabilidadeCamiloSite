@@ -75,6 +75,27 @@ A arquitetura Jamstack com Decap CMS oferece um nível de governança e seguran�
 * **Rastreabilidade Exata:** Cada vez que qualquer usuário clica em "Publicar", "Editar" ou "Excluir" no painel do Decap CMS, um *Commit* (Registro Oficial) é criado. Esse registro mostra exatamente **QUEM** foi o usuário (e-mail), **A HORA E O SEGUNDO** exatos da ação, e **QUAL ARQUIVO/TEXTO** foi alterado.
 * **Proteção Anti-Deleção (Rollback):** Como o histórico é gravado no GitHub, se um usuário deletar um artigo acidentalmente (ou maliciosamente), nada é perdido. O Administrador Master consegue acessar o histórico e restaurar a versão do site de 5 minutos atrás com apenas 1 clique, garantindo proteção total contra perda de dados.
 
+## Etapa 4: Como Operar o Painel de Publicação (Decap CMS)
+
+O Decap CMS (antigo Netlify CMS) é um gerenciador de conteúdo que funciona diretamente no navegador, permitindo que os administradores criem artigos sem tocar em código.
+
+### 🔐 Segurança e Níveis de Acesso
+Existe uma separação natural de segurança entre o Desenvolvedor e o Cliente Final (Thaís):
+1. **Acesso do Desenvolvedor:** O desenvolvedor acessa o painel central da hospedagem (`app.netlify.com`) e o código no `GitHub`. Daqui, ele controla o servidor, domínios e a estrutura do site.
+2. **Acesso do Cliente (Thaís):** O cliente acessa EXCLUSIVAMENTE o painel de publicações através da URL do próprio site: `https://[dominio-do-site]/admin`.
+   - O cliente faz login com e-mail e senha.
+   - O ambiente `/admin` é "cego" para o código. O cliente só consegue ver e editar os Textos, Títulos e Imagens dos Artigos. É impossível que o cliente quebre o layout ou apague o site por acidente usando o `/admin`.
+
+### 🚀 Acessando e Publicando (Passo a Passo)
+
+1. **Acesso:** Acesse `https://[seu-site.com.br]/admin`.
+2. **Login:** Insira o e-mail (ex: thais@contabilidadecamilo.com.br) e a senha que foi criada no momento do convite.
+3. **Novo Artigo:** Clique em "Novo Notícias & Artigos".
+4. **Preenchimento:**
+   - **Data:** Sempre clique no botão "Agora" para gravar a data atual.
+   - **Corpo do Artigo:** Use as opções de H2 e H3 para estruturar o texto.
+5. **Publicação:** Clique em Publicar. O Netlify fará um "build" automático e em ~30 segundos o artigo estará no ar.
+
 ---
 
 ## 4. ⚙️ Automações Inteligentes do Site

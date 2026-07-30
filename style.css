@@ -1645,6 +1645,11 @@ textarea.form-control {
     flex-direction: column;
     text-align: center;
   }
+  .footer-dev-credit {
+    position: static !important;
+    transform: none !important;
+    margin-top: 1rem !important;
+    text-align: center;
+  }
 }
-
 

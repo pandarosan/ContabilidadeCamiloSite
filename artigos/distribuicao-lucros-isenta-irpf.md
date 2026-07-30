@@ -2,7 +2,7 @@
 title: "Distribuição de Lucros Isenta no IRPF 2026: Requisitos contábeis
   obrigatórios para sócios"
 category: Imposto de Renda
-date: 2026-09-05T21:00:00.000-03:00
+date: 2026-07-30T14:44:00.000-03:00
 image: /Contabilidade-Camilo-Fundo0.jpg
 summary: Para retirar lucro isento de imposto na pessoa física, a empresa
   precisa manter a escrituração contábil rigorosa e estar sem débitos

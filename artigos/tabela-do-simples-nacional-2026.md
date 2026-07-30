@@ -1,9 +1,12 @@
 ---
-title: "Tabela do Simples Nacional 2026: Novas regras e limites de faturamento para empresas"
-category: "Simples Nacional"
-date: 2026-07-25T00:00:00.000Z
-image: "/corporate_business.jpg"
-summary: "Confira como ficam as alíquotas, anexos de partilha e o sublimite de faturamento para micro e pequenas empresas neste exercício fiscal, evitando surpresas na emissão de notas."
+title: "Tabela do Simples Nacional 2026: Novas regras e limites de faturamento
+  para empresas"
+category: Simples Nacional
+date: 2026-09-05T21:00:00.000-03:00
+image: /corporate_business.jpg
+summary: Confira como ficam as alíquotas, anexos de partilha e o sublimite de
+  faturamento para micro e pequenas empresas neste exercício fiscal, evitando
+  surpresas na emissão de notas.
 ---
 O ano de 2026 traz atualizações cruciais na tabela do Simples Nacional que impactarão diretamente o caixa das micro e pequenas empresas, bem como o planejamento tributário de novos negócios.
 

@@ -14,6 +14,7 @@ collections:
     folder: "artigos"
     create: true
     slug: "{{slug}}"
+    summary: "{{date | date('DD/MM/YYYY HH:mm')}} - {{title}}"
     fields:
       - { label: "Título do Artigo", name: "title", widget: "string", required: true }
       - { label: "URL Amigável (Slug)", name: "slug", widget: "string", required: false, hint: "Deixe VAZIO para geração automaticamente a partir do Título. Preencha apenas se quiser personalizar (ex: meu-artigo-123)." }

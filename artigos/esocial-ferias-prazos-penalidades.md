@@ -1,9 +1,12 @@
 ---
-title: "eSocial e Férias 2026: Prazos rigorosos de envio e penalidades que todo empregador precisa evitar"
-category: "Trabalhista & eSocial"
-date: 2026-07-17T00:00:00.000Z
-image: "/dp_team.png"
-summary: "As novas diretrizes de cruzamento eletrônico da Receita e do Ministério do Trabalho não toleram atrasos nos avisos de férias e SST. Veja o checklist obrigatório do DP."
+title: "eSocial e Férias 2026: Prazos rigorosos de envio e penalidades que todo
+  empregador precisa evitar"
+category: Trabalhista & eSocial
+date: 2026-09-05T21:00:00.000-03:00
+image: /dp_team.png
+summary: As novas diretrizes de cruzamento eletrônico da Receita e do Ministério
+  do Trabalho não toleram atrasos nos avisos de férias e SST. Veja o checklist
+  obrigatório do DP.
 ---
 ## Prazos rigorosos de envio e penalidades que todo empregador precisa evitar
 

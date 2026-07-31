@@ -365,12 +365,26 @@
 
               // 6. Artigos Recomendados (Inteligência de Tags)
               const currentCategory = article.category;
+              const now = new Date();
+              
+              // Filtra apenas os já publicados (data <= agora)
+              const publishedArticles = articlesList.filter(a => {
+                let aDate;
+                if (a.date && a.date.includes('T')) {
+                  aDate = new Date(a.date);
+                } else if (a.date) {
+                  const dateParts = a.date.split('-');
+                  aDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+                }
+                return aDate ? aDate <= now : true;
+              });
+
               // Filtra mesma tag, excluindo o atual
-              let recommended = articlesList.filter(a => a.category === currentCategory && a.slug !== articleId);
+              let recommended = publishedArticles.filter(a => a.category === currentCategory && a.slug !== articleId);
               
               // Se não der 3, preenche com os mais recentes (excluindo o atual e os que já estão na lista)
               if (recommended.length < 3) {
-                const others = articlesList.filter(a => a.slug !== articleId && !recommended.includes(a));
+                const others = publishedArticles.filter(a => a.slug !== articleId && !recommended.includes(a));
                 recommended = recommended.concat(others).slice(0, 3);
               } else {
                 recommended = recommended.slice(0, 3);

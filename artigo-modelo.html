@@ -215,50 +215,7 @@
           Outras Leituras Recomendadas para Seu Negócio
         </h3>
         
-        <div class="articles-grid" style="grid-template-columns: repeat(3, 1fr); gap: 1.2rem;">
-          
-          <!-- Recomendado 1 -->
-          <div class="article-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.04); position: relative;">
-            <a href="noticias-e-artigos.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;" aria-label="Ler artigo: Reforma Tributária"></a>
-            <div class="article-img-wrapper" style="height: 160px;">
-              <span class="article-category-badge" style="font-size: 0.68rem; padding: 0.25rem 0.7rem;">Tributário</span>
-              <img src="/strategic_planning.png" alt="Reforma Tributária">
-            </div>
-            <div class="article-content" style="padding: 1.2rem;">
-              <span style="font-size: 0.75rem; color: var(--secondary-color); font-weight: 600; display: block; margin-bottom: 0.4rem;">⏱️ 6 min de leitura</span>
-              <h4 style="font-size: 1.05rem; color: var(--primary-color); margin-bottom: 0.6rem; line-height: 1.3;">Reforma Tributária (IBS e CBS): O impacto em serviços B2B</h4>
-              <a href="noticias-e-artigos.html" target="_blank" class="article-read-more" style="font-size: 0.85rem;">Ver na Central &rarr;</a>
-            </div>
-          </div>
-
-          <!-- Recomendado 2 -->
-          <div class="article-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.04); position: relative;">
-            <a href="noticias-e-artigos.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;" aria-label="Ler artigo: eSocial e Férias 2026"></a>
-            <div class="article-img-wrapper" style="height: 160px;">
-              <span class="article-category-badge" style="font-size: 0.68rem; padding: 0.25rem 0.7rem;">Trabalhista</span>
-              <img src="/dp_team.png" alt="eSocial">
-            </div>
-            <div class="article-content" style="padding: 1.2rem;">
-              <span style="font-size: 0.75rem; color: var(--secondary-color); font-weight: 600; display: block; margin-bottom: 0.4rem;">⏱️ 5 min de leitura</span>
-              <h4 style="font-size: 1.05rem; color: var(--primary-color); margin-bottom: 0.6rem; line-height: 1.3;">eSocial e Férias 2026: Prazos rigorosos e penalidades</h4>
-              <a href="noticias-e-artigos.html" target="_blank" class="article-read-more" style="font-size: 0.85rem;">Ver na Central &rarr;</a>
-            </div>
-          </div>
-
-          <!-- Recomendado 3 -->
-          <div class="article-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.04); position: relative;">
-            <a href="noticias-e-artigos.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;" aria-label="Ler artigo: BPO Financeiro vs Contabilidade"></a>
-            <div class="article-img-wrapper" style="height: 160px;">
-              <span class="article-category-badge" style="font-size: 0.68rem; padding: 0.25rem 0.7rem;">Gestão</span>
-              <img src="/mei_entrepreneur.png" alt="BPO Financeiro">
-            </div>
-            <div class="article-content" style="padding: 1.2rem;">
-              <span style="font-size: 0.75rem; color: var(--secondary-color); font-weight: 600; display: block; margin-bottom: 0.4rem;">⏱️ 4 min de leitura</span>
-              <h4 style="font-size: 1.05rem; color: var(--primary-color); margin-bottom: 0.6rem; line-height: 1.3;">BPO Financeiro vs. Contabilidade: Aumente sua lucratividade</h4>
-              <a href="noticias-e-artigos.html" target="_blank" class="article-read-more" style="font-size: 0.85rem;">Ver na Central &rarr;</a>
-            </div>
-          </div>
-
+        <div class="articles-grid" id="recommended-articles-grid" style="grid-template-columns: repeat(3, 1fr); gap: 1.2rem;">
         </div>
       </section>
 
@@ -404,6 +361,40 @@
                 const ctaBox = document.querySelector('.article-callout-box') ? document.querySelector('.article-callout-box').outerHTML : '';
                 
                 bodyContainer.innerHTML = marked.parse(article.body) + (ctaBox) + shareBar;
+              }
+
+              // 6. Artigos Recomendados (Inteligência de Tags)
+              const currentCategory = article.category;
+              // Filtra mesma tag, excluindo o atual
+              let recommended = articlesList.filter(a => a.category === currentCategory && a.slug !== articleId);
+              
+              // Se não der 3, preenche com os mais recentes (excluindo o atual e os que já estão na lista)
+              if (recommended.length < 3) {
+                const others = articlesList.filter(a => a.slug !== articleId && !recommended.includes(a));
+                recommended = recommended.concat(others).slice(0, 3);
+              } else {
+                recommended = recommended.slice(0, 3);
+              }
+              
+              const recGrid = document.getElementById('recommended-articles-grid');
+              if (recGrid && recommended.length > 0) {
+                recGrid.innerHTML = recommended.map(rec => {
+                  const totalW = (rec.body || '').split(/\s+/).length;
+                  const recTime = Math.max(1, Math.ceil(totalW / 200));
+                  return `
+          <div class="article-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.04); position: relative;">
+            <a href="artigo-modelo.html?id=${rec.slug}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;" aria-label="Ler artigo: ${rec.title}"></a>
+            <div class="article-img-wrapper" style="height: 160px;">
+              <span class="article-category-badge" style="font-size: 0.68rem; padding: 0.25rem 0.7rem;">${rec.category}</span>
+              <img src="${rec.image}" alt="${rec.title}">
+            </div>
+            <div class="article-content" style="padding: 1.2rem;">
+              <span style="font-size: 0.75rem; color: var(--secondary-color); font-weight: 600; display: block; margin-bottom: 0.4rem;">⏱️ ${recTime} min de leitura</span>
+              <h4 style="font-size: 1.05rem; color: var(--primary-color); margin-bottom: 0.6rem; line-height: 1.3;">${rec.title}</h4>
+              <a href="artigo-modelo.html?id=${rec.slug}" class="article-read-more" style="font-size: 0.85rem;">Ler artigo &rarr;</a>
+            </div>
+          </div>`;
+                }).join('');
               }
             }
           }

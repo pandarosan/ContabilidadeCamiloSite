@@ -53,33 +53,41 @@ document.addEventListener("DOMContentLoaded", () => {
       const workbook = XLSX.read(data, { type: 'array' });
       
       // 1. LER ABA DE REFERÊNCIA (Alíquotas e Faixas)
-      if (workbook.SheetNames.includes("Tabelas_Referencia")) {
-        const sheetRef = workbook.Sheets["Tabelas_Referencia"];
+      // Procura a aba ignorando espaços em branco no final/começo
+      const nomeAbaRef = workbook.SheetNames.find(n => n.trim().toLowerCase() === "tabelas_referencia");
+      
+      if (nomeAbaRef) {
+        const sheetRef = workbook.Sheets[nomeAbaRef];
         const rawData = XLSX.utils.sheet_to_json(sheetRef, { defval: null });
         
         // Mapeia colunas novas (Anexo, Faixa, Limite, AliqNom, Ded) para o formato esperado
         aliquotasData = [];
-        let prevLimite = { 'I': 0, 'II': 0, 'III': 0, 'IV': 0, 'V': 0 };
+        let prevLimite = {};
 
         // Garante que os dados estejam ordenados por Anexo e por Faixa
         rawData.sort((a, b) => {
-          const anexoA = a.Anexo || a.anexo || '';
-          const anexoB = b.Anexo || b.anexo || '';
+          const anexoA = (a.Anexo || a.anexo || '').toString().trim();
+          const anexoB = (b.Anexo || b.anexo || '').toString().trim();
           if (anexoA === anexoB) return (a.Faixa || 0) - (b.Faixa || 0);
           return anexoA.localeCompare(anexoB);
         });
 
         rawData.forEach(row => {
-          const anexo = row.Anexo || row.anexo;
-          if (!anexo) return;
+          const anexoRaw = row.Anexo || row.anexo;
+          if (!anexoRaw) return;
+          const anexo = anexoRaw.toString().trim();
           
-          let limite = parseFloat(row.Limite !== undefined ? row.Limite : row.rbt12_ate);
+          if (prevLimite[anexo] === undefined) {
+            prevLimite[anexo] = 0;
+          }
+          
+          let limite = parseFloat(row.Limite !== undefined && row.Limite !== null ? row.Limite : row.rbt12_ate);
           if (isNaN(limite)) limite = 99999999999; // Para a última faixa caso venha vazia
 
-          let aliq = parseFloat(row.AliqNom !== undefined ? row.AliqNom : row.aliquota);
-          let ded = parseFloat(row.Ded !== undefined ? row.Ded : row.parcela_deduzir);
+          let aliq = parseFloat(row.AliqNom !== undefined && row.AliqNom !== null ? row.AliqNom : row.aliquota);
+          let ded = parseFloat(row.Ded !== undefined && row.Ded !== null ? row.Ded : row.parcela_deduzir);
 
-          let de = row.rbt12_de !== undefined ? parseFloat(row.rbt12_de) : (prevLimite[anexo] + 0.01);
+          let de = row.rbt12_de !== undefined && row.rbt12_de !== null ? parseFloat(row.rbt12_de) : (prevLimite[anexo] + 0.01);
           if (prevLimite[anexo] === 0) de = 0; // Primeira faixa começa em 0
 
           aliquotasData.push({
@@ -95,8 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // 2. LER ABA DE CONFIGURAÇÕES (Tetos, Sublimites e Repartições)
-      if (workbook.SheetNames.includes("Configuracoes")) {
-        const sheetConfig = workbook.Sheets["Configuracoes"];
+      const nomeAbaConf = workbook.SheetNames.find(n => n.trim().toLowerCase() === "configuracoes");
+      if (nomeAbaConf) {
+        const sheetConfig = workbook.Sheets[nomeAbaConf];
         const configData = XLSX.utils.sheet_to_json(sheetConfig, { defval: null });
         
         configData.forEach(row => {
@@ -124,7 +133,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
     .catch(err => {
-      console.error("Erro ao carregar o Excel do Drive:", err);
+      console.error("Erro ao processar planilha:", err);
+      alert("Falha ao ler o arquivo Excel das alíquotas. O arquivo pode ter sido deletado ou movido. Certifique-se de que o arquivo foi salvo corretamente no painel do CMS.");
+      
       // Fallback visual caso o Drive esteja fora do ar (mantém os defaults do JS)
       const txtLimite = document.getElementById("txt-limite");
       const txtSublimite = document.getElementById("txt-sublimite");

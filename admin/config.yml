@@ -1,7 +1,9 @@
 backend:
-  # O Git Gateway permite usar a identidade do Netlify para gerenciar quem pode logar
-  name: git-gateway
-  branch: main # Defina como master se for a branch principal do repositório
+  # Autenticação nativa do GitHub via OAuth (Livre do Netlify)
+  name: github
+  repo: pandarosan/ContabilidadeCamiloSite
+  branch: main # Defina como master se for a branch principal
+  base_url: https://SUA_URL_DO_WORKER_AQUI # O cliente/dev vai substituir pelo link do Worker
   
 media_folder: "img" # Resolvido o crash: A pasta raiz "/" quebrava a biblioteca de imagens do CMS
 public_folder: "/img"
@@ -23,3 +25,13 @@ collections:
       - { label: "Imagem de Capa (Recomendado: 1200x630px JPG)", name: "image", widget: "image", required: true }
       - { label: "Resumo (Chamada curta para o card)", name: "summary", widget: "text", required: true }
       - { label: "Corpo do Artigo", name: "body", widget: "markdown", required: true, hint: "Use o editor visual para formatar texto, adicionar subtítulos e listas!" }
+
+  - name: "sistema"
+    label: "⚙️ Configurações do Sistema"
+    files:
+      - label: "📊 Base de Dados da Calculadora"
+        name: "calculadora_simples"
+        file: "data/configuracoes.json"
+        description: "Faça o upload do seu arquivo .xlsx com as tabelas do Simples Nacional."
+        fields:
+          - { label: "Planilha do Simples Nacional (.xlsx)", name: "planilha_excel", widget: "file", hint: "Envie o arquivo atualizado aqui. O site se atualizará automaticamente." }

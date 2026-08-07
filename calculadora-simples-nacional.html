@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora Simples Nacional | Contabilidade Camilo</title>
+    <meta name="description" content="Faça a simulação rápida da sua carga tributária com base na legislação atual usando nossa Calculadora do Simples Nacional." />
+    <link rel="stylesheet" href="/style.css">
+    <!-- SheetJS para ler Excel direto do Google Drive -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <style>
+      /* Responsividade Específica da Calculadora */
+      @media (max-width: 768px) {
+        body { overflow-x: hidden; }
+        .calc-header-global h1 { font-size: 1.8rem !important; }
+        .calc-header-global p { font-size: 1rem !important; padding: 0 1rem; }
+        .calc-layout-wrapper { padding: 0 1rem !important; gap: 1.5rem !important; margin-top: 1.5rem !important; flex-direction: column; width: 100%; box-sizing: border-box; }
+        .seo-content, .calc-container-wrapper { width: 100% !important; min-width: 0 !important; max-width: 100% !important; flex: none !important; box-sizing: border-box; }
+        .calc-container { padding: 1.2rem 0.5rem !important; width: 100% !important; min-width: 0 !important; max-width: 100% !important; box-sizing: border-box; overflow: hidden; }
+        .table-responsive-wrapper { width: 100% !important; overflow: hidden !important; }
+        .calc-table th, .calc-table td { font-size: 0.75rem !important; padding: 0.4rem 0.15rem !important; word-wrap: break-word; }
+        .fat-mes { font-size: 0.9rem !important; padding: 0.5rem !important; max-width: 100%; box-sizing: border-box; }
+        .btn-wrapper { flex-direction: column !important; width: 100% !important; margin: 0 !important; }
+        .btn-wrapper button { width: 100% !important; box-sizing: border-box; margin: 0 !important; }
+        .form-control { box-sizing: border-box; width: 100%; }
+      }
+    </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  "name": "Contabilidade Camilo",
+  "url": "https://contabilidadecamilo.com.br",
+  "telephone": "+55-11-94491-3323",
+  "email": "contato@contabilidadecamilo.com.br",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Praça Getúlio Vargas, 19 - Sala 01, Vila Progresso",
+    "addressLocality": "Jundiaí",
+    "addressRegion": "SP",
+    "postalCode": "13202-259",
+    "addressCountry": "BR"
+  },
+  "areaServed": ["Jundiaí", "Brasil"],
+  "priceRange": "$$"
+}
+</script>
+</head>
+  <body>
+    <!-- Header Fixo -->
+    <header class="header">
+      <div class="container header-content">
+        <a href="index.html" class="logo">
+          <span class="logo-text">Contabilidade <strong>Camilo</strong></span>
+        </a>
+        <nav class="nav">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li class="dropdown">
+              <a href="index.html#solucoes" class="nav-link">Soluções <span class="caret">▾</span></a>
+              <ul class="dropdown-menu">
+              <li><a href="abertura-de-empresas-e-societario.html" target="_blank" rel="noopener noreferrer">Abertura de Empresas e Societário</a></li>
+              <li><a href="fiscal-e-contabilidade.html" target="_blank" rel="noopener noreferrer">Fiscal e Contabilidade</a></li>
+              <li><a href="departamento-de-pessoal.html" target="_blank" rel="noopener noreferrer">Departamento de Pessoal</a></li>
+              <li><a href="certificado-digital.html" target="_blank" rel="noopener noreferrer">Certificado Digital</a></li>
+              <li><a href="bpo-financeiro.html" target="_blank" rel="noopener noreferrer">BPO Financeiro</a></li>
+              <li><a href="demais-solucoes.html" target="_blank" rel="noopener noreferrer">Demais Soluções</a></li>
+            </ul>
+            </li>
+            <li><a href="sobre-nos.html" class="nav-link">Sobre Nós</a></li>
+          <li><a href="noticias-e-artigos.html" class="nav-link">Notícias & Artigos</a></li>
+            <li><a href="contato.html" class="nav-link">Contato</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions" style="display: flex; gap: 0.5rem; align-items: center;">
+          <a href="https://onvio.com.br/clientcenter/pt/auth?r=%2Fhome" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Portal do Cliente</a>
+          <a href="https://onvio.com.br/login/#/" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Portal do Empregado</a>
+        </div>
+      </div>
+    </header>
+
+  <main style="padding-top: 60px; background-color: var(--secondary-color); min-height: 100vh;">
+    
+    <!-- TÍTULO PRINCIPAL (Centralizado) -->
+    <div class="calc-header-global" style="text-align: center; padding: 0 1.5rem;">
+      <h1 style="color: var(--primary-color); font-size: 2.5rem; margin-bottom: 0.5rem; margin-top: 0;">Calculadora Simples Nacional</h1>
+      <p style="color: var(--text-color); font-size: 1.2rem; max-width: 800px; margin: 0 auto;">Faça a simulação rápida da sua carga tributária com base na legislação atual.</p>
+    </div>
+
+    <div class="calc-layout-wrapper" style="max-width: 1300px; margin: 3rem auto 2rem auto; display: flex; flex-wrap: wrap; gap: 2rem; padding: 0 1.5rem; align-items: flex-start;">
+      
+      <div class="seo-content" style="flex: 1; min-width: 300px; color: var(--text-color); line-height: 1.6;">
+        <h2 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.8rem;">Fique atento às principais características do<br>Simples Nacional:</h2>
+        <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 1.1rem;">
+          <li>O <strong>limite</strong> de faturamento anual é de <strong id="txt-limite">R$ 4,8 milhões</strong>.</li>
+          <li>O <strong>sublimite</strong> para fins de apuração do ICMS e ISS é de <strong id="txt-sublimite">R$ 3,6 milhões</strong>.</li>
+          <li>O Simples Nacional abrange os seguintes tributos: IRPJ, CSLL, PIS, Cofins, IPI, ICMS, ISS e INSS Patronal.</li>
+          <li>O prazo para recolhimento é até o <strong>dia 20</strong> do mês subsequente ao do faturamento.</li>
+          <li>A <strong>opção</strong> pelo Simples Nacional deve ser formalizada em <strong>janeiro</strong> de cada ano, sendo irretratável para aquele ano.</li>
+        </ul>
+        <p style="margin-top: 1.5rem; font-size: 1.1rem; font-weight: 500;">A Contabilidade Camilo disponibiliza ao lado uma ferramenta de cálculo do Simples Nacional:</p>
+      </div>
+
+      <div class="calc-container-wrapper" style="flex: 1.3; min-width: 280px;">
+        <div class="calc-container" style="margin: 0; max-width: 100%; box-sizing: border-box; padding: 2rem; background-color: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+
+      <form id="simplesForm">
+        
+        <div class="form-group" style="max-width: 400px; margin: 0 auto 2rem auto;">
+          <label class="form-label" for="rbt12" style="text-align: center; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; color: var(--primary-color);">
+            Faturamento Acumulado (Últimos 12 meses)
+          </label>
+          <input type="text" id="rbt12" class="form-control" placeholder="R$ 0,00" style="width: 100%; box-sizing: border-box;" required>
+        </div>
+
+        <div class="table-responsive-wrapper" style="overflow-x: auto; max-width: 100%;">
+          <table class="calc-table" style="width: 100%; border-collapse: collapse; text-align: left; margin-bottom: 2rem;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--primary-color);">
+                <th style="padding: 1rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center;">Atividade</th>
+                <th style="padding: 1rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center;">Faturamento<br>do Mês <span style="font-size:0.8em; font-weight:normal;">(R$)</span></th>
+                <th style="padding: 1rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center;">Alíquota<br>Efetiva</th>
+                <th style="padding: 1rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center;">Valor<br>do DAS <span style="font-size:0.8em; font-weight:normal;">(R$)</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Anexo I -->
+              <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 1rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2;">Anexo I<br><span style="font-size:0.85rem; color:#64748b;">(Comércio)</span></td>
+                <td style="padding: 0.2rem;"><input type="text" class="form-control fat-mes" data-anexo="I" placeholder="0,00" style="padding: 0.75rem 0.2rem; font-size: 0.9rem; text-align: center;"></td>
+                <td style="padding: 1rem 0.2rem; font-weight: bold; color: var(--text-muted); font-size: 0.9rem; text-align: center;" id="aliq-I">0,00%</td>
+                <td style="padding: 1rem 0.2rem; font-weight: bold; font-size: 0.9rem; text-align: center;" id="das-I">0,00</td>
+              </tr>
+              <!-- Anexo II -->
+              <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 1rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2;">Anexo II<br><span style="font-size:0.85rem; color:#64748b;">(Indústria)</span></td>
+                <td style="padding: 0.2rem;"><input type="text" class="form-control fat-mes" data-anexo="II" placeholder="0,00" style="padding: 0.75rem 0.2rem; font-size: 0.9rem; text-align: center;"></td>
+                <td style="padding: 1rem 0.2rem; font-weight: bold; color: var(--text-muted); font-size: 0.9rem; text-align: center;" id="aliq-II">0,00%</td>
+                <td style="padding: 1rem 0.2rem; font-weight: bold; font-size: 0.9rem; text-align: center;" id="das-II">0,00</td>
+              </tr>
+              <!-- Anexo III -->
+              <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 1rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2;">Anexo III<br><span style="font-size:0.85rem; color:#64748b;">(Serviço)</span></td>
+                <td style="padding: 0.2rem;"><input type="text" class="form-control fat-mes" data-anexo="III" placeholder="0,00" style="padding: 0.75rem 0.2rem; font-size: 0.9rem; text-align: center;"></td>
+                <td style="padding: 1rem 0.2rem; font-weight: bold; color: var(--text-muted); font-size: 0.9rem; text-align: center;" id="aliq-III">0,00%</td>
+                <td style="padding: 1rem 0.2rem; font-weight: bold; font-size: 0.9rem; text-align: center;" id="das-III">0,00</td>
+              </tr>
+              <!-- Anexo IV -->
+              <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 1rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2;">Anexo IV<br><span style="font-size:0.85rem; color:#64748b;">(Serviço)</span></td>
+                <td style="padding: 0.2rem;"><input type="text" class="form-control fat-mes" data-anexo="IV" placeholder="0,00" style="padding: 0.75rem 0.2rem; font-size: 0.9rem; text-align: center;"></td>
+                <td style="padding: 1rem 0.2rem; font-weight: bold; color: var(--text-muted); font-size: 0.9rem; text-align: center;" id="aliq-IV">0,00%</td>
+                <td style="padding: 1rem 0.2rem; font-weight: bold; font-size: 0.9rem; text-align: center;" id="das-IV">0,00</td>
+              </tr>
+              <!-- Anexo V -->
+              <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 1rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2;">Anexo V<br><span style="font-size:0.85rem; color:#64748b;">(Serviço)</span></td>
+                <td style="padding: 0.2rem;"><input type="text" class="form-control fat-mes" data-anexo="V" placeholder="0,00" style="padding: 0.75rem 0.2rem; font-size: 0.9rem; text-align: center;"></td>
+                <td style="padding: 1rem 0.2rem; font-weight: bold; color: var(--text-muted); font-size: 0.9rem; text-align: center;" id="aliq-V">0,00%</td>
+                <td style="padding: 1rem 0.2rem; font-weight: bold; font-size: 0.9rem; text-align: center;" id="das-V">0,00</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr style="background-color: var(--secondary-color);">
+                <td style="padding: 1rem 0.5rem; font-weight: bold; color: var(--primary-color); text-align: right; white-space: nowrap;">TOTAL:</td>
+                <td style="padding: 1rem 0.5rem; font-weight: bold; color: var(--primary-color); text-align: center; font-size: 1.1rem;" id="fat-mes-total">R$ 0,00</td>
+                <td style="padding: 1rem 0.5rem;"></td>
+                <td style="padding: 1rem 0.5rem; font-weight: bold; color: var(--primary-color); font-size: 1.2rem; text-align: right; white-space: nowrap;" id="das-total">R$ 0,00</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="btn-wrapper" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <button type="button" id="btn-limpar" class="btn-secondary" style="padding: 1rem 2rem; font-size: 1.1rem; width: auto; background-color: transparent; color: var(--primary-color); border: 1px solid var(--primary-color);">Limpar</button>
+          <button type="submit" id="btn-calcular" class="btn-primary" style="padding: 1rem 3rem; font-size: 1.1rem; width: auto;">Calcular Impostos</button>
+        </div>
+
+        <div id="msg-erro-rbt12" style="display: none; background-color: #fff3cd; color: #856404; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; text-align: center; border: 1px solid #ffeeba;">
+          <strong>Atenção:</strong> A soma do faturamento do mês não pode ser maior que o Faturamento Acumulado (RBT12).
+          <p style="margin: 0.5rem 0 1rem 0; font-size: 0.95rem;">Se você possui dúvidas sobre como preencher ou se sua empresa ultrapassou o limite, nossa equipe pode analisar o seu caso gratuitamente.</p>
+          <a href="https://wa.me/5511944913323?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvidas%20na%20calculadora%20do%20Simples%20Nacional." target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.5rem; font-size: 0.95rem; text-decoration: none; background-color: #25D366; color: white; border-radius: 8px; font-weight: bold;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            Falar com Especialista
+          </a>
+        </div>
+        
+        <div id="msg-erro-teto" style="display: none; background-color: #f8d7da; color: #721c24; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; text-align: center; border: 1px solid #f5c6cb;">
+          <strong>Atenção:</strong> O faturamento acumulado ultrapassa o limite máximo do Simples Nacional.
+          <p style="margin: 0.5rem 0 1rem 0; font-size: 0.95rem;">Sua empresa deverá ser tributada pelo Lucro Presumido ou Lucro Real. Nossa equipe contábil pode elaborar um diagnóstico tributário especializado para o seu negócio.</p>
+          <a href="https://wa.me/5511944913323?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvidas%20sobre%20a%20exclus%C3%A3o%20do%20Simples%20Nacional%20(teto%20ultrapassado)." target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.5rem; font-size: 0.95rem; text-decoration: none; background-color: #25D366; color: white; border-radius: 8px; font-weight: bold;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            Falar com Especialista
+          </a>
+        </div>
+
+        <div id="cta-resultado" style="display: none; background-color: #f0fdf4; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; text-align: center; border: 1px solid #dcfce3;">
+          <p style="color: var(--text-color); font-size: 1.05rem; margin-bottom: 1rem; font-weight: 500;">Fale com nossos especialistas e descubra se existe uma brecha legal para pagar menos com um planejamento tributário seguro para o seu negócio.</p>
+          <a href="https://wa.me/5511944913323?text=Ol%C3%A1%21%20Acabei%20de%20fazer%20uma%20simula%C3%A7%C3%A3o%20na%20calculadora%20do%20Simples%20Nacional%20e%20gostaria%20de%20falar%20sobre%20planejamento%20tribut%C3%A1rio." target="_blank" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; font-size: 1rem; text-decoration: none; background-color: #25D366; color: white;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            Falar com Especialista
+          </a>
+        </div>
+      </form>
+    
+      </div>
+      <p style="text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 2rem;">*Os cálculos aqui demonstrados são aproximações baseadas nas tabelas gerais do Simples Nacional.<br>Para valores exatos e obrigações acessórias, consulte um de nossos especialistas.</p>
+    </div> <!-- fecha calc-container-wrapper -->
+  </div> <!-- fecha calc-layout-wrapper -->
+
+  <!-- INFORMAÇÕES IMPORTANTES -->
+  <section style="background-color: #f8fafc; padding: 4rem 1.5rem;">
+    <div class="container" style="max-width: 900px; background-color: white; border-radius: 12px; padding: 3rem 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <h3 style="color: var(--primary-color); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">Informações Importantes</h3>
+      </div>
+      <ul style="color: var(--text-color); font-size: 1.05rem; line-height: 1.8; padding-left: 1.5rem;">
+        <li style="margin-bottom: 1rem;">As informações fornecidas por esta ferramenta foram preparadas para orientação geral sobre o Simples Nacional a partir de 2018 (Lei Complementar 155/2016) e não constituem aconselhamento profissional ou uma consulta específica do seu negócio.</li>
+        <li style="margin-bottom: 1rem;">Você não deve agir de acordo com as informações fornecidas por esta ferramenta sem obter aconselhamento profissional específico.</li>
+        <li style="margin-bottom: 1rem;">Os cálculos apresentados acima podem não ser aplicáveis à sua empresa; uma análise cuidadosa deve ser feita em conexão com qualquer tipo de cálculo tributário, especialmente envolvendo particularidades como Fator R, isenções ou produtos monofásicos.</li>
+        <li>Entre em contato com a Contabilidade Camilo, um escritório de contabilidade especializado em empresas do Simples Nacional, para um diagnóstico tributário completo e seguro.</li>
+      </ul>
+    </div>
+  </section>
+
+  </main>
+
+    <!-- Footer Institucional -->
+      <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-col">
+        <a href="index.html" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-bottom: 1.2rem; text-decoration: none;">
+          <span class="logo-text-footer" style="margin-bottom:0;">Contabilidade <strong>Camilo</strong></span>
+        </a>
+        <p style="color:var(--text-light); font-size:0.95rem;">
+          Há mais de <span class="anos-experiencia">17</span> anos oferecendo soluções contábeis, tributárias e de gestão empresarial com excelência, tecnologia e atendimento humanizado em Jundiaí e região.
+        </p>
+        <p style="color:var(--secondary-color); font-weight:600; margin-top:1rem;">
+          CRC/SP: 2SP042079/O-5
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Acesso Rápido</h4>
+        <ul class="footer-links">
+          <li><a href="index.html" target="_blank" rel="noopener noreferrer">Home</a></li>
+          <li><a href="sobre-nos.html" target="_blank" rel="noopener noreferrer">Sobre Nós</a></li>
+          <li><a href="noticias-e-artigos.html" target="_blank" rel="noopener noreferrer">Notícias & Artigos</a></li>
+          <li><a href="contato.html" target="_blank" rel="noopener noreferrer">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Especialidades</h4>
+        <ul class="footer-links">
+          <li><a href="abertura-de-empresas-e-societario.html" target="_blank" rel="noopener noreferrer">Abertura de Empresas e Societário</a></li>
+          <li><a href="fiscal-e-contabilidade.html" target="_blank" rel="noopener noreferrer">Fiscal e Contabilidade</a></li>
+          <li><a href="departamento-de-pessoal.html" target="_blank" rel="noopener noreferrer">Departamento de Pessoal</a></li>
+          <li><a href="certificado-digital.html" target="_blank" rel="noopener noreferrer">Certificado Digital</a></li>
+          <li><a href="bpo-financeiro.html" target="_blank" rel="noopener noreferrer">BPO Financeiro</a></li>
+          <li><a href="demais-solucoes.html" target="_blank" rel="noopener noreferrer">Demais Soluções</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Fale Conosco</h4>
+        <p style="color:var(--text-light); font-size:0.95rem; margin-bottom:0.5rem;">
+          📍 Praça Getúlio Vargas, 19 - Sala 01<br>Vila Progresso, Jundiaí - SP
+        </p>
+        <p style="color:var(--text-light); font-size:0.95rem; margin-bottom:0.5rem;">
+          📞 (11) 94491-3323
+        </p>
+        <p style="color:var(--text-light); font-size:0.95rem; margin-bottom:1rem;">
+          ✉️ contato@contabilidadecamilo.com.br
+        </p>
+        <div class="social-links" style="display:flex; gap:1rem; flex-wrap: wrap;">
+          <a href="https://br.linkedin.com/company/contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/contabilidadecamilo/" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/contabilidadecamilo/" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@contabilidadecamilo" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); transition: transform 0.3s, color 0.3s;" onmouseover="this.style.color='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.color='var(--text-light)'; this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" viewBox="0 0 448 512" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+          </a>
+        </div><!-- /.social-links -->
+      </div><!-- /.footer-col -->
+    </div><!-- /.footer-content -->
+  </footer>
+  <div class="footer-bottom" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; position: relative; padding: 1.5rem 2rem; background-color: var(--primary-color); color: white; font-size: 0.875rem; width: 100%; box-sizing: border-box;">
+    <p style="margin: 0; text-align: center; z-index: 1;">&copy; <span id="current-year"></span> Contabilidade Camilo. Todos os direitos reservados. | <a href="politica-de-privacidade.html" target="_blank" style="color:rgba(255,255,255,0.7); text-decoration: none;">Política de Privacidade</a> | <a href="termos-de-uso.html" target="_blank" style="color:rgba(255,255,255,0.7); text-decoration: none;">Termos de Uso</a></p>
+    <p class="footer-dev-credit" style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.5); position: absolute; left: 2rem; top: 50%; transform: translateY(-50%); z-index: 2;">
+        <a href="https://wa.me/5511998834347?text=Ol%C3%A1%20PandaRoSan%2C%20estou%20entrando%20em%20contato%20atrav%C3%A9s%20da%20assinatura%20no%20site%20da%20Contabilidade%20Camilo." target="_blank" rel="noopener noreferrer" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">🌐 por PandaRoSan</a>
+    </p>
+  </div>
+
+    <script type="module" src="/main.js"></script>
+    <script src="calculadora-simples.js"></script>
+  
+  <!-- Botões Flutuantes -->
+  <a href="https://wa.me/5511944913323" class="fab-whatsapp" aria-label="Falar no WhatsApp">
+    <!-- Ícone do WhatsApp (Lucide) -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle">
+      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+    </svg>
+  </a>
+
+  <button id="btn-back-to-top" class="fab-back-to-top" aria-label="Voltar ao topo">
+    <!-- Ícone Chevron Up (Lucide) -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up">
+      <path d="m18 15-6-6-6 6" />
+    </svg>
+  </button>
+</body>
+</html>

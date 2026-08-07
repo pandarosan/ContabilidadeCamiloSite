@@ -46,7 +46,9 @@ Para o cliente e sua agência de marketing, manter o site atualizado é simples,
 Para garantir que o artigo seja publicado corretamente e seja bem ranqueado pelo Google, siga rigorosamente as regras abaixo no painel:
 
 1. **Data de Publicação (Obrigatório):**
-   * **ATENÇÃO:** É **OBRIGATÓRIO** clicar em "Agora" ou no ícone do calendário para preencher a data e a hora. Sem isso, o sistema apresentará erro (exibindo `Invalid Date`) e a postagem não funcionará.
+   * **Data:** A data em que o artigo será exibido.
+   * > [!IMPORTANT]
+   * > **ATENÇÃO:** É **OBRIGATÓRIO** clicar no botão **"Agora"** ou no ícone do calendário para preencher a data e a hora. Sem isso, o sistema apresentará erro (exibindo `Invalid Date`) e a postagem não funcionará.
 2. **Uso de Títulos (H1, H2, H3):**
    * **Título 1 (H1):** NUNCA utilize no corpo do texto. O Título 1 é o título principal do artigo e já é inserido automaticamente no topo da página pelo sistema.
    * **Título 2 (H2):** Use para os **Tópicos Principais** do seu artigo.
@@ -128,10 +130,30 @@ O Google não ranqueia apenas "palavras isoladas"; ele busca **autoridade em eco
 
 ---
 
-## 6. 🔜 Módulos Futuros (Em Construção)
+## 6. 🚀 Fase 3/4: Calculadoras Fisco-Tributárias Interativas (Ativas!)
 
-### 6.1. Fase 3: Calculadoras Fisco-Tributárias Interativas
-*(Esta seção será detalhada assim que implementarmos as calculadoras interativas para captação direta de empreendedores na próxima fase!)*
+Nossa plataforma conta com um ecossistema de calculadoras tributárias desenhadas para atrair e converter empreendedores, começando pela **Calculadora do Simples Nacional**.
+
+### 6.1. Integração com Planilha Excel via CMS (Autonomia e Segurança)
+A Calculadora do Simples Nacional é **100% autônoma** e não depende de programadores para atualizar os limites, faixas ou alíquotas anuais. Ela está conectada a uma planilha Excel hospedada de forma segura na raiz do próprio site, que a equipe da Contabilidade Camilo atualiza diretamente pelo painel administrativo (`/admin`).
+
+> [!NOTE]
+> *Nota Técnica:* Inicialmente, o sistema utilizaria o arquivo público direto do Google Drive. No entanto, os servidores do Google bloqueiam conexões externas (via política de segurança CORS). A solução definitiva e imune a bloqueios foi migrar a planilha para o próprio servidor, sendo atualizada via GitHub (arquitetura Cloudflare Pages).
+
+#### A Arquitetura Invisível (SheetJS)
+Sempre que um lead acessa a página da calculadora, nosso JavaScript (impulsionado pela tecnologia corporativa `SheetJS`) lê o arquivo Excel. Ele varre as abas estruturadas em milissegundos e calibra o motor de cálculo da interface instantaneamente.
+
+### 6.2. Como o Escritório Atualiza as Regras (Fricção Zero)
+Se a Receita Federal alterar as faixas de faturamento, o teto global ou os repasses de ICMS/ISS na virada do ano, siga este roteiro:
+
+1. **Abra a Planilha Localmente:** Abra o arquivo matriz do Excel no seu computador.
+2. **Edite a Aba `Tabelas_Referencia`:** Atualize os números das faixas e alíquotas na tabela, conforme a nova lei.
+3. **Edite a Aba `Configuracoes`:** Ajuste os limites globais como `TETO`, `SUBLIMITE` e os percentuais de `REPARTICAO`.
+4. **Envie a Nova Planilha pelo Painel (O Segredo da Autonomia):** 
+   * Acesse `contabilidadecamilo.com.br/admin` (ou o domínio provisório atual) e faça login.
+   * No menu esquerdo, clique em **Configurações do Sistema** > **Base de Dados da Calculadora**.
+   * Faça o upload da sua nova planilha `.xlsx` no campo correspondente e clique em **Salvar**.
+   * O sistema acionará a Cloudflare automaticamente e a calculadora será atualizada em menos de 1 minuto em todo o Brasil!
 
 ---
 *Documentação elaborada pela equipe de engenharia e arquitetura de software contábil.*  

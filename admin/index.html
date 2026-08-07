@@ -23,6 +23,14 @@
         }
       });
     }
+
+    // Tática à prova de balas: Se o popup perder a conexão com esta janela principal,
+    // nós detectamos a gravação da senha no banco do navegador e recarregamos!
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'netlify-cms-user' && e.newValue) {
+        window.location.reload();
+      }
+    });
   </script>
 </body>
 </html>

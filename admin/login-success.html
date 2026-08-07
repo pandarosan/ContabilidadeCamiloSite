@@ -35,11 +35,14 @@
         // Salva no LocalStorage da aba principal
         localStorage.setItem("netlify-cms-user", JSON.stringify(userData));
         
+        // Exibe mensagem de sucesso visual na janela
+        document.body.innerHTML = "<h2 style='color: green;'>✅ Autenticação concluída!</h2><p>O painel principal já deve estar carregando no fundo. Se esta janela não fechar sozinha, pode fechá-la com segurança.</p>";
+        
         // Recarrega a aba do painel e fecha a janelinha
         if (window.opener && !window.opener.closed) {
           window.opener.location.reload();
         }
-        window.close();
+        setTimeout(() => window.close(), 1500);
       })
       .catch(err => {
         document.body.innerHTML = "<p>Erro na conexão com o GitHub: " + err.message + "</p>";

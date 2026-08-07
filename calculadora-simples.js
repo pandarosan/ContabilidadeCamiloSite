@@ -55,8 +55,43 @@ document.addEventListener("DOMContentLoaded", () => {
       // 1. LER ABA DE REFERÊNCIA (Alíquotas e Faixas)
       if (workbook.SheetNames.includes("Tabelas_Referencia")) {
         const sheetRef = workbook.Sheets["Tabelas_Referencia"];
-        // Converte para array de objetos mantendo os cabeçalhos como chaves (rbt12_de, aliquota, etc.)
-        aliquotasData = XLSX.utils.sheet_to_json(sheetRef, { defval: null });
+        const rawData = XLSX.utils.sheet_to_json(sheetRef, { defval: null });
+        
+        // Mapeia colunas novas (Anexo, Faixa, Limite, AliqNom, Ded) para o formato esperado
+        aliquotasData = [];
+        let prevLimite = { 'I': 0, 'II': 0, 'III': 0, 'IV': 0, 'V': 0 };
+
+        // Garante que os dados estejam ordenados por Anexo e por Faixa
+        rawData.sort((a, b) => {
+          const anexoA = a.Anexo || a.anexo || '';
+          const anexoB = b.Anexo || b.anexo || '';
+          if (anexoA === anexoB) return (a.Faixa || 0) - (b.Faixa || 0);
+          return anexoA.localeCompare(anexoB);
+        });
+
+        rawData.forEach(row => {
+          const anexo = row.Anexo || row.anexo;
+          if (!anexo) return;
+          
+          let limite = parseFloat(row.Limite !== undefined ? row.Limite : row.rbt12_ate);
+          if (isNaN(limite)) limite = 99999999999; // Para a última faixa caso venha vazia
+
+          let aliq = parseFloat(row.AliqNom !== undefined ? row.AliqNom : row.aliquota);
+          let ded = parseFloat(row.Ded !== undefined ? row.Ded : row.parcela_deduzir);
+
+          let de = row.rbt12_de !== undefined ? parseFloat(row.rbt12_de) : (prevLimite[anexo] + 0.01);
+          if (prevLimite[anexo] === 0) de = 0; // Primeira faixa começa em 0
+
+          aliquotasData.push({
+            anexo: anexo,
+            rbt12_de: de,
+            rbt12_ate: limite,
+            aliquota: aliq,
+            parcela_deduzir: ded
+          });
+
+          prevLimite[anexo] = limite;
+        });
       }
 
       // 2. LER ABA DE CONFIGURAÇÕES (Tetos, Sublimites e Repartições)

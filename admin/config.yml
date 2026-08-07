@@ -3,7 +3,7 @@ backend:
   name: github
   repo: pandarosan/ContabilidadeCamiloSite
   branch: main # Defina como master se for a branch principal
-  base_url: https://SUA_URL_DO_WORKER_AQUI # O cliente/dev vai substituir pelo link do Worker
+  base_url: https://cms-auth.thais-cristina-camilo.workers.dev
   
 media_folder: "img" # Resolvido o crash: A pasta raiz "/" quebrava a biblioteca de imagens do CMS
 public_folder: "/img"

@@ -12,22 +12,21 @@
     const token = urlParams.get('token');
 
     if (token) {
-      // Salva o token no localStorage do domínio do site!
-      const userData = {
-        backendName: "github",
-        token: token
-      };
-      localStorage.setItem("netlify-cms-user", JSON.stringify(userData));
-
-      // Tenta recarregar a janela principal (o CMS que ficou no fundo)
+      // Como estamos no MESMO domínio do CMS, o Chrome não bloqueia a comunicação!
+      // Podemos enviar a mensagem exatamente no formato que o Decap CMS nativo entende:
+      const msg = 'authorization:github:success:{"token":"' + token + '","provider":"github"}';
+      
       if (window.opener && !window.opener.closed) {
-        window.opener.location.reload();
+        // Envia a chave nativa para o painel principal
+        window.opener.postMessage(msg, window.location.origin);
       }
-
-      // Fecha esta janelinha
-      window.close();
+      
+      // Espera 1 segundo para o CMS pegar a mensagem e fecha
+      setTimeout(() => {
+        window.close();
+      }, 1000);
     } else {
-      document.body.innerHTML = "<p>Erro: Token não encontrado.</p>";
+      document.body.innerHTML = "<p>Erro: Token não encontrado na URL.</p>";
     }
   </script>
 </body>

@@ -23,26 +23,6 @@
         }
       });
     }
-
-    // PATCH DE SEGURANÇA: Contorno para o Bug do Chrome (WindowProxy) com o Decap CMS
-    // Em navegadores modernos, a janela do popup perde a referência de origem ao redirecionar para o GitHub.
-    // Isso faz o CMS ignorar a chave de acesso. Este script intercepta a chave e força o login!
-    window.addEventListener("message", (e) => {
-      if (typeof e.data === "string" && e.data.match(/^authorization:github:success:/)) {
-        console.log("Token capturado com sucesso pelo patch de segurança!");
-        const data = JSON.parse(e.data.replace(/^authorization:github:success:/, ""));
-        if (data.token) {
-          const userData = {
-            backendName: "github",
-            token: data.token
-          };
-          // Salva o token exatamente onde o CMS espera encontrar
-          localStorage.setItem("netlify-cms-user", JSON.stringify(userData));
-          // Recarrega a página para o CMS iniciar já logado
-          window.location.reload();
-        }
-      }
-    });
   </script>
 </body>
 </html>

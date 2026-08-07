@@ -7,24 +7,43 @@
 <body>
   <p>Autenticando... Redirecionando para o CMS.</p>
   <script>
-    // Recupera o token da URL (adicionado pelo Cloudflare Worker)
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
 
     if (token) {
-      // Como estamos no MESMO domínio do CMS, o Chrome não bloqueia a comunicação!
-      // Podemos enviar a mensagem exatamente no formato que o Decap CMS nativo entende:
-      const msg = 'authorization:github:success:{"token":"' + token + '","provider":"github"}';
+      document.body.innerHTML = "<p>Verificando credenciais no GitHub...</p>";
       
-      if (window.opener && !window.opener.closed) {
-        // Envia a chave nativa para o painel principal
-        window.opener.postMessage(msg, window.location.origin);
-      }
-      
-      // Espera 1 segundo para o CMS pegar a mensagem e fecha
-      setTimeout(() => {
+      // Busca o perfil do usuário diretamente do GitHub usando o token
+      fetch('https://api.github.com/user', {
+        headers: { 
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      })
+      .then(res => res.json())
+      .then(user => {
+        // Monta o objeto EXATAMENTE como o Decap CMS salva nativamente
+        const userData = {
+          backendName: "github",
+          token: token,
+          login: user.login,
+          name: user.name || user.login,
+          email: user.email,
+          avatar_url: user.avatar_url
+        };
+        
+        // Salva no LocalStorage da aba principal
+        localStorage.setItem("netlify-cms-user", JSON.stringify(userData));
+        
+        // Recarrega a aba do painel e fecha a janelinha
+        if (window.opener && !window.opener.closed) {
+          window.opener.location.reload();
+        }
         window.close();
-      }, 1000);
+      })
+      .catch(err => {
+        document.body.innerHTML = "<p>Erro na conexão com o GitHub: " + err.message + "</p>";
+      });
     } else {
       document.body.innerHTML = "<p>Erro: Token não encontrado na URL.</p>";
     }

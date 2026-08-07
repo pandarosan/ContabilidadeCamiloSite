@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Login Efetuado</title>
+</head>
+<body>
+  <p>Autenticando... Redirecionando para o CMS.</p>
+  <script>
+    // Recupera o token da URL (adicionado pelo Cloudflare Worker)
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+
+    if (token) {
+      // Salva o token no localStorage do domínio do site!
+      const userData = {
+        backendName: "github",
+        token: token
+      };
+      localStorage.setItem("netlify-cms-user", JSON.stringify(userData));
+
+      // Tenta recarregar a janela principal (o CMS que ficou no fundo)
+      if (window.opener && !window.opener.closed) {
+        window.opener.location.reload();
+      }
+
+      // Fecha esta janelinha
+      window.close();
+    } else {
+      document.body.innerHTML = "<p>Erro: Token não encontrado.</p>";
+    }
+  </script>
+</body>
+</html>

@@ -12,25 +12,6 @@
   <!-- Script principal do Decap CMS (antigo Netlify CMS) -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
-  <!-- Script de redirecionamento para o login pós-autenticação -->
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
 
-    // Tática à prova de balas: Se o popup perder a conexão com esta janela principal,
-    // nós detectamos a gravação da senha no banco do navegador e recarregamos!
-    window.addEventListener('storage', (e) => {
-      if (e.key === 'netlify-cms-user' && e.newValue) {
-        window.location.reload();
-      }
-    });
-  </script>
 </body>
 </html>

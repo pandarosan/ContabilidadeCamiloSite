@@ -349,19 +349,27 @@
         const now = new Date();
         articlesList.forEach(article => {
           let dataFormatada = article.date;
-          // Comparar data e HORA completas (incluindo fuso horário)
           const articleDate = new Date(article.date);
+          const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+          
           if (isNaN(articleDate)) {
-            // Se a data não tiver fuso (ex: "2026-07-29"), tratar como início do dia local
-            const dateParts = article.date.split('-');
-            const articleDateLocal = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-            if (articleDateLocal > now) return;
-            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-            dataFormatada = `${articleDateLocal.getDate()} de ${meses[articleDateLocal.getMonth()]}, ${articleDateLocal.getFullYear()}`;
+            // Se falhar o Date parsing, verifica se é formato escrito PT-BR
+            if (typeof article.date === 'string' && article.date.includes(' de ')) {
+               dataFormatada = article.date; // Já formatada, ignorar filtro de futuro
+            } else if (typeof article.date === 'string' && article.date.includes('-')) {
+              // Ex: 2026-07-29
+              const dateParts = article.date.split('-');
+              if (dateParts.length >= 3) {
+                const articleDateLocal = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substring(0,2));
+                if (articleDateLocal > now) return; // Oculta posts futuros
+                dataFormatada = `${articleDateLocal.getDate()} de ${meses[articleDateLocal.getMonth()]}, ${articleDateLocal.getFullYear()}`;
+              }
+            } else {
+              dataFormatada = "Data não disponível";
+            }
           } else {
-            // Data com timestamp completo — comparar com exatidão de hora e minuto
-            if (articleDate > now) return;
-            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            // Data padrão ISO do Decap CMS (ex: 2026-07-29T14:30:00Z)
+            if (articleDate > now) return; // Oculta posts programados para o futuro
             dataFormatada = `${articleDate.getDate()} de ${meses[articleDate.getMonth()]}, ${articleDate.getFullYear()}`;
           }
 

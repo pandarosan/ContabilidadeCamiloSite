@@ -2,7 +2,7 @@
 title: "Planejamento Tributário para Clínicas Médicas e Profissionais da Saúde:
   Como reduzir o IRPJ legalmente"
 category: Tributário & Impostos
-date: 2026-09-05T21:00:00.000-03:00
+date: 2026-08-07T23:01:00.000-03:00
 image: /switch_accountant.png
 summary: A equiparação hospitalar e a correta opção de regime podem gerar
   economias expressivas no IRPJ e CSLL para clínicas. Veja como aplicamos essa

@@ -227,6 +227,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const erroTeto = document.getElementById("msg-erro-teto");
     if (erroTeto) erroTeto.style.display = "none";
+    const avisoSub = document.getElementById("msg-aviso-sublimite");
+    if (avisoSub) avisoSub.style.display = "none";
   });
 
   // Realiza o cálculo principal
@@ -257,11 +259,21 @@ document.addEventListener("DOMContentLoaded", () => {
       
       const erroDiv = document.getElementById("msg-erro-rbt12");
       if (erroDiv) erroDiv.style.display = "none";
+      const avisoSub = document.getElementById("msg-aviso-sublimite");
+      if (avisoSub) avisoSub.style.display = "none";
       
       clearResults();
       return;
     } else {
       if (erroTeto) erroTeto.style.display = "none";
+    }
+
+    // AVISO DO SUBLIMITE (Não bloqueia o cálculo)
+    const avisoSub = document.getElementById("msg-aviso-sublimite");
+    if (rbt12 > CONFIG_SIMPLES.SUBLIMITE) {
+      if (avisoSub) avisoSub.style.display = "block";
+    } else {
+      if (avisoSub) avisoSub.style.display = "none";
     }
 
     let somaFaturamentoMes = 0;

@@ -1,7 +1,7 @@
 ---
 title: Teste de novo painel
-category: Trabalhista & eSocial
-date: 2026-08-07T21:46:00.000-03:00
+category: Avisos do Escritório
+date: 2026-08-07T21:48:00.000-03:00
 image: /dp_team.png
 summary: As novas diretrizes de cruzamento eletrônico da Receita e do Ministério
   do Trabalho não toleram atrasos nos avisos de férias e SST. Veja o checklist

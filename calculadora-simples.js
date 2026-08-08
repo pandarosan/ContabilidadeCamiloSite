@@ -29,20 +29,22 @@ document.addEventListener("DOMContentLoaded", () => {
   
   let aliquotasData = [];
   
+  const cacheBuster = "?v=" + new Date().getTime();
+  
   // Buscar as configurações do CMS para encontrar o arquivo Excel atualizado
-  fetch("/data/configuracoes.json")
+  fetch("/data/configuracoes.json" + cacheBuster)
     .then(res => {
       if (!res.ok) throw new Error("Configuração não encontrada, usando arquivo local padrão.");
       return res.json();
     })
     .then(config => {
       const excelUrl = config.planilha_excel || "aliquotas-simples.xlsx";
-      return fetch(excelUrl);
+      return fetch(excelUrl + cacheBuster);
     })
     .catch(err => {
       console.warn(err.message);
       // Fallback para arquivo padrão caso o CMS ainda não tenha gerado o JSON
-      return fetch("aliquotas-simples.xlsx");
+      return fetch("aliquotas-simples.xlsx" + cacheBuster);
     })
     .then(response => {
       if (!response.ok) throw new Error("Erro na rede ao baixar a planilha.");

@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const fatMesInputs = document.querySelectorAll(".fat-mes");
   const btnLimpar = document.getElementById("btn-limpar");
   const btnCalcular = document.getElementById("btn-calcular");
-  
+  const btnImprimir = document.getElementById("btn-imprimir");
   const fatMesTotalDisplay = document.getElementById("fat-mes-total");
   const dasTotalDisplay = document.getElementById("das-total");
 
@@ -231,7 +231,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (erroTeto) erroTeto.style.display = "none";
     const avisoSub = document.getElementById("msg-aviso-sublimite");
     if (avisoSub) avisoSub.style.display = "none";
+    const erroRbt12 = document.getElementById("msg-erro-rbt12");
+    if (erroRbt12) erroRbt12.style.display = "none";
   });
+
+  if (btnImprimir) {
+    btnImprimir.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.print();
+    });
+  }
 
   // Realiza o cálculo principal
   const calcularImpostos = () => {

@@ -370,12 +370,19 @@
               // Filtra apenas os já publicados (data <= agora)
               const publishedArticles = articlesList.filter(a => {
                 let aDate;
-                if (a.date && a.date.includes('T')) {
-                  aDate = new Date(a.date);
-                } else if (a.date) {
-                  const dateParts = a.date.split('-');
-                  aDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+                if (typeof a.date === 'string') {
+                  if (a.date.includes('T')) {
+                    aDate = new Date(a.date); // Formato ISO
+                  } else if (a.date.includes('-')) {
+                    const dateParts = a.date.split('-'); // Formato YYYY-MM-DD
+                    if (dateParts.length >= 3) {
+                      aDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substring(0,2));
+                    }
+                  } else if (a.date.includes(' de ')) {
+                    return true; // Formato em português PT-BR legível. Passa direto.
+                  }
                 }
+                if (aDate && isNaN(aDate.getTime())) aDate = null;
                 return aDate ? aDate <= now : true;
               });
 

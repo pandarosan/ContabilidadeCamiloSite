@@ -1,0 +1,38 @@
+backend:
+  # Autenticação nativa do GitHub via OAuth (Livre do Netlify)
+  name: github
+  repo: pandarosan/ContabilidadeCamiloSite
+  branch: main # Defina como master se for a branch principal
+  base_url: https://cms-auth.thais-cristina-camilo.workers.dev
+  auth_endpoint: /auth
+  
+media_folder: "public" # Pasta estática do Vite
+public_folder: "/"
+
+locale: 'pt'
+
+collections:
+  - name: "artigos"
+    label: "Notícias & Artigos"
+    folder: "artigos"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{date | date('DD/MM/YYYY HH:mm')}} - {{title}}"
+    fields:
+      - { label: "Título do Artigo", name: "title", widget: "string", required: true }
+      - { label: "URL Amigável (Slug)", name: "slug", widget: "string", required: false, hint: "Deixe VAZIO para geração automaticamente a partir do Título. Preencha apenas se quiser personalizar (ex: meu-artigo-123)." }
+      - { label: "Categoria", name: "category", widget: "select", options: ["Simples Nacional", "Trabalhista & eSocial", "Gestão Empresarial", "Imposto de Renda", "Tributário & Impostos", "Abertura de Empresas", "Planejamento Tributário", "BPO Financeiro", "Lucro Presumido e Real", "Tecnologia & Inovação", "Avisos do Escritório"], default: "Tributário & Impostos" }
+      - { label: "Data de Publicação", name: "date", widget: "datetime", required: true, hint: "ATENÇÃO: É OBRIGATÓRIO clicar em 'Agora' ou no calendário para preencher a data. Sem isso, o sistema apresentará erro (Invalid Date)." }
+      - { label: "Imagem de Capa (Recomendado: 1200x630px JPG)", name: "image", widget: "image", required: true }
+      - { label: "Resumo (Chamada curta para o card)", name: "summary", widget: "text", required: true }
+      - { label: "Corpo do Artigo", name: "body", widget: "markdown", required: true, hint: "Use o editor visual para formatar texto, adicionar subtítulos e listas!" }
+
+  - name: "sistema"
+    label: "⚙️ Configurações do Sistema"
+    files:
+      - label: "📊 Base de Dados da Calculadora"
+        name: "calculadora_simples"
+        file: "data/configuracoes.json"
+        description: "Faça o upload do seu arquivo .xlsx com as tabelas do Simples Nacional."
+        fields:
+          - { label: "Planilha do Simples Nacional (.xlsx)", name: "planilha_excel", widget: "file", hint: "Envie o arquivo atualizado aqui. O site se atualizará automaticamente." }

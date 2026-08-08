@@ -6,8 +6,8 @@ backend:
   base_url: https://cms-auth.thais-cristina-camilo.workers.dev
   auth_endpoint: /auth
   
-media_folder: "img" # Resolvido o crash: A pasta raiz "/" quebrava a biblioteca de imagens do CMS
-public_folder: "/img"
+media_folder: "public" # Pasta estática do Vite
+public_folder: "/"
 
 locale: 'pt'
 

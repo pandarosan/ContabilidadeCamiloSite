@@ -358,9 +358,7 @@
               const bodyContainer = document.querySelector('.article-body');
               if (bodyContainer) {
                 const shareBar = document.querySelector('.share-bar') ? document.querySelector('.share-bar').outerHTML : '';
-                const ctaBox = document.querySelector('.article-callout-box') ? document.querySelector('.article-callout-box').outerHTML : '';
-                
-                bodyContainer.innerHTML = marked.parse(article.body) + (ctaBox) + shareBar;
+                bodyContainer.innerHTML = marked.parse(article.body) + shareBar;
               }
 
               // 6. Artigos Recomendados (Inteligência de Tags)
@@ -404,7 +402,7 @@
                   const recTime = Math.max(1, Math.ceil(totalW / 200));
                   return `
           <div class="article-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.04); position: relative;">
-            <a href="artigo-modelo.html?id=${rec.slug}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;" aria-label="Ler artigo: ${rec.title}"></a>
+            <a href="artigo-modelo?id=${rec.slug}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;" aria-label="Ler artigo: ${rec.title}"></a>
             <div class="article-img-wrapper" style="height: 160px;">
               <span class="article-category-badge" style="font-size: 0.68rem; padding: 0.25rem 0.7rem;">${rec.category}</span>
               <img src="${rec.image}" alt="${rec.title}">
@@ -412,7 +410,7 @@
             <div class="article-content" style="padding: 1.2rem;">
               <span style="font-size: 0.75rem; color: var(--secondary-color); font-weight: 600; display: block; margin-bottom: 0.4rem;">⏱️ ${recTime} min de leitura</span>
               <h4 style="font-size: 1.05rem; color: var(--primary-color); margin-bottom: 0.6rem; line-height: 1.3;">${rec.title}</h4>
-              <a href="artigo-modelo.html?id=${rec.slug}" class="article-read-more" style="font-size: 0.85rem;">Ler artigo &rarr;</a>
+              <a href="artigo-modelo?id=${rec.slug}" class="article-read-more" style="font-size: 0.85rem;">Ler artigo &rarr;</a>
             </div>
           </div>`;
                 }).join('');

@@ -394,7 +394,7 @@
               </div>
               <h3 class="article-title">${article.title}</h3>
               <p class="article-summary">${article.summary}</p>
-              <a href="artigo-modelo.html?id=${article.slug}" class="article-read-more">Ler Artigo Completo &rarr;</a>
+              <a href="artigo-modelo?id=${article.slug}" class="article-read-more">Ler Artigo Completo &rarr;</a>
             </div>
           `;
           
@@ -403,7 +403,7 @@
           card.addEventListener('click', (e) => {
             // Evitar clique duplo se o usuário clicar exatamente em cima da tag <a> ou outro elemento iterativo
             if (e.target.tagName.toLowerCase() !== 'a') {
-              window.location.href = `artigo-modelo.html?id=${article.slug}`;
+              window.location.href = `artigo-modelo?id=${article.slug}`;
             }
           });
           

@@ -13,8 +13,9 @@ cp *.css out/ 2>/dev/null || true
 cp *.js out/ 2>/dev/null || true
 cp artigos.json out/ 2>/dev/null || true
 
-# 4. Copia a pasta admin do CMS
+# 4. Copia a pasta admin do CMS e a pasta data (configurações)
 cp -r admin out/ 2>/dev/null || true
+cp -r data out/ 2>/dev/null || true
 
 # 5. MÁGICA DAS IMAGENS: O Decap CMS salva as imagens na pasta 'public'.
 # Mas no nosso HTML (Vanilla), nós chamamos as imagens direto na raiz (ex: src="foto.png").

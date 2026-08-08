@@ -6,7 +6,9 @@ date: 2026-09-05T14:44:00.000-03:00
 image: /Contabilidade-Camilo-Fundo0.jpg
 summary: Para retirar lucro isento de imposto na pessoa física, a empresa
   precisa manter a escrituração contábil rigorosa e estar sem débitos
-  tributários. Conheça as regras.
+  tributários. Conheça as regras.Para retirar lucro isento de imposto na pessoa
+  física, a empresa precisa manter a escrituração contábil rigorosa e estar sem
+  débitos tributários. Conheça as regras.
 ---
 ## Requisitos contábeis obrigatórios para sócios
 

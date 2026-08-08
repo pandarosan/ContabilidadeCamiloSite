@@ -2,7 +2,7 @@
 title: Outro teste de publicação!
 category: Tributário & Impostos
 date: 2026-08-07T23:02:00.000-03:00
-image: /img/contabilidade-camilo-logo.jpg
+image: /img/corporate_business.jpg
 summary: Vamos testar outras formas
 ---
 Eu acessei o "banco de dados" do site aqui nos bastidores e verifiquei que o resumo `"uyebsjkdbhab"` que você digitou no CMS (Screenshot 2) **foi salvo com sucesso**! O painel do CMS está funcionando 100%.

@@ -1,5 +1,5 @@
 ---
-title: Teste de novo painel
+title: Teste de novo painel Teste de novo painel
 category: Avisos do Escritório
 date: 2026-08-07T21:50:00.000-03:00
 image: /dp_team.png
@@ -7,7 +7,9 @@ summary: As novas diretrizes de cruzamento eletrônico da Receita e do Ministér
   do Trabalho não toleram atrasos nos avisos de férias e SST. Veja o checklist
   obrigatório do DP. As novas diretrizes de cruzamento eletrônico da Receita e
   do Ministério do Trabalho não toleram atrasos nos avisos de férias e SST. Veja
-  o checklist obrigatório do DP.
+  o checklist obrigatório do DP. As novas diretrizes de cruzamento eletrônico da
+  Receita e do Ministério do Trabalho não toleram atrasos nos avisos de férias e
+  SST. Veja o checklist obrigatório do DP.
 ---
 ## Prazos rigorosos de envio e penalidades que todo empregador precisa evitar
 

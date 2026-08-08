@@ -34,10 +34,12 @@ No painel, clique em **"Novo Notícias & Artigos"** e preencha os campos conform
 - Clique no botão **"Agora"** logo abaixo do calendário para preencher automaticamente com o dia e hora exatos de hoje.
 - Se quiser agendar com uma data retroativa, basta selecionar no calendário.
 
-### Imagem de Capa
-- É a foto que aparece na página principal e no topo do artigo.
-- **Dica de Ouro:** Dê preferência para imagens no formato horizontal (paisagem). O tamanho ideal recomendado é **1200x630 pixels** em formato JPG.
-- Evite imagens muito pesadas (acima de 1MB) para não deixar o site lento.
+### Imagem de Capa (Fase 4: Imagens Ultrarrápidas em WebP)
+- É a foto que aparece na página principal e no topo do artigo. O formato horizontal (paisagem) é o ideal.
+- **Dica de Ouro para SEO e Vendas:** Antes de subir a sua imagem, converta-a para o formato `.webp`. Isso faz o seu blog abrir instantaneamente no 4G e atrai mais clientes pelo Google!
+  1. Acesse o site gratuito **[Squoosh.app](https://squoosh.app/)** ou **[iloveimg.com](https://www.iloveimg.com/pt/converter-para-jpg)**.
+  2. Arraste a sua foto para lá e baixe a versão `.webp`.
+  3. Faça o upload desse arquivo `.webp` diretamente no painel. O ganho de velocidade no site será gigantesco!
 
 ### Resumo (Chamada curta para o card)
 - Escreva de 1 a 2 frases (máximo 150 caracteres) que chamem a atenção do leitor. Esse texto aparecerá nos "cards" na página de listagem.

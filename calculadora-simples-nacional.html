@@ -115,10 +115,11 @@
 
       
         <!-- PRINT HEADER (Only visible on print) -->
-        <div class="print-header" style="display: none; text-align: center; margin-bottom: 2rem;">
-          <div style="font-size: 2.5rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">Contabilidade <span style="color: #d4af37;">Camilo</span></div>
-          <h2 style="color: var(--primary-color); margin: 0; font-size: 1.3rem;">Relatório de Simulação - Simples Nacional</h2>
-          <p style="color: #666; margin-top: 0.5rem;">Cálculo estimado com base nas informações fornecidas.</p>
+        <div class="print-header" style="display: none; text-align: center; margin-bottom: 2.5rem; position: relative;">
+          <div style="position: absolute; top: 1.25rem; left: 0; width: 100%; height: 1px; background-color: #ddd; z-index: 1;"></div>
+          <div style="font-size: 2.8rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1.5rem; position: relative; z-index: 2; display: inline-block; background: white; padding: 0 1.5rem;">Contabilidade <span style="color: #d4af37;">Camilo</span></div>
+          <h2 style="color: var(--primary-color); margin: 0; font-size: 1.6rem;">Relatório de Simulação - Simples Nacional</h2>
+          <p style="color: #666; margin-top: 0.5rem; font-size: 1rem;">Cálculo estimado com base nas informações fornecidas.</p>
         </div>
 
       <form id="simplesForm">
@@ -230,24 +231,27 @@
           </button>
           <button type="submit" id="btn-calcular" class="btn-primary" style="padding: 0.8rem 2.5rem; font-size: 1.05rem; width: auto;">Calcular Impostos</button>
         </div>
-        <div id="print-footer" class="print-only-footer" style="display: none; margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid #eee; text-align: center;">
-          <div style="text-align: center; line-height: 1.3;">
-            <p style="font-weight: bold; color: var(--primary-color); font-size: 1.1rem; margin: 0 0 0.3rem 0;">Simulação realizada no site da Contabilidade Camilo.</p>
-            <p style="color: #444; font-size: 1rem; margin: 0 0 0.8rem 0;">Precisa de ajuda para reduzir seus impostos com segurança?</p>
-            <div style="font-size: 1rem; font-weight: bold; color: var(--primary-color); margin: 0 0 0.2rem 0;">
-              <span style="color: #25D366;">WhatsApp:</span> (11) 94491-3323 <span style="font-weight: normal; margin: 0 0.3rem;">|</span> E-mail: contato@contabilidadecamilo.com.br
-            </div>
-            <div style="font-size: 1rem; font-weight: bold; color: var(--primary-color); margin: 0 0 1.2rem 0;">
-              contabilidadecamilo.com.br
-            </div>
-            <p style="font-size: 8pt; color: #64748b; margin: 0 0 0.3rem 0;">
+        <div id="print-footer" class="print-only-footer" style="display: none; margin-top: 2rem; padding-top: 1rem; text-align: center;">
+          <div style="margin-bottom: 1.5rem;">
+            <p style="font-size: 8pt; color: #64748b; margin: 0 0 0.2rem 0; line-height: 1.4;">
               *Os cálculos aqui demonstrados são aproximações baseadas nas tabelas gerais do Simples Nacional.<br>
               Para valores exatos e obrigações acessórias, consulte um de nossos especialistas.
             </p>
-            <p style="font-size: 8pt; color: #64748b; margin: 0;">
-              &copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso<br>
-              <span style="color: #007bff; display: inline-block; margin-top: 0.3rem;">🌐 por PandaRoSan</span>
-            </p>
+          </div>
+          <hr style="border: none; border-top: 1px solid #ddd; margin: 1.5rem 0;">
+          <div style="text-align: center; line-height: 1.4;">
+            <p style="font-weight: bold; color: var(--primary-color); font-size: 1.2rem; margin: 0 0 0.4rem 0;">Simulação realizada no site da Contabilidade Camilo.</p>
+            <div style="font-size: 1.05rem; font-weight: bold; color: var(--primary-color); margin: 0 0 1.5rem 0;">
+              <span style="color: #007bff;">🌐</span> contabilidadecamilo.com.br
+            </div>
+            <p style="color: #444; font-size: 1.05rem; margin: 0 0 0.8rem 0;">Precisa de ajuda para reduzir seus impostos com segurança?</p>
+            <div style="font-size: 1.05rem; font-weight: bold; color: var(--primary-color); margin: 0 0 4rem 0;">
+              <span style="color: #25D366;">WhatsApp:</span> (11) 94491-3323 <span style="font-weight: normal; margin: 0 0.3rem;">|</span> E-mail: contato@contabilidadecamilo.com.br
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; font-size: 7pt; color: #64748b;">
+              <div style="color: #007bff; font-weight: 500;"><span style="font-size: 9pt;">🌐</span> por PandaRoSan</div>
+              <div style="text-align: right;">&copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso</div>
+            </div>
           </div>
         </div>
 
@@ -278,24 +282,27 @@
       </ul>
     </div>
 
-    <div class="print-only-footer" style="display: none; margin-top: 2rem; padding-top: 1rem; border-top: 2px solid #eee; text-align: center;">
-          <div style="text-align: center; line-height: 1.3;">
-            <p style="font-weight: bold; color: var(--primary-color); font-size: 1.1rem; margin: 0 0 0.3rem 0;">Simulação realizada no site da Contabilidade Camilo.</p>
-            <p style="color: #444; font-size: 1rem; margin: 0 0 0.8rem 0;">Precisa de ajuda para reduzir seus impostos com segurança?</p>
-            <div style="font-size: 1rem; font-weight: bold; color: var(--primary-color); margin: 0 0 0.2rem 0;">
-              <span style="color: #25D366;">WhatsApp:</span> (11) 94491-3323 <span style="font-weight: normal; margin: 0 0.3rem;">|</span> E-mail: contato@contabilidadecamilo.com.br
-            </div>
-            <div style="font-size: 1rem; font-weight: bold; color: var(--primary-color); margin: 0 0 1.2rem 0;">
-              contabilidadecamilo.com.br
-            </div>
-            <p style="font-size: 8pt; color: #64748b; margin: 0 0 0.3rem 0;">
+    <div class="print-only-footer" style="display: none; margin-top: 2rem; padding-top: 1rem; text-align: center;">
+          <div style="margin-bottom: 1.5rem;">
+            <p style="font-size: 8pt; color: #64748b; margin: 0 0 0.2rem 0; line-height: 1.4;">
               *Os cálculos aqui demonstrados são aproximações baseadas nas tabelas gerais do Simples Nacional.<br>
               Para valores exatos e obrigações acessórias, consulte um de nossos especialistas.
             </p>
-            <p style="font-size: 8pt; color: #64748b; margin: 0;">
-              &copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso<br>
-              <span style="color: #007bff; display: inline-block; margin-top: 0.3rem;">🌐 por PandaRoSan</span>
-            </p>
+          </div>
+          <hr style="border: none; border-top: 1px solid #ddd; margin: 1.5rem 0;">
+          <div style="text-align: center; line-height: 1.4;">
+            <p style="font-weight: bold; color: var(--primary-color); font-size: 1.2rem; margin: 0 0 0.4rem 0;">Simulação realizada no site da Contabilidade Camilo.</p>
+            <div style="font-size: 1.05rem; font-weight: bold; color: var(--primary-color); margin: 0 0 1.5rem 0;">
+              <span style="color: #007bff;">🌐</span> contabilidadecamilo.com.br
+            </div>
+            <p style="color: #444; font-size: 1.05rem; margin: 0 0 0.8rem 0;">Precisa de ajuda para reduzir seus impostos com segurança?</p>
+            <div style="font-size: 1.05rem; font-weight: bold; color: var(--primary-color); margin: 0 0 4rem 0;">
+              <span style="color: #25D366;">WhatsApp:</span> (11) 94491-3323 <span style="font-weight: normal; margin: 0 0.3rem;">|</span> E-mail: contato@contabilidadecamilo.com.br
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; font-size: 7pt; color: #64748b;">
+              <div style="color: #007bff; font-weight: 500;"><span style="font-size: 9pt;">🌐</span> por PandaRoSan</div>
+              <div style="text-align: right;">&copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso</div>
+            </div>
           </div>
     </div>
   </section>

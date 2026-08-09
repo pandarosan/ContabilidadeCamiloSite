@@ -176,3 +176,9 @@ As calculadoras do site foram construídas com reatividade em tempo real (basta 
 **A Decisão Psicológica:**
 Ainda que o botão de "Calcular Impostos" não seja tecnicamente necessário para a engrenagem funcionar, ele **deve ser mantido na interface**.
 - **Benefício:** Para o perfil de público mais tradicional ou conservador do mercado contábil, a ação de preencher um formulário e ativamente clicar em um botão de confirmação gera uma **sensação de conclusão e segurança** ("Eu enviei os dados, o sistema processou e me deu a resposta"). Remover o botão pode gerar confusão ou insegurança sobre se o cálculo foi realmente concluído.
+
+## 3. Experiência de Impressão (Retrato vs. Paisagem)
+**O Contexto:**
+Os relatórios gerados a partir do site contêm tabelas, anexos, alertas e o rodapé oficial com os contatos e os direitos autorais da Contabilidade Camilo.
+**A Diretriz Operacional:**
+Sempre que for orientar um cliente a imprimir, gerar um PDF ou visualizar um relatório tirado da ferramenta, **instrua o uso do formato Retrato (Portrait)**. A impressão no formato Paisagem (Landscape) quebra o layout pretendido porque a altura vertical do papel é insuficiente, espremendo as informações em 3 ou mais páginas quebradas e destruindo o design pensado para 1 ou 2 folhas no máximo.

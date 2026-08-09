@@ -1740,7 +1740,27 @@ textarea.form-control {
 /* ========================================================= */
 @media print {
 
-    .info-importantes { page-break-before: always; margin-top: 0 !important; }
+  /* Ajustes extras para caber tudo em 2 folhas de PDF */
+  .calc-container-wrapper {
+      padding: 0.5rem !important;
+      margin: 0 !important;
+  }
+  .info-importantes-section {
+      padding: 0 !important;
+  }
+  .info-importantes-section .container {
+      padding: 1rem !important;
+      box-shadow: none !important;
+  }
+  ul {
+      line-height: 1.4 !important;
+      font-size: 0.95rem !important;
+  }
+  li {
+      margin-bottom: 0.5rem !important;
+  }
+
+    
 
     body, html { margin: 0 !important; padding: 0 !important; }
     body, main, .calc-table, .form-control, p, span, div { font-size: 11pt !important; line-height: 1.3 !important; }

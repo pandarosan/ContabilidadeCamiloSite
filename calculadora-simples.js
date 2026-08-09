@@ -1,3 +1,33 @@
+
+
+window.resetToasts = function() {
+  const alertZone = document.getElementById("alert-zone");
+  ["msg-erro-rbt12", "msg-erro-teto", "msg-aviso-sublimite"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      if (alertZone && el.parentElement !== alertZone) {
+         alertZone.appendChild(el);
+         const closeBtn = el.querySelector('.btn-close-toast');
+         if (closeBtn) closeBtn.style.display = 'block';
+         // Restore original styling
+         el.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+         el.style.display = 'none'; // reset to hidden when moved back
+      }
+    }
+  });
+};
+
+window.moveToast = function(toastEl) {
+  const leftContainer = document.getElementById('seo-cta-container');
+  if (leftContainer) {
+    leftContainer.appendChild(toastEl);
+    const closeBtn = toastEl.querySelector('.btn-close-toast');
+    if (closeBtn) closeBtn.style.display = 'none'; // hide close btn once moved
+    toastEl.style.boxShadow = 'none'; // flatten
+    toastEl.style.animation = 'none';
+  }
+};
+
 // --- CONFIGURAÇÕES DO CLIENTE (AUTONOMIA) ---
 // O valor do sublimite e os percentuais de repartição de ICMS/ISS da 5ª Faixa
 // Podem ser alterados diretamente aqui caso haja mudanças na legislação.
@@ -244,6 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Realiza o cálculo principal
   const calcularImpostos = () => {
+    window.resetToasts();
     if (aliquotasData.length === 0) {
       return; // Silencioso no auto-calculate, aguardando carregamento
     }
@@ -261,6 +292,8 @@ document.addEventListener("DOMContentLoaded", () => {
       dasTotalDisplay.textContent = "R$ 0,00";
       const ctaResultado = document.getElementById("cta-resultado");
       if (ctaResultado) ctaResultado.style.display = "none";
+
+
     };
 
     // BLOQUEIO DO TETO DO SIMPLES NACIONAL

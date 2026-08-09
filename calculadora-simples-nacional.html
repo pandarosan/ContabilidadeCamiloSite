@@ -133,7 +133,8 @@
 
         <!-- ZONA DE ALERTA -->
         <div id="alert-zone" class="toast-container">
-<div id="msg-erro-rbt12" class="alert-msg" style="display: none; background-color: #fff3cd; color: #856404; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); text-align: center; border: 1px solid #ffeeba;">
+<div id="msg-erro-rbt12" class="alert-msg" style="position: relative; display: none; background-color: #fff3cd; color: #856404; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); text-align: center; border: 1px solid #ffeeba;">
+          <button type="button" class="btn-close-toast" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #666;" onclick="moveToast(this.parentElement)">✖</button>
           <strong>Atenção:</strong> A soma do faturamento do mês não pode ser maior que o Faturamento Acumulado (RBT12).
           <p style="margin: 0.5rem 0 1rem 0; font-size: 0.95rem;">Se você possui dúvidas sobre como preencher ou se sua empresa ultrapassou o limite, nossa equipe pode analisar o seu caso gratuitamente.</p>
           <a href="https://wa.me/5511944913323?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvidas%20na%20calculadora%20do%20Simples%20Nacional." target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.5rem; font-size: 0.95rem; text-decoration: none; background-color: #25D366; color: white; border-radius: 8px; font-weight: bold;">
@@ -142,7 +143,8 @@
           </a>
         </div>
         
-        <div id="msg-erro-teto" class="alert-msg" style="display: none; background-color: #f8d7da; color: #721c24; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); text-align: center; border: 1px solid #f5c6cb;">
+        <div id="msg-erro-teto" class="alert-msg" style="position: relative; display: none; background-color: #f8d7da; color: #721c24; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); text-align: center; border: 1px solid #f5c6cb;">
+          <button type="button" class="btn-close-toast" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #666;" onclick="moveToast(this.parentElement)">✖</button>
           <strong>Atenção:</strong> O faturamento acumulado ultrapassa o limite máximo do Simples Nacional.
           <p style="margin: 0.5rem 0 1rem 0; font-size: 0.95rem;">Sua empresa deverá ser tributada pelo Lucro Presumido ou Lucro Real. Nossa equipe contábil pode elaborar um diagnóstico tributário especializado para o seu negócio.</p>
           <a href="https://wa.me/5511944913323?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvidas%20sobre%20a%20exclus%C3%A3o%20do%20Simples%20Nacional%20(teto%20ultrapassado)." target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.5rem; font-size: 0.95rem; text-decoration: none; background-color: #25D366; color: white; border-radius: 8px; font-weight: bold;">
@@ -151,7 +153,8 @@
           </a>
         </div>
 
-        <div id="msg-aviso-sublimite" class="alert-msg" style="display: none; background-color: #fff3cd; color: #856404; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); text-align: center; border: 1px solid #ffeeba;">
+        <div id="msg-aviso-sublimite" class="alert-msg" style="position: relative; display: none; background-color: #fff3cd; color: #856404; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); text-align: center; border: 1px solid #ffeeba;">
+          <button type="button" class="btn-close-toast" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #666;" onclick="moveToast(this.parentElement)">✖</button>
           <strong>Aviso Importante:</strong> O seu faturamento acumulado ultrapassou o Sublimite Estadual/Municipal.
           <p style="margin: 0.5rem 0 1rem 0; font-size: 0.95rem;">O ICMS e o ISS não estão incluídos no valor deste DAS. Estes impostos deverão ser recolhidos em guia própria (separada) diretamente para o Estado ou Município.</p>
           <a href="https://wa.me/5511944913323?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvidas%20sobre%20o%20recolhimento%20de%20ICMS%2FISS%20fora%20do%20DAS%20(sublimite)." target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.5rem; font-size: 0.95rem; text-decoration: none; background-color: #25D366; color: white; border-radius: 8px; font-weight: bold;">
@@ -245,6 +248,13 @@
       <p style="text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 2rem;">*Os cálculos aqui demonstrados são aproximações baseadas nas tabelas gerais do Simples Nacional.<br>Para valores exatos e obrigações acessórias, consulte um de nossos especialistas.</p>
     </div> <!-- fecha calc-container-wrapper -->
   </div> <!-- fecha calc-layout-wrapper -->
+
+  
+      <!-- PRINT HEADER PAGE 2 -->
+      <div class="print-header" style="display: none; text-align: center; margin-bottom: 2rem; page-break-before: always;">
+        <div style="font-size: 2.5rem; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem;">Contabilidade <span style="color: #d4af37;">Camilo</span></div>
+        <h2 style="color: var(--primary-color); margin: 0; font-size: 1.5rem;">Anexo - Informações Importantes</h2>
+      </div>
 
   <!-- INFORMAÇÕES IMPORTANTES -->
   <section style="background-color: #f8fafc; padding: 4rem 1.5rem;">

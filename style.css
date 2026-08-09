@@ -1783,7 +1783,7 @@ textarea.form-control {
   }
 
     body, html { margin: 0 !important; padding: 0 !important; }
-    body, main, .calc-table, .form-control, p { font-size: 11pt !important; line-height: 1.3 !important; }
+    body, main, .calc-table, .form-control, p, span, div { font-size: 11pt !important; line-height: 1.3 !important; }
     .calc-container-wrapper { page-break-inside: avoid; }
     .calc-table { page-break-inside: avoid; }
     /* Ocultar elementos desnecessários na impressão */
@@ -1797,6 +1797,12 @@ textarea.form-control {
     }
     #print-footer, .print-only-footer {
         display: block !important;
+    }
+    
+    /* Protege o cabecalho e rodape do resize global de 11pt para que o design Canva prevaleca */
+    .print-header div, .print-header span, .print-header h2, .print-header p,
+    .print-only-footer div, .print-only-footer span, .print-only-footer p {
+        font-size: unset !important;
     }
 
     /* Ajustar fundo e bordas para economizar tinta e focar no conteúdo */

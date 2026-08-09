@@ -1,3 +1,38 @@
+
+
+window.lastRbt12ForToasts = "";
+
+window.resetToasts = function(currentRbt12) {
+  if (window.lastRbt12ForToasts === currentRbt12 && currentRbt12 !== "") return; // Não reseta se o RBT12 for o mesmo
+  window.lastRbt12ForToasts = currentRbt12;
+
+  const alertZone = document.getElementById("alert-zone");
+  ["msg-erro-rbt12", "msg-erro-teto", "msg-aviso-sublimite"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      if (alertZone && el.parentElement !== alertZone) {
+         alertZone.appendChild(el);
+         const closeBtn = el.querySelector('.btn-close-toast');
+         if (closeBtn) closeBtn.style.display = 'block';
+         // Restore original styling
+         el.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+         el.style.display = 'none'; // reset to hidden when moved back
+      }
+    }
+  });
+};
+
+window.moveToast = function(toastEl) {
+  const leftContainer = document.getElementById('seo-cta-container');
+  if (leftContainer) {
+    leftContainer.appendChild(toastEl);
+    const closeBtn = toastEl.querySelector('.btn-close-toast');
+    if (closeBtn) closeBtn.style.display = 'none'; // hide close btn once moved
+    toastEl.style.boxShadow = 'none'; // flatten
+    toastEl.style.animation = 'none';
+  }
+};
+
 // --- CONFIGURAÇÕES DO CLIENTE (AUTONOMIA) ---
 // O valor do sublimite e os percentuais de repartição de ICMS/ISS da 5ª Faixa
 // Podem ser alterados diretamente aqui caso haja mudanças na legislação.
@@ -20,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const fatMesInputs = document.querySelectorAll(".fat-mes");
   const btnLimpar = document.getElementById("btn-limpar");
   const btnCalcular = document.getElementById("btn-calcular");
-  
+  const btnImprimir = document.getElementById("btn-imprimir");
   const fatMesTotalDisplay = document.getElementById("fat-mes-total");
   const dasTotalDisplay = document.getElementById("das-total");
 
@@ -29,20 +64,22 @@ document.addEventListener("DOMContentLoaded", () => {
   
   let aliquotasData = [];
   
+  const cacheBuster = "?v=" + new Date().getTime();
+  
   // Buscar as configurações do CMS para encontrar o arquivo Excel atualizado
-  fetch("/data/configuracoes.json")
+  fetch("/data/configuracoes.json" + cacheBuster)
     .then(res => {
       if (!res.ok) throw new Error("Configuração não encontrada, usando arquivo local padrão.");
       return res.json();
     })
     .then(config => {
       const excelUrl = config.planilha_excel || "aliquotas-simples.xlsx";
-      return fetch(excelUrl);
+      return fetch(excelUrl + cacheBuster);
     })
     .catch(err => {
       console.warn(err.message);
       // Fallback para arquivo padrão caso o CMS ainda não tenha gerado o JSON
-      return fetch("aliquotas-simples.xlsx");
+      return fetch("aliquotas-simples.xlsx" + cacheBuster);
     })
     .then(response => {
       if (!response.ok) throw new Error("Erro na rede ao baixar a planilha.");
@@ -229,10 +266,28 @@ document.addEventListener("DOMContentLoaded", () => {
     if (erroTeto) erroTeto.style.display = "none";
     const avisoSub = document.getElementById("msg-aviso-sublimite");
     if (avisoSub) avisoSub.style.display = "none";
+    const erroRbt12 = document.getElementById("msg-erro-rbt12");
+    if (erroRbt12) erroRbt12.style.display = "none";
   });
+
+  if (btnImprimir) {
+    btnImprimir.addEventListener("click", (e) => {
+      e.preventDefault();
+      const rbtVal = parseCurrency(rbt12Input.value);
+      let fatMesSoma = 0;
+      fatMesInputs.forEach(input => fatMesSoma += parseCurrency(input.value));
+      if (rbtVal <= 0 || fatMesSoma <= 0) {
+        alert("Preencha o faturamento de 12 meses e o faturamento do mês para imprimir o relatório.");
+        return;
+      }
+      window.print();
+    });
+  }
 
   // Realiza o cálculo principal
   const calcularImpostos = () => {
+    const rbtValForReset = rbt12Input ? rbt12Input.value : "";
+    window.resetToasts(rbtValForReset);
     if (aliquotasData.length === 0) {
       return; // Silencioso no auto-calculate, aguardando carregamento
     }
@@ -250,6 +305,8 @@ document.addEventListener("DOMContentLoaded", () => {
       dasTotalDisplay.textContent = "R$ 0,00";
       const ctaResultado = document.getElementById("cta-resultado");
       if (ctaResultado) ctaResultado.style.display = "none";
+
+
     };
 
     // BLOQUEIO DO TETO DO SIMPLES NACIONAL

@@ -1740,6 +1740,24 @@ textarea.form-control {
 /* ========================================================= */
 @media print {
 
+  /* Regras para não quebrar layout de tela, mas formatar tabela na impressao */
+  .hide-print { display: none !important; }
+  .show-print { display: inline !important; }
+  
+  .rbt12-group {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: center !important;
+      align-items: center !important;
+      max-width: 100% !important;
+      gap: 15px;
+  }
+  .rbt12-group label, .rbt12-group input {
+      width: auto !important;
+      margin: 0 !important;
+      text-align: left !important;
+  }
+
   /* Ajustes extras para caber tudo em 2 folhas de PDF */
   .calc-container-wrapper {
       padding: 0.5rem !important;
@@ -1823,4 +1841,8 @@ textarea.form-control {
         box-shadow: none !important;
         color: black !important;
     }
+}
+
+@media screen {
+  .show-print { display: none !important; }
 }

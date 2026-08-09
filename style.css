@@ -1799,6 +1799,10 @@ textarea.form-control {
         display: block !important;
     }
     
+    .print-fixed-footer {
+        display: flex !important;
+    }
+    
     main {
         padding-top: 0 !important;
     }

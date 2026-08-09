@@ -1795,7 +1795,7 @@ textarea.form-control {
     .print-header {
         display: block !important;
     }
-    #print-footer {
+    #print-footer, .print-only-footer {
         display: block !important;
     }
 

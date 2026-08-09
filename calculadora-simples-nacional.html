@@ -124,16 +124,16 @@
       <form id="simplesForm">
 
         
-        <div class="form-group" style="max-width: 400px; margin: 0 auto 1.5rem auto;">
-          <label class="form-label" for="rbt12" style="text-align: center; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; color: var(--primary-color);">
+        <div class="form-group rbt-container" style="max-width: 600px; margin: 0 auto 1.5rem auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <label class="form-label" for="rbt12" style="text-align: center; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; color: var(--primary-color); margin-bottom: 0.5rem;">
             Faturamento Acumulado (Últimos 12 meses)
           </label>
-          <input type="text" id="rbt12" class="form-control" placeholder="R$ 0,00" style="width: 100%; box-sizing: border-box;" required>
+          <input type="text" id="rbt12" class="form-control" placeholder="R$ 0,00" style="width: 100%; max-width: 400px; box-sizing: border-box; text-align: center;" required>
         </div>
 
         <!-- ZONA DE ALERTA -->
         <div id="alert-zone" class="toast-container">
-<div id="msg-erro-rbt12" class="alert-msg" style="position: relative; display: none; background-color: #fff3cd; color: #856404; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); text-align: center; border: 1px solid #ffeeba;">
+<div id="msg-erro-rbt12" class="alert-msg" style="position: relative; display: none; background-color: #ffedd5; color: #9a3412; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); text-align: center; border: 1px solid #ffeeba; border-left: 5px solid #d97706;">
           <strong>Atenção:</strong> A soma do faturamento do mês não pode ser maior que o Faturamento Acumulado (RBT12).
           <p style="margin: 0.5rem 0 1rem 0; font-size: 0.95rem;">Se você possui dúvidas sobre como preencher ou se sua empresa ultrapassou o limite, nossa equipe pode analisar o seu caso gratuitamente.</p>
           <a href="https://wa.me/5511944913323?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvidas%20na%20calculadora%20do%20Simples%20Nacional." target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.5rem; font-size: 0.95rem; text-decoration: none; background-color: #25D366; color: white; border-radius: 8px; font-weight: bold;">
@@ -143,7 +143,6 @@
         </div>
         
         <div id="msg-erro-teto" class="alert-msg" style="position: relative; display: none; background-color: #f8d7da; color: #721c24; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); text-align: center; border: 1px solid #f5c6cb;">
-          <button type="button" class="btn-close-toast" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #666;" onclick="moveToast(this.parentElement)">✖</button>
           <strong>Atenção:</strong> O faturamento acumulado ultrapassa o limite máximo do <span style="white-space: nowrap;">Simples Nacional</span>.
           <p style="margin: 0.5rem 0 1rem 0; font-size: 0.95rem;">Sua empresa deverá ser tributada pelo Lucro Presumido ou Lucro Real. Nossa equipe contábil pode elaborar um diagnóstico tributário especializado para o seu negócio.</p>
           <a href="https://wa.me/5511944913323?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvidas%20sobre%20a%20exclus%C3%A3o%20do%20Simples%20Nacional%20(teto%20ultrapassado)." target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.5rem; font-size: 0.95rem; text-decoration: none; background-color: #25D366; color: white; border-radius: 8px; font-weight: bold;">
@@ -169,44 +168,44 @@
           <table class="calc-table" style="width: 100%; border-collapse: collapse; text-align: left; margin-bottom: 2rem;">
             <thead>
               <tr style="border-bottom: 2px solid var(--primary-color);">
-                <th style="padding: 0.4rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center;">Atividade</th>
-                <th style="padding: 0.4rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center;">Faturamento<br>do Mês <span style="font-size:0.8em; font-weight:normal;">(R$)</span></th>
-                <th style="padding: 0.4rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center;">Alíquota<br>Efetiva</th>
-                <th style="padding: 0.4rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center;">Valor<br>do DAS <span style="font-size:0.8em; font-weight:normal;">(R$)</span></th>
+                <th style="padding: 0.4rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center; white-space: nowrap;">Atividade</th>
+                <th style="padding: 0.4rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center; white-space: nowrap;">Faturamento do Mês <span style="font-size:0.8em; font-weight:normal;">(R$)</span></th>
+                <th style="padding: 0.4rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center; white-space: nowrap;">Alíquota Efetiva</th>
+                <th style="padding: 0.4rem 0.2rem; color: var(--primary-color); font-size: 0.95rem; text-align: center; white-space: nowrap;">Valor do DAS <span style="font-size:0.8em; font-weight:normal;">(R$)</span></th>
               </tr>
             </thead>
             <tbody>
               <!-- Anexo I -->
               <tr style="border-bottom: 1px solid #eee;">
-                <td style="padding: 0.4rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2;">Anexo I<br><span style="font-size:0.85rem; color:#64748b;">(Comércio)</span></td>
+                <td style="padding: 0.4rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2; white-space: nowrap;">Anexo I - <span style="font-size:0.85rem; color:#64748b;">(Comércio)</span></td>
                 <td style="padding: 0.2rem;"><input type="text" class="form-control fat-mes" data-anexo="I" placeholder="0,00" style="padding: 0.4rem 0.2rem; font-size: 0.9rem; text-align: center;"></td>
                 <td style="padding: 0.4rem 0.2rem; font-weight: bold; color: var(--text-muted); font-size: 0.9rem; text-align: center;" id="aliq-I">0,00%</td>
                 <td style="padding: 0.4rem 0.2rem; font-weight: bold; font-size: 0.9rem; text-align: center;" id="das-I">0,00</td>
               </tr>
               <!-- Anexo II -->
               <tr style="border-bottom: 1px solid #eee;">
-                <td style="padding: 0.4rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2;">Anexo II<br><span style="font-size:0.85rem; color:#64748b;">(Indústria)</span></td>
+                <td style="padding: 0.4rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2; white-space: nowrap;">Anexo II - <span style="font-size:0.85rem; color:#64748b;">(Indústria)</span></td>
                 <td style="padding: 0.2rem;"><input type="text" class="form-control fat-mes" data-anexo="II" placeholder="0,00" style="padding: 0.4rem 0.2rem; font-size: 0.9rem; text-align: center;"></td>
                 <td style="padding: 0.4rem 0.2rem; font-weight: bold; color: var(--text-muted); font-size: 0.9rem; text-align: center;" id="aliq-II">0,00%</td>
                 <td style="padding: 0.4rem 0.2rem; font-weight: bold; font-size: 0.9rem; text-align: center;" id="das-II">0,00</td>
               </tr>
               <!-- Anexo III -->
               <tr style="border-bottom: 1px solid #eee;">
-                <td style="padding: 0.4rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2;">Anexo III<br><span style="font-size:0.85rem; color:#64748b;">(Serviço)</span></td>
+                <td style="padding: 0.4rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2; white-space: nowrap;">Anexo III - <span style="font-size:0.85rem; color:#64748b;">(Serviço)</span></td>
                 <td style="padding: 0.2rem;"><input type="text" class="form-control fat-mes" data-anexo="III" placeholder="0,00" style="padding: 0.4rem 0.2rem; font-size: 0.9rem; text-align: center;"></td>
                 <td style="padding: 0.4rem 0.2rem; font-weight: bold; color: var(--text-muted); font-size: 0.9rem; text-align: center;" id="aliq-III">0,00%</td>
                 <td style="padding: 0.4rem 0.2rem; font-weight: bold; font-size: 0.9rem; text-align: center;" id="das-III">0,00</td>
               </tr>
               <!-- Anexo IV -->
               <tr style="border-bottom: 1px solid #eee;">
-                <td style="padding: 0.4rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2;">Anexo IV<br><span style="font-size:0.85rem; color:#64748b;">(Serviço)</span></td>
+                <td style="padding: 0.4rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2; white-space: nowrap;">Anexo IV - <span style="font-size:0.85rem; color:#64748b;">(Serviço)</span></td>
                 <td style="padding: 0.2rem;"><input type="text" class="form-control fat-mes" data-anexo="IV" placeholder="0,00" style="padding: 0.4rem 0.2rem; font-size: 0.9rem; text-align: center;"></td>
                 <td style="padding: 0.4rem 0.2rem; font-weight: bold; color: var(--text-muted); font-size: 0.9rem; text-align: center;" id="aliq-IV">0,00%</td>
                 <td style="padding: 0.4rem 0.2rem; font-weight: bold; font-size: 0.9rem; text-align: center;" id="das-IV">0,00</td>
               </tr>
               <!-- Anexo V -->
               <tr style="border-bottom: 1px solid #eee;">
-                <td style="padding: 0.4rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2;">Anexo V<br><span style="font-size:0.85rem; color:#64748b;">(Serviço)</span></td>
+                <td style="padding: 0.4rem 0.2rem; font-weight: 500; font-size: 1rem; text-align: center; line-height: 1.2; white-space: nowrap;">Anexo V - <span style="font-size:0.85rem; color:#64748b;">(Serviço)</span></td>
                 <td style="padding: 0.2rem;"><input type="text" class="form-control fat-mes" data-anexo="V" placeholder="0,00" style="padding: 0.4rem 0.2rem; font-size: 0.9rem; text-align: center;"></td>
                 <td style="padding: 0.4rem 0.2rem; font-weight: bold; color: var(--text-muted); font-size: 0.9rem; text-align: center;" id="aliq-V">0,00%</td>
                 <td style="padding: 0.4rem 0.2rem; font-weight: bold; font-size: 0.9rem; text-align: center;" id="das-V">0,00</td>
@@ -234,8 +233,11 @@
         <div id="print-footer" class="print-only-footer" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #eee; text-align: center;">
           <p style="font-weight: bold; color: var(--primary-color); font-size: 1.2rem; margin-bottom: 0.5rem;">Simulação realizada no site da Contabilidade Camilo.</p>
           <p style="color: #444; font-size: 1rem; margin-bottom: 1rem;">Precisa de ajuda para reduzir seus impostos com segurança?</p>
-          <div style="font-size: 1.1rem; font-weight: bold; color: #25D366;">
+          <div style="font-size: 1.1rem; font-weight: bold; color: #25D366; margin-bottom: 0.5rem;">
             WhatsApp: (11) 94491-3323 | E-mail: contato@contabilidadecamilo.com.br
+          </div>
+          <div style="font-size: 1rem; font-weight: 500; color: #666;">
+            contabilidadecamilo.com.br
           </div>
         </div>
 
@@ -267,6 +269,15 @@
         <li style="margin-bottom: 1rem;">Os cálculos apresentados acima podem não ser aplicáveis à sua empresa; uma análise cuidadosa deve ser feita em conexão com qualquer tipo de cálculo tributário, especialmente envolvendo particularidades como Fator R, isenções ou produtos monofásicos.</li>
         <li>Entre em contato com a Contabilidade Camilo, um escritório de contabilidade especializado em empresas do Simples Nacional, para um diagnóstico tributário completo e seguro.</li>
       </ul>
+    </div>
+    <div class="print-only-footer" style="display: none; margin-top: 2rem; padding-top: 1rem; border-top: 2px solid #eee; text-align: center;">
+      <p style="font-weight: bold; color: var(--primary-color); font-size: 1.2rem; margin-bottom: 0.5rem;">Precisa de ajuda para reduzir seus impostos com segurança?</p>
+      <div style="font-size: 1.1rem; font-weight: bold; color: #25D366; margin-bottom: 0.5rem;">
+        WhatsApp: (11) 94491-3323 | E-mail: contato@contabilidadecamilo.com.br
+      </div>
+      <div style="font-size: 1rem; font-weight: 500; color: #666;">
+        contabilidadecamilo.com.br
+      </div>
     </div>
   </section>
 

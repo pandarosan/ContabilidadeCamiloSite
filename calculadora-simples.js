@@ -1,6 +1,11 @@
 
 
-window.resetToasts = function() {
+window.lastRbt12ForToasts = "";
+
+window.resetToasts = function(currentRbt12) {
+  if (window.lastRbt12ForToasts === currentRbt12 && currentRbt12 !== "") return; // Não reseta se o RBT12 for o mesmo
+  window.lastRbt12ForToasts = currentRbt12;
+
   const alertZone = document.getElementById("alert-zone");
   ["msg-erro-rbt12", "msg-erro-teto", "msg-aviso-sublimite"].forEach(id => {
     const el = document.getElementById(id);
@@ -268,13 +273,21 @@ document.addEventListener("DOMContentLoaded", () => {
   if (btnImprimir) {
     btnImprimir.addEventListener("click", (e) => {
       e.preventDefault();
+      const rbtVal = parseCurrency(rbt12Input.value);
+      let fatMesSoma = 0;
+      fatMesInputs.forEach(input => fatMesSoma += parseCurrency(input.value));
+      if (rbtVal <= 0 || fatMesSoma <= 0) {
+        alert("Preencha o faturamento de 12 meses e o faturamento do mês para imprimir o relatório.");
+        return;
+      }
       window.print();
     });
   }
 
   // Realiza o cálculo principal
   const calcularImpostos = () => {
-    window.resetToasts();
+    const rbtValForReset = rbt12Input ? rbt12Input.value : "";
+    window.resetToasts(rbtValForReset);
     if (aliquotasData.length === 0) {
       return; // Silencioso no auto-calculate, aguardando carregamento
     }

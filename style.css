@@ -1760,7 +1760,9 @@ textarea.form-control {
       margin-bottom: 0.5rem !important;
   }
 
-    
+  .fab-whatsapp {
+      display: none !important;
+  }
 
     body, html { margin: 0 !important; padding: 0 !important; }
     body, main, .calc-table, .form-control, p, span, div { font-size: 11pt !important; line-height: 1.3 !important; }

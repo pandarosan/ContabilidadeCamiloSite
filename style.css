@@ -1799,10 +1799,8 @@ textarea.form-control {
         display: block !important;
     }
     
-    /* Protege o cabecalho e rodape do resize global de 11pt para que o design Canva prevaleca */
-    .print-header div, .print-header span, .print-header h2, .print-header p,
-    .print-only-footer div, .print-only-footer span, .print-only-footer p {
-        font-size: unset !important;
+    main {
+        padding-top: 0 !important;
     }
 
     /* Ajustar fundo e bordas para economizar tinta e focar no conteúdo */

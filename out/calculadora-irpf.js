@@ -56,7 +56,27 @@ document.addEventListener("DOMContentLoaded", () => {
   UI.loadingIndicator.style.display = 'block';
   UI.form.style.opacity = '0.5';
   
-  fetch("/calculadora-ir-configuracoes.xlsx" + cacheBuster)
+  // Buscar as configurações do CMS para encontrar o arquivo Excel atualizado
+  fetch("/data/configuracoes.json" + cacheBuster)
+    .then(res => {
+      if (!res.ok) throw new Error("Configuração não encontrada, usando arquivo local padrão.");
+      return res.json();
+    })
+    .then(config => {
+      const excelUrl = config.planilha_irpf || "/calculadora-ir-configuracoes.xlsx";
+      // Verifica se o caminho absoluto começa com a pasta public (onde o Decap joga os arquivos via CMS)
+      let finalUrl = excelUrl;
+      if (finalUrl && finalUrl.startsWith("public/")) {
+        finalUrl = "/" + finalUrl.substring(7); // Remove 'public/' para usar caminho raiz
+      } else if (finalUrl && !finalUrl.startsWith("/")) {
+        finalUrl = "/" + finalUrl;
+      }
+      return fetch(finalUrl + cacheBuster);
+    })
+    .catch(err => {
+      console.warn(err.message);
+      return fetch("/calculadora-ir-configuracoes.xlsx" + cacheBuster);
+    })
     .then(response => {
       if (!response.ok) throw new Error("Erro na rede ao baixar a planilha.");
       return response.arrayBuffer();

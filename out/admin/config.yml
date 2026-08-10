@@ -30,9 +30,10 @@ collections:
   - name: "sistema"
     label: "⚙️ Configurações do Sistema"
     files:
-      - label: "📊 Base de Dados da Calculadora"
+      - label: "📊 Base de Dados das Calculadoras"
         name: "calculadora_simples"
         file: "data/configuracoes.json"
-        description: "Faça o upload do seu arquivo .xlsx com as tabelas do Simples Nacional."
+        description: "Faça o upload dos seus arquivos .xlsx com as tabelas tributárias atualizadas."
         fields:
-          - { label: "Planilha do Simples Nacional (.xlsx)", name: "planilha_excel", widget: "file", hint: "Envie o arquivo atualizado aqui. O site se atualizará automaticamente." }
+          - { label: "Planilha do Simples Nacional (.xlsx)", name: "planilha_excel", widget: "file", hint: "Envie o arquivo do Simples Nacional atualizado aqui." }
+          - { label: "Planilha do IRPF (.xlsx)", name: "planilha_irpf", widget: "file", hint: "Envie o arquivo do IRPF atualizado aqui.", required: false }

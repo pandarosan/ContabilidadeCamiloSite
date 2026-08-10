@@ -276,10 +276,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const rbtVal = parseCurrency(rbt12Input.value);
       let fatMesSoma = 0;
       fatMesInputs.forEach(input => fatMesSoma += parseCurrency(input.value));
-      if (rbtVal <= 0 || fatMesSoma <= 0) {
-        alert("Preencha o faturamento de 12 meses e o faturamento do mês para imprimir o relatório.");
+      if (rbtVal <= 0 || fatMesSoma > rbtVal) {
+        alert("Não é possível imprimir: O faturamento acumulado deve ser maior que zero e maior ou igual à soma do faturamento do mês.");
         return;
       }
+
+      // Regra 2: Valor de 12 meses acima do Teto (R$ 4.800.000,00)
+      if (rbtVal > 4800000) {
+        alert("Não é possível imprimir: O faturamento acumulado ultrapassa o limite máximo do Simples Nacional (Teto).");
+        return;
+      }
+
+      // Regra 3: Fechar caixas de mensagem de DAS/Sublimite antes de imprimir
+      const mensagens = document.querySelectorAll(".alert-msg");
+      mensagens.forEach(msg => msg.style.display = "none");
+
       window.print();
     });
   }

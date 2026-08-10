@@ -1787,7 +1787,7 @@ textarea.form-control {
     .calc-container-wrapper { page-break-inside: avoid; }
     .calc-table { page-break-inside: avoid; }
     /* Ocultar elementos desnecessários na impressão */
-    header, footer, .footer-bottom, nav, .seo-content, .calc-header-global, .btn-wrapper, #cta-resultado, .contato-header {
+    header, footer, .footer-bottom, nav, .seo-content, .calc-header-global, .btn-wrapper, #cta-resultado, .contato-header, .alert-msg {
         display: none !important;
     }
 

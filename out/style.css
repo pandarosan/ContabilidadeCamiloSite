@@ -1854,3 +1854,96 @@ textarea.form-control {
 @media screen {
   .show-print { display: none !important; }
 }
+
+/* --- ESTILOS IRPF (TOOLTIPS E CARDS) --- */
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 0.5rem;
+  cursor: help;
+}
+.tooltip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.tooltip-text {
+  visibility: hidden;
+  width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 0.5rem;
+  position: absolute;
+  z-index: 100;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -125px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.85rem;
+  font-weight: normal;
+  text-transform: none;
+  line-height: 1.4;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+}
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.result-cards {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.result-card {
+  flex: 1;
+  min-width: 200px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: white;
+  text-align: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.result-card h3 {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.result-card .value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #d4af37; /* Dourado Premium */
+  margin: 0;
+}
+.result-card.highlight {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #0f172a 100%);
+  transform: scale(1.02);
+}
+.result-card.highlight .value {
+  color: white;
+}

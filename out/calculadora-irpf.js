@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     valImpostoPagar: document.getElementById('valImpostoPagar'),
     valRendaLiquida: document.getElementById('valRendaLiquida'),
     resultadoTabela: document.getElementById('resultadoTabela'),
+    printSummary: document.getElementById('printSummary'),
     dataHoraImpressao: document.getElementById('data-hora-impressao')
   };
 
@@ -168,6 +169,18 @@ document.addEventListener("DOMContentLoaded", () => {
     UI.valImpostoPagar.textContent = formatCurrency(impostoTotal);
     UI.valRendaLiquida.textContent = formatCurrency(rendaLiquida);
 
+    if (UI.printSummary) {
+      UI.printSummary.innerHTML = `
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; border: 1px solid #e2e8f0; padding: 1.5rem; border-radius: 8px;">
+          <div><strong style="color: var(--primary-color);">RENDIMENTOS TRIBUTÁVEIS (MENSAL):</strong> <br>${formatCurrency(rendimento)}</div>
+          <div><strong style="color: var(--primary-color);">DEPENDENTES:</strong> <br>${dependentes}</div>
+          <div><strong style="color: var(--primary-color);">PENSÃO ALIMENTÍCIA (MENSAL):</strong> <br>${formatCurrency(pensao)}</div>
+          <div><strong style="color: var(--primary-color);">INSS / OUTRAS DEDUÇÕES:</strong> <br>${formatCurrency(outrasDeducoes)}</div>
+          <div style="grid-column: 1 / -1;"><strong style="color: var(--primary-color);">LUCROS E DIVIDENDOS / OUTRAS ISENTAS (MENSAL):</strong> <br>${formatCurrency(dividendos)}</div>
+        </div>
+      `;
+    }
+
     // Atualizar Tabela Detalhada
     let tabelaHTML = '';
     
@@ -214,6 +227,11 @@ document.addEventListener("DOMContentLoaded", () => {
     tabelaHTML += `<tr>
       <td style="padding: 0.6rem;">Alíquota Efetiva (Peso real do imposto)</td>
       <td style="padding: 0.6rem; text-align: right; font-weight: bold;">${aliquotaEfetiva.toFixed(2)}%</td>
+    </tr>`;
+
+    tabelaHTML += `<tr>
+      <td style="padding: 0.6rem; border-top: 2px solid #10b981; color: #10b981;"><strong>RENDA LÍQUIDA ESTIMADA</strong></td>
+      <td style="padding: 0.6rem; border-top: 2px solid #10b981; text-align: right; color: #10b981; font-weight: bold;">${formatCurrency(rendaLiquida)}</td>
     </tr>`;
 
     UI.resultadoTabela.innerHTML = tabelaHTML;

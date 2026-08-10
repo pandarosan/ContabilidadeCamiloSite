@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculadora IRPF 2026 | Contabilidade Camilo</title>
+  <title>Calculadora IRPF - Contabilidade Camilo</title>
   <meta name="description" content="Simule seu Imposto de Renda Pessoa Física com as novas regras da PL 1087 (Isenção até 5 mil e adicional para Altas Rendas)." />
   <link rel="stylesheet" href="/style.css">
   <!-- SheetJS para ler Excel -->
@@ -92,8 +92,10 @@
             <div style="font-size: 3.2rem !important; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem; display: inline-block; padding: 0 1.5rem;">Contabilidade <span style="font-size: 3.2rem !important; color: #d4af37;">Camilo</span></div>
             <h2 style="color: var(--primary-color); margin: 0; font-size: 1.6rem !important;">Relatório de Simulação - IRPF</h2>
           </div>
+          
+          <div id="printSummary" class="show-print" style="display:none; text-align: left; margin-bottom: 2rem;"></div>
 
-          <form id="irpfForm">
+          <form id="irpfForm" class="hide-print">
             <!-- INPUTS -->
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
               <div class="form-group" style="margin: 0; grid-column: 1 / -1;">
@@ -153,7 +155,7 @@
             </div>
 
             <div class="btn-wrapper" style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; margin-bottom: 2.5rem;">
-              <button type="button" class="btn-secondary" id="btnLimpar" style="flex: 1; max-width: 200px;">Limpar Dados</button>
+              <button type="button" class="btn-secondary" id="btnLimpar" style="flex: 1; max-width: 200px; border: 2px solid var(--primary-color); color: var(--primary-color);">Limpar Dados</button>
               <button type="submit" class="btn-primary" style="flex: 2; max-width: 400px; font-weight: bold; font-size: 1.1rem;">Calcular Imposto</button>
             </div>
           </form>
@@ -165,7 +167,7 @@
           <!-- RESULTADOS -->
           <div id="resultadoContainer" style="display: none; border-top: 1px solid #e2e8f0; padding-top: 2rem;">
             
-            <div class="result-cards">
+            <div class="result-cards hide-print">
               <div class="result-card">
                 <h3>Base de Cálculo</h3>
                 <p class="value" id="valBaseCalculo">R$ 0,00</p>
@@ -334,6 +336,19 @@
       </div><!-- /.footer-col -->
     </div><!-- /.footer-content -->
   </footer>
+
+  <div class="print-fixed-footer" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; padding: 0 1.5rem 1rem 1.5rem; justify-content: space-between; align-items: flex-end; font-size: 7pt !important; color: #64748b; z-index: 9999; flex-direction: row; border-top: 1px solid #ccc; padding-top: 1rem; background: white;">
+    <div style="font-size: 8pt !important; color: #555;">
+      <strong>Simulação realizada no site da Contabilidade Camilo.</strong><br>
+      🌐 contabilidadecamilo.com.br<br>
+      Precisa de ajuda para reduzir seus impostos com segurança?<br>
+      WhatsApp: (11) 94491-3323 | E-mail: contato@contabilidadecamilo.com.br
+    </div>
+    <div style="font-size: 7pt !important; text-align: right; color: #ababab;">
+      <span style="font-size: 7pt !important;">🌐</span> por PandaRoSan<br>
+      &copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso
+    </div>
+  </div>
 
   <script type="module" src="/main.js"></script>
   <script src="calculadora-irpf.js"></script>

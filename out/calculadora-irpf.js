@@ -125,8 +125,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       
       const isencaoElem = document.getElementById('texto-isencao');
-      if (isencaoElem && tabelasReferencia[0]) {
-        isencaoElem.innerHTML = `<strong>Isenção até ${formatCurrency(tabelasReferencia[0].limite)}:</strong> Quem ganha até este valor (estimado) não pagará imposto.`;
+      if (isencaoElem) {
+        let teto = parametrosGerais.Teto_Isencao;
+        if (!teto && tabelasReferencia[0]) {
+          teto = tabelasReferencia[0].limite;
+        }
+        if (teto) {
+          isencaoElem.innerHTML = `<strong>Isenção até ${formatCurrency(teto)}:</strong> Quem ganha até este valor (estimado) não pagará imposto.`;
+        }
       }
       
       const adicionalElem = document.getElementById('texto-adicional');

@@ -106,9 +106,32 @@ document.addEventListener("DOMContentLoaded", () => {
         rawParams.forEach(row => {
           const paramName = (row.Parametro || row.parametro || "").toString().trim();
           if (paramName) {
-            parametrosGerais[paramName] = parseFloat(row.Valor || row.valor || 0);
+            let val = row.Valor !== undefined ? row.Valor : row.valor;
+            if (val !== undefined && val !== null) {
+              // se for um texto que não é número (ex: "PL 1087/25"), mantém o texto.
+              parametrosGerais[paramName] = isNaN(Number(val)) ? val : Number(val);
+            }
           }
         });
+      }
+
+      // Atualizar textos dinâmicos
+      if (parametrosGerais.Ano_Base) {
+        document.querySelectorAll('.dynamic-ano').forEach(el => el.textContent = parametrosGerais.Ano_Base);
+        document.title = "Calculadora IRPF " + parametrosGerais.Ano_Base + " - Contabilidade Camilo";
+      }
+      if (parametrosGerais.Regra_Dividendos) {
+        document.querySelectorAll('.dynamic-regra').forEach(el => el.textContent = parametrosGerais.Regra_Dividendos);
+      }
+      
+      const isencaoElem = document.getElementById('texto-isencao');
+      if (isencaoElem && tabelasReferencia[0]) {
+        isencaoElem.innerHTML = `<strong>Isenção até ${formatCurrency(tabelasReferencia[0].limite)}:</strong> Quem ganha até este valor (estimado) não pagará imposto.`;
+      }
+      
+      const adicionalElem = document.getElementById('texto-adicional');
+      if (adicionalElem && parametrosGerais.Adicional_Limite && parametrosGerais.Adicional_Aliquota) {
+        adicionalElem.innerHTML = `<strong>Adicional para Altas Rendas:</strong> Rendimentos (incluindo lucros e dividendos) superiores a <strong>${formatCurrency(parametrosGerais.Adicional_Limite)} por mês</strong> terão um adicional de ${parametrosGerais.Adicional_Aliquota}% sobre o excedente.`;
       }
 
       UI.loadingIndicator.style.display = 'none';

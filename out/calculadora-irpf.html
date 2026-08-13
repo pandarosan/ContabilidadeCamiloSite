@@ -63,8 +63,8 @@
 
   <main style="padding-top: 60px; background-color: var(--secondary-color); min-height: 100vh;">
     <div class="calc-header-global" style="text-align: center; padding: 0 1.5rem;">
-      <h1 style="color: var(--primary-color); font-size: 2.5rem; margin-bottom: 0.5rem; margin-top: 0;">Calculadora IRPF 2026</h1>
-      <p style="color: var(--text-color); font-size: 1.2rem; max-width: 800px; margin: 0 auto;">Simule o desconto do Imposto de Renda com as novas regras (PL 1087/25).</p>
+      <h1 style="color: var(--primary-color); font-size: 2.5rem; margin-bottom: 0.5rem; margin-top: 0;">Calculadora IRPF <span class="dynamic-ano">2026</span></h1>
+      <p style="color: var(--text-color); font-size: 1.2rem; max-width: 800px; margin: 0 auto;">Simule o desconto do Imposto de Renda com as novas regras (<span class="dynamic-regra">PL 1087/25</span>).</p>
     </div>
 
     <div class="calc-layout-wrapper" style="max-width: 1300px; margin: 3rem auto 2rem auto; display: flex; flex-wrap: wrap; gap: 2rem; padding: 0 1.5rem; align-items: flex-start;">
@@ -72,8 +72,8 @@
       <div class="seo-content" style="flex: 1; min-width: 300px; color: var(--text-color); line-height: 1.6;">
         <h2 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.3rem;">Entenda as novas regras do IRPF:</h2>
         <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 1.1rem;">
-          <li><strong>Isenção até R$ 5.000:</strong> Quem ganha até 5 salários mínimos (estimado) não pagará imposto.</li>
-          <li><strong>Adicional para Altas Rendas:</strong> Rendimentos (incluindo lucros e dividendos) superiores a <strong>R$ 50 mil por mês</strong> terão um adicional de 10% sobre o excedente.</li>
+          <li id="texto-isencao"><strong>Isenção até R$ 5.000:</strong> Quem ganha até 5 salários mínimos (estimado) não pagará imposto.</li>
+          <li id="texto-adicional"><strong>Adicional para Altas Rendas:</strong> Rendimentos (incluindo lucros e dividendos) superiores a <strong>R$ 50 mil por mês</strong> terão um adicional de 10% sobre o excedente.</li>
           <li>Os valores por dependente e outras deduções são subtraídos da base de cálculo antes de aplicar a tabela.</li>
         </ul>
         <div id="cta-resultado" style="display: none; background-color: #f0fdf4; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; text-align: center; border: 1px solid #dcfce3;">

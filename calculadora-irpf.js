@@ -287,7 +287,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Impressão
   UI.btnImprimir.addEventListener('click', () => {
     const now = new Date();
-    UI.dataHoraImpressao.textContent = now.toLocaleString('pt-BR');
+    if (UI.dataHoraImpressao) {
+      UI.dataHoraImpressao.textContent = now.toLocaleString('pt-BR');
+    }
     window.print();
   });
 

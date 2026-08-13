@@ -192,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Renda líquida no bolso do contribuinte (receitas reais menos deduções reais e imposto)
     // O imposto come parte dos rendimentos. Pensão e Outras (como INSS) já saíram do bolso.
     const rendaLiquida = rendaTotal - pensao - outrasDeducoes - impostoTotal;
+    const aliquotaEfetiva = rendaTotal > 0 ? (impostoTotal / rendaTotal) * 100 : 0;
 
     // Atualizar UI
     UI.valBaseCalculo.textContent = formatCurrency(baseCalculo);
@@ -200,6 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (UI.printSummary) {
       UI.printSummary.innerHTML = `
+        <div style="display: flex; justify-content: space-between; background-color: var(--primary-color); color: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <div><strong style="font-size: 1.2rem;">Alíquota Efetiva:</strong> <br><span style="font-size: 1.8rem; font-weight: bold;">${aliquotaEfetiva.toFixed(2)}%</span></div>
+          <div style="text-align: right;"><strong style="font-size: 1.2rem;">Renda Líquida Estimada:</strong> <br><span style="font-size: 1.8rem; font-weight: bold; color: #10b981;">${formatCurrency(rendaLiquida)}</span></div>
+        </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; border: 1px solid #e2e8f0; padding: 1.5rem; border-radius: 8px;">
           <div><strong style="color: var(--primary-color);">RENDIMENTOS TRIBUTÁVEIS (MENSAL):</strong> <br>${formatCurrency(rendimento)}</div>
           <div><strong style="color: var(--primary-color);">DEPENDENTES:</strong> <br>${dependentes}</div>
@@ -239,8 +244,10 @@ document.addEventListener("DOMContentLoaded", () => {
     </tr>`;
 
     if (impostoAdicional > 0) {
+      const regraDescricao = parametrosGerais.Regra_Dividendos || 'PL 1087/25';
+      const aliquotaAdic = parametrosGerais.Adicional_Aliquota || 10;
       tabelaHTML += `<tr>
-        <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Adicional Altas Rendas (Sobre excedente de ${formatCurrency(baseAdicional)})</td>
+        <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Adicional Altas Rendas - ${regraDescricao} (${aliquotaAdic}% sobre excedente de ${formatCurrency(baseAdicional)})</td>
         <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right;">${formatCurrency(impostoAdicional)}</td>
       </tr>`;
     }
@@ -250,8 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <td style="padding: 0.6rem; border-bottom: 2px solid var(--primary-color); text-align: right; color: var(--primary-color); font-weight: bold;">${formatCurrency(impostoTotal)}</td>
     </tr>`;
 
-    // Alíquota Efetiva = Imposto Total / Renda Bruta Total
-    const aliquotaEfetiva = rendaTotal > 0 ? (impostoTotal / rendaTotal) * 100 : 0;
+    // Alíquota Efetiva = Imposto Total / Renda Bruta Total (Já calculada acima)
     
     tabelaHTML += `<tr>
       <td style="padding: 0.6rem;">Alíquota Efetiva (Peso real do imposto)</td>

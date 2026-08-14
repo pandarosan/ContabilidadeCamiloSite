@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cálculo Salário Líquido 2026 - Contabilidade Camilo</title>
+  <meta name="description" content="Calculadora de Salário Líquido CLT e Autônomos. Descubra os descontos reais de INSS e IRPF na folha de pagamento." />
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <style>
+    .calc-container { padding: 2rem; background-color: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .colaborador-panel { border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; background: #f8fafc; }
+    .table-container { width: 100%; overflow-x: auto; margin-top: 2rem; }
+    table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+    th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem;}
+    th { background: var(--primary-color); color: white; font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+    .resultado-liquido { font-size: 2.5rem; color: #2563eb; font-weight: 700; margin-bottom: 0.5rem; }
+    .detalhe-linha { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px dashed #cbd5e1; }
+    .detalhe-linha.bold { font-weight: bold; border-top: 2px solid #cbd5e1; border-bottom: none; margin-top: 0.5rem; padding-top: 1rem; }
+    
+    @media (max-width: 768px) {
+      body { overflow-x: hidden; }
+      .calc-header-global h1 { font-size: 1.8rem !important; }
+      .calc-layout-wrapper { padding: 0 1rem !important; gap: 1.5rem !important; flex-direction: column; }
+      .seo-content, .calc-container-wrapper { width: 100% !important; flex: none !important; }
+      .form-control { width: 100%; box-sizing: border-box; }
+    }
+    
+    @media print {
+      body, html { background: white !important; height: auto !important; min-height: auto !important; margin: 0; padding: 0; }
+      .hide-print { display: none !important; }
+      .show-print { display: block !important; }
+      .calc-layout-wrapper { margin: 0 !important; padding: 0 !important; gap: 0 !important; }
+      .seo-content, .calc-container-wrapper { width: 100% !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; }
+      .calc-container { box-shadow: none !important; padding: 0 !important; border: none !important; }
+      .print-header { display: block !important; margin-bottom: 2rem !important; }
+      #resultadoDestaque { box-shadow: none !important; padding: 0 !important; margin-bottom: 2rem !important; border: 1px solid #e2e8f0; padding: 1.5rem !important; }
+      table { border: 1px solid #e2e8f0; }
+      th { color: black !important; background: #f8fafc !important; border-bottom: 2px solid black; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header hide-print">
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <span class="logo-text">Contabilidade <strong>Camilo</strong></span>
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li class="dropdown">
+            <a href="index.html#solucoes" class="nav-link">Soluções <span class="caret">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="abertura-de-empresas-e-societario.html">Abertura de Empresas e Societário</a></li>
+              <li><a href="fiscal-e-contabilidade.html">Fiscal e Contabilidade</a></li>
+              <li><a href="departamento-de-pessoal.html">Departamento de Pessoal</a></li>
+            </ul>
+          </li>
+          <li><a href="sobre-nos.html" class="nav-link">Sobre Nós</a></li>
+          <li><a href="contato.html" class="nav-link">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main style="padding-top: 60px; background-color: var(--secondary-color); min-height: 100vh;" class="print-no-padding">
+    <div class="calc-header-global hide-print" style="text-align: center; padding: 0 1.5rem;">
+      <h1 style="color: var(--primary-color); font-size: 2.5rem; margin-bottom: 0.5rem; margin-top: 0;">Calculadora de Salário Líquido <span class="dynamic-ano">2026</span></h1>
+      <p style="color: var(--text-color); font-size: 1.2rem; max-width: 800px; margin: 0 auto;">Descubra os descontos reais de INSS e IRPF na folha de pagamento.</p>
+    </div>
+
+    <div class="calc-layout-wrapper" style="max-width: 1300px; margin: 3rem auto 2rem auto; display: flex; flex-wrap: wrap; gap: 2rem; padding: 0 1.5rem; align-items: flex-start;">
+      
+      <!-- Lado Esquerdo: SEO e Resultados -->
+      <div class="seo-content" style="flex: 1; min-width: 300px;">
+        <div class="print-header show-print" style="display: none; text-align: center; margin-bottom: 1rem; position: relative;">
+          <div style="font-size: 2.8rem; font-weight: bold; color: var(--primary-color); display: inline-block;">Contabilidade <span style="color: #d4af37;">Camilo</span></div>
+          <h2 style="color: var(--primary-color); margin: 0; font-size: 1.4rem;">Relatório Oficial: Salário Líquido</h2>
+        </div>
+      
+        <div id="resultadoDestaque" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+          <h2 style="color: var(--text-color); font-size: 1.2rem; margin-bottom: 0.5rem;" id="tituloPainel">Seu salário líquido:</h2>
+          <div class="resultado-liquido" id="displaySalarioLiquido">R$ 0,00</div>
+          <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem;" class="hide-print">Entenda o resultado no detalhamento abaixo.</p>
+          
+          <div class="detalhamento" id="painelDetalhamento">
+            <div class="detalhe-linha">
+              <span>(+) Salário Bruto</span>
+              <strong id="resSalarioBruto">R$ 0,00</strong>
+            </div>
+            <div class="detalhe-linha">
+              <span>(-) INSS</span>
+              <strong id="resINSS" style="color: #ef4444;">R$ 0,00</strong>
+            </div>
+            <div class="detalhe-linha">
+              <span>(-) Imposto de Renda</span>
+              <strong id="resIRRF" style="color: #ef4444;">R$ 0,00</strong>
+            </div>
+            <div class="detalhe-linha">
+              <span>(-) Pensão Alimentícia</span>
+              <strong id="resPensao" style="color: #ef4444;">R$ 0,00</strong>
+            </div>
+            <div class="detalhe-linha bold">
+              <span>Salário Líquido Final</span>
+              <strong id="resLiquidoFinal">R$ 0,00</strong>
+            </div>
+          </div>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem;" class="hide-print">
+             <button type="button" class="btn-primary" onclick="window.print()" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                Imprimir Relatório
+             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lado Direito: Formulário e Colaboradores -->
+      <div class="calc-container-wrapper" style="flex: 1.5; min-width: 280px;">
+        <div class="calc-container">
+          
+          <form id="calcForm" class="hide-print">
+            <div class="colaborador-panel">
+              <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Dados do Cálculo</h3>
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label" for="nomeColaborador">Nome (Opcional)</label>
+                  <input type="text" id="nomeColaborador" class="form-control" placeholder="Ex: João Silva">
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label" for="categoria">Categoria
+                    <div class="tooltip-container"><span class="tooltip-icon">?</span><span class="tooltip-text">Regime de contratação para o cálculo correto do INSS.</span></div>
+                  </label>
+                  <select id="categoria" class="form-control" required>
+                    <option value="CLT">CLT (Carteira Assinada)</option>
+                    <!-- As outras opções virão dinâmicas da planilha se houver a aba Outras_Categorias -->
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="salarioBruto">Salário Bruto (R$)
+                    <div class="tooltip-container"><span class="tooltip-icon">?</span><span class="tooltip-text">Remuneração total antes de qualquer desconto oficial.</span></div>
+                  </label>
+                  <input type="text" id="salarioBruto" class="form-control" placeholder="R$ 0,00" required>
+                </div>
+
+                <div class="form-group" id="divDependentes">
+                  <label class="form-label" for="dependentes">Dependentes
+                    <div class="tooltip-container"><span class="tooltip-icon">?</span><span class="tooltip-text">Quantidade de dependentes legais para dedução no IRRF.</span></div>
+                  </label>
+                  <input type="number" id="dependentes" class="form-control" placeholder="0" min="0">
+                </div>
+
+                <div class="form-group" id="divPensao">
+                  <label class="form-label" for="pensao">Pensão Alimentícia (R$)
+                    <div class="tooltip-container"><span class="tooltip-icon">?</span><span class="tooltip-text">Valor descontado judicialmente da folha.</span></div>
+                  </label>
+                  <input type="text" id="pensao" class="form-control" placeholder="R$ 0,00">
+                </div>
+              </div>
+
+              <div style="margin-top: 1.5rem; text-align: right;">
+                <button type="button" id="btnAdicionar" class="btn-secondary" style="font-size: 0.95rem; border: 2px solid var(--primary-color); color: var(--primary-color); background: transparent; padding: 0.5rem 1rem;">
+                  + Adicionar mais um colaborador
+                </button>
+              </div>
+            </div>
+
+            <div class="btn-wrapper" style="display: flex; gap: 1rem; justify-content: center;">
+              <button type="button" class="btn-secondary" id="btnLimpar" style="flex: 1; border: 2px solid var(--primary-color);">Limpar Tudo</button>
+            </div>
+          </form>
+
+          <!-- Tabela Múltiplos Colaboradores -->
+          <div class="table-container" id="tabelaColaboradores" style="display: none;">
+            <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Lista de Colaboradores</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome / Categoria</th>
+                  <th>Bruto</th>
+                  <th>INSS</th>
+                  <th>IRRF</th>
+                  <th>Líquido</th>
+                  <th class="hide-print" style="width: 50px; text-align: center;"></th>
+                </tr>
+              </thead>
+              <tbody id="tbodyColaboradores">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer id="printFooter" class="show-print" style="display:none; background: white;">
+    <div style="text-align: center; border-top: 1px solid #ccc; padding-top: 10px; margin-top: 30px; font-size: 12px; color: #666;">
+        <p style="margin: 0;"><strong>Contabilidade Camilo</strong> - Excelência e Tradição</p>
+        <p style="margin: 0;">WhatsApp: (11) 94491-3323 | E-mail: contato@contabilidadecamilo.com.br</p>
+        <p style="margin: 5px 0 0 0;">© por PandaRoSan <span class="dynamic-ano">2026</span> Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso</p>
+    </div>
+  </footer>
+
+  <script src="/calculadora-salario-liquido.js"></script>
+</body>
+</html>

@@ -242,3 +242,11 @@ O erro fatal de implementações antigas é que o Google Chrome destrói a vari�
 
 ### ⚙️ FAQ Dinâmico e SEO (Schema.org)
 A seção de Perguntas Frequentes (FAQ) da calculadora de IRPF foi construída em formato "Accordion". Além da organização visual, cada pergunta e resposta está envelopada com marcações JSON-LD do `Schema.org (FAQPage)`, injetando os dados estruturados direto nos motores do Google e garantindo presença orgânica e preferência em respostas de IAs Generativas (ChatGPT, Gemini).
+
+### 🔍 SEO Dinâmico Anti-Esquecimento (A Estratégia do Ano Base)
+**O Contexto:**
+Para manter alta relevância no Google (ex: "Calculadora Salário Líquido 2026"), não podemos usar anos fixos ("chumbados") no código-fonte, pois o site rapidamente envelheceria se esquecêssemos de atualizar o HTML. Mas, ao mesmo tempo, não usamos a data do relógio do servidor, porque o cliente precisa estar no controle de *quando* o sistema vira de ano (já que as leis demoram a ser sancionadas).
+**A Diretriz Operacional:**
+Toda calculadora alimentada por planilha possui um campo **Ano_Base** na aba de `Parametros_Gerais`. 
+- Instrua o cliente a **nunca alterar o título do campo `Ano_Base`**.
+- O JavaScript do portal varre essa aba e injeta esse ano no Título da Página, no H1, e nas meta tags de SEO em tempo real. Assim, o cliente tem total autonomia para virar o site de "2026" para "2027" no exato momento em que publicar a nova planilha, mantendo o tráfego de buscas sempre no topo sem precisar de desenvolvedores.

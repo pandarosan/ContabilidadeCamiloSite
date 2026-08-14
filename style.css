@@ -1782,9 +1782,11 @@ textarea.form-control {
       display: none !important;
   }
 
-    body, html { margin: 0 !important; padding: 0 !important; }
+    body, html { margin: 0 !important; padding: 0 !important; height: auto !important; }
     body, main, .calc-table, .form-control, p, span, div { font-size: 11pt !important; line-height: 1.3 !important; }
-    .calc-container-wrapper { page-break-inside: avoid; }
+    .calc-layout-wrapper { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+    .calc-container-wrapper { page-break-inside: avoid; margin-bottom: 0 !important; }
+    .calc-container { margin-bottom: 0 !important; padding-bottom: 0 !important; }
     .calc-table { page-break-inside: avoid; }
     /* Ocultar elementos desnecessários na impressão */
     header, footer, .footer-bottom, nav, .seo-content, .calc-header-global, .btn-wrapper, #cta-resultado, .contato-header, .alert-msg {

@@ -271,7 +271,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     UI.resultadoTabela.innerHTML = tabelaHTML;
     UI.resultadoContainer.style.display = 'block';
+    
+    const cta = document.getElementById('cta-resultado');
+    if (cta) cta.style.display = 'block';
   }
+
+  const allInputs = UI.form.querySelectorAll('input');
+  allInputs.forEach((input, index) => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const next = allInputs[index + 1];
+        if (next) next.focus();
+        else {
+          if (tabelasReferencia.length > 0) calcularIRPF();
+        }
+      }
+    });
+    input.addEventListener('change', () => {
+      if (tabelasReferencia.length > 0) calcularIRPF();
+    });
+  });
 
   UI.form.addEventListener('submit', (e) => {
     e.preventDefault();

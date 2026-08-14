@@ -63,8 +63,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const configRes = await fetch('/data/configuracoes.json');
       const configJson = await configRes.json();
-      const inssPath = configJson.calculadora_simples?.planilha_inss || '/calculadora-inss-configuracoes.xlsx';
-      const irpfPath = configJson.calculadora_simples?.planilha_irpf || '/calculadora-ir-configuracoes.xlsx';
+      const inssPath = configJson.planilha_inss || '/calculadora-inss-configuracoes.xlsx';
+      const irpfPath = configJson.planilha_irpf || '/calculadora-ir-configuracoes.xlsx';
 
       await Promise.all([
         loadINSS(inssPath),
@@ -87,18 +87,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     const workbook = XLSX.read(arrayBuffer, { type: 'array' });
 
     // Lendo Parametros_Gerais
-    const paramsSheet = workbook.Sheets['Parametros_Gerais'];
+    const nomeParamsINSS = workbook.SheetNames.find(n => n.trim().toLowerCase() === "parametros_gerais");
+    const paramsSheet = nomeParamsINSS ? workbook.Sheets[nomeParamsINSS] : null;
     if (paramsSheet) {
       const pData = XLSX.utils.sheet_to_json(paramsSheet);
       pData.forEach(row => {
-        if (row.Parametro && row.Valor !== undefined) {
-          inssData.parametros[row.Parametro.trim()] = row.Valor;
+        const paramName = (row.Parametro || row.parametro || "").toString().trim();
+        const val = row.Valor !== undefined ? row.Valor : row.valor;
+        if (paramName && val !== undefined) {
+          inssData.parametros[paramName] = val;
         }
       });
     }
 
     // Lendo Tabelas_Referencia
-    const tabSheet = workbook.Sheets['Tabelas_Referencia'];
+    const nomeRefINSS = workbook.SheetNames.find(n => n.trim().toLowerCase() === "tabelas_referencia");
+    const tabSheet = nomeRefINSS ? workbook.Sheets[nomeRefINSS] : null;
     if (tabSheet) {
       inssData.tabelaProgressiva = XLSX.utils.sheet_to_json(tabSheet).map(row => {
         let limite = row.Limite_Ate;
@@ -113,7 +117,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Lendo Outras_Categorias
-    const catSheet = workbook.Sheets['Outras_Categorias'];
+    const nomeCatINSS = workbook.SheetNames.find(n => n.trim().toLowerCase() === "outras_categorias");
+    const catSheet = nomeCatINSS ? workbook.Sheets[nomeCatINSS] : null;
     if (catSheet) {
       inssData.outrasCategorias = XLSX.utils.sheet_to_json(catSheet).map(row => ({
         nome: row.Categoria,
@@ -128,23 +133,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     const arrayBuffer = await res.arrayBuffer();
     const workbook = XLSX.read(arrayBuffer, { type: 'array' });
 
-    const pSheet = workbook.Sheets['Configuracoes'];
+    const nomeAbaParams = workbook.SheetNames.find(n => n.trim().toLowerCase() === "parametros_gerais");
+    const pSheet = nomeAbaParams ? workbook.Sheets[nomeAbaParams] : null;
     if (pSheet) {
       const pData = XLSX.utils.sheet_to_json(pSheet);
       pData.forEach(row => {
-        if (row.Variavel) irpfData.parametros[row.Variavel.trim()] = row.Valor;
+        const paramName = (row.Variavel || row.Parametro || row.parametro || "").toString().trim();
+        if (paramName) irpfData.parametros[paramName] = row.Valor !== undefined ? row.Valor : row.valor;
       });
     }
 
-    const tSheet = workbook.Sheets['Tabela_Progressiva'];
+    const nomeAbaRef = workbook.SheetNames.find(n => n.trim().toLowerCase() === "tabelas_referencia");
+    const tSheet = nomeAbaRef ? workbook.Sheets[nomeAbaRef] : null;
     if (tSheet) {
       irpfData.tabelaProgressiva = XLSX.utils.sheet_to_json(tSheet).map(row => {
-        let limite = row.Limite_Ate;
+        let limite = row.Limite_Ate || row.Limite || row.limite;
         if (typeof limite === 'string' && isNaN(parseFloat(limite))) limite = Infinity;
         return {
-          limite: limite,
-          aliquota: (parseFloat(row.Aliquota) || 0), // IRPF spreadsheet is already divided or decimal? Need to test, wait, IRPF formula was parsed carefully
-          deducao: parseFloat(row.Parcela_Deduzir) || 0
+          limite: parseFloat(limite),
+          aliquota: parseFloat(row.Aliquota || row.aliquota || 0),
+          deducao: parseFloat(row.Parcela_Deduzir || row.Deducao || row.deducao || 0)
         };
       });
     }

@@ -201,16 +201,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (UI.printSummary) {
       UI.printSummary.innerHTML = `
-        <div style="display: flex; justify-content: space-between; background-color: var(--primary-color); color: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
-          <div><strong style="font-size: 1.2rem;">Alíquota Efetiva:</strong> <br><span style="font-size: 1.8rem; font-weight: bold;">${aliquotaEfetiva.toFixed(2)}%</span></div>
-          <div style="text-align: right;"><strong style="font-size: 1.2rem;">Renda Líquida Estimada:</strong> <br><span style="font-size: 1.8rem; font-weight: bold; color: #10b981;">${formatCurrency(rendaLiquida)}</span></div>
+        <div style="display: flex; justify-content: space-between; background-color: var(--primary-color); color: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+          <div><strong style="font-size: 1.1rem;">Alíquota Efetiva:</strong> <br><span style="font-size: 1.5rem; font-weight: bold;">${aliquotaEfetiva.toFixed(2)}%</span></div>
+          <div style="text-align: right;"><strong style="font-size: 1.1rem;">Renda Líquida Estimada:</strong> <br><span style="font-size: 1.5rem; font-weight: bold; color: #10b981;">${formatCurrency(rendaLiquida)}</span></div>
         </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; border: 1px solid #e2e8f0; padding: 1.5rem; border-radius: 8px;">
-          <div><strong style="color: var(--primary-color);">RENDIMENTOS TRIBUTÁVEIS (MENSAL):</strong> <br>${formatCurrency(rendimento)}</div>
-          <div><strong style="color: var(--primary-color);">DEPENDENTES:</strong> <br>${dependentes}</div>
-          <div><strong style="color: var(--primary-color);">PENSÃO ALIMENTÍCIA (MENSAL):</strong> <br>${formatCurrency(pensao)}</div>
-          <div><strong style="color: var(--primary-color);">INSS / OUTRAS DEDUÇÕES:</strong> <br>${formatCurrency(outrasDeducoes)}</div>
-          <div style="grid-column: 1 / -1;"><strong style="color: var(--primary-color);">LUCROS E DIVIDENDOS / OUTRAS ISENTAS (MENSAL):</strong> <br>${formatCurrency(dividendos)}</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; border: 1px solid #e2e8f0; padding: 1rem; border-radius: 8px;">
+          <div style="font-size: 0.95rem;"><strong style="color: var(--primary-color);">RENDIMENTOS TRIBUTÁVEIS (MENSAL):</strong> <br>${formatCurrency(rendimento)}</div>
+          <div style="font-size: 0.95rem;"><strong style="color: var(--primary-color);">DEPENDENTES:</strong> <br>${dependentes}</div>
+          <div style="font-size: 0.95rem;"><strong style="color: var(--primary-color);">PENSÃO ALIMENTÍCIA (MENSAL):</strong> <br>${formatCurrency(pensao)}</div>
+          <div style="font-size: 0.95rem;"><strong style="color: var(--primary-color);">INSS / OUTRAS DEDUÇÕES:</strong> <br>${formatCurrency(outrasDeducoes)}</div>
+          <div style="grid-column: 1 / -1; font-size: 0.95rem;"><strong style="color: var(--primary-color);">LUCROS E DIVIDENDOS / OUTRAS ISENTAS (MENSAL):</strong> <br>${formatCurrency(dividendos)}</div>
         </div>
       `;
     }
@@ -219,54 +219,54 @@ document.addEventListener("DOMContentLoaded", () => {
     let tabelaHTML = '';
     
     tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Dedução por Dependentes (${dependentes})</td>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444;">- ${formatCurrency(deducaoDependentes)}</td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem;">Dedução por Dependentes (${dependentes})</td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444; font-size: 0.95rem;">- ${formatCurrency(deducaoDependentes)}</td>
     </tr>`;
     
     tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Outras Deduções (Pensão + INSS)</td>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444;">- ${formatCurrency(pensao + outrasDeducoes)}</td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem;">Outras Deduções (Pensão + INSS)</td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444; font-size: 0.95rem;">- ${formatCurrency(pensao + outrasDeducoes)}</td>
     </tr>`;
 
     tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;"><strong>Base de Cálculo do IRPF</strong></td>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right;"><strong>${formatCurrency(baseCalculo)}</strong></td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem;"><strong>Base de Cálculo do IRPF</strong></td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.95rem;"><strong>${formatCurrency(baseCalculo)}</strong></td>
     </tr>`;
 
     tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Faixa do Imposto</td>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right;">Faixa ${faixaEncontrada.faixa} (${faixaEncontrada.aliquota}%)</td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem;">Faixa do Imposto</td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.95rem;">Faixa ${faixaEncontrada.faixa} (${faixaEncontrada.aliquota}%)</td>
     </tr>`;
 
     tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Imposto Progressivo (após dedução da faixa)</td>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right;">${formatCurrency(impostoProgressivo)}</td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem;">Imposto Progressivo (após dedução da faixa)</td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.95rem;">${formatCurrency(impostoProgressivo)}</td>
     </tr>`;
 
     if (impostoAdicional > 0) {
       const regraDescricao = parametrosGerais.Regra_Dividendos || 'PL 1087/25';
       const aliquotaAdic = parametrosGerais.Adicional_Aliquota || 10;
       tabelaHTML += `<tr>
-        <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Adicional Altas Rendas - ${regraDescricao} (${aliquotaAdic}% sobre excedente de ${formatCurrency(baseAdicional)})</td>
-        <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right;">${formatCurrency(impostoAdicional)}</td>
+        <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem;">Adicional Altas Rendas - ${regraDescricao} (${aliquotaAdic}% sobre excedente de ${formatCurrency(baseAdicional)})</td>
+        <td style="padding: 0.4rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.95rem;">${formatCurrency(impostoAdicional)}</td>
       </tr>`;
     }
 
     tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 2px solid var(--primary-color);"><strong>TOTAL DE IMPOSTO DEVIDO</strong></td>
-      <td style="padding: 0.6rem; border-bottom: 2px solid var(--primary-color); text-align: right; color: var(--primary-color); font-weight: bold;">${formatCurrency(impostoTotal)}</td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 2px solid var(--primary-color); font-size: 0.95rem;"><strong>TOTAL DE IMPOSTO DEVIDO</strong></td>
+      <td style="padding: 0.4rem 0.6rem; border-bottom: 2px solid var(--primary-color); text-align: right; color: var(--primary-color); font-weight: bold; font-size: 0.95rem;">${formatCurrency(impostoTotal)}</td>
     </tr>`;
 
     // Alíquota Efetiva = Imposto Total / Renda Bruta Total (Já calculada acima)
     
     tabelaHTML += `<tr>
-      <td style="padding: 0.6rem;">Alíquota Efetiva (Peso real do imposto)</td>
-      <td style="padding: 0.6rem; text-align: right; font-weight: bold;">${aliquotaEfetiva.toFixed(2)}%</td>
+      <td style="padding: 0.4rem 0.6rem; font-size: 0.95rem;">Alíquota Efetiva (Peso real do imposto)</td>
+      <td style="padding: 0.4rem 0.6rem; text-align: right; font-weight: bold; font-size: 0.95rem;">${aliquotaEfetiva.toFixed(2)}%</td>
     </tr>`;
 
     tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-top: 2px solid #10b981; color: #10b981;"><strong>RENDA LÍQUIDA ESTIMADA</strong></td>
-      <td style="padding: 0.6rem; border-top: 2px solid #10b981; text-align: right; color: #10b981; font-weight: bold;">${formatCurrency(rendaLiquida)}</td>
+      <td style="padding: 0.4rem 0.6rem; border-top: 2px solid #10b981; color: #10b981; font-size: 0.95rem;"><strong>RENDA LÍQUIDA ESTIMADA</strong></td>
+      <td style="padding: 0.4rem 0.6rem; border-top: 2px solid #10b981; text-align: right; color: #10b981; font-weight: bold; font-size: 0.95rem;">${formatCurrency(rendaLiquida)}</td>
     </tr>`;
 
     UI.resultadoTabela.innerHTML = tabelaHTML;

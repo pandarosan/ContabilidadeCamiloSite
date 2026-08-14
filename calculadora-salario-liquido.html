@@ -40,6 +40,54 @@
       th { color: black !important; background: #f8fafc !important; border-bottom: 2px solid black; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Calculadora de Salário Líquido - Contabilidade Camilo",
+        "operatingSystem": "All",
+        "applicationCategory": "FinanceApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "BRL"
+        },
+        "description": "Simulador de Salário Líquido com cálculo de descontos de INSS (Progressivo) e IRPF para CLT, Autônomos e MEI."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "O que é o desconto de INSS?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "O INSS (Instituto Nacional do Seguro Social) é a contribuição obrigatória descontada da folha de pagamento que garante ao trabalhador benefícios previdenciários, como aposentadoria, auxílio-doença e salário-maternidade."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Como funciona o desconto para Autônomos e MEI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "MEIs pagam uma taxa fixa de 5% baseada no salário mínimo vigente. Autônomos no Plano Simplificado pagam 11% sobre o mínimo. Já os Autônomos no Plano Normal pagam 20% sobre o rendimento total, sendo o desconto limitado ao Teto máximo do INSS."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Qual é a diferença entre Salário Bruto e Salário Líquido?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Salário Bruto é o valor total registrado em contrato antes de qualquer desconto. Salário Líquido é o valor real que cai na sua conta bancária após os descontos obrigatórios (INSS e IRPF) e eventuais deduções legais como pensão alimentícia."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="header hide-print">
@@ -113,6 +161,20 @@
                 Imprimir Relatório
              </button>
           </div>
+        </div>
+
+        <div class="seo-text-block hide-print" style="color: var(--text-color); line-height: 1.6; margin-bottom: 2rem;">
+          <h2 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.3rem;">Como funciona o Cálculo do Salário Líquido?</h2>
+          <p style="margin-bottom: 1rem;">O cálculo do salário líquido em <span class="dynamic-ano">2026</span> leva em consideração uma série de regras oficiais da Receita Federal e da Previdência Social. Primeiro, é aplicada a tabela progressiva do <strong>INSS</strong>, que atua em sistema de "cascata" para trabalhadores CLT, ou alíquotas diretas para autônomos (MEI e Carnê-Leão).</p>
+          <p>Após o desconto do INSS e eventuais deduções por dependentes ou pensão alimentícia judicial, aplicamos a tabela do <strong>IRPF (Imposto de Renda Retido na Fonte)</strong>, considerando a regra mais benéfica para o trabalhador, como o Desconto Simplificado legal.</p>
+        </div>
+
+        <div id="cta-resultado" class="hide-print" style="display: none; background-color: #f0fdf4; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; text-align: center; border: 1px solid #dcfce3;">
+          <p style="color: var(--text-color); font-size: 1.05rem; margin-bottom: 1rem; font-weight: 500;">Os impostos estão corroendo seus rendimentos como autônomo? Descubra como a abertura de um CNPJ pode ser mais lucrativa!</p>
+          <a href="https://wa.me/5511944913323?text=Ol%C3%A1%21%20Fiz%20uma%20simula%C3%A7%C3%A3o%20de%20Sal%C3%A1rio%20L%C3%A1quido%20e%20gostaria%20de%20saber%20se%20abrir%20um%20CNPJ%20vale%20a%20pena%20para%20mim." target="_blank" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; font-size: 1rem; background-color: #25D366; color: white;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            Falar com Especialista
+          </a>
         </div>
       </div>
 
@@ -195,12 +257,51 @@
         </div>
       </div>
     </div>
+
+    <!-- Seção de FAQ (Acordeon) -->
+    <div class="faq-section hide-print" style="max-width: 900px; margin: 3rem auto; padding: 0 1.5rem;">
+      <h2 style="color: var(--primary-color); text-align: center; margin-bottom: 2rem; font-size: 2rem;">Perguntas Frequentes</h2>
+      
+      <div class="faq-item" style="background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden;">
+        <button class="faq-btn" style="width: 100%; text-align: left; padding: 1.2rem; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.icon').innerText = this.querySelector('.icon').innerText === '+' ? '-' : '+'">
+          O que é o desconto de INSS?
+          <span class="icon" style="font-size: 1.5rem; font-weight: normal;">+</span>
+        </button>
+        <div class="faq-content" style="padding: 0 1.2rem; color: var(--text-color); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+          <p style="padding-bottom: 1.2rem;">O INSS (Instituto Nacional do Seguro Social) é a contribuição obrigatória descontada da folha de pagamento que garante ao trabalhador benefícios previdenciários, como aposentadoria, auxílio-doença e salário-maternidade.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" style="background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden;">
+        <button class="faq-btn" style="width: 100%; text-align: left; padding: 1.2rem; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.icon').innerText = this.querySelector('.icon').innerText === '+' ? '-' : '+'">
+          Como funciona o desconto para Autônomos e MEI?
+          <span class="icon" style="font-size: 1.5rem; font-weight: normal;">+</span>
+        </button>
+        <div class="faq-content" style="padding: 0 1.2rem; color: var(--text-color); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+          <p style="padding-bottom: 1.2rem;">MEIs pagam uma taxa fixa de 5% baseada no salário mínimo vigente. Autônomos no Plano Simplificado pagam 11% sobre o mínimo. Já os Autônomos no Plano Normal pagam 20% sobre o rendimento total, sendo o desconto limitado ao Teto máximo do INSS.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" style="background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden;">
+        <button class="faq-btn" style="width: 100%; text-align: left; padding: 1.2rem; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.icon').innerText = this.querySelector('.icon').innerText === '+' ? '-' : '+'">
+          Qual é a diferença entre Salário Bruto e Salário Líquido?
+          <span class="icon" style="font-size: 1.5rem; font-weight: normal;">+</span>
+        </button>
+        <div class="faq-content" style="padding: 0 1.2rem; color: var(--text-color); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+          <p style="padding-bottom: 1.2rem;">Salário Bruto é o valor total registrado em contrato antes de qualquer desconto. Salário Líquido é o valor real que cai na sua conta bancária após os descontos obrigatórios (INSS e IRPF) e eventuais deduções legais como pensão alimentícia.</p>
+        </div>
+      </div>
+      <style>
+        .faq-content.active { max-height: 500px; }
+      </style>
+    </div>
   </main>
   
   <footer id="printFooter" class="show-print" style="display:none; background: white;">
     <div style="text-align: center; border-top: 1px solid #ccc; padding-top: 10px; margin-top: 30px; font-size: 12px; color: #666;">
         <p style="margin: 0;"><strong>Contabilidade Camilo</strong> - Excelência e Tradição</p>
         <p style="margin: 0;">WhatsApp: (11) 94491-3323 | E-mail: contato@contabilidadecamilo.com.br</p>
+        <br><br>
         <p style="margin: 5px 0 0 0;">© por PandaRoSan <span class="dynamic-ano">2026</span> Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso</p>
     </div>
   </footer>

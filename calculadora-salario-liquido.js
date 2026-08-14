@@ -255,6 +255,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     let nome = els.nome.value.trim() || "Simulação";
     els.tituloPainel.innerText = `Salário Líquido de ${nome}:`;
+    
+    const cta = document.getElementById('cta-resultado');
+    if (cta && bruto > 0) cta.style.display = 'block';
   }
 
   function adicionarColaborador() {

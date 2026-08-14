@@ -182,3 +182,63 @@ Ainda que o botão de "Calcular Impostos" não seja tecnicamente necessário par
 Os relatórios gerados a partir do site contêm tabelas, anexos, alertas e o rodapé oficial com os contatos e os direitos autorais da Contabilidade Camilo.
 **A Diretriz Operacional:**
 Sempre que for orientar um cliente a imprimir, gerar um PDF ou visualizar um relatório tirado da ferramenta, **instrua o uso do formato Retrato (Portrait)**. A impressão no formato Paisagem (Landscape) quebra o layout pretendido porque a altura vertical do papel é insuficiente, espremendo as informações em 3 ou mais páginas quebradas e destruindo o design pensado para 1 ou 2 folhas no máximo.
+
+---
+
+# 📚 APÊNDICE TÉCNICO: Engenharia e Arquitetura Serverless
+
+Este apêndice compila os módulos técnicos de desenvolvimento do portal, detalhando as engrenagens por trás das soluções implementadas. Ele serve como referência para desenvolvedores, agências e profissionais de TI que venham a interagir com o sistema.
+
+## Módulo 1: O Blog Sem Banco de Dados (Arquitetura Serverless com Markdown)
+
+### 📌 Finalidade
+Em um ambiente onde a premissa máxima é **soberania, custo zero de hospedagem e ausência de banco de dados tradicional** (MySQL, Postgres), precisamos de uma forma de gerenciar e renderizar postagens de blog em tempo real sem servidor (Serverless).
+Para isso, usamos o **Decap CMS** para que o usuário redija artigos visualmente, e os salvamos como arquivos de texto (Markdown - `.md`). Em seguida, um script intercepta esses arquivos e os compila para que o site os leia com velocidade extrema.
+
+### ⚙️ A Mágica (Código e Engenharia para a IA)
+A genialidade desta solução reside no arquivo `build.js` que roda exclusivamente durante o deploy na Cloudflare. Ele lê todos os arquivos `.md` da pasta `/artigos`, extrai o cabeçalho (Frontmatter) e o conteúdo, e constrói um grande arquivo `artigos.json`. O front-end do site faz um `fetch('/artigos.json')` no carregamento e monta a tela de notícias instantaneamente.
+
+**Por que isso é incrível?**
+1. **Velocidade (CDN):** O JSON vira um arquivo estático distribuído em todos os servidores da Cloudflare no mundo (cache infinito).
+2. **Independência:** Não há custo com AWS RDS, Vercel ou Supabase. A hospedagem e o "banco de dados" custam R$ 0,00.
+
+---
+
+## Módulo 2: Motor Dinâmico via Planilha Excel (SheetJS)
+
+### 📌 Finalidade
+A maior dor dos clientes na área contábil é depender de programadores toda vez que o governo muda uma alíquota ou um teto tributário. Para resolver isso, desenvolvemos uma arquitetura que permite ao próprio cliente (leigo em código) atualizar a inteligência do site fazendo upload de uma planilha do Excel via Decap CMS. O front-end lê a planilha em tempo real e se recalcula sozinho.
+
+### ⚙️ A Mágica (Código e Engenharia para a IA)
+A solução usa a biblioteca **SheetJS (XLSX)**. 
+- **Resiliência a Nomenclatura:** Os usuários alteram os nomes das colunas com frequência. O código verifica as colunas *humanas* (`Limite`, `AliqNom`) e as *técnicas* antigas (`rbt12_ate`, `aliquota`), evitando crashes.
+- **Tolerância a Omissões:** A base do limite da faixa (`rbt12_de`) não precisa existir na planilha; ela é auto-calculada a partir do teto da faixa anterior.
+
+### 🆘 Troubleshooting (Solução de Problemas)
+**O Erro "N/A" (Teto vs Faixas):** Se você aumentou o **TETO** máximo da calculadora na aba `Configuracoes` (ex: de 4.800.000 para 5.800.000), o sistema não bloqueará a tela se o cliente faturar 5 milhões. Porém, as alíquotas aparecerão como **N/A**.
+**A Solução:** Sempre que alterar o Teto Global na aba `Configuracoes`, lembre-se de ir na aba `Tabelas_Referencia` e atualizar o Limite da *última faixa* (Faixa 6) para refletir o novo teto (ou deixar a célula Limite vazia para que ela represente "infinito").
+
+---
+
+## Módulo 3: Protocolo OAuth Nativo (O Fim do Netlify)
+
+### 📌 Finalidade
+A autenticação padrão do Decap CMS é baseada no Netlify Identity ou Netlify Gateway, ambos provedores com forte *vendor lock-in* e dependentes de serviços fora do nosso controle. Quando abdicamos do Netlify e construímos nossa arquitetura 100% no GitHub + Cloudflare Pages, criamos um Auth Server próprio em um Cloudflare Worker para fazer a ponte de login OAuth. O login passa a ser invisível, soberano e 100% gratuito.
+
+### ⚙️ A Mágica (Código e Engenharia para a IA)
+O erro fatal de implementações antigas é que o Google Chrome destrói a variável `window.opener` se a janela popup do GitHub sofrer um redirecionamento de domínio. Sem `window.opener`, a popup fica cega e não consegue entregar a chave OAuth para o painel principal do CMS.
+**O Handshake em Duas Etapas (Solução Definitiva):** Para resolver isso, o Worker **não faz redirecionamento na rota de callback**. Ele renderiza o HTML final na própria URL do Worker. O Decap CMS escuta, recebe a chave token e faz o aperto de mãos com sucesso.
+
+---
+
+## Módulo 4: Otimização de Conversão (CRO) e Ferramentas Dinâmicas
+
+### 🧠 Psicologia e Experiência do Usuário (UX) nas Calculadoras
+1. **O Botão "Calcular Impostos":** Mantido propositalmente na interface para dar "closure" (conclusão) ao usuário conservador, mesmo com o cálculo sendo automático em tempo real (on-change). Além disso, adicionamos o atalho *Enter* para navegação fluida entre os inputs.
+2. **A Dança do CTA Dinâmico:** O Call-to-Action flutua de forma não obstrutiva. No Mobile, ele se joga para baixo da calculadora para não estragar o teclado numérico. Na calculadora de IRPF, o card CTA lateral de *Adicional de Alta Renda* só se revela após os cálculos estarem concluídos na tela.
+3. **Relatórios Oficiais em PDF:** 
+   - **Simples Nacional:** Otimizado para um relatório completo de 2 folhas com cabeçalhos fortes.
+   - **IRPF:** Compressão extrema de paddings e layout para garantir que caiba perfeitamente em 1 única folha para fácil compartilhamento, preservando a identidade visual.
+
+### ⚙️ FAQ Dinâmico e SEO (Schema.org)
+A seção de Perguntas Frequentes (FAQ) da calculadora de IRPF foi construída em formato "Accordion". Além da organização visual, cada pergunta e resposta está envelopada com marcações JSON-LD do `Schema.org (FAQPage)`, injetando os dados estruturados direto nos motores do Google e garantindo presença orgânica e preferência em respostas de IAs Generativas (ChatGPT, Gemini).

@@ -37,3 +37,4 @@ collections:
         fields:
           - { label: "Planilha do Simples Nacional (.xlsx)", name: "planilha_excel", widget: "file", hint: "Envie o arquivo do Simples Nacional atualizado aqui." }
           - { label: "Planilha do IRPF (.xlsx)", name: "planilha_irpf", widget: "file", hint: "Envie o arquivo do IRPF atualizado aqui.", required: false }
+          - { label: "Planilha do INSS (.xlsx)", name: "planilha_inss", widget: "file", hint: "Envie o arquivo do INSS atualizado aqui.", required: false }

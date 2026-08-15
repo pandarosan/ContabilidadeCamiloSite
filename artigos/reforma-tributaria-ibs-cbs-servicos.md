@@ -1,7 +1,7 @@
 ---
 title: "Reforma Tributária e Split Payment: Como Proteger o Caixa da Sua Empresa
   Até 2033"
-category: Tributário & Impostos
+category: Reforma Tributária
 date: 2026-01-05T21:00:00.000-03:00
 image: /strategic_planning.png
 summary: A Emenda Constitucional nº 132/2023 e a Lei Complementar nº 214/2025
@@ -43,6 +43,24 @@ Com a nova legislação, o recolhimento passa a ser síncrono à venda.
 
 Para evitar impactos abruptos na economia, a transição para o modelo de IVA Dual ocorrerá em fases:
 
+*2026: Fase de testes*
+
+Sem recolhimento efetivo. As empresas devem destacar IBS (0,1%) e CBS (0,9%) nas Notas Fiscais para calibração do sistema.
+
+*2027: Extinção Federal*
+
+Extinção do PIS/COFINS. A CBS entra em vigor com alíquota cheia (estimada entre 8,5% e 9%). IBS segue em testes.
+
+*2029-2032: Transição Estadual/Municipal*
+
+Substituição gradual do ICMS e ISS pelo IBS (redução de 1/10 das alíquotas antigas por ano).
+
+*2033: Vigência Integral*
+
+O novo sistema opera a 100% (CBS + IBS + IS). ICMS e ISS são totalmente extintos.
+
+
+
 ## Checklist Prático: 3 Passos para Adequar sua Empresa
 
 Esperar pela aplicação integral das regras em 2033 pode comprometer a sobrevivência financeira do seu negócio. Recomendamos iniciar este plano de ação imediatamente:
@@ -54,5 +72,3 @@ Esperar pela aplicação integral das regras em 2033 pode comprometer a sobreviv
 ### Conclusão
 
 A transição para o IVA Dual reduzirá custos burocráticos e trará transparência ao ambiente de negócios brasileiro. No entanto, o sucesso financeiro da sua empresa dependerá diretamente do planejamento antecipado durante o período de transição.
-
-**AnoEtapa da ReformaO que acontece na prática?**2026Fase de TestesSem recolhimento efetivo. As empresas devem destacar IBS (0,1%) e CBS (0,9%) nas Notas Fiscais para calibração do sistema.2027Extinção FederalExtinção do PIS/COFINS. A CBS entra em vigor com alíquota cheia (estimada entre 8,5% e 9%). IBS segue em testes.2029–2032Transição Estadual/MunicipalSubstituição gradual do ICMS e ISS pelo IBS (redução de 1/10 das alíquotas antigas por ano).2033Vigência IntegralO novo sistema opera a 100% (CBS + IBS + IS). ICMS e ISS são totalmente extintos.

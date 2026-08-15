@@ -1,7 +1,7 @@
 ---
 title: Compreendendo a Apuração Assistida para IBS e CBS
 category: Tributário & Impostos
-date: 1906-01-31T15:11:00.000-03:00
+date: 2026-01-31T15:34:00.000-03:00
 image: /design-sem-nome.jpg
 summary: O modelo de apuração assistida representa uma mudança significativa na
   forma como o Fisco acompanha as obrigações tributárias.

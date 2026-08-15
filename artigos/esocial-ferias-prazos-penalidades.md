@@ -1,7 +1,7 @@
 ---
 title: "eSocial e Férias 2026: Prazos rigorosos de envio e penalidades que todo
   empregador precisa evitar"
-category: Trabalhista & eSocial
+category: Trabalhista & Previdenciário
 date: 2026-10-03T23:00:00.000-03:00
 image: /dp_team.png
 summary: As novas diretrizes de cruzamento eletrônico da Receita e do Ministério

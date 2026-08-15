@@ -21,7 +21,7 @@ collections:
     fields:
       - { label: "Título do Artigo", name: "title", widget: "string", required: true }
       - { label: "URL Amigável (Slug)", name: "slug", widget: "string", required: false, hint: "Deixe VAZIO para geração automaticamente a partir do Título. Preencha apenas se quiser personalizar (ex: meu-artigo-123)." }
-      - { label: "Categoria", name: "category", widget: "select", options: ["Simples Nacional", "Trabalhista & eSocial", "Gestão Empresarial", "Imposto de Renda", "Tributário & Impostos", "Abertura de Empresas", "Planejamento Tributário", "BPO Financeiro", "Lucro Presumido e Real", "Tecnologia & Inovação", "Avisos do Escritório"], default: "Tributário & Impostos" }
+      - { label: "Categoria", name: "category", widget: "select", options: ["Simples Nacional", "Trabalhista & Previdenciário", "Gestão Empresarial", "Imposto de Renda", "Tributário & Impostos", "Reforma Tributária", "Abertura de Empresas", "Planejamento Tributário", "BPO Financeiro", "Lucro Presumido e Real", "Tecnologia & Inovação", "Avisos do Escritório"], default: "Tributário & Impostos" }
       - { label: "Data de Publicação", name: "date", widget: "datetime", required: true, hint: "ATENÇÃO: É OBRIGATÓRIO clicar em 'Agora' ou no calendário para preencher a data. Sem isso, o sistema apresentará erro (Invalid Date)." }
       - { label: "Imagem de Capa (Recomendado: 1200x630px JPG)", name: "image", widget: "image", required: true }
       - { label: "Resumo (Chamada curta para o card)", name: "summary", widget: "text", required: true }

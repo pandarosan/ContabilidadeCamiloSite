@@ -63,6 +63,7 @@ a {
   font-weight: 600;
   font-size: 0.95rem;
   transition: all 0.3s ease;
+  white-space: nowrap;
   border: none;
   cursor: pointer;
 }
@@ -103,7 +104,7 @@ a {
 .nav-list {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: 1.2rem;
   align-items: center;
 }
 
@@ -112,6 +113,7 @@ a {
   font-weight: 500;
   transition: color 0.3s;
   padding: 0.5rem 0;
+  white-space: nowrap;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -270,6 +272,7 @@ main {
   font-size: 0.95rem;
   transition: all 0.3s ease;
   border: 2px solid white;
+  white-space: nowrap;
 }
 
 .btn-secondary:hover {

@@ -179,70 +179,62 @@ document.addEventListener("DOMContentLoaded", async () => {
   function calcularDescontos(bruto, dependentes, pensao, categoriaNome) {
     let inss = 0;
     
-    // Calcula INSS
     if (categoriaNome === 'CLT') {
-      // Progressivo Simplificado pelas deduções (Igual IRPF)
-      for (let faixa of inssData.tabelaProgressiva) {
-        if (bruto <= faixa.limite) {
-          inss = (bruto * faixa.aliquota) - faixa.deducao;
-          break;
+      // 1. Identifica se o salário ultrapassou o teto da tabela
+      const penultimaFaixa = inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 2];
+      const ultimaFaixa = inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 1];
+      const tetoValor = inssData.parametros['Teto_INSS'] || (penultimaFaixa ? penultimaFaixa.limite : 8475.55);
+      
+      if (bruto >= tetoValor) {
+        // Trava no Teto Fixo da Previdência
+        inss = ultimaFaixa.deducao > 0 ? ultimaFaixa.deducao : 988.09;
+      } else {
+        // Aplica a regra progressiva oficial da faixa correspondente
+        for (let faixa of inssData.tabelaProgressiva) {
+          if (faixa.limite !== Infinity && bruto <= faixa.limite) {
+            inss = (bruto * faixa.aliquota) - faixa.deducao;
+            break;
+          }
         }
       }
-      // Se bruto maior que a última faixa (Teto)
-      const ultimaFaixa = inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 1];
-      if (bruto > ultimaFaixa.limite || ultimaFaixa.limite === Infinity) {
-        inss = (bruto * ultimaFaixa.aliquota) - ultimaFaixa.deducao;
-      }
-      // Travar no Teto fixo (faixa sem aliquota, com deducao cheia no excel do usuário)
-      // O usuário colocou a deducao cheia na ultima faixa
-      if(ultimaFaixa.aliquota === 0 && bruto > inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 2].limite) {
-        inss = ultimaFaixa.deducao;
-      }
     } else {
-      // Outras categorias
+      // 2. Outras categorias (Autônomos / MEI)
       const cat = inssData.outrasCategorias.find(c => c.nome === categoriaNome);
       if (cat) {
         let base = bruto;
         if (cat.base.includes('mínimo') || cat.base.includes('minimo')) {
-          base = inssData.parametros['Salario_Minimo'] || 1621;
+          base = inssData.parametros['Salario_Minimo'] || 1621.00;
         }
-        // Limitando a base ao Teto do INSS
         const teto = inssData.parametros['Teto_INSS'] || 8475.55;
         if (base > teto) base = teto;
         inss = base * cat.aliquota;
       }
     }
-
-    // Calcula IRRF
+    
+    if (inss < 0) inss = 0;
+    
+    // 3. Cálculo do IRPF
     let irrf = 0;
-    const valorDependente = irpfData.parametros['Valor_Dependente'] || 189.59;
+    const valorDependente = irpfData.parametros['Deducao_Dependente'] || irpfData.parametros['Valor_Dependente'] || 189.59;
     const deducaoSimplificada = irpfData.parametros['Desconto_Simplificado'] || 564.80;
     
     const deducoesLegais = inss + pensao + (dependentes * valorDependente);
-    let baseIR = bruto - deducoesLegais;
-    let baseSimplificada = bruto - deducaoSimplificada;
+    const baseLegal = Math.max(0, bruto - deducoesLegais);
+    const baseSimplificada = Math.max(0, bruto - deducaoSimplificada);
     
-    // Escolher a base mais benéfica
-    let baseCalculoFinal = Math.min(baseIR, baseSimplificada);
-    if(baseCalculoFinal < 0) baseCalculoFinal = 0;
-
+    // O contribuinte utiliza a base que resultar no menor imposto
+    const baseCalculoFinal = Math.min(baseLegal, baseSimplificada);
+    
     for (let faixa of irpfData.tabelaProgressiva) {
       if (baseCalculoFinal <= faixa.limite) {
-        irrf = (baseCalculoFinal * faixa.aliquota) - faixa.deducao;
+        irrf = (baseCalculoFinal * (faixa.aliquota > 1 ? faixa.aliquota / 100 : faixa.aliquota)) - faixa.deducao;
         break;
       }
     }
-    
-    // Regra adicional para IRPF (Alta Renda PL 1087)
-    const tetoAdicional = irpfData.parametros['Limite_Isencao_Adicional'] || 50000;
-    const aliqAdicional = irpfData.parametros['Aliquota_Adicional'] || 0.10;
-    if (bruto > tetoAdicional) {
-      irrf += (bruto - tetoAdicional) * aliqAdicional;
-    }
 
     if (irrf < 0) irrf = 0;
-
-    const liquido = bruto - inss - irrf - pensao;
+    const liquido = Math.max(0, bruto - inss - irrf - pensao);
+    
     return { bruto, inss, irrf, pensao, liquido };
   }
 

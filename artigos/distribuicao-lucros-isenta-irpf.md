@@ -2,7 +2,7 @@
 title: "Distribuição de Lucros Isenta no IRPF 2026: Requisitos contábeis
   obrigatórios para sócios"
 category: Imposto de Renda
-date: 2026-10-03T22:59:00.000-03:00
+date: 2026-08-15T11:17:00.000-03:00
 image: /Contabilidade-Camilo-Fundo0.jpg
 summary: uyebsjkdbhab
 ---

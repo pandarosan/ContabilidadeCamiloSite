@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Archivo:wght@400;500;600;700&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --primary-color: #1B2A5E; /* Azul Marinho */
   --primary-hover: #121C3F;
@@ -1977,5 +1981,5 @@ section[id],
 #guia-rapido,
 #solucoes,
 #contato {
-  scroll-margin-top: 90px !important;
+  scroll-margin-top: 100px !important;
 }

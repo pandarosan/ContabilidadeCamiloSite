@@ -250,7 +250,7 @@
         <div class="section-header">
           <h2 style="font-size: 2.2rem; color: var(--primary-color);">O que dizem sobre nós</h2>
         </div>
-        <div class="testimonials-grid" style="display: block; margin: 0 auto; max-width: 1200px;">
+        <div class="testimonials-grid" style="display: block; margin: 0 auto; max-width: 1200px; min-height: 400px;">
           <!-- Elfsight Google Reviews -->
           <script src="https://elfsightcdn.com/platform.js" async></script>
           <div class="elfsight-app-7da8252b-31b2-4a85-a4ac-9a5381ccad1d" data-elfsight-app-lazy></div>
@@ -1082,6 +1082,19 @@
   </div>
 
   <script type="module" src="/main.js"></script>
+  <script>
+    // Correção de rota e scroll ao vir de outras páginas
+    window.addEventListener('load', function() {
+      if (window.location.hash) {
+        setTimeout(function() {
+          const target = document.querySelector(window.location.hash);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 800); // Aguarda widgets assíncronos (Google Reviews, etc)
+      }
+    });
+  </script>
 </body>
 
 </html>

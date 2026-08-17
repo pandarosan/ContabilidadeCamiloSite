@@ -1959,3 +1959,23 @@ textarea.form-control {
 .result-card.highlight .value {
   color: white;
 }
+
+/* 1. Correção da quebra de linha no Dropdown do Menu */
+.dropdown-menu {
+  min-width: 260px !important;
+  white-space: nowrap !important;
+}
+
+.dropdown-menu li a {
+  white-space: nowrap !important;
+  display: block;
+}
+
+/* 2. Correção do Scroll Offset (Posicionamento perfeito abaixo do Header Fixo) */
+section[id],
+#calculadoras,
+#guia-rapido,
+#solucoes,
+#contato {
+  scroll-margin-top: 90px !important;
+}

@@ -370,13 +370,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const aliqDisplay = document.getElementById(`aliq-${anexo}`);
       const dasDisplay = document.getElementById(`das-${anexo}`);
 
-      if (fatMes <= 0) {
-        aliqDisplay.textContent = "0,00%";
-        aliqDisplay.style.color = "var(--text-muted)";
-        dasDisplay.textContent = "R$ 0,00";
-        return;
-      }
-
       // Encontra a faixa correspondente no CSV
       const faixaEncontrada = aliquotasData.find(row => 
         row.anexo === anexo && rbt12 >= row.rbt12_de && rbt12 <= row.rbt12_ate
@@ -409,16 +402,25 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (aliquotaEfetiva < 0) aliquotaEfetiva = 0;
 
-        // Arredonda o valor do DAS da faixa para 2 casas antes de somar, como no sistema PGDAS
-        const valorDas = Math.round(fatMes * aliquotaEfetiva * 100) / 100;
-        dasTotal += valorDas;
+        if (rbt12 > 0 || fatMes > 0) {
+          aliqDisplay.textContent = (aliquotaEfetiva * 100).toFixed(2).replace(".", ",") + "%";
+          aliqDisplay.style.color = "var(--text-color)";
+        } else {
+          aliqDisplay.textContent = "0,00%";
+          aliqDisplay.style.color = "var(--text-muted)";
+        }
 
-        aliqDisplay.textContent = (aliquotaEfetiva * 100).toFixed(2).replace(".", ",") + "%";
-        aliqDisplay.style.color = "var(--text-color)";
-        dasDisplay.textContent = formatNumber(valorDas);
+        if (fatMes > 0) {
+          // Arredonda o valor do DAS da faixa para 2 casas antes de somar, como no sistema PGDAS
+          const valorDas = Math.round(fatMes * aliquotaEfetiva * 100) / 100;
+          dasTotal += valorDas;
+          dasDisplay.textContent = formatNumber(valorDas);
+        } else {
+          dasDisplay.textContent = "R$ 0,00";
+        }
       } else {
         aliqDisplay.textContent = "N/A";
-        dasDisplay.textContent = "0,00";
+        dasDisplay.textContent = "R$ 0,00";
       }
     });
 

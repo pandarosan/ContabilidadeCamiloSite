@@ -364,7 +364,8 @@
               const imgWrapper = document.querySelector('.article-cover-wrapper img');
               if (imgWrapper) {
                 imgWrapper.src = article.image;
-                imgWrapper.alt = article.title;
+                imgWrapper.alt = article.image_alt || article.title;
+                imgWrapper.title = article.image_title || article.title;
               }
               
               // 5. Corpo do Artigo (Markdown -> HTML)

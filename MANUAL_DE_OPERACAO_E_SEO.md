@@ -79,6 +79,16 @@ A arquitetura Jamstack com Decap CMS oferece um nível de governança e seguran�
 
 ## Etapa 4: Como Operar o Painel de Publicação (Decap CMS)
 
+### 3.6. 🖼️ Gestão do Banco de Imagens (Galeria de Mídia) e SEO Avançado
+Para manter a galeria de imagens organizada e o SEO das postagens forte, siga rigorosamente estas orientações de governança de arquivos:
+
+1. **A Regra de Ouro da Nomenclatura:** Antes de fazer upload de qualquer imagem ou planilha no painel, renomeie o arquivo no seu computador de forma descritiva e com a data. O painel lista as mídias em ordem alfabética.
+   * *❌ Errado:* `IMG-2026-whatsapp.jpg` ou `capa_final_1.jpg`
+   * *✅ Correto:* `2026-08-simples-nacional-capa.jpg`
+   * *Benefício:* Isso permite que você use a "Lupa" na galeria do painel para pesquisar arquivos e reutilizá-los futuramente.
+2. **Jamais Delete Arquivos em Uso:** Se você deletar uma imagem da galeria do painel (ícone da lixeira), ela **sumirá imediatamente de qualquer artigo publicado no site que a esteja utilizando**. Nunca apague uma mídia sem ter 100% de certeza que nenhum artigo antigo depende dela.
+3. **Alt Text e Title (Texto Alternativo):** Nossa estrutura inclui campos de "Alt Text" e "Title" na Imagem de Capa e nas Imagens Clicáveis. Preenchê-los não é opcional se você deseja tráfego orgânico! Escreva uma frase descritiva sobre o que a foto mostra (ex: *"Empresária calculando os impostos do Simples Nacional na calculadora"*). O robô do Google é "cego" para imagens e lê esse texto para entender do que se trata a página, elevando sua nota de ranqueamento.
+
 O Decap CMS (antigo Netlify CMS) é um gerenciador de conteúdo que funciona diretamente no navegador, permitindo que os administradores criem artigos sem tocar em código.
 
 ### 🔐 Segurança e Níveis de Acesso

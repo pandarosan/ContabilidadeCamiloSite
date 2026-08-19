@@ -46,6 +46,8 @@ const artigosLista = files.map(file => {
     category: getValue('category'),
     date: getValue('date'),
     image: getValue('image'),
+    image_alt: getValue('image_alt'),
+    image_title: getValue('image_title'),
     summary: getValue('summary'),
     slug: getValue('slug'),
     body: body

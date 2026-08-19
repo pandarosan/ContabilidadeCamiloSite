@@ -23,10 +23,14 @@
         return { id: match[1] };
       },
       toBlock: function(obj) {
-        return '<iframe width="100%" height="400" src="https://www.youtube.com/embed/' + obj.id + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        var match = obj.id.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})/);
+        var videoId = (match && match[1]) ? match[1] : obj.id;
+        return '<iframe width="100%" height="400" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
       },
       toPreview: function(obj) {
-        return '<img src="https://img.youtube.com/vi/' + obj.id + '/hqdefault.jpg" alt="Youtube Video" style="width: 100%; height: auto;"/>';
+        var match = obj.id.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})/);
+        var videoId = (match && match[1]) ? match[1] : obj.id;
+        return '<img src="https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg" alt="Youtube Video" style="width: 100%; height: auto;"/>';
       }
     });
 
@@ -39,16 +43,16 @@
         {name: "alt", label: "Texto Alternativo (Alt Text para SEO)", widget: "string"},
         {name: "url", label: "URL de Destino (Link ao clicar)", widget: "string", hint: "Lembre-se de colocar o https:// se for um site externo."}
       ],
-      pattern: /^\[!\[(.*?)\]\((.*?)\)\]\((.*?)\)$/,
+      pattern: /^<a href="(.*?)" target="_blank"><img src="(.*?)" alt="(.*?)" \/><\/a>$/,
       fromBlock: function(match) {
         return {
-          alt: match[1],
+          url: match[1],
           image: match[2],
-          url: match[3]
+          alt: match[3]
         };
       },
       toBlock: function(obj) {
-        return '[![' + (obj.alt || '') + '](' + (obj.image || '') + ')](' + (obj.url || '') + ')';
+        return '<a href="' + (obj.url || '') + '" target="_blank"><img src="' + (obj.image || '') + '" alt="' + (obj.alt || '') + '" /></a>';
       },
       toPreview: function(obj) {
         return '<a href="' + obj.url + '" target="_blank"><img src="' + obj.image + '" alt="' + obj.alt + '" style="max-width:100%; height:auto;" /></a>';

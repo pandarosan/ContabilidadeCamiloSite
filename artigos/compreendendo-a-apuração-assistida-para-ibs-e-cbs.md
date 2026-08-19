@@ -2,7 +2,7 @@
 title: "Apuração Assistida de IBS e CBS: Como Garantir a Assertividade Fiscal do
   Seu Negócio"
 category: Tributário & Impostos
-date: 31/01/2026 15:34
+date: 2026-01-31T15:34:00.000-03:00
 image: /design-sem-nome.jpg
 summary: A Reforma Tributária (EC nº 132/2023 e LC nº 214/2025) introduz a
   Apuração Assistida para o IBS e a CBS. O Fisco usará os dados dos documentos

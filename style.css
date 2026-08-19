@@ -1983,3 +1983,24 @@ section[id],
 #contato {
   scroll-margin-top: 100px !important;
 }
+
+/* Padronização de Imagens e Vídeos no Corpo dos Artigos */
+.article-body img,
+.article-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 12px !important;
+  margin: 1.5rem auto !important;
+  display: block !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.video-responsive {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}

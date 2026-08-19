@@ -13,23 +13,30 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
   <script>
+    // Helper para extrair ID do YouTube com robustez
+    function extractYouTubeId(url) {
+      if (!url) return "";
+      var m = url.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);
+      if (m) return m[1];
+      if (/^[\w-]{11}$/.test(url)) return url;
+      return url;
+    }
+
     // Registro de Componente: Vídeo do YouTube
     CMS.registerEditorComponent({
       id: "youtube",
       label: "Vídeo do YouTube",
-      fields: [{name: "id", label: "ID do Vídeo do YouTube (ex: dQw4w9WgXcQ)", widget: "string", hint: "Copie apenas as letras/números após o 'v=' no link do YouTube."}],
+      fields: [{name: "id", label: "ID ou Link do Vídeo do YouTube", widget: "string", hint: "Cole o link completo do vídeo ou apenas a ID."}],
       pattern: /^<iframe width="100%" height="400" src="https:\/\/www\.youtube\.com\/embed\/(.*)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen><\/iframe>$/,
       fromBlock: function(match) {
         return { id: match[1] };
       },
       toBlock: function(obj) {
-        var match = obj.id.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})/);
-        var videoId = (match && match[1]) ? match[1] : obj.id;
+        var videoId = extractYouTubeId(obj.id);
         return '<iframe width="100%" height="400" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
       },
       toPreview: function(obj) {
-        var match = obj.id.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})/);
-        var videoId = (match && match[1]) ? match[1] : obj.id;
+        var videoId = extractYouTubeId(obj.id);
         return '<img src="https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg" alt="Youtube Video" style="width: 100%; height: auto;"/>';
       }
     });

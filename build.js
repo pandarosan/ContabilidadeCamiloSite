@@ -59,8 +59,28 @@ const artigosLista = files.map(file => {
   return articleData;
 }).filter(a => a !== null);
 
+// Helper para converter string de data (ISO ou BR) em objeto Date
+function parseDateBR(dateStr) {
+  if (!dateStr) return new Date(0);
+  // Tenta parse nativo primeiro (para ISO 8601 como YYYY-MM-DD)
+  let d = new Date(dateStr);
+  if (!isNaN(d.getTime())) return d;
+  
+  // Tenta parse no formato DD/MM/YYYY HH:mm
+  const m = dateStr.match(/^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2}))?/);
+  if (m) {
+    const day = parseInt(m[1], 10);
+    const month = parseInt(m[2], 10) - 1;
+    const year = parseInt(m[3], 10);
+    const hour = m[4] ? parseInt(m[4], 10) : 0;
+    const min = m[5] ? parseInt(m[5], 10) : 0;
+    return new Date(year, month, day, hour, min);
+  }
+  return new Date(0);
+}
+
 // Ordenar do mais novo pro mais velho
-artigosLista.sort((a, b) => new Date(b.date) - new Date(a.date));
+artigosLista.sort((a, b) => parseDateBR(b.date) - parseDateBR(a.date));
 
 const finalOutput = {
   artigos_lista: artigosLista

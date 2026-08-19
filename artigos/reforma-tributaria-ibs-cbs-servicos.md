@@ -2,7 +2,7 @@
 title: "Reforma Tributária e Split Payment: Como Proteger o Caixa da Sua Empresa
   Até 2033"
 category: Reforma Tributária
-date: 2026-01-05T21:00:00.000-03:00
+date: 05/01/2026 21:00
 image: /strategic_planning.png
 summary: A Emenda Constitucional nº 132/2023 e a Lei Complementar nº 214/2025
   mudam radicalmente o sistema fiscal brasileiro. A grande revolução para o

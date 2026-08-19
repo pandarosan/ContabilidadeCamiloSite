@@ -15,7 +15,7 @@ Teste de imagens, tabela, links e Youtube
 
 Teste de imagens, tabela, links e Youtube
 
-<div style="background:#f8d7da; padding: 20px; color: #721c24; border-radius: 5px; text-align: center;"><strong>Link de vídeo inválido ou vazio.</strong> Por favor, cole a URL correta do YouTube.</div>
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/Pdkpw23loSU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Teste de imagens, tabela, links e Youtube
 

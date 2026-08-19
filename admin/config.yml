@@ -22,7 +22,7 @@ collections:
       - { label: "Título do Artigo", name: "title", widget: "string", required: true }
       - { label: "URL Amigável (Slug)", name: "slug", widget: "string", required: false, hint: "Deixe VAZIO para geração automaticamente a partir do Título. Preencha apenas se quiser personalizar (ex: meu-artigo-123)." }
       - { label: "Categoria", name: "category", widget: "select", options: ["Simples Nacional", "Trabalhista & Previdenciário", "Gestão Empresarial", "Imposto de Renda", "Tributário & Impostos", "Reforma Tributária", "Abertura de Empresas", "Planejamento Tributário", "BPO Financeiro", "Lucro Presumido e Real", "Tecnologia & Inovação", "Avisos do Escritório"], default: "Tributário & Impostos" }
-      - { label: "Data de Publicação", name: "date", widget: "date", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", required: true, hint: "Preencha a data ou use o botão 'Agora'." }
+      - { label: "Data de Publicação", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm", date_format: "YYYY-MM-DD", time_format: "HH:mm", picker_utc: false, required: true, hint: "Selecione no Calendário, clique em 'Agora' ou digite no formato AAAA-MM-DD HH:mm para agendamento." }
       - { label: "Imagem de Capa (Recomendado: 1200x630px JPG)", name: "image", widget: "image", required: true }
       - { label: "Texto Alternativo da Capa (Alt Text para SEO)", name: "image_alt", widget: "string", required: false, hint: "Descreva a imagem (ex: Contadora trabalhando com gráficos)." }
       - { label: "Título da Capa (Title)", name: "image_title", widget: "string", required: false, hint: "Aparece quando o usuário passa o mouse na imagem." }

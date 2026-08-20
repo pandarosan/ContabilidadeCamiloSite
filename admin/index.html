@@ -67,5 +67,21 @@
       }
     });
   </script>
+  
+  <script>
+    // Script Vigilante: Bloqueia a digitação manual no campo de Data
+    const observer = new MutationObserver(function() {
+      // Procura por campos de input que tenham 'date' no ID (padrão do Decap)
+      const inputs = document.querySelectorAll('input[type="text"]');
+      inputs.forEach(input => {
+        if (input.id && input.id.endsWith('-date') && !input.hasAttribute('readonly')) {
+          input.setAttribute('readonly', 'true');
+          // Altera a cor de fundo levemente para indicar que é só clique
+          input.style.cursor = 'pointer';
+        }
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
 </body>
 </html>

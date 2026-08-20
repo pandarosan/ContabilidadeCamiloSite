@@ -74,8 +74,8 @@
       // Busca todas as labels na tela
       const labels = document.querySelectorAll('label');
       labels.forEach(label => {
-        // Encontra a label exata do nosso campo
-        if (label.innerText.includes('Data de Publicação')) {
+        // Encontra a label exata do nosso campo ignorando maiúsculas/minúsculas
+        if (label.innerText.toLowerCase().includes('data de publicação')) {
           // Pega a "caixa" inteira do campo (que contém a label e o input)
           const wrapper = label.parentElement;
           if (wrapper) {

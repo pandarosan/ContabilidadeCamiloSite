@@ -174,8 +174,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 4. Calcular Imposto Progressivo
-    let impostoProgressivo = (baseCalculo * (faixaEncontrada.aliquota / 100)) - faixaEncontrada.deducao;
-    if (impostoProgressivo < 0) impostoProgressivo = 0;
+    // 4. Calcular Imposto Progressivo
+    let impostoBruto = (baseCalculo * (faixaEncontrada.aliquota / 100)) - faixaEncontrada.deducao;
+    if (impostoBruto < 0) impostoBruto = 0;
+
+    // 4.1. Desconto Complementar de Isenção (Novo Governo 2026)
+    const tetoIsencao = parametrosGerais.Isencao_Teto || parametrosGerais.Teto_Isencao || 5000;
+    const faseOut = parametrosGerais.Isencao_Fase_Out || 7350;
+
+    let descontoIsencao = 0;
+    if (baseCalculo <= tetoIsencao) {
+      descontoIsencao = impostoBruto;
+    } else if (baseCalculo < faseOut) {
+      descontoIsencao = impostoBruto * (faseOut - baseCalculo) / (faseOut - tetoIsencao);
+    }
+    let impostoProgressivo = Math.max(0, impostoBruto - descontoIsencao);
 
     // 5. Adicional de Altas Rendas (PL 1087)
     const rendaTotal = rendimento + dividendos;
@@ -239,9 +252,21 @@ document.addEventListener("DOMContentLoaded", () => {
     </tr>`;
 
     tabelaHTML += `<tr>
-      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Imposto Progressivo (após dedução da faixa)</td>
-      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.9rem;">${formatCurrency(impostoProgressivo)}</td>
+      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Imposto Bruto (após dedução da faixa)</td>
+      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.9rem;">${formatCurrency(impostoBruto)}</td>
     </tr>`;
+
+    if (descontoIsencao > 0) {
+      tabelaHTML += `<tr>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; color: #10b981;">Desconto Complementar (Regra de Isenção)</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.9rem; color: #10b981;">- ${formatCurrency(descontoIsencao)}</td>
+      </tr>`;
+      
+      tabelaHTML += `<tr>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Imposto Progressivo Final</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.9rem;">${formatCurrency(impostoProgressivo)}</td>
+      </tr>`;
+    }
 
     if (impostoAdicional > 0) {
       const regraDescricao = parametrosGerais.Regra_Dividendos || 'PL 1087/25';

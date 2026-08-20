@@ -71,13 +71,22 @@
   <script>
     // Script Vigilante: Bloqueia a digitação manual no campo de Data
     const observer = new MutationObserver(function() {
-      // Procura por campos de input que tenham 'date' no ID (padrão do Decap)
-      const inputs = document.querySelectorAll('input[type="text"]');
-      inputs.forEach(input => {
-        if (input.id && input.id.endsWith('-date') && !input.hasAttribute('readonly')) {
-          input.setAttribute('readonly', 'true');
-          // Altera a cor de fundo levemente para indicar que é só clique
-          input.style.cursor = 'pointer';
+      // Busca todas as labels na tela
+      const labels = document.querySelectorAll('label');
+      labels.forEach(label => {
+        // Encontra a label exata do nosso campo
+        if (label.innerText.includes('Data de Publicação')) {
+          // Pega a "caixa" inteira do campo (que contém a label e o input)
+          const wrapper = label.parentElement;
+          if (wrapper) {
+            // Encontra o input de texto de data dentro dessa caixa
+            const input = wrapper.querySelector('input[type="text"]');
+            if (input && !input.hasAttribute('readonly')) {
+              // Trava fisicamente a digitação
+              input.setAttribute('readonly', 'true');
+              input.style.cursor = 'pointer'; // Mostra a mãozinha de clique
+            }
+          }
         }
       });
     });

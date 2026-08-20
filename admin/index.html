@@ -71,21 +71,31 @@
   <script>
     // Script Vigilante: Bloqueia a digitação manual no campo de Data
     const observer = new MutationObserver(function() {
-      // Busca todas as labels na tela
       const labels = document.querySelectorAll('label');
       labels.forEach(label => {
-        // Encontra a label exata do nosso campo ignorando maiúsculas/minúsculas
         if (label.innerText.toLowerCase().includes('data de publicação')) {
-          // Pega a "caixa" inteira do campo (que contém a label e o input)
-          const wrapper = label.parentElement;
-          if (wrapper) {
-            // Encontra o input de texto de data dentro dessa caixa
-            const input = wrapper.querySelector('input[type="text"]');
-            if (input && !input.hasAttribute('readonly')) {
-              // Trava fisicamente a digitação
-              input.setAttribute('readonly', 'true');
-              input.style.cursor = 'pointer'; // Mostra a mãozinha de clique
-            }
+          // Sobe na árvore do HTML até achar a caixa que contém o input
+          let container = label.parentElement;
+          while (container && container.tagName !== 'BODY' && !container.querySelector('input[type="text"]')) {
+            container = container.parentElement;
+          }
+          
+          if (container) {
+            // Pega todos os inputs de texto dentro dessa caixa
+            const inputs = container.querySelectorAll('input[type="text"]');
+            inputs.forEach(input => {
+              if (!input.hasAttribute('readonly')) {
+                // Trava pelo atributo
+                input.setAttribute('readonly', 'true');
+                input.style.cursor = 'pointer';
+                
+                // Trava fisicamente o teclado interceptando as teclas
+                input.addEventListener('keydown', function(e) {
+                  e.preventDefault();
+                  return false;
+                });
+              }
+            });
           }
         }
       });

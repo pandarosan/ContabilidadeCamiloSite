@@ -124,20 +124,24 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.dynamic-regra').forEach(el => el.textContent = parametrosGerais.Regra_Dividendos);
       }
       
-      const isencaoElem = document.getElementById('texto-isencao');
-      if (isencaoElem) {
-        let teto = parametrosGerais.Teto_Isencao;
-        if (!teto && tabelasReferencia[0]) {
-          teto = tabelasReferencia[0].limite;
-        }
-        if (teto) {
-          isencaoElem.innerHTML = `<strong>Isenção até ${formatCurrency(teto)}:</strong> Quem ganha até este valor (estimado) não pagará imposto.`;
-        }
+      if (parametrosGerais.Teto_Isencao) {
+        document.querySelectorAll('.dyn-teto-isencao').forEach(el => el.textContent = formatCurrency(parametrosGerais.Teto_Isencao));
+        document.querySelectorAll('.dyn-teto-isencao-plus1').forEach(el => el.textContent = formatCurrency(parametrosGerais.Teto_Isencao + 0.01));
+      } else if (tabelasReferencia[0]) {
+        document.querySelectorAll('.dyn-teto-isencao').forEach(el => el.textContent = formatCurrency(tabelasReferencia[0].limite));
+        document.querySelectorAll('.dyn-teto-isencao-plus1').forEach(el => el.textContent = formatCurrency(tabelasReferencia[0].limite + 0.01));
       }
       
-      const adicionalElem = document.getElementById('texto-adicional');
-      if (adicionalElem && parametrosGerais.Adicional_Limite && parametrosGerais.Adicional_Aliquota) {
-        adicionalElem.innerHTML = `<strong>Adicional para Altas Rendas:</strong> Rendimentos (incluindo lucros e dividendos) superiores a <strong>${formatCurrency(parametrosGerais.Adicional_Limite)} por mês</strong> terão um adicional de ${parametrosGerais.Adicional_Aliquota}% sobre o excedente.`;
+      if (parametrosGerais.Isencao_Fase_Out) {
+        document.querySelectorAll('.dyn-isencao-fase-out').forEach(el => el.textContent = formatCurrency(parametrosGerais.Isencao_Fase_Out));
+      }
+      
+      if (parametrosGerais.Adicional_Limite) {
+        document.querySelectorAll('.dyn-adicional-limite').forEach(el => el.textContent = formatCurrency(parametrosGerais.Adicional_Limite));
+      }
+      
+      if (parametrosGerais.Adicional_Aliquota) {
+        document.querySelectorAll('.dyn-adicional-aliquota').forEach(el => el.textContent = parametrosGerais.Adicional_Aliquota);
       }
 
       UI.loadingIndicator.style.display = 'none';

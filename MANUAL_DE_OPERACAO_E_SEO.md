@@ -142,10 +142,10 @@ O Google não ranqueia apenas "palavras isoladas"; ele busca **autoridade em eco
 
 ## 6. 🚀 Fase 3/4: Calculadoras Fisco-Tributárias Interativas (Ativas!)
 
-Nossa plataforma conta com um ecossistema de calculadoras tributárias desenhadas para atrair e converter empreendedores, começando pela **Calculadora do Simples Nacional**.
+Nossa plataforma conta com um ecossistema de calculadoras tributárias desenhadas para atrair e converter clientes, englobando a **Calculadora do Simples Nacional** e a **Calculadora de IRPF**.
 
 ### 6.1. Integração com Planilha Excel via CMS (Autonomia e Segurança)
-A Calculadora do Simples Nacional é **100% autônoma** e não depende de programadores para atualizar os limites, faixas ou alíquotas anuais. Ela está conectada a uma planilha Excel hospedada de forma segura na raiz do próprio site, que a equipe da Contabilidade Camilo atualiza diretamente pelo painel administrativo (`/admin`).
+As calculadoras são **100% autônomas** e não dependem de programadores para atualizar limites, faixas ou alíquotas anuais. Ambas leem os parâmetros da mesma planilha Excel hospedada de forma segura na raiz do próprio site, que a equipe da Contabilidade Camilo atualiza diretamente pelo painel administrativo (`/admin`).
 
 > [!NOTE]
 > *Nota Técnica:* Inicialmente, o sistema utilizaria o arquivo público direto do Google Drive. No entanto, os servidores do Google bloqueiam conexões externas (via política de segurança CORS). A solução definitiva e imune a bloqueios foi migrar a planilha para o próprio servidor, sendo atualizada via GitHub (arquitetura Cloudflare Pages).
@@ -156,9 +156,13 @@ Sempre que um lead acessa a página da calculadora, nosso JavaScript (impulsiona
 ### 6.2. Como o Escritório Atualiza as Regras (Fricção Zero)
 Se a Receita Federal alterar as faixas de faturamento, o teto global ou os repasses de ICMS/ISS na virada do ano, siga este roteiro:
 
-1. **Abra a Planilha Localmente:** Abra o arquivo matriz do Excel no seu computador.
-2. **Edite a Aba `Tabelas_Referencia`:** Atualize os números das faixas e alíquotas na tabela, conforme a nova lei.
-3. **Edite a Aba `Configuracoes`:** Ajuste os limites globais como `TETO`, `SUBLIMITE` e os percentuais de `REPARTICAO`.
+1. **Abra a Planilha Localmente:** Abra o arquivo matriz do Excel (`calculadora-ir-configuracoes.xlsx`) no seu computador.
+2. **Edite as Tabelas Progressivas (Abas de Referência):**
+   * **Simples Nacional:** Atualize as faixas e alíquotas na aba `Tabelas_Referencia`.
+   * **IRPF:** Atualize a tabela progressiva e a dedução padrão na aba `IRPF_Tabela`.
+3. **Edite os Parâmetros Gerais (Aba `Parametros_Gerais`):** Ajuste limites e tetos globais para o ano vigente:
+   * **Simples Nacional:** `TETO_GLOBAL`, `SUBLIMITE_GLOBAL`, percentuais de `REPARTICAO`.
+   * **IRPF:** Limites como `Teto_Isencao` (ex: 5000), teto do desconto gradual (`Isencao_Fase_Out`), e as regras da tributação para altas rendas (`Adicional_Limite` e `Adicional_Aliquota`).
 4. **Envie a Nova Planilha pelo Painel (O Segredo da Autonomia):** 
    * Acesse `contabilidadecamilo.com.br/admin` (ou o domínio provisório atual) e faça login.
    * No menu esquerdo, clique em **Configurações do Sistema** > **Base de Dados da Calculadora**.

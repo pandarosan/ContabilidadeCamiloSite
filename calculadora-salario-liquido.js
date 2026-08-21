@@ -90,7 +90,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nomeParamsINSS = workbook.SheetNames.find(n => n.trim().toLowerCase() === "parametros_gerais");
     if (nomeParamsINSS) {
       const pData = XLSX.utils.sheet_to_json(workbook.Sheets[nomeParamsINSS]);
-      pData.forEach(row => {
+      pData.forEach(rawRow => {
+        const row = typeof normalizeKeys === 'function' ? normalizeKeys(rawRow) : (() => {
+          const newObj = {}; for (let k in rawRow) newObj[k.trim()] = rawRow[k]; return newObj;
+        })();
         const paramName = (row.Parametro || row.parametro || "").toString().trim();
         const val = row.Valor !== undefined ? row.Valor : row.valor;
         if (paramName && val !== undefined) inssData.parametros[paramName] = val;
@@ -99,7 +102,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const nomeRefINSS = workbook.SheetNames.find(n => n.trim().toLowerCase() === "tabelas_referencia");
     if (nomeRefINSS) {
-      inssData.tabelaProgressiva = XLSX.utils.sheet_to_json(workbook.Sheets[nomeRefINSS]).map(row => {
+      // Normaliza as chaves removendo espaços extras que o usuário pode digitar acidentalmente no Excel
+      const normalizeKeys = (obj) => {
+        const newObj = {};
+        for (let key in obj) {
+          newObj[key.trim()] = obj[key];
+        }
+        return newObj;
+      };
+
+      inssData.tabelaProgressiva = XLSX.utils.sheet_to_json(workbook.Sheets[nomeRefINSS]).map(rawRow => {
+        const row = normalizeKeys(rawRow);
         let limite = row.Limite_Ate !== undefined ? row.Limite_Ate : (row.Limite || row.limite);
         if (limite === undefined || limite === null || isNaN(parseFloat(limite))) limite = Infinity;
         
@@ -116,7 +129,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const nomeCatINSS = workbook.SheetNames.find(n => n.trim().toLowerCase() === "outras_categorias");
     if (nomeCatINSS) {
-      inssData.outrasCategorias = XLSX.utils.sheet_to_json(workbook.Sheets[nomeCatINSS]).map(row => {
+      inssData.outrasCategorias = XLSX.utils.sheet_to_json(workbook.Sheets[nomeCatINSS]).map(rawRow => {
+        const normalizeKeys = (obj) => {
+          const newObj = {}; for (let k in obj) newObj[k.trim()] = obj[k]; return newObj;
+        };
+        const row = normalizeKeys(rawRow);
         const catNome = row.Categoria || row.categoria || row.Nome || row.nome || "Outro";
         const catAliq = parseFloat(row.Aliquota || row.aliquota || 0);
         const catBase = (row.Base_Calculo || row.base_calculo || "").toString().trim().toLowerCase();

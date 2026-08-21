@@ -199,44 +199,45 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function calcularDescontos(bruto, dependentes, pensao, categoriaNome) {
-    let inss = 0;
-    
-    if (categoriaNome === 'CLT') {
-      const tetoValor = inssData.parametros['Teto_INSS'] || 8475.55;
-      const tetoDesconto = 988.09;
-      
-      if (bruto >= tetoValor) {
-        const ultimaFaixa = inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 1];
-        inss = (ultimaFaixa && ultimaFaixa.deducao > 0) ? ultimaFaixa.deducao : tetoDesconto;
-      } else {
-        let baseAnterior = 0;
-        let inssBruto = 0;
-        for (const faixa of inssData.tabelaProgressiva) {
-          if (bruto > baseAnterior) {
-            let valorNaFaixa = Math.min(bruto, faixa.limite) - baseAnterior;
-            inssBruto += valorNaFaixa * faixa.aliquota;
-            baseAnterior = faixa.limite;
-          } else {
-            break;
+    const calcularINSS = (valorBruto) => {
+      let v_inss = 0;
+      if (categoriaNome === 'CLT') {
+        const tetoValor = inssData.parametros['Teto_INSS'] || 8475.55;
+        const tetoDesconto = 988.09;
+        
+        if (valorBruto >= tetoValor) {
+          const ultimaFaixa = inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 1];
+          v_inss = (ultimaFaixa && ultimaFaixa.deducao > 0) ? ultimaFaixa.deducao : tetoDesconto;
+        } else {
+          let baseAnterior = 0;
+          let inssBrutoTemp = 0;
+          for (const faixa of inssData.tabelaProgressiva) {
+            if (valorBruto > baseAnterior) {
+              let valorNaFaixa = Math.min(valorBruto, faixa.limite) - baseAnterior;
+              inssBrutoTemp += valorNaFaixa * faixa.aliquota;
+              baseAnterior = faixa.limite;
+            } else {
+              break;
+            }
           }
+          v_inss = Math.floor((inssBrutoTemp + 0.000001) * 100) / 100;
         }
-        // Truncamento na 2ª casa decimal, assim como no IRPF
-        inss = Math.floor((inssBruto + 0.000001) * 100) / 100;
-      }
-    } else {
-      const cat = inssData.outrasCategorias.find(c => c.nome === categoriaNome);
-      if (cat) {
-        let base = bruto;
-        if (cat.base.includes('mínimo') || cat.base.includes('minimo')) {
-          base = inssData.parametros['Salario_Minimo'] || 1621.00;
+      } else {
+        const cat = inssData.outrasCategorias.find(c => c.nome === categoriaNome);
+        if (cat) {
+          let base = valorBruto;
+          if (cat.base.includes('mínimo') || cat.base.includes('minimo')) {
+            base = inssData.parametros['Salario_Minimo'] || 1621.00;
+          }
+          const teto = inssData.parametros['Teto_INSS'] || 8475.55;
+          if (base > teto) base = teto;
+          v_inss = base * cat.aliquota;
         }
-        const teto = inssData.parametros['Teto_INSS'] || 8475.55;
-        if (base > teto) base = teto;
-        inss = base * cat.aliquota;
       }
-    }
-    
-    if (inss < 0) inss = 0;
+      return Math.max(0, v_inss);
+    };
+
+    let inss = calcularINSS(bruto);
     
     let irrf = 0;
     if (categoriaNome !== 'MEI') {
@@ -247,7 +248,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       const baseLegal = Math.max(0, bruto - deducoesLegais);
       const baseSimplificada = Math.max(0, bruto - deducaoSimplificada);
       
-      // Função auxiliar para calcular o imposto bruto exato somando as parcelas
       const calcularImpostoBrutoParaBase = (base) => {
         if (base <= 0) return 0;
         let imp = 0;
@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         for (const f of irpfData.tabelaProgressiva) {
           if (base > baseAnterior) {
             let valorNaFaixa = Math.min(base, f.limite) - baseAnterior;
-            imp += valorNaFaixa * (f.aliquota); // aliquota já está em decimal
+            imp += valorNaFaixa * (f.aliquota);
             baseAnterior = f.limite;
           } else {
             break;
@@ -264,7 +264,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         return Math.floor(Math.max(0, imp) * 100) / 100;
       };
 
-      // Avalia qual base resulta em menor imposto
       const impostoLegal = calcularImpostoBrutoParaBase(baseLegal);
       const impostoSimplificado = calcularImpostoBrutoParaBase(baseSimplificada);
       
@@ -284,8 +283,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       const faseOut = irpfData.parametros['Isencao_Fase_Out'] || 7350;
       let descontoIsencao = 0;
       
-      let baseTeto = Math.max(0, tetoIsencao - totalDeducoesCalc);
-      let impostoTeto = calcularImpostoBrutoParaBase(baseTeto);
+      // O impostoTeto deve simular um contribuinte que ganha exatamente o tetoIsencao
+      const inssTeto = calcularINSS(tetoIsencao);
+      const deducoesLegaisTeto = inssTeto + pensao + (dependentes * valorDependente);
+      const baseLegalTeto = Math.max(0, tetoIsencao - deducoesLegaisTeto);
+      const baseSimplificadaTeto = Math.max(0, tetoIsencao - deducaoSimplificada);
+      const impostoLegalTeto = calcularImpostoBrutoParaBase(baseLegalTeto);
+      const impostoSimplificadoTeto = calcularImpostoBrutoParaBase(baseSimplificadaTeto);
+      const impostoTeto = Math.min(impostoLegalTeto, impostoSimplificadoTeto);
       
       if (bruto <= tetoIsencao) {
         descontoIsencao = impostoBruto;

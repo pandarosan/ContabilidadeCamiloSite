@@ -196,7 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
       let imp = (base * (f.aliquota / 100)) - f.deducao;
-      return imp < 0 ? 0 : imp;
+      // A Receita Federal trunca o imposto para 2 casas decimais
+      return Math.floor(Math.max(0, imp) * 100) / 100;
     }
 
     // 4. Calcular Imposto Progressivo Bruto
@@ -217,7 +218,9 @@ document.addEventListener("DOMContentLoaded", () => {
       descontoIsencao = impostoBruto;
     } else if (rendimento < faseOut) {
       // Phase-out decrescente baseado no rendimento bruto
-      descontoIsencao = impostoTeto * (faseOut - rendimento) / (faseOut - tetoIsencao);
+      let descontoReal = impostoTeto * (faseOut - rendimento) / (faseOut - tetoIsencao);
+      // O desconto complementar é arredondado
+      descontoIsencao = Math.round(descontoReal * 100) / 100;
     }
     
     let impostoProgressivo = Math.max(0, impostoBruto - descontoIsencao);

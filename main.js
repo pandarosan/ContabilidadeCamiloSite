@@ -178,21 +178,19 @@ document.addEventListener('DOMContentLoaded', () => {
           title: 'Acesse nosso canal para mais dicas de Contabilidade e Negócios!'
         };
         
-        for(let i=0; i<3; i++) {
-          const iframeHtml = `
-            <a href="${fallbackVideo.link}" target="_blank" rel="noopener noreferrer" style="display: block; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-decoration: none; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-              <div style="width: 100%; aspect-ratio: 16/9; background-image: url('${fallbackVideo.thumbnail}'); background-size: cover; background-position: center; position: relative;">
-                <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play" style="opacity: 0.9;"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-                </div>
+        const iframeHtml = `
+          <a href="${fallbackVideo.link}" target="_blank" rel="noopener noreferrer" style="display: block; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-decoration: none; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="width: 100%; aspect-ratio: 16/9; background-image: url('${fallbackVideo.thumbnail}'); background-size: cover; background-position: center; position: relative;">
+              <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play" style="opacity: 0.9;"><polygon points="6 3 20 12 6 21 6 3"/></svg>
               </div>
-              <div style="padding: 1rem; background: white;">
-                <h4 style="font-size: 1.1rem; color: var(--primary-color); margin-bottom: 0.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${fallbackVideo.title}</h4>
-              </div>
-            </a>
-          `;
-          youtubeContainer.insertAdjacentHTML('beforeend', iframeHtml);
-        }
+            </div>
+            <div style="padding: 1rem; background: white;">
+              <h4 style="font-size: 1.1rem; color: var(--primary-color); margin-bottom: 0.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${fallbackVideo.title}</h4>
+            </div>
+          </a>
+        `;
+        youtubeContainer.insertAdjacentHTML('beforeend', iframeHtml);
       };
 
       if (data.status === 'ok' && data.items.length > 0) {
@@ -233,21 +231,19 @@ document.addEventListener('DOMContentLoaded', () => {
         thumbnail: 'https://img.youtube.com/vi/mD6Zht09EiA/hqdefault.jpg',
         title: 'Acesse nosso canal para mais dicas de Contabilidade e Negócios!'
       };
-      for(let i=0; i<3; i++) {
-        const iframeHtml = `
-          <a href="${fallbackVideo.link}" target="_blank" rel="noopener noreferrer" style="display: block; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-decoration: none; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-            <div style="width: 100%; aspect-ratio: 16/9; background-image: url('${fallbackVideo.thumbnail}'); background-size: cover; background-position: center; position: relative;">
-              <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play" style="opacity: 0.9;"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-              </div>
+      const iframeHtml = `
+        <a href="${fallbackVideo.link}" target="_blank" rel="noopener noreferrer" style="display: block; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-decoration: none; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="width: 100%; aspect-ratio: 16/9; background-image: url('${fallbackVideo.thumbnail}'); background-size: cover; background-position: center; position: relative;">
+            <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play" style="opacity: 0.9;"><polygon points="6 3 20 12 6 21 6 3"/></svg>
             </div>
-            <div style="padding: 1rem; background: white;">
-              <h4 style="font-size: 1.1rem; color: var(--primary-color); margin-bottom: 0.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${fallbackVideo.title}</h4>
-            </div>
-          </a>
-        `;
-        youtubeContainer.insertAdjacentHTML('beforeend', iframeHtml);
-      }
+          </div>
+          <div style="padding: 1rem; background: white;">
+            <h4 style="font-size: 1.1rem; color: var(--primary-color); margin-bottom: 0.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${fallbackVideo.title}</h4>
+          </div>
+        </a>
+      `;
+      youtubeContainer.insertAdjacentHTML('beforeend', iframeHtml);
     });
 });
 

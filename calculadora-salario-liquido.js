@@ -223,15 +223,56 @@ document.addEventListener("DOMContentLoaded", async () => {
       const baseLegal = Math.max(0, bruto - deducoesLegais);
       const baseSimplificada = Math.max(0, bruto - deducaoSimplificada);
       
-      const baseCalculoFinal = Math.min(baseLegal, baseSimplificada);
-      
-      for (let faixa of irpfData.tabelaProgressiva) {
-        if (baseCalculoFinal <= faixa.limite) {
-          irrf = (baseCalculoFinal * faixa.aliquota) - faixa.deducao;
-          break;
+      // Função auxiliar para calcular o imposto bruto exato somando as parcelas
+      const calcularImpostoBrutoParaBase = (base) => {
+        if (base <= 0) return 0;
+        let imp = 0;
+        let baseAnterior = 0;
+        for (const f of irpfData.tabelaProgressiva) {
+          if (base > baseAnterior) {
+            let valorNaFaixa = Math.min(base, f.limite) - baseAnterior;
+            imp += valorNaFaixa * (f.aliquota); // aliquota já está em decimal
+            baseAnterior = f.limite;
+          } else {
+            break;
+          }
         }
-      }
+        return Math.floor(Math.max(0, imp) * 100) / 100;
+      };
 
+      // Avalia qual base resulta em menor imposto
+      const impostoLegal = calcularImpostoBrutoParaBase(baseLegal);
+      const impostoSimplificado = calcularImpostoBrutoParaBase(baseSimplificada);
+      
+      let impostoBruto = 0;
+      let totalDeducoesCalc = 0;
+      
+      if (impostoLegal <= impostoSimplificado) {
+        impostoBruto = impostoLegal;
+        totalDeducoesCalc = deducoesLegais;
+      } else {
+        impostoBruto = impostoSimplificado;
+        totalDeducoesCalc = deducaoSimplificada;
+      }
+      
+      // Desconto Complementar de Isenção Progressiva
+      const tetoIsencao = irpfData.parametros['Teto_Isencao'] || irpfData.parametros['Isencao_Teto'] || 5000;
+      const faseOut = irpfData.parametros['Isencao_Fase_Out'] || 7350;
+      let descontoIsencao = 0;
+      
+      let baseTeto = Math.max(0, tetoIsencao - totalDeducoesCalc);
+      let impostoTeto = calcularImpostoBrutoParaBase(baseTeto);
+      
+      if (bruto <= tetoIsencao) {
+        descontoIsencao = impostoBruto;
+      } else if (bruto < faseOut) {
+        descontoIsencao = impostoTeto * (faseOut - bruto) / (faseOut - tetoIsencao);
+      }
+      
+      let impostoProgressivoReal = Math.max(0, impostoBruto - descontoIsencao);
+      irrf = Math.floor((impostoProgressivoReal + 0.000001) * 100) / 100;
+
+      // Adicional de Altas Rendas (PL 1087) mantido
       const tetoAdicional = irpfData.parametros['Adicional_Limite'] || irpfData.parametros['Limite_Isencao_Adicional'] || 50000;
       const aliqAdicional = (irpfData.parametros['Adicional_Aliquota'] || irpfData.parametros['Aliquota_Adicional'] || 10) / 100;
       if (bruto > tetoAdicional) {

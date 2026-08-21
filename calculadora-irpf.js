@@ -186,16 +186,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Função Auxiliar para calcular imposto bruto de qualquer base
+    // A Receita Federal calcula o imposto somando as parcelas exatas de cada faixa, sem usar 
+    // a coluna de "dedução" arredondada (que existe na tabela apenas para facilitar contas manuais).
     function calcularImpostoBrutoParaBase(base) {
       if (base <= 0) return 0;
-      let f = tabelasReferencia[tabelasReferencia.length - 1];
-      for (const t of tabelasReferencia) {
-        if (base <= t.limite) {
-          f = t;
+      let imp = 0;
+      let baseAnterior = 0;
+      
+      for (const f of tabelasReferencia) {
+        if (base > baseAnterior) {
+          let valorNaFaixa = Math.min(base, f.limite) - baseAnterior;
+          imp += valorNaFaixa * (f.aliquota / 100);
+          baseAnterior = f.limite;
+        } else {
           break;
         }
       }
-      let imp = (base * (f.aliquota / 100)) - f.deducao;
+      
       // A Receita Federal trunca o imposto para 2 casas decimais
       return Math.floor(Math.max(0, imp) * 100) / 100;
     }

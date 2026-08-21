@@ -217,13 +217,15 @@ document.addEventListener("DOMContentLoaded", () => {
       // Isenção total para rendimentos até o teto
       descontoIsencao = impostoBruto;
     } else if (rendimento < faseOut) {
-      // Phase-out decrescente baseado no rendimento bruto
-      let descontoReal = impostoTeto * (faseOut - rendimento) / (faseOut - tetoIsencao);
-      // O desconto complementar é arredondado
-      descontoIsencao = Math.round(descontoReal * 100) / 100;
+      // Phase-out decrescente baseado no rendimento bruto (sem arredondar aqui)
+      descontoIsencao = impostoTeto * (faseOut - rendimento) / (faseOut - tetoIsencao);
     }
     
-    let impostoProgressivo = Math.max(0, impostoBruto - descontoIsencao);
+    // O imposto progressivo final também é truncado para 2 casas decimais
+    let impostoProgressivoReal = Math.max(0, impostoBruto - descontoIsencao);
+    // Para evitar bugs de ponto flutuante no JS (ex: 1.79 virar 1.789999), 
+    // somamos um epsilon mínimo antes de fazer o floor.
+    let impostoProgressivo = Math.floor((impostoProgressivoReal + 0.000001) * 100) / 100;
 
     // 5. Adicional de Altas Rendas (PL 1087)
     const rendaTotal = rendimento + dividendos;

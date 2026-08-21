@@ -156,9 +156,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const pensao = parseCurrency(UI.pensao.value);
     const outrasDeducoes = parseCurrency(UI.outrasDeducoes.value);
 
-    // 1. Deduções
+    // 1. Deduções Legais
     const deducaoDependentes = dependentes * parametrosGerais.Deducao_Dependente;
-    const totalDeducoesCalc = deducaoDependentes + pensao + outrasDeducoes;
+    const deducoesLegais = deducaoDependentes + pensao + outrasDeducoes;
+
+    // 1.1 Desconto Simplificado
+    const descontoSimplificado = parametrosGerais.Desconto_Simplificado || 607.20;
+    
+    // O governo permite usar o que for mais vantajoso (maior dedução)
+    let totalDeducoesCalc = deducoesLegais;
+    let usouSimplificado = false;
+    
+    if (descontoSimplificado > deducoesLegais) {
+      totalDeducoesCalc = descontoSimplificado;
+      usouSimplificado = true;
+    }
 
     // 2. Base de Cálculo do IRPF Progressivo
     let baseCalculo = rendimento - totalDeducoesCalc;
@@ -231,15 +243,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // Atualizar Tabela Detalhada
     let tabelaHTML = '';
     
-    tabelaHTML += `<tr>
-      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Dedução por Dependentes (${dependentes})</td>
-      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444; font-size: 0.9rem;">- ${formatCurrency(deducaoDependentes)}</td>
-    </tr>`;
-    
-    tabelaHTML += `<tr>
-      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Outras Deduções (Pensão + INSS)</td>
-      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444; font-size: 0.9rem;">- ${formatCurrency(pensao + outrasDeducoes)}</td>
-    </tr>`;
+    if (usouSimplificado) {
+      tabelaHTML += `<tr>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Desconto Simplificado (Mais Vantajoso)</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444; font-size: 0.9rem;">- ${formatCurrency(descontoSimplificado)}</td>
+      </tr>`;
+    } else {
+      tabelaHTML += `<tr>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Dedução por Dependentes (${dependentes})</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444; font-size: 0.9rem;">- ${formatCurrency(deducaoDependentes)}</td>
+      </tr>`;
+      
+      tabelaHTML += `<tr>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Outras Deduções (Pensão + INSS)</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444; font-size: 0.9rem;">- ${formatCurrency(pensao + outrasDeducoes)}</td>
+      </tr>`;
+    }
 
     tabelaHTML += `<tr>
       <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;"><strong>Base de Cálculo do IRPF</strong></td>

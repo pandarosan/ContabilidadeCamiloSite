@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let baseCalculo = rendimento - totalDeducoesCalc;
     if (baseCalculo < 0) baseCalculo = 0;
 
-    // 3. Encontrar Faixa
+    // 3. Encontrar Faixa (Para exibir no layout)
     let faixaEncontrada = tabelasReferencia[tabelasReferencia.length - 1]; // Fallback pra última
     for (const f of tabelasReferencia) {
       if (baseCalculo <= f.limite) {
@@ -185,21 +185,41 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // 4. Calcular Imposto Progressivo
-    // 4. Calcular Imposto Progressivo
-    let impostoBruto = (baseCalculo * (faixaEncontrada.aliquota / 100)) - faixaEncontrada.deducao;
-    if (impostoBruto < 0) impostoBruto = 0;
+    // Função Auxiliar para calcular imposto bruto de qualquer base
+    function calcularImpostoBrutoParaBase(base) {
+      if (base <= 0) return 0;
+      let f = tabelasReferencia[tabelasReferencia.length - 1];
+      for (const t of tabelasReferencia) {
+        if (base <= t.limite) {
+          f = t;
+          break;
+        }
+      }
+      let imp = (base * (f.aliquota / 100)) - f.deducao;
+      return imp < 0 ? 0 : imp;
+    }
+
+    // 4. Calcular Imposto Progressivo Bruto
+    let impostoBruto = calcularImpostoBrutoParaBase(baseCalculo);
 
     // 4.1. Desconto Complementar de Isenção (Novo Governo 2026)
     const tetoIsencao = parametrosGerais.Isencao_Teto || parametrosGerais.Teto_Isencao || 5000;
     const faseOut = parametrosGerais.Isencao_Fase_Out || 7350;
 
     let descontoIsencao = 0;
-    if (baseCalculo <= tetoIsencao) {
+    
+    // O desconto baseia-se no imposto devido se a renda fosse o exato teto da isenção.
+    let baseTeto = tetoIsencao - totalDeducoesCalc;
+    let impostoTeto = calcularImpostoBrutoParaBase(baseTeto);
+
+    if (rendimento <= tetoIsencao) {
+      // Isenção total para rendimentos até o teto
       descontoIsencao = impostoBruto;
-    } else if (baseCalculo < faseOut) {
-      descontoIsencao = impostoBruto * (faseOut - baseCalculo) / (faseOut - tetoIsencao);
+    } else if (rendimento < faseOut) {
+      // Phase-out decrescente baseado no rendimento bruto
+      descontoIsencao = impostoTeto * (faseOut - rendimento) / (faseOut - tetoIsencao);
     }
+    
     let impostoProgressivo = Math.max(0, impostoBruto - descontoIsencao);
 
     // 5. Adicional de Altas Rendas (PL 1087)

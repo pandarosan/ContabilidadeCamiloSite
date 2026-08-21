@@ -185,19 +185,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     let inss = 0;
     
     if (categoriaNome === 'CLT') {
-      const penultimaFaixa = inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 2];
-      const ultimaFaixa = inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 1];
-      const tetoValor = inssData.parametros['Teto_INSS'] || (penultimaFaixa ? penultimaFaixa.limite : 8475.55);
+      const tetoValor = inssData.parametros['Teto_INSS'] || 8475.55;
+      const tetoDesconto = 988.09;
       
       if (bruto >= tetoValor) {
-        inss = ultimaFaixa && ultimaFaixa.deducao > 0 ? ultimaFaixa.deducao : 988.09;
+        const ultimaFaixa = inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 1];
+        inss = (ultimaFaixa && ultimaFaixa.deducao > 0) ? ultimaFaixa.deducao : tetoDesconto;
       } else {
-        for (let faixa of inssData.tabelaProgressiva) {
-          if (bruto <= faixa.limite) {
-            inss = (bruto * faixa.aliquota) - faixa.deducao;
+        let baseAnterior = 0;
+        let inssBruto = 0;
+        for (const faixa of inssData.tabelaProgressiva) {
+          if (bruto > baseAnterior) {
+            let valorNaFaixa = Math.min(bruto, faixa.limite) - baseAnterior;
+            inssBruto += valorNaFaixa * faixa.aliquota;
+            baseAnterior = faixa.limite;
+          } else {
             break;
           }
         }
+        // Truncamento na 2ª casa decimal, assim como no IRPF
+        inss = Math.floor((inssBruto + 0.000001) * 100) / 100;
       }
     } else {
       const cat = inssData.outrasCategorias.find(c => c.nome === categoriaNome);

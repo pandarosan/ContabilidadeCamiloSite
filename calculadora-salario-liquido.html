@@ -29,16 +29,33 @@
     
     @media print {
       body, html { background: white !important; height: auto !important; margin: 0; padding: 0; }
+      main { min-height: 0 !important; padding: 0 !important; }
       body.hide-main-on-print #resultadoDestaque { display: none !important; }
       .hide-print { display: none !important; }
       .show-print { display: block !important; }
       .calc-layout-wrapper { display: block !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
       .seo-content { display: block !important; width: 100% !important; margin: 0 !important; }
       #resultadoDestaque { border: 1px solid #e2e8f0 !important; padding: 1.5rem !important; margin-bottom: 2rem !important; }
-      .table-container { margin-top: 1rem !important; }
-      table { width: 100% !important; border: 1px solid #e2e8f0 !important; }
+      .calc-container { box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
+      .table-container { margin-top: 1rem !important; page-break-inside: auto; }
+      table { width: 100% !important; border: 1px solid #e2e8f0 !important; font-size: 0.85rem !important; page-break-inside: auto; }
+      tr { page-break-inside: avoid; page-break-after: auto; }
+      th, td { padding: 0.4rem 0.5rem !important; }
       th { background: #f8fafc !important; color: black !important; border-bottom: 2px solid black !important; }
-      #print-footer { display: block !important; }
+      td:nth-child(n+2) { text-align: right; } /* Alinha valores R$ à direita */
+      th:nth-child(n+2) { text-align: right; }
+      #print-footer { display: block !important; page-break-inside: avoid; }
+      
+      /* Rodapé repetido em todas as páginas */
+      .print-fixed-bottom {
+        position: fixed !important;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding-top: 0.5rem;
+      }
+      body { padding-bottom: 3rem !important; } /* Espaço para o rodapé fixo não sobrepor o conteúdo */
     }
   </style>
   <script type="application/ld+json">
@@ -465,7 +482,7 @@
               </div>
             </div>
             
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; font-size: 7pt !important; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 0.5rem; margin-top: 5rem;">
+            <div class="print-fixed-bottom" style="display: flex; justify-content: space-between; align-items: flex-end; font-size: 7pt !important; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 0.5rem; margin-top: 2rem;">
               <div style="font-size: 7pt !important; color:#ababab; font-weight: 500; white-space: nowrap; margin-right: 1rem;"><span style="font-size: 7pt !important;">🌐</span> por PandaRoSan.com.br</div>
               <div style="font-size: 7pt !important; text-align: right; color: #ababab;">&copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso</div>
             </div>

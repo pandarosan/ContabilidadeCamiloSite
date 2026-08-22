@@ -199,10 +199,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function calcularDescontos(bruto, dependentes, pensao, categoriaNome) {
+    const getParam = (data, keys, label) => {
+      for (let k of keys) {
+        if (data.parametros[k] !== undefined) return parseFloat(data.parametros[k]);
+      }
+      alert(`Parâmetro ausente na planilha: ${label}. Por favor, avise o escritório pelo WhatsApp para corrigir a configuração.`);
+      throw new Error(`Falta parâmetro: ${label}`);
+    };
+
     const calcularINSS = (valorBruto) => {
       let v_inss = 0;
       if (categoriaNome === 'CLT') {
-        const tetoValor = inssData.parametros['Teto_INSS'] || Infinity;
+        const tetoValor = getParam(inssData, ['Teto_INSS'], 'Teto INSS');
         
         if (valorBruto >= tetoValor && inssData.tabelaProgressiva.length > 0) {
           const ultimaFaixa = inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 1];
@@ -242,9 +250,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (cat) {
           let base = valorBruto;
           if (cat.base.includes('mínimo') || cat.base.includes('minimo')) {
-            base = inssData.parametros['Salario_Minimo'] || 1621.00;
+            base = getParam(inssData, ['Salario_Minimo'], 'Salário Mínimo');
           }
-          const teto = inssData.parametros['Teto_INSS'] || 8475.55;
+          const teto = getParam(inssData, ['Teto_INSS'], 'Teto INSS');
           if (base > teto) base = teto;
           v_inss = base * cat.aliquota;
         }
@@ -256,8 +264,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     let irrf = 0;
     if (categoriaNome !== 'MEI') {
-      const valorDependente = irpfData.parametros['Deducao_Dependente'] || irpfData.parametros['Valor_Dependente'] || 189.59;
-      const deducaoSimplificada = irpfData.parametros['Desconto_Simplificado'] || 564.80;
+      const valorDependente = getParam(irpfData, ['Deducao_Dependente', 'Valor_Dependente'], 'Valor por Dependente');
+      const deducaoSimplificada = getParam(irpfData, ['Desconto_Simplificado'], 'Desconto Simplificado');
       
       const deducoesLegais = inss + pensao + (dependentes * valorDependente);
       const baseLegal = Math.max(0, bruto - deducoesLegais);
@@ -294,8 +302,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       
       // Desconto Complementar de Isenção Progressiva
-      const tetoIsencao = irpfData.parametros['Teto_Isencao'] || irpfData.parametros['Isencao_Teto'] || 5000;
-      const faseOut = irpfData.parametros['Isencao_Fase_Out'] || 7350;
+      const tetoIsencao = getParam(irpfData, ['Teto_Isencao', 'Isencao_Teto'], 'Teto Isenção');
+      const faseOut = getParam(irpfData, ['Isencao_Fase_Out'], 'Isenção Fase Out');
       let descontoIsencao = 0;
       
       // O impostoTeto deve simular um contribuinte que ganha exatamente o tetoIsencao
@@ -317,8 +325,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       irrf = Math.floor((impostoProgressivoReal + 0.000001) * 100) / 100;
 
       // Adicional de Altas Rendas (PL 1087) mantido
-      const tetoAdicional = irpfData.parametros['Adicional_Limite'] || irpfData.parametros['Limite_Isencao_Adicional'] || 50000;
-      const aliqAdicional = (irpfData.parametros['Adicional_Aliquota'] || irpfData.parametros['Aliquota_Adicional'] || 10) / 100;
+      const tetoAdicional = getParam(irpfData, ['Adicional_Limite', 'Limite_Isencao_Adicional'], 'Limite Adicional Altas Rendas');
+      const aliqAdicional = getParam(irpfData, ['Adicional_Aliquota', 'Aliquota_Adicional'], 'Alíquota Adicional') / 100;
+      
       if (bruto > tetoAdicional) {
         irrf += (bruto - tetoAdicional) * aliqAdicional;
       }

@@ -203,7 +203,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       for (let k of keys) {
         if (data.parametros[k] !== undefined) return parseFloat(data.parametros[k]);
       }
-      alert(`Parâmetro ausente na planilha: ${label}. Por favor, avise o escritório pelo WhatsApp para corrigir a configuração.`);
+      
+      const modalHtml = `
+        <div id="param-error-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+          <div style="background: white; padding: 2rem; border-radius: 8px; max-width: 400px; text-align: center; font-family: 'Inter', sans-serif;">
+            <h3 style="color: #d9534f; margin-top: 0; font-size: 1.25rem;">Configuração Incompleta</h3>
+            <p style="color: #555; margin-bottom: 1.5rem; line-height: 1.5;">O parâmetro <strong>${label}</strong> não foi encontrado na planilha.</p>
+            <p style="color: #555; margin-bottom: 2rem; font-size: 0.9rem;">Por favor, avise o escritório clicando no botão abaixo para que possam atualizar os dados no sistema.</p>
+            <a href="https://wa.me/5511944913323?text=${encodeURIComponent('Olá! A calculadora de Salário Líquido está com o parâmetro "' + label + '" ausente na planilha. Podem verificar?')}" target="_blank" style="background: #25D366; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; transition: background 0.3s;" onmouseover="this.style.background='#1da851'" onmouseout="this.style.background='#25D366'" onclick="document.getElementById('param-error-modal').remove()">Avisar pelo WhatsApp</a>
+            <button onclick="document.getElementById('param-error-modal').remove()" style="margin-top: 15px; display: block; width: 100%; background: transparent; border: none; color: #888; text-decoration: underline; cursor: pointer;">Fechar aviso</button>
+          </div>
+        </div>
+      `;
+      if (!document.getElementById('param-error-modal')) {
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+      }
+      
       throw new Error(`Falta parâmetro: ${label}`);
     };
 

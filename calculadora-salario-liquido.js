@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     displayLiquido: document.getElementById('displaySalarioLiquido'),
     tabela: document.getElementById('tabelaColaboradores'),
     tbody: document.getElementById('tbodyColaboradores'),
-    tituloPainel: document.getElementById('tituloPainel')
+    tituloPainel: document.getElementById('tituloPainel'),
+    containerImprimir: document.getElementById('containerImprimir')
   };
 
   const parseCurrency = (val) => {
@@ -374,6 +375,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     const cta = document.getElementById('cta-resultado');
     if (cta && bruto > 0) cta.style.display = 'block';
+    
+    if (els.containerImprimir) {
+      els.containerImprimir.style.display = (bruto > 0 || colaboradores.length > 0) ? 'flex' : 'none';
+    }
   }
 
   function adicionarColaborador() {

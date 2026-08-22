@@ -147,9 +147,9 @@
       
       <!-- Lado Esquerdo: SEO e Resultados -->
       <div class="seo-content" style="flex: 1; min-width: 300px;">
-        <div class="print-header show-print" style="display: none; text-align: center; margin-bottom: 2.5rem; margin-top: -2rem; position: relative;">
-          <div style="font-size: 3.2rem !important; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem; display: inline-block; padding: 0 1.5rem;">
-            Contabilidade <span style="font-size: 3.2rem !important; color: #d4af37;">Camilo</span></div>
+        <div class="print-header show-print" style="display: none; text-align: center; margin-bottom: 2rem; padding-top: 2rem; position: relative;">
+          <div style="font-size: 2.6rem !important; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem; display: inline-block; padding: 0 1.5rem;">
+            Contabilidade <span style="font-size: 2.6rem !important; color: #d4af37;">Camilo</span></div>
           <h2 style="color: var(--primary-color); margin: 0; font-size: 1.6rem !important;">Relatório Oficial: Salário Líquido</h2>
           <p style="color: #666; margin-top: 0.5rem; font-size: 1rem !important;">Cálculo estimado com base nas informações fornecidas.</p>
         </div>
@@ -257,8 +257,8 @@
               <button type="submit" class="btn-primary" id="btnCalcular" style="flex: 2; font-weight: bold; background-color: var(--primary-color); color: white; border: none; padding: 0.8rem;">Calcular</button>
             </div>
             
-            <div style="margin-top: 1rem; display: flex; gap: 0.5rem;" class="hide-print">
-               <button type="button" class="btn-secondary" onclick="window.print()" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.8rem; border: 2px solid #64748b; color: #64748b;">
+            <div id="containerImprimir" style="display: none; margin-top: 1rem; gap: 0.5rem;" class="hide-print">
+               <button type="button" class="btn-secondary" onclick="window.print()" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.8rem; border: 2px solid #64748b; color: #64748b; background: white; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='white'">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                   Imprimir Relatório
                </button>

@@ -420,6 +420,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     if (colaboradores.length > 0) {
+      document.body.classList.add('hide-main-on-print');
       const trTotal = document.createElement('tr');
       trTotal.style.backgroundColor = '#f8fafc';
       trTotal.style.fontWeight = 'bold';
@@ -434,6 +435,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       els.tbody.appendChild(trTotal);
       els.tabela.style.display = 'block';
     } else {
+      document.body.classList.remove('hide-main-on-print');
       els.tabela.style.display = 'none';
     }
   }

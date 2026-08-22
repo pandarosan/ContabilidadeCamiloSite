@@ -202,12 +202,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     const calcularINSS = (valorBruto) => {
       let v_inss = 0;
       if (categoriaNome === 'CLT') {
-        const tetoValor = inssData.parametros['Teto_INSS'] || 8475.55;
-        const tetoDesconto = 988.09;
+        const tetoValor = inssData.parametros['Teto_INSS'] || Infinity;
         
-        if (valorBruto >= tetoValor) {
+        if (valorBruto >= tetoValor && inssData.tabelaProgressiva.length > 0) {
           const ultimaFaixa = inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 1];
-          v_inss = (ultimaFaixa && ultimaFaixa.deducao > 0) ? ultimaFaixa.deducao : tetoDesconto;
+          if (ultimaFaixa && ultimaFaixa.deducao > 0) {
+            v_inss = ultimaFaixa.deducao;
+          } else {
+            // Se por acaso a dedução do teto não foi preenchida na planilha, calcula o teto na raça
+            let baseAnterior = 0;
+            let inssBrutoTemp = 0;
+            for (const faixa of inssData.tabelaProgressiva) {
+              if (tetoValor > baseAnterior) {
+                let valorNaFaixa = Math.min(tetoValor, faixa.limite) - baseAnterior;
+                inssBrutoTemp += valorNaFaixa * faixa.aliquota;
+                baseAnterior = faixa.limite;
+              } else {
+                break;
+              }
+            }
+            v_inss = Math.floor((inssBrutoTemp + 0.000001) * 100) / 100;
+          }
         } else {
           let baseAnterior = 0;
           let inssBrutoTemp = 0;

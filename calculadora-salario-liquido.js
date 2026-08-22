@@ -356,16 +356,46 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function calcularEAtualizarTela() {
     const bruto = parseCurrency(els.bruto.value);
+    
+    // Gerenciar exibição do botão imprimir
+    const containerImprimir = document.getElementById('containerImprimir');
+    if (containerImprimir) {
+      if (bruto > 0 || colaboradores.length > 0) {
+        containerImprimir.style.display = 'flex';
+      } else {
+        containerImprimir.style.display = 'none';
+      }
+    }
+    
+    if (bruto <= 0) {
+      document.body.classList.remove('hide-main-on-print');
+      els.resBruto.innerText = 'R$ 0,00';
+      els.resINSS.innerText = 'R$ 0,00';
+      els.resIRRF.innerText = 'R$ 0,00';
+      els.resPensao.innerText = 'R$ 0,00';
+      els.resLiquido.innerText = 'R$ 0,00';
+      els.displayLiquido.innerText = 'R$ 0,00';
+      els.tituloPainel.innerText = `Seu salário líquido:`;
+      return;
+    }
+    
+    // Oculta painel principal na impressão se houver tabela
+    if (colaboradores.length > 0) {
+      document.body.classList.add('hide-main-on-print');
+    } else {
+      document.body.classList.remove('hide-main-on-print');
+    }
+
     const dependentes = parseInt(els.dependentes.value) || 0;
     const pensao = parseCurrency(els.pensao.value);
     const cat = els.categoria.value;
-    
+
     const res = calcularDescontos(bruto, dependentes, pensao, cat);
-    
-    els.resBruto.innerText = formatCurrency(res.bruto);
+
+    els.resBruto.innerText = formatCurrency(bruto);
     els.resINSS.innerText = formatCurrency(res.inss);
     els.resIRRF.innerText = formatCurrency(res.irrf);
-    els.resPensao.innerText = formatCurrency(res.pensao);
+    els.resPensao.innerText = formatCurrency(pensao);
     els.resLiquido.innerText = formatCurrency(res.liquido);
     els.displayLiquido.innerText = formatCurrency(res.liquido);
     
@@ -385,7 +415,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nome = els.nome.value.trim() || `Colaborador ${colaboradores.length + 1}`;
     
     const res = calcularDescontos(bruto, dependentes, pensao, cat);
-    colaboradores.push({ nome, categoria: cat, ...res });
+    colaboradores.push({ nome, categoria: cat, dependentes, pensao, ...res });
     renderTabela();
     
     els.nome.value = '';
@@ -397,10 +427,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function renderTabela() {
     els.tbody.innerHTML = '';
-    let totalBruto = 0, totalINSS = 0, totalIRRF = 0, totalLiquido = 0;
+    let totalBruto = 0, totalDep = 0, totalPensao = 0, totalINSS = 0, totalIRRF = 0, totalLiquido = 0;
     
     colaboradores.forEach((c, index) => {
       totalBruto += c.bruto;
+      totalDep += c.dependentes || 0;
+      totalPensao += c.pensao || 0;
       totalINSS += c.inss;
       totalIRRF += c.irrf;
       totalLiquido += c.liquido;
@@ -409,6 +441,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       tr.innerHTML = `
         <td><strong>${c.nome}</strong><br><small style="color:#64748b;">${c.categoria}</small></td>
         <td>${formatCurrency(c.bruto)}</td>
+        <td style="text-align: center;">${c.dependentes || 0}</td>
+        <td>${formatCurrency(c.pensao || 0)}</td>
         <td>${formatCurrency(c.inss)}</td>
         <td>${formatCurrency(c.irrf)}</td>
         <td style="color:#2563eb; font-weight:bold;">${formatCurrency(c.liquido)}</td>
@@ -426,6 +460,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       trTotal.innerHTML = `
         <td>TOTAIS</td>
         <td>${formatCurrency(totalBruto)}</td>
+        <td style="text-align: center;">${totalDep}</td>
+        <td>${formatCurrency(totalPensao)}</td>
         <td>${formatCurrency(totalINSS)}</td>
         <td>${formatCurrency(totalIRRF)}</td>
         <td style="color:#2563eb;">${formatCurrency(totalLiquido)}</td>

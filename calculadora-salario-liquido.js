@@ -385,7 +385,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nome = els.nome.value.trim() || `Colaborador ${colaboradores.length + 1}`;
     
     const res = calcularDescontos(bruto, dependentes, pensao, cat);
-    colaboradores.push({ nome, categoria: cat, ...res });
+    colaboradores.push({ nome, categoria: cat, dependentes, ...res });
     renderTabela();
     
     els.nome.value = '';
@@ -397,18 +397,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function renderTabela() {
     els.tbody.innerHTML = '';
-    let totalBruto = 0, totalINSS = 0, totalIRRF = 0, totalLiquido = 0;
+    let totalBruto = 0, totalINSS = 0, totalIRRF = 0, totalLiquido = 0, totalPensao = 0, totalDep = 0;
     
     colaboradores.forEach((c, index) => {
       totalBruto += c.bruto;
       totalINSS += c.inss;
       totalIRRF += c.irrf;
       totalLiquido += c.liquido;
+      totalPensao += c.pensao || 0;
+      totalDep += c.dependentes || 0;
       
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td><strong>${c.nome}</strong><br><small style="color:#64748b;">${c.categoria}</small></td>
         <td>${formatCurrency(c.bruto)}</td>
+        <td style="text-align: center;">${c.dependentes || 0}</td>
+        <td>${formatCurrency(c.pensao || 0)}</td>
         <td>${formatCurrency(c.inss)}</td>
         <td>${formatCurrency(c.irrf)}</td>
         <td style="color:#2563eb; font-weight:bold;">${formatCurrency(c.liquido)}</td>
@@ -427,6 +431,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       trTotal.innerHTML = `
         <td>TOTAIS</td>
         <td>${formatCurrency(totalBruto)}</td>
+        <td style="text-align: center;">${totalDep}</td>
+        <td>${formatCurrency(totalPensao)}</td>
         <td>${formatCurrency(totalINSS)}</td>
         <td>${formatCurrency(totalIRRF)}</td>
         <td style="color:#2563eb;">${formatCurrency(totalLiquido)}</td>

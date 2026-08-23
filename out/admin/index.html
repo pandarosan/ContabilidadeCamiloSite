@@ -12,6 +12,73 @@
   <!-- Script principal do Decap CMS (antigo Netlify CMS) -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
+  <script>
+    // Registro de Componente: Vídeo do YouTube
+    CMS.registerEditorComponent({
+      id: "youtube",
+      label: "Vídeo do YouTube",
+      fields: [{name: "id", label: "Link Completo do Vídeo do YouTube", widget: "string", hint: "Cole o link completo do vídeo (ex: https://www.youtube.com/watch?v=... ou youtube.com/shorts/...) ou o link curto."}],
+      pattern: /^<iframe width="100%" height="400" src="https:\/\/www\.youtube\.com\/embed\/(.*)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen><\/iframe>$/,
+      fromBlock: function(match) {
+        return { id: match[1] };
+      },
+      toBlock: function(obj) {
+        var videoId = obj.id ? obj.id.trim() : "";
+        var match = videoId.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|shorts\/|watch\?v=|watch\?.+&v=))([a-zA-Z0-9_-]{11})/);
+        if (match && match[1]) {
+            videoId = match[1];
+        }
+        return '<iframe width="100%" height="400" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+      },
+      toPreview: function(obj) {
+        var videoId = obj.id ? obj.id.trim() : "";
+        var match = videoId.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|shorts\/|watch\?v=|watch\?.+&v=))([a-zA-Z0-9_-]{11})/);
+        if (match && match[1]) {
+            videoId = match[1];
+        } else if (videoId.length !== 11 || !/^[a-zA-Z0-9_-]{11}$/.test(videoId)) {
+             return '<div style="background:#f8d7da; padding: 20px; color: #721c24; border-radius: 5px; text-align: center;"><strong>Link de vídeo inválido.</strong> Cole a URL correta no campo ao lado.</div>';
+        }
+        return '<img src="https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg" alt="Youtube Video" style="width: 100%; height: auto;"/>';
+      }
+    });
 
+    // Registro de Componente: Imagem Clicável (Com Link)
+    CMS.registerEditorComponent({
+      id: "imagem_link",
+      label: "Imagem com Link Clicável",
+      fields: [
+        {name: "image", label: "Escolha a Imagem", widget: "image"},
+        {name: "alt", label: "Texto Alternativo (Alt Text para SEO)", widget: "string"},
+        {name: "url", label: "URL de Destino (Link ao clicar)", widget: "string", hint: "Lembre-se de colocar o https:// se for um site externo."}
+      ],
+      pattern: /^<a href="(.*?)" target="_blank" rel="noopener noreferrer"><img src="(.*?)" alt="(.*?)" style="max-width:100%; height:auto;" \/><\/a>$/,
+      fromBlock: function(match) {
+        return {
+          url: match[1],
+          image: match[2],
+          alt: match[3]
+        };
+      },
+      toBlock: function(obj) {
+        return '<a href="' + (obj.url || '#') + '" target="_blank" rel="noopener noreferrer"><img src="' + (obj.image || '') + '" alt="' + (obj.alt || '') + '" style="max-width:100%; height:auto;" /></a>';
+      },
+      toPreview: function(obj) {
+        return '<a href="' + obj.url + '" target="_blank"><img src="' + obj.image + '" alt="' + obj.alt + '" style="max-width:100%; height:auto;" /></a>';
+      }
+    });
+  </script>
+
+  <script>
+    // Interceptador de Teclado: Bloqueia digitação nos campos de Data e Hora do Decap CMS
+    // O Decap CMS gera IDs contendo 'datetime' para todos os campos deste tipo.
+    document.addEventListener('keydown', function(e) {
+      if (e.target && e.target.tagName === 'INPUT' && e.target.id.includes('datetime')) {
+        // Bloqueia qualquer tecla, exceto Tab (para permitir navegação entre campos)
+        if (e.key !== 'Tab') {
+          e.preventDefault();
+        }
+      }
+    }, true);
+  </script>
 </body>
 </html>

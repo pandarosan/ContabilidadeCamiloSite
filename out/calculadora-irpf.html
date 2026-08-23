@@ -22,6 +22,47 @@
       .result-cards { flex-direction: column; }
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Calculadora IRPF - Contabilidade Camilo",
+        "operatingSystem": "All",
+        "applicationCategory": "FinanceApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "BRL"
+        },
+        "description": "Simulador de Imposto de Renda Pessoa Física com cálculo de deduções legais e regras de adicional de altas rendas."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "O que é o IRRF?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "O Imposto de Renda Retido na Fonte (IRRF) é o valor descontado diretamente do salário. Funciona como uma antecipação do imposto anual."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Como o IRRF é calculado na folha de pagamento?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "O cálculo subtrai do salário bruto as deduções legais (INSS, dependentes, pensão) para encontrar a base de cálculo, sobre a qual aplica-se a tabela progressiva vigente."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="header">
@@ -30,7 +71,7 @@
         <span class="logo-text">Contabilidade <strong>Camilo</strong></span>
       </a>
       <nav class="nav">
-        <ul class="nav-list">
+                <ul class="nav-list">
           <li><a href="planos.html" class="nav-link">Planos</a></li>
           <li class="dropdown">
             <a href="index.html#solucoes" class="nav-link">Soluções <span class="caret">▾</span></a>
@@ -38,17 +79,26 @@
               <li><a href="abertura-de-empresas-e-societario.html" target="_blank" rel="noopener noreferrer">Abertura de
                   Empresas e Societário</a></li>
               <li><a href="fiscal-e-contabilidade.html" target="_blank" rel="noopener noreferrer">Fiscal e
-                  Contabilidade</a></li>
+                  Contabilidade</a>
+              </li>
               <li><a href="departamento-de-pessoal.html" target="_blank" rel="noopener noreferrer">Departamento de
                   Pessoal</a></li>
               <li><a href="certificado-digital.html" target="_blank" rel="noopener noreferrer">Certificado Digital</a>
               </li>
-              <li><a href="bpo-financeiro.html" target="_blank" rel="noopener noreferrer">BPO Financeiro</a></li>
+              <li><a href="bpo-financeiro.html" target="_blank" rel="noopener noreferrer">BPO Financeiro</a>
+              </li>
               <li><a href="demais-solucoes.html" target="_blank" rel="noopener noreferrer">Demais Soluções</a></li>
             </ul>
           </li>
+          <li><a href="noticias-e-artigos.html" class="nav-link">Notícias</a></li>
+          <li class="dropdown">
+            <a href="#" class="nav-link">Explore <span class="caret">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/#calculadoras">Calculadoras Inteligentes</a></li>
+              <li><a href="/#guia-rapido">Guia Rápido & Glossário Contábil</a></li>
+            </ul>
+          </li>
           <li><a href="sobre-nos.html" class="nav-link">Sobre Nós</a></li>
-          <li><a href="noticias-e-artigos.html" class="nav-link">Notícias & Artigos</a></li>
           <li><a href="contato.html" class="nav-link">Contato</a></li>
         </ul>
       </nav>
@@ -72,10 +122,12 @@
       <div class="seo-content" style="flex: 1; min-width: 300px; color: var(--text-color); line-height: 1.6;">
         <h2 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.3rem;">Entenda as novas regras do IRPF:</h2>
         <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 1.1rem;">
-          <li id="texto-isencao"><strong>Isenção até R$ 5.000:</strong> Quem ganha até 5 salários mínimos (estimado) não pagará imposto.</li>
-          <li id="texto-adicional"><strong>Adicional para Altas Rendas:</strong> Rendimentos (incluindo lucros e dividendos) superiores a <strong>R$ 50 mil por mês</strong> terão um adicional de 10% sobre o excedente.</li>
-          <li>Os valores por dependente e outras deduções são subtraídos da base de cálculo antes de aplicar a tabela.</li>
+          <li id="texto-isencao"><strong>Isenção até <span class="dyn-teto-isencao">R$ 5.000,00</span>:</strong> Quem ganha até este valor (estimado) não pagará imposto.</li>
+          <li id="texto-desconto-gradual"><strong>Desconto gradual entre <span class="dyn-teto-isencao-plus1">R$ 5.000,01</span> e <span class="dyn-isencao-fase-out">R$ 7.350,00</span>:</strong> Para não prejudicar quem ganha um pouco acima de <span class="dyn-teto-isencao">R$ 5.000,00</span>, a nova regra aplica um desconto parcial e decrescente no imposto. Quanto mais perto de <span class="dyn-teto-isencao">R$ 5.000,00</span> for a renda, maior é o desconto do imposto. A partir de <span class="dyn-isencao-fase-out">R$ 7.350,00</span>, volta a vigorar a tabela tradicional sem abatimentos adicionais.</li>
+          <li id="texto-adicional"><strong>Adicional para Altas Rendas:</strong> Rendimentos (incluindo lucros e dividendos) superiores a <strong><span class="dyn-adicional-limite">R$ 50.000,00</span> por mês</strong> terão um adicional de <span class="dyn-adicional-aliquota">10</span>% sobre o excedente.</li>
+          <li><strong>Deduções Legais (Dependentes, INSS e Saúde):</strong> As deduções tradicionais (dependente, INSS, previdência e pensão) continuam sendo subtraídas do salário bruto para determinar a base de cálculo tributável sobre a qual incide a tabela do IR.</li>
         </ul>
+        <p style="margin-top: 1rem; font-size: 1.1rem;">Esta calculadora está disponível para a vigência atual.</p>
         <div id="cta-resultado" style="display: none; background-color: #f0fdf4; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; text-align: center; border: 1px solid #dcfce3;">
           <p style="color: var(--text-color); font-size: 1.05rem; margin-bottom: 1rem; font-weight: 500;">O adicional de alta renda vai impactar os seus dividendos? Fale com nossos especialistas sobre alternativas de estruturação patrimonial.</p>
           <a href="https://wa.me/5511944913323?text=Ol%C3%A1%21%20Fiz%20uma%20simula%C3%A7%C3%A3o%20do%20novo%20IRPF%20e%20gostaria%20de%20falar%20com%20um%20especialista." target="_blank" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; font-size: 1rem; background-color: #25D366; color: white;">
@@ -88,9 +140,9 @@
       <div class="calc-container-wrapper" style="flex: 1.3; min-width: 280px;">
         <div class="calc-container" style="margin: 0; max-width: 100%; box-sizing: border-box; padding: 1.5rem; background-color: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
           
-          <div class="print-header" style="display: none; text-align: center; margin-bottom: 2.5rem; margin-top: -2rem; position: relative;">
-            <div style="font-size: 3.2rem !important; font-weight: bold; color: var(--primary-color); margin-bottom: 1rem; display: inline-block; padding: 0 1.5rem;">Contabilidade <span style="font-size: 3.2rem !important; color: #d4af37;">Camilo</span></div>
-            <h2 style="color: var(--primary-color); margin: 0; font-size: 1.6rem !important;">Relatório de Simulação - IRPF</h2>
+          <div class="print-header" style="display: none; text-align: center; margin-bottom: 1rem; margin-top: -1rem; position: relative;">
+            <div style="font-size: 2.8rem !important; font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem; display: inline-block; padding: 0 1.5rem;">Contabilidade <span style="font-size: 2.8rem !important; color: #d4af37;">Camilo</span></div>
+            <h2 style="color: var(--primary-color); margin: 0; font-size: 1.4rem !important;">Relatório de Simulação - IRPF</h2>
           </div>
           
           <div id="printSummary" class="show-print" style="display:none; text-align: left; margin-bottom: 2rem;"></div>
@@ -103,7 +155,7 @@
                   Rendimentos Tributáveis (Mensal)
                   <div class="tooltip-container">
                     <span class="tooltip-icon">?</span>
-                    <span class="tooltip-text">Salário bruto, pró-labore, aluguéis recebidos ou outras rendas tributáveis sujeitas ao IRPF.</span>
+                    <span class="tooltip-text">Soma de todos os seus ganhos sujeitos ao imposto no mês: Salário Bruto, Pró-labore de sócios, Rendimentos de Aluguel e Prestação de Serviços.</span>
                   </div>
                 </label>
                 <input type="text" id="rendimentoBase" class="form-control" placeholder="R$ 0,00" required>
@@ -136,7 +188,7 @@
                   INSS / Outras Deduções
                   <div class="tooltip-container">
                     <span class="tooltip-icon">?</span>
-                    <span class="tooltip-text">Valor descontado de INSS ou previdência oficial/privada permitida por lei.</span>
+                    <span class="tooltip-text">Insira o desconto de INSS da folha/pró-labore ou contribuições oficiais de previdência. Este valor reduz diretamente a base de cálculo do seu imposto.</span>
                   </div>
                 </label>
                 <input type="text" id="outrasDeducoes" class="form-control" placeholder="R$ 0,00">
@@ -147,7 +199,7 @@
                   Lucros e Dividendos / Outras Isentas (Mensal)
                   <div class="tooltip-container">
                     <span class="tooltip-icon">?</span>
-                    <span class="tooltip-text">Dividendos recebidos da sua empresa. Atualmente isentos, mas entram no cálculo do adicional de 10% para altas rendas (se a soma passar de R$ 50 mil mensais).</span>
+                    <span class="tooltip-text">Rendimentos isentos recebidos (ex: distribuição de lucros da sua PJ). Importante: conforme regra vigente, se a soma da sua renda mensal passar do teto, incidirá o adicional sobre o excedente.</span>
                   </div>
                 </label>
                 <input type="text" id="lucrosDividendos" class="form-control" placeholder="R$ 0,00">
@@ -206,19 +258,144 @@
             </div>
           </div>
           
-          <div class="print-only-footer" style="display: none; text-align: center; margin-top: 3rem; color: #64748b; font-size: 0.9rem;">
-            Relatório gerado em <span id="data-hora-impressao"></span>
+          <div id="print-footer" class="print-only-footer"
+            style="display: none; margin-top: 1rem; padding-top: 1rem; text-align: center;">
+            <div style="margin-bottom: 1.5rem; text-align: center;">
+              <p style="font-size: 8pt !important; color: #64748b; margin: 0 0 0.2rem 0; line-height: 1.4;">
+                *Os cálculos aqui demonstrados são estimativas baseadas nas regras tributárias vigentes/projetadas do IRPF.<br>
+                Para valores exatos e planejamento financeiro, consulte um de nossos especialistas.
+              </p>
+            </div>
+            <div style="text-align: center; line-height: 1.4; margin-bottom: 1rem;">
+              <p style="font-weight: bold; color: var(--primary-color); font-size: 1.1rem; margin: 0 0 0.4rem 0;">
+                Simulação realizada no site da Contabilidade Camilo.</p>
+              <div style="font-size: 1rem; font-weight: bold; color: var(--primary-color); margin: 0 0 1rem 0;">
+                <span style="color: #007bff;">🌐</span> contabilidadecamilo.com.br
+              </div>
+              <p style="color: #444; font-size: 1rem; margin: 0 0 0.6rem 0;">Precisa de ajuda para reduzir seus impostos com segurança?</p>
+              <div style="font-size: 1rem; color: var(--primary-color); margin: 0 0 1rem 0;">
+                <span style="color: #25D366; font-weight: bold;">WhatsApp:</span> (11) 94491-3323 <span style="margin: 0 0.3rem;">|</span> <span style="font-weight: bold;">E-mail:</span> contato@contabilidadecamilo.com.br
+              </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; font-size: 7pt !important; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 0.5rem; margin-top: 5rem;">
+              <div style="font-size: 7pt !important; color:#ababab; font-weight: 500; white-space: nowrap; margin-right: 1rem;"><span style="font-size: 7pt !important;">🌐</span> por PandaRoSan.com.br</div>
+              <div style="font-size: 7pt !important; text-align: right; color: #ababab;">&copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso</div>
+            </div>
           </div>
 
         </div>
       </div>
     </div>
+
+    <!-- Seção FAQ Accordion -->
+    <section class="faq-section hide-print" style="padding: 4rem 1.5rem; background-color: white; border-top: 1px solid #e2e8f0; margin-top: 3rem;">
+      <div class="container" style="max-width: 1000px; margin: 0 auto;">
+        <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+          <h2 style="color: var(--primary-color); font-size: 2.2rem;">Perguntas Frequentes sobre IRPF</h2>
+          <p style="color: var(--text-color); font-size: 1.1rem;">Tire suas dúvidas sobre o cálculo e as novas regras do Imposto de Renda Retido na Fonte.</p>
+        </div>
+        
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">1. O que é o IRRF?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">O Imposto de Renda Retido na Fonte (IRRF) é o valor descontado diretamente do salário ou de outros rendimentos antes que o dinheiro chegue ao contribuinte.</div>
+            <div class="accordion-content">
+              <p>Ele funciona como uma antecipação do Imposto de Renda anual. Ou seja:</p>
+              <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li>A empresa desconta o imposto do salário;</li>
+                <li>Repassa o valor ao governo;</li>
+                <li>O contribuinte informa esses valores na declaração anual de ajuste.</li>
+              </ul>
+              <p>O IRRF incide sobre Salários, Férias, 13º salário, Aluguéis, Prestação de serviços e outras rendas.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">2. Como o IRRF é calculado na folha de pagamento?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">O cálculo segue uma sequência matemática de deduções legais e aplicação da tabela progressiva.</div>
+            <div class="accordion-content">
+              <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: decimal;">
+                <li><strong>Comece pelo salário bruto:</strong> Esse é o valor total antes dos descontos.</li>
+                <li><strong>Subtraia a contribuição ao INSS:</strong> O desconto previdenciário reduz a base de cálculo.</li>
+                <li><strong>Desconte dependentes e pensão:</strong> A lei permite abater um valor fixo por dependente e valores de pensão judicial.</li>
+                <li><strong>Aplique a alíquota:</strong> O resultado até aqui é a base de cálculo. Consulte a tabela progressiva e multiplique pela alíquota da sua faixa.</li>
+                <li><strong>Subtraia a parcela a deduzir:</strong> Do valor encontrado, subtraia o desconto fixo da sua faixa para chegar ao valor final do imposto mensal.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">3. O IRRF descontado no mês é o valor final do imposto?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">Não necessariamente. O IRRF é apenas uma antecipação mensal do Imposto de Renda devido no ano.</div>
+            <div class="accordion-content">
+              <p>Na declaração anual de ajuste:</p>
+              <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li>Se você pagou mais do que devia ao longo do ano, recebe <strong>restituição</strong>.</li>
+                <li>Se pagou menos do que a renda anual determinou, precisa <strong>complementar o imposto</strong> (pagar a diferença).</li>
+              </ul>
+              <p><em>Importante:</em> Despesas médicas e educacionais não reduzem o IRRF mensal automaticamente na folha. Elas entram para ajudar a reduzir o imposto apenas no acerto da declaração anual.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">4. O 13º salário sofre desconto de IRRF?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">Sim, mas o cálculo é feito de forma totalmente separada do salário mensal regular.</div>
+            <div class="accordion-content">
+              <p>O 13º salário é considerado de tributação exclusiva na fonte. Isso significa que o imposto incide apenas sobre o valor do 13º (após deduzir o INSS correspondente a ele), aplicando a tabela progressiva vigente no momento do pagamento (geralmente na segunda parcela, em dezembro).</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">5. Quem é isento de pagar o IRRF?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">Pessoas com rendimentos totais abaixo da primeira faixa da tabela progressiva ou portadores de certas doenças graves.</div>
+            <div class="accordion-content">
+              <p>Estão isentos do desconto na fonte:</p>
+              <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li>Quem recebe rendimentos que, mesmo após as deduções legais, não atingem o limite mínimo de tributação da tabela vigente.</li>
+                <li>Aposentados, pensionistas e reformados que possuam doenças graves especificadas em lei (como câncer, cardiopatia grave, Parkinson, etc), desde que apresentem laudo médico oficial.</li>
+              </ul>
+              <p>⚠️ <strong>Atenção:</strong> Ser isento do IRRF mensal não desobriga automaticamente a pessoa de entregar a declaração anual, caso ela se enquadre em outras regras (como ter patrimônio alto ou bens sujeitos a ganho de capital).</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">6. O que muda com a nova taxação de altas rendas e isenção?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">Um aumento na faixa de isenção aliada a uma alíquota adicional sobre os rendimentos globais (incluindo dividendos) de grandes rendas, conforme proposta de reforma.</div>
+            <div class="accordion-content">
+              <p>De acordo com o projeto de reestruturação tributária (PL 1087/25):</p>
+              <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li><strong>Mais isenção:</strong> A base da tabela salta para até R$ 5.000 mensais (estimado), isentando milhões de brasileiros da base de cálculo progressiva.</li>
+                <li><strong>Adicional sobre Excedente:</strong> Aqueles que possuem rendimentos <em>globais</em> superiores ao teto de R$ 50 mil mensais (aqui somam-se salários, aluguéis e também os Lucros/Dividendos, que até então eram totalmente isentos) sofrerão uma alíquota extra de 10% <strong>apenas sobre o valor que ultrapassar o teto</strong>.</li>
+              </ul>
+              <p>Fale com nossa equipe para entender os impactos práticos na sua retirada de lucros (Pró-labore vs Dividendos)!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
   
-  <div class="print-fixed-footer" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; padding: 0 1.5rem 1rem 1.5rem; justify-content: space-between; align-items: flex-end; font-size: 7pt !important; color: #64748b; z-index: 9999;">
-    <div style="font-size: 7pt !important; color:#ababab; font-weight: 500; white-space: nowrap; flex-shrink: 0; margin-right: 1rem;"><span style="font-size: 7pt !important;">🌐</span> por PandaRoSan</div>
-    <div style="font-size: 7pt !important; text-align: right; color: #ababab;">&copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso</div>
-  </div>
+
 
 
   <footer class="footer">
@@ -334,22 +511,11 @@
         target="_blank" rel="noopener noreferrer"
         style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;"
         onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">🌐 por
-        PandaRoSan</a>
+        PandaRoSan.com.br</a>
     </p>
   </div>
 
-  <div class="print-fixed-footer" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; padding: 0 1.5rem 1rem 1.5rem; justify-content: space-between; align-items: flex-end; font-size: 7pt !important; color: #64748b; z-index: 9999; flex-direction: row; border-top: 1px solid #ccc; padding-top: 1rem; background: white;">
-    <div style="font-size: 8pt !important; color: #555;">
-      <strong>Simulação realizada no site da Contabilidade Camilo.</strong><br>
-      🌐 contabilidadecamilo.com.br<br>
-      Precisa de ajuda para reduzir seus impostos com segurança?<br>
-      WhatsApp: (11) 94491-3323 | E-mail: contato@contabilidadecamilo.com.br
-    </div>
-    <div style="font-size: 7pt !important; text-align: right; color: #ababab;">
-      <span style="font-size: 7pt !important;">🌐</span> por PandaRoSan<br>
-      &copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso
-    </div>
-  </div>
+
 
   <script type="module" src="/main.js"></script>
   <script src="calculadora-irpf.js"></script>

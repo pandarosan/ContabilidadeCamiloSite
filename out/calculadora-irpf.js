@@ -124,20 +124,24 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.dynamic-regra').forEach(el => el.textContent = parametrosGerais.Regra_Dividendos);
       }
       
-      const isencaoElem = document.getElementById('texto-isencao');
-      if (isencaoElem) {
-        let teto = parametrosGerais.Teto_Isencao;
-        if (!teto && tabelasReferencia[0]) {
-          teto = tabelasReferencia[0].limite;
-        }
-        if (teto) {
-          isencaoElem.innerHTML = `<strong>Isenção até ${formatCurrency(teto)}:</strong> Quem ganha até este valor (estimado) não pagará imposto.`;
-        }
+      if (parametrosGerais.Teto_Isencao) {
+        document.querySelectorAll('.dyn-teto-isencao').forEach(el => el.textContent = formatCurrency(parametrosGerais.Teto_Isencao));
+        document.querySelectorAll('.dyn-teto-isencao-plus1').forEach(el => el.textContent = formatCurrency(parametrosGerais.Teto_Isencao + 0.01));
+      } else if (tabelasReferencia[0]) {
+        document.querySelectorAll('.dyn-teto-isencao').forEach(el => el.textContent = formatCurrency(tabelasReferencia[0].limite));
+        document.querySelectorAll('.dyn-teto-isencao-plus1').forEach(el => el.textContent = formatCurrency(tabelasReferencia[0].limite + 0.01));
       }
       
-      const adicionalElem = document.getElementById('texto-adicional');
-      if (adicionalElem && parametrosGerais.Adicional_Limite && parametrosGerais.Adicional_Aliquota) {
-        adicionalElem.innerHTML = `<strong>Adicional para Altas Rendas:</strong> Rendimentos (incluindo lucros e dividendos) superiores a <strong>${formatCurrency(parametrosGerais.Adicional_Limite)} por mês</strong> terão um adicional de ${parametrosGerais.Adicional_Aliquota}% sobre o excedente.`;
+      if (parametrosGerais.Isencao_Fase_Out) {
+        document.querySelectorAll('.dyn-isencao-fase-out').forEach(el => el.textContent = formatCurrency(parametrosGerais.Isencao_Fase_Out));
+      }
+      
+      if (parametrosGerais.Adicional_Limite) {
+        document.querySelectorAll('.dyn-adicional-limite').forEach(el => el.textContent = formatCurrency(parametrosGerais.Adicional_Limite));
+      }
+      
+      if (parametrosGerais.Adicional_Aliquota) {
+        document.querySelectorAll('.dyn-adicional-aliquota').forEach(el => el.textContent = parametrosGerais.Adicional_Aliquota);
       }
 
       UI.loadingIndicator.style.display = 'none';
@@ -156,15 +160,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const pensao = parseCurrency(UI.pensao.value);
     const outrasDeducoes = parseCurrency(UI.outrasDeducoes.value);
 
-    // 1. Deduções
+    // 1. Deduções Legais
     const deducaoDependentes = dependentes * parametrosGerais.Deducao_Dependente;
-    const totalDeducoesCalc = deducaoDependentes + pensao + outrasDeducoes;
+    const deducoesLegais = deducaoDependentes + pensao + outrasDeducoes;
+
+    // 1.1 Desconto Simplificado
+    const descontoSimplificado = parametrosGerais.Desconto_Simplificado || 607.20;
+    
+    // O governo permite usar o que for mais vantajoso (maior dedução)
+    let totalDeducoesCalc = deducoesLegais;
+    let usouSimplificado = false;
+    
+    if (descontoSimplificado > deducoesLegais) {
+      totalDeducoesCalc = descontoSimplificado;
+      usouSimplificado = true;
+    }
 
     // 2. Base de Cálculo do IRPF Progressivo
     let baseCalculo = rendimento - totalDeducoesCalc;
     if (baseCalculo < 0) baseCalculo = 0;
 
-    // 3. Encontrar Faixa
+    // 3. Encontrar Faixa (Para exibir no layout)
     let faixaEncontrada = tabelasReferencia[tabelasReferencia.length - 1]; // Fallback pra última
     for (const f of tabelasReferencia) {
       if (baseCalculo <= f.limite) {
@@ -173,9 +189,54 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // 4. Calcular Imposto Progressivo
-    let impostoProgressivo = (baseCalculo * (faixaEncontrada.aliquota / 100)) - faixaEncontrada.deducao;
-    if (impostoProgressivo < 0) impostoProgressivo = 0;
+    // Função Auxiliar para calcular imposto bruto de qualquer base
+    // A Receita Federal calcula o imposto somando as parcelas exatas de cada faixa, sem usar 
+    // a coluna de "dedução" arredondada (que existe na tabela apenas para facilitar contas manuais).
+    function calcularImpostoBrutoParaBase(base) {
+      if (base <= 0) return 0;
+      let imp = 0;
+      let baseAnterior = 0;
+      
+      for (const f of tabelasReferencia) {
+        if (base > baseAnterior) {
+          let valorNaFaixa = Math.min(base, f.limite) - baseAnterior;
+          imp += valorNaFaixa * (f.aliquota / 100);
+          baseAnterior = f.limite;
+        } else {
+          break;
+        }
+      }
+      
+      // A Receita Federal trunca o imposto para 2 casas decimais
+      return Math.floor(Math.max(0, imp) * 100) / 100;
+    }
+
+    // 4. Calcular Imposto Progressivo Bruto
+    let impostoBruto = calcularImpostoBrutoParaBase(baseCalculo);
+
+    // 4.1. Desconto Complementar de Isenção (Novo Governo 2026)
+    const tetoIsencao = parametrosGerais.Isencao_Teto || parametrosGerais.Teto_Isencao || 5000;
+    const faseOut = parametrosGerais.Isencao_Fase_Out || 7350;
+
+    let descontoIsencao = 0;
+    
+    // O desconto baseia-se no imposto devido se a renda fosse o exato teto da isenção.
+    let baseTeto = tetoIsencao - totalDeducoesCalc;
+    let impostoTeto = calcularImpostoBrutoParaBase(baseTeto);
+
+    if (rendimento <= tetoIsencao) {
+      // Isenção total para rendimentos até o teto
+      descontoIsencao = impostoBruto;
+    } else if (rendimento < faseOut) {
+      // Phase-out decrescente baseado no rendimento bruto (sem arredondar aqui)
+      descontoIsencao = impostoTeto * (faseOut - rendimento) / (faseOut - tetoIsencao);
+    }
+    
+    // O imposto progressivo final também é truncado para 2 casas decimais
+    let impostoProgressivoReal = Math.max(0, impostoBruto - descontoIsencao);
+    // Para evitar bugs de ponto flutuante no JS (ex: 1.79 virar 1.789999), 
+    // somamos um epsilon mínimo antes de fazer o floor.
+    let impostoProgressivo = Math.floor((impostoProgressivoReal + 0.000001) * 100) / 100;
 
     // 5. Adicional de Altas Rendas (PL 1087)
     const rendaTotal = rendimento + dividendos;
@@ -192,6 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Renda líquida no bolso do contribuinte (receitas reais menos deduções reais e imposto)
     // O imposto come parte dos rendimentos. Pensão e Outras (como INSS) já saíram do bolso.
     const rendaLiquida = rendaTotal - pensao - outrasDeducoes - impostoTotal;
+    const aliquotaEfetiva = rendaTotal > 0 ? (impostoTotal / rendaTotal) * 100 : 0;
 
     // Atualizar UI
     UI.valBaseCalculo.textContent = formatCurrency(baseCalculo);
@@ -200,12 +262,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (UI.printSummary) {
       UI.printSummary.innerHTML = `
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; border: 1px solid #e2e8f0; padding: 1.5rem; border-radius: 8px;">
-          <div><strong style="color: var(--primary-color);">RENDIMENTOS TRIBUTÁVEIS (MENSAL):</strong> <br>${formatCurrency(rendimento)}</div>
-          <div><strong style="color: var(--primary-color);">DEPENDENTES:</strong> <br>${dependentes}</div>
-          <div><strong style="color: var(--primary-color);">PENSÃO ALIMENTÍCIA (MENSAL):</strong> <br>${formatCurrency(pensao)}</div>
-          <div><strong style="color: var(--primary-color);">INSS / OUTRAS DEDUÇÕES:</strong> <br>${formatCurrency(outrasDeducoes)}</div>
-          <div style="grid-column: 1 / -1;"><strong style="color: var(--primary-color);">LUCROS E DIVIDENDOS / OUTRAS ISENTAS (MENSAL):</strong> <br>${formatCurrency(dividendos)}</div>
+        <div style="display: flex; justify-content: space-between; background-color: var(--primary-color); color: white; padding: 0.6rem 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+          <div><strong style="font-size: 1rem;">Alíquota Efetiva:</strong> <br><span style="font-size: 1.3rem; font-weight: bold;">${aliquotaEfetiva.toFixed(2)}%</span></div>
+          <div style="text-align: right;"><strong style="font-size: 1rem;">Renda Líquida Estimada:</strong> <br><span style="font-size: 1.3rem; font-weight: bold; color: #10b981;">${formatCurrency(rendaLiquida)}</span></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem 1rem; border: 1px solid #e2e8f0; padding: 0.6rem 1rem; border-radius: 8px;">
+          <div style="font-size: 0.85rem;"><strong style="color: var(--primary-color);">RENDIMENTOS TRIBUTÁVEIS (MENSAL):</strong> <br>${formatCurrency(rendimento)}</div>
+          <div style="font-size: 0.85rem;"><strong style="color: var(--primary-color);">DEPENDENTES:</strong> <br>${dependentes}</div>
+          <div style="font-size: 0.85rem;"><strong style="color: var(--primary-color);">PENSÃO ALIMENTÍCIA (MENSAL):</strong> <br>${formatCurrency(pensao)}</div>
+          <div style="font-size: 0.85rem;"><strong style="color: var(--primary-color);">INSS / OUTRAS DEDUÇÕES:</strong> <br>${formatCurrency(outrasDeducoes)}</div>
+          <div style="grid-column: 1 / -1; font-size: 0.85rem; margin-top: 0.2rem;"><strong style="color: var(--primary-color);">LUCROS E DIVIDENDOS / OUTRAS ISENTAS (MENSAL):</strong> <br>${formatCurrency(dividendos)}</div>
         </div>
       `;
     }
@@ -213,59 +279,99 @@ document.addEventListener("DOMContentLoaded", () => {
     // Atualizar Tabela Detalhada
     let tabelaHTML = '';
     
-    tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Dedução por Dependentes (${dependentes})</td>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444;">- ${formatCurrency(deducaoDependentes)}</td>
-    </tr>`;
-    
-    tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Outras Deduções (Pensão + INSS)</td>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444;">- ${formatCurrency(pensao + outrasDeducoes)}</td>
-    </tr>`;
-
-    tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;"><strong>Base de Cálculo do IRPF</strong></td>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right;"><strong>${formatCurrency(baseCalculo)}</strong></td>
-    </tr>`;
-
-    tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Faixa do Imposto</td>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right;">Faixa ${faixaEncontrada.faixa} (${faixaEncontrada.aliquota}%)</td>
-    </tr>`;
-
-    tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Imposto Progressivo (após dedução da faixa)</td>
-      <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right;">${formatCurrency(impostoProgressivo)}</td>
-    </tr>`;
-
-    if (impostoAdicional > 0) {
+    if (usouSimplificado) {
       tabelaHTML += `<tr>
-        <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Adicional Altas Rendas (Sobre excedente de ${formatCurrency(baseAdicional)})</td>
-        <td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right;">${formatCurrency(impostoAdicional)}</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Desconto Simplificado (Mais Vantajoso)</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444; font-size: 0.9rem;">- ${formatCurrency(descontoSimplificado)}</td>
+      </tr>`;
+    } else {
+      tabelaHTML += `<tr>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Dedução por Dependentes (${dependentes})</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444; font-size: 0.9rem;">- ${formatCurrency(deducaoDependentes)}</td>
+      </tr>`;
+      
+      tabelaHTML += `<tr>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Outras Deduções (Pensão + INSS)</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; color: #ef4444; font-size: 0.9rem;">- ${formatCurrency(pensao + outrasDeducoes)}</td>
       </tr>`;
     }
 
     tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-bottom: 2px solid var(--primary-color);"><strong>TOTAL DE IMPOSTO DEVIDO</strong></td>
-      <td style="padding: 0.6rem; border-bottom: 2px solid var(--primary-color); text-align: right; color: var(--primary-color); font-weight: bold;">${formatCurrency(impostoTotal)}</td>
+      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;"><strong>Base de Cálculo do IRPF</strong></td>
+      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.9rem;"><strong>${formatCurrency(baseCalculo)}</strong></td>
     </tr>`;
 
-    // Alíquota Efetiva = Imposto Total / Renda Bruta Total
-    const aliquotaEfetiva = rendaTotal > 0 ? (impostoTotal / rendaTotal) * 100 : 0;
+    tabelaHTML += `<tr>
+      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Faixa do Imposto</td>
+      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.9rem;">Faixa ${faixaEncontrada.faixa} (${faixaEncontrada.aliquota}%)</td>
+    </tr>`;
+
+    tabelaHTML += `<tr>
+      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Imposto Bruto (após dedução da faixa)</td>
+      <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.9rem;">${formatCurrency(impostoBruto)}</td>
+    </tr>`;
+
+    if (descontoIsencao > 0) {
+      tabelaHTML += `<tr>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; color: #10b981;">Desconto Complementar (Regra de Isenção)</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.9rem; color: #10b981;">- ${formatCurrency(descontoIsencao)}</td>
+      </tr>`;
+      
+      tabelaHTML += `<tr>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Imposto Progressivo Final</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.9rem;">${formatCurrency(impostoProgressivo)}</td>
+      </tr>`;
+    }
+
+    if (impostoAdicional > 0) {
+      const regraDescricao = parametrosGerais.Regra_Dividendos || 'PL 1087/25';
+      const aliquotaAdic = parametrosGerais.Adicional_Aliquota || 10;
+      tabelaHTML += `<tr>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem;">Adicional Altas Rendas - ${regraDescricao} (${aliquotaAdic}% sobre excedente de ${formatCurrency(baseAdicional)})</td>
+        <td style="padding: 0.2rem 0.6rem; border-bottom: 1px solid #e2e8f0; text-align: right; font-size: 0.9rem;">${formatCurrency(impostoAdicional)}</td>
+      </tr>`;
+    }
+
+    tabelaHTML += `<tr>
+      <td style="padding: 0.2rem 0.6rem; border-bottom: 2px solid var(--primary-color); font-size: 0.9rem;"><strong>TOTAL DE IMPOSTO DEVIDO</strong></td>
+      <td style="padding: 0.2rem 0.6rem; border-bottom: 2px solid var(--primary-color); text-align: right; color: var(--primary-color); font-weight: bold; font-size: 0.9rem;">${formatCurrency(impostoTotal)}</td>
+    </tr>`;
+
+    // Alíquota Efetiva = Imposto Total / Renda Bruta Total (Já calculada acima)
     
     tabelaHTML += `<tr>
-      <td style="padding: 0.6rem;">Alíquota Efetiva (Peso real do imposto)</td>
-      <td style="padding: 0.6rem; text-align: right; font-weight: bold;">${aliquotaEfetiva.toFixed(2)}%</td>
+      <td style="padding: 0.2rem 0.6rem; font-size: 0.9rem;">Alíquota Efetiva (Peso real do imposto)</td>
+      <td style="padding: 0.2rem 0.6rem; text-align: right; font-weight: bold; font-size: 0.9rem;">${aliquotaEfetiva.toFixed(2)}%</td>
     </tr>`;
 
     tabelaHTML += `<tr>
-      <td style="padding: 0.6rem; border-top: 2px solid #10b981; color: #10b981;"><strong>RENDA LÍQUIDA ESTIMADA</strong></td>
-      <td style="padding: 0.6rem; border-top: 2px solid #10b981; text-align: right; color: #10b981; font-weight: bold;">${formatCurrency(rendaLiquida)}</td>
+      <td style="padding: 0.2rem 0.6rem; border-top: 2px solid #10b981; color: #10b981; font-size: 0.9rem;"><strong>RENDA LÍQUIDA ESTIMADA</strong></td>
+      <td style="padding: 0.2rem 0.6rem; border-top: 2px solid #10b981; text-align: right; color: #10b981; font-weight: bold; font-size: 0.9rem;">${formatCurrency(rendaLiquida)}</td>
     </tr>`;
 
     UI.resultadoTabela.innerHTML = tabelaHTML;
     UI.resultadoContainer.style.display = 'block';
+    
+    const cta = document.getElementById('cta-resultado');
+    if (cta) cta.style.display = 'block';
   }
+
+  const allInputs = UI.form.querySelectorAll('input');
+  allInputs.forEach((input, index) => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const next = allInputs[index + 1];
+        if (next) next.focus();
+        else {
+          if (tabelasReferencia.length > 0) calcularIRPF();
+        }
+      }
+    });
+    input.addEventListener('change', () => {
+      if (tabelasReferencia.length > 0) calcularIRPF();
+    });
+  });
 
   UI.form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -281,7 +387,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Impressão
   UI.btnImprimir.addEventListener('click', () => {
     const now = new Date();
-    UI.dataHoraImpressao.textContent = now.toLocaleString('pt-BR');
+    if (UI.dataHoraImpressao) {
+      UI.dataHoraImpressao.textContent = now.toLocaleString('pt-BR');
+    }
     window.print();
   });
 

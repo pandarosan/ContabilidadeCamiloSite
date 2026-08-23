@@ -29,22 +29,35 @@
         <span class="logo-text">Contabilidade <strong>Camilo</strong></span>
       </a>
       <nav class="nav">
-        <ul class="nav-list">
-          <li><a href="index.html" target="_blank" rel="noopener noreferrer" class="nav-link">Home</a></li>
+                <ul class="nav-list">
+          <li><a href="planos.html" class="nav-link">Planos</a></li>
           <li class="dropdown">
-            <a href="index.html#solucoes" target="_blank" rel="noopener noreferrer" class="nav-link">Soluções <span class="caret">▾</span></a>
+            <a href="index.html#solucoes" class="nav-link">Soluções <span class="caret">▾</span></a>
             <ul class="dropdown-menu">
-              <li><a href="abertura-de-empresas-e-societario.html" target="_blank" rel="noopener noreferrer">Abertura de Empresas e Societário</a></li>
-              <li><a href="fiscal-e-contabilidade.html" target="_blank" rel="noopener noreferrer">Fiscal e Contabilidade</a></li>
-              <li><a href="departamento-de-pessoal.html" target="_blank" rel="noopener noreferrer">Departamento de Pessoal</a></li>
-              <li><a href="certificado-digital.html" target="_blank" rel="noopener noreferrer">Certificado Digital</a></li>
-              <li><a href="bpo-financeiro.html" target="_blank" rel="noopener noreferrer">BPO Financeiro</a></li>
+              <li><a href="abertura-de-empresas-e-societario.html" target="_blank" rel="noopener noreferrer">Abertura de
+                  Empresas e Societário</a></li>
+              <li><a href="fiscal-e-contabilidade.html" target="_blank" rel="noopener noreferrer">Fiscal e
+                  Contabilidade</a>
+              </li>
+              <li><a href="departamento-de-pessoal.html" target="_blank" rel="noopener noreferrer">Departamento de
+                  Pessoal</a></li>
+              <li><a href="certificado-digital.html" target="_blank" rel="noopener noreferrer">Certificado Digital</a>
+              </li>
+              <li><a href="bpo-financeiro.html" target="_blank" rel="noopener noreferrer">BPO Financeiro</a>
+              </li>
               <li><a href="demais-solucoes.html" target="_blank" rel="noopener noreferrer">Demais Soluções</a></li>
             </ul>
           </li>
-          <li><a href="sobre-nos.html" target="_blank" rel="noopener noreferrer" class="nav-link">Sobre Nós</a></li>
-          <li><a href="noticias-e-artigos.html" class="nav-link active">Notícias & Artigos</a></li>
-          <li><a href="contato.html" target="_blank" rel="noopener noreferrer" class="nav-link">Contato</a></li>
+          <li><a href="noticias-e-artigos.html" class="nav-link">Notícias</a></li>
+          <li class="dropdown">
+            <a href="#" class="nav-link">Explore <span class="caret">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/#calculadoras">Calculadoras Inteligentes</a></li>
+              <li><a href="/#guia-rapido">Guia Rápido & Glossário Contábil</a></li>
+            </ul>
+          </li>
+          <li><a href="sobre-nos.html" class="nav-link">Sobre Nós</a></li>
+          <li><a href="contato.html" class="nav-link">Contato</a></li>
         </ul>
       </nav>
       <div class="header-actions" style="display: flex; gap: 0.5rem; align-items: center;">
@@ -134,9 +147,9 @@
           </div>
 
           <!-- Card 3 -->
-          <div class="article-card" data-category="Trabalhista & eSocial" data-title="eSocial e Férias 2026 Prazos rigorosos de envio e penalidades que todo empregador precisa evitar">
+          <div class="article-card" data-category="Trabalhista & Previdenciário" data-title="eSocial e Férias 2026 Prazos rigorosos de envio e penalidades que todo empregador precisa evitar">
             <div class="article-img-wrapper">
-              <span class="article-category-badge">Trabalhista & eSocial</span>
+              <span class="article-category-badge">Trabalhista & Previdenciário</span>
               <img src="/dp_team.png" alt="Equipe de Departamento Pessoal gerenciando eventos do eSocial">
             </div>
             <div class="article-content">
@@ -385,7 +398,7 @@
           card.innerHTML = `
             <div class="article-img-wrapper">
               <span class="article-category-badge">${article.category}</span>
-              <img src="${article.image}" alt="${article.title}">
+              <img src="${article.image}" alt="${article.image_alt || article.title}" title="${article.image_title || article.title}">
             </div>
             <div class="article-content">
               <div class="article-meta">

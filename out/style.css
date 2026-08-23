@@ -1747,6 +1747,18 @@ textarea.form-control {
 }
 
 /* ========================================================= */
+/* Ocultação do rodapé na tela para evitar bug do Chrome no @media print */
+.print-fixed-footer {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    pointer-events: none;
+}
+/* ========================================================= */
+
+/* ========================================================= */
 /* IMPRESSÃO (RELATÓRIO COMERCIAL) */
 /* ========================================================= */
 @media print {
@@ -1813,7 +1825,16 @@ textarea.form-control {
     }
     
     .print-fixed-footer {
+        opacity: 1 !important;
+        visibility: visible !important;
+        height: auto !important;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
         display: flex !important;
+        background: white;
+        z-index: 9999;
     }
     
     main {

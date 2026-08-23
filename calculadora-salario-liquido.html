@@ -26,6 +26,16 @@
       .seo-content, .calc-container-wrapper { width: 100% !important; flex: none !important; }
       .form-control { width: 100%; box-sizing: border-box; }
     }
+
+    /* Ocultação do rodapé na tela para evitar bug do Chrome no @media print */
+    .print-fixed-bottom {
+      opacity: 0;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+      position: absolute;
+      pointer-events: none;
+    }
     
     @media print {
       @page { margin: 1.2cm; }
@@ -40,8 +50,8 @@
       .calc-container { box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
       
       /* SOBRESCRITA DA REGRA GLOBAL DE FONTE: */
-      #print-logo-salario { font-size: 3.8rem !important; line-height: 1.2 !important; }
-      #print-logo-salario span { font-size: 3.8rem !important; }
+      #print-logo-salario { font-size: 3.4rem !important; line-height: 1.2 !important; }
+      #print-logo-salario span { font-size: 3.4rem !important; }
       #print-subtitulo-salario { font-size: 1.5rem !important; }
 
       .table-container { margin-top: 1rem !important; page-break-inside: auto; }
@@ -72,11 +82,14 @@
       #print-footer { display: block !important; page-break-inside: avoid; }
       
       .print-fixed-bottom {
-        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        height: auto !important;
         position: fixed !important;
-        bottom: 0;
-        left: 0;
-        width: 100%;
+        display: flex !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
         background: white;
         padding-top: 0.5rem;
         z-index: 9999;
@@ -191,7 +204,7 @@
       <!-- Lado Esquerdo: SEO e Resultados -->
       <div class="seo-content" style="flex: 1; min-width: 300px;">
         <div class="print-header show-print" style="display: none; text-align: center; margin-bottom: 2rem; position: relative; padding-top: 2rem;">
-          <div id="print-logo-salario" style="font-size: 3.8rem !important; font-weight: bold; color: var(--primary-color); display: inline-block; margin-bottom: 0.5rem; line-height: 1.2 !important;">Contabilidade <span style="font-size: 3.8rem !important; color: #d4af37;">Camilo</span></div>
+          <div id="print-logo-salario" style="font-size: 3.4rem !important; font-weight: bold; color: var(--primary-color); display: inline-block; margin-bottom: 0.5rem; line-height: 1.2 !important;">Contabilidade <span style="font-size: 3.4rem !important; color: #d4af37;">Camilo</span></div>
           <h2 id="print-subtitulo-salario" style="color: var(--primary-color); margin: 0; font-size: 1.5rem !important;">Relatório Oficial: Salário Líquido</h2>
         </div>
       
@@ -510,7 +523,7 @@
               </div>
             </div>
             
-            <div class="print-fixed-bottom" style="display: none; justify-content: space-between; align-items: flex-end; font-size: 7pt !important; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 0.5rem; margin-top: 2rem;">
+            <div class="print-fixed-bottom" style="justify-content: space-between; align-items: flex-end; font-size: 7pt !important; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 0.5rem; margin-top: 2rem;">
               <div style="font-size: 7pt !important; color:#ababab; font-weight: 500; white-space: nowrap; margin-right: 1rem;"><span style="font-size: 7pt !important;">🌐</span> por PandaRoSan.com.br</div>
               <div style="font-size: 7pt !important; text-align: right; color: #ababab;">&copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso</div>
             </div>

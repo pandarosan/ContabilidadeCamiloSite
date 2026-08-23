@@ -477,6 +477,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   window.removerColaborador = function(index) {
     colaboradores.splice(index, 1);
     renderTabela();
+    calcularEAtualizarTela();
+  };
+
+  window.prepararImpressao = function() {
+    const bruto = parseCurrency(els.bruto.value);
+    // Se há dados preenchidos na tela E já existe uma lista, 
+    // a impressão vai ignorar a tela e imprimir a lista.
+    // Portanto, jogamos a simulação atual para dentro da lista antes de imprimir.
+    if (bruto > 0 && colaboradores.length > 0) {
+      adicionarColaborador();
+    }
+    window.print();
   };
 
   els.categoria.addEventListener('change', function() {

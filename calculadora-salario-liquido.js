@@ -326,7 +326,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       
       // O impostoTeto deve simular um contribuinte que ganha exatamente o tetoIsencao
       const inssTeto = calcularINSS(tetoIsencao);
-      const deducoesLegaisTeto = inssTeto + pensao + (dependentes * valorDependente);
+      const deducoesLegaisTeto = inssTeto + pensao + deducaoDependentes;
       const baseLegalTeto = Math.max(0, tetoIsencao - deducoesLegaisTeto);
       const baseSimplificadaTeto = Math.max(0, tetoIsencao - deducaoSimplificada);
       const impostoLegalTeto = calcularImpostoBrutoParaBase(baseLegalTeto);

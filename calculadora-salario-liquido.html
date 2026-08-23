@@ -29,14 +29,15 @@
     
     @media print {
       @page { size: auto; margin: 10mm; }
-      body, html { background: white !important; height: auto !important; margin: 0 !important; padding: 0 !important; }
-      main { min-height: auto !important; padding: 0 !important; margin: 0 !important; }
+      body, html { background: white !important; margin: 0 !important; padding: 0 !important; min-height: 100vh !important; }
+      body { display: flex !important; flex-direction: column !important; }
+      main { flex: 1 !important; display: flex !important; flex-direction: column !important; min-height: auto !important; padding: 0 !important; margin: 0 !important; }
       body.hide-main-on-print #resultadoDestaque { display: none !important; }
       .hide-print { display: none !important; }
       .show-print { display: block !important; }
-      .calc-layout-wrapper { display: block !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
-      .seo-content { display: block !important; width: 100% !important; margin: 0 !important; }
-      #resultadoDestaque { border: 1px solid #e2e8f0 !important; padding: 1.5rem !important; margin-bottom: 2rem !important; }
+      .calc-layout-wrapper { display: flex !important; flex-direction: column !important; flex: 1 !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+      .seo-content { display: flex !important; flex-direction: column !important; flex: 1 !important; width: 100% !important; margin: 0 !important; }
+      #resultadoDestaque { border: 1px solid #e2e8f0 !important; padding: 1.5rem !important; margin-bottom: 2rem !important; flex-shrink: 0; }
       .calc-container { box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
       .table-container { margin-top: 1rem !important; page-break-inside: auto; }
       table { width: 100% !important; border: 1px solid #e2e8f0 !important; font-size: 0.85rem !important; page-break-inside: auto; }
@@ -48,8 +49,7 @@
       #print-footer { display: block !important; page-break-inside: avoid; margin-top: 2rem !important; }
       
       .print-fixed-bottom {
-        position: relative !important;
-        margin-top: 2rem !important;
+        margin-top: auto !important;
         padding-top: 0.5rem;
         border-top: 1px solid #e2e8f0;
         width: 100%;
@@ -164,8 +164,8 @@
       
       <!-- Lado Esquerdo: SEO e Resultados -->
       <div class="seo-content" style="flex: 1; min-width: 300px;">
-        <div class="print-header show-print" style="display: none; text-align: center; margin-bottom: 1.5rem; position: relative; padding-top: 0.5rem;">
-          <div style="font-size: 1.6rem; font-weight: bold; color: var(--primary-color); display: inline-block; margin-bottom: 0.3rem;">Contabilidade <span style="color: #d4af37;">Camilo</span></div>
+        <div class="print-header show-print" style="display: none; text-align: center; margin-bottom: 1.5rem; position: relative; padding-top: 0.5rem; flex-shrink: 0;">
+          <div style="font-size: 2.2rem; font-weight: bold; color: var(--primary-color); display: inline-block; margin-bottom: 0.3rem;">Contabilidade <span style="color: #d4af37;">Camilo</span></div>
           <h2 style="color: var(--primary-color); margin: 0; font-size: 1.2rem;">Relatório Oficial: Salário Líquido</h2>
         </div>
       

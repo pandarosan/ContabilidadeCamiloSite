@@ -48,12 +48,14 @@
       #print-footer { display: block !important; page-break-inside: avoid; }
       
       .print-fixed-bottom {
+        display: flex !important;
         position: fixed !important;
         bottom: 0;
         left: 0;
         width: 100%;
         background: white;
         padding-top: 0.5rem;
+        z-index: 9999;
       }
       body { padding-bottom: 3rem !important; }
     }
@@ -164,8 +166,8 @@
       
       <!-- Lado Esquerdo: SEO e Resultados -->
       <div class="seo-content" style="flex: 1; min-width: 300px;">
-        <div class="print-header show-print" style="display: none; text-align: center; margin-bottom: 2rem; position: relative; padding-top: 1rem;">
-          <div style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color); display: inline-block;">Contabilidade <span style="color: #d4af37;">Camilo</span></div>
+        <div class="print-header show-print" style="display: none; text-align: center; margin-bottom: 1.5rem; position: relative; padding-top: 0.5rem;">
+          <div style="font-size: 2.2rem; font-weight: bold; color: var(--primary-color); display: inline-block; margin-bottom: 0.3rem;">Contabilidade <span style="color: #d4af37;">Camilo</span></div>
           <h2 style="color: var(--primary-color); margin: 0; font-size: 1.2rem;">Relatório Oficial: Salário Líquido</h2>
         </div>
       
@@ -182,6 +184,10 @@
             <div class="detalhe-linha">
               <span>(-) INSS</span>
               <strong id="resINSS" style="color: #ef4444;">R$ 0,00</strong>
+            </div>
+            <div class="detalhe-linha" id="linhaDependentes" style="display: none;">
+              <span>(-) Dependentes (<span id="resQtdDep">0</span>)</span>
+              <strong id="resValorDep" style="color: #ef4444;">R$ 0,00</strong>
             </div>
             <div class="detalhe-linha">
               <span>(-) Imposto de Renda</span>
@@ -480,7 +486,7 @@
               </div>
             </div>
             
-            <div class="print-fixed-bottom" style="display: flex; justify-content: space-between; align-items: flex-end; font-size: 7pt !important; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 0.5rem; margin-top: 2rem;">
+            <div class="print-fixed-bottom" style="display: none; justify-content: space-between; align-items: flex-end; font-size: 7pt !important; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 0.5rem; margin-top: 2rem;">
               <div style="font-size: 7pt !important; color:#ababab; font-weight: 500; white-space: nowrap; margin-right: 1rem;"><span style="font-size: 7pt !important;">🌐</span> por PandaRoSan.com.br</div>
               <div style="font-size: 7pt !important; text-align: right; color: #ababab;">&copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso</div>
             </div>

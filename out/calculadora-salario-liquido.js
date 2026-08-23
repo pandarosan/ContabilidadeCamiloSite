@@ -370,31 +370,60 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
     
-    if (bruto <= 0) {
-      document.body.classList.remove('hide-main-on-print');
-      els.resBruto.innerText = 'R$ 0,00';
-      els.resINSS.innerText = 'R$ 0,00';
-      els.resIRRF.innerText = 'R$ 0,00';
-      els.resPensao.innerText = 'R$ 0,00';
-      els.resLiquido.innerText = 'R$ 0,00';
-      els.displayLiquido.innerText = 'R$ 0,00';
-      els.tituloPainel.innerText = `Seu salário líquido:`;
-      
-      const linhaDep = document.getElementById('linhaDependentes');
-      if (linhaDep) linhaDep.style.display = 'none';
-      const qtdDep = document.getElementById('resQtdDep');
-      if (qtdDep) qtdDep.innerText = '0';
-      const valorDep = document.getElementById('resValorDep');
-      if (valorDep) valorDep.innerText = 'R$ 0,00';
-      
-      return;
-    }
-    
-    // Oculta painel principal na impressão se houver tabela
-    if (colaboradores.length > 0) {
-      document.body.classList.add('hide-main-on-print');
+    // Lógica de exibição para a Impressão e Card
+    const tabelaContainer = document.getElementById('tabelaColaboradores');
+    if (colaboradores.length > 1) {
+      document.body.classList.add('hide-main-on-print'); // Oculta o card
+      if (tabelaContainer) tabelaContainer.classList.remove('hide-print'); // Garante que a tabela imprima
     } else {
-      document.body.classList.remove('hide-main-on-print');
+      document.body.classList.remove('hide-main-on-print'); // Mostra o card
+      if (tabelaContainer && colaboradores.length <= 1) {
+        tabelaContainer.classList.add('hide-print'); // Se só tem 1 (ou 0), a tabela não imprime
+      }
+    }
+
+    if (bruto <= 0) {
+      if (colaboradores.length === 1) {
+        // Se há exatamente 1 colaborador na lista e o input está vazio, populamos o card com ele
+        const c = colaboradores[0];
+        els.resBruto.innerText = formatCurrency(c.bruto);
+        els.resINSS.innerText = formatCurrency(c.inss);
+        els.resIRRF.innerText = formatCurrency(c.irrf);
+        els.resPensao.innerText = formatCurrency(c.pensao);
+        els.resLiquido.innerText = formatCurrency(c.liquido);
+        els.displayLiquido.innerText = formatCurrency(c.liquido);
+        els.tituloPainel.innerText = `Salário Líquido de ${c.nome}:`;
+        
+        const linhaDep = document.getElementById('linhaDependentes');
+        const qtdDep = document.getElementById('resQtdDep');
+        const valorDep = document.getElementById('resValorDep');
+        if (linhaDep && qtdDep && valorDep) {
+          if (c.deducaoDependentes > 0) {
+            linhaDep.style.display = 'flex';
+            qtdDep.innerText = c.dependentes;
+            valorDep.innerText = formatCurrency(c.deducaoDependentes);
+          } else {
+            linhaDep.style.display = 'none';
+          }
+        }
+      } else {
+        // 0 colaboradores e input vazio: Zera o card
+        els.resBruto.innerText = 'R$ 0,00';
+        els.resINSS.innerText = 'R$ 0,00';
+        els.resIRRF.innerText = 'R$ 0,00';
+        els.resPensao.innerText = 'R$ 0,00';
+        els.resLiquido.innerText = 'R$ 0,00';
+        els.displayLiquido.innerText = 'R$ 0,00';
+        els.tituloPainel.innerText = `Seu salário líquido:`;
+        
+        const linhaDep = document.getElementById('linhaDependentes');
+        if (linhaDep) linhaDep.style.display = 'none';
+        const qtdDep = document.getElementById('resQtdDep');
+        if (qtdDep) qtdDep.innerText = '0';
+        const valorDep = document.getElementById('resValorDep');
+        if (valorDep) valorDep.innerText = 'R$ 0,00';
+      }
+      return;
     }
 
     const dependentes = parseInt(els.dependentes.value) || 0;

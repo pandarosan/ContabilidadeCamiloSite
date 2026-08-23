@@ -278,11 +278,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     let inss = calcularINSS(bruto);
     
     let irrf = 0;
+    let deducaoDependentes = 0;
+
     if (categoriaNome !== 'MEI') {
       const valorDependente = getParam(irpfData, ['Deducao_Dependente', 'Valor_Dependente'], 'Valor por Dependente');
       const deducaoSimplificada = getParam(irpfData, ['Desconto_Simplificado'], 'Desconto Simplificado');
       
-      const deducoesLegais = inss + pensao + (dependentes * valorDependente);
+      deducaoDependentes = dependentes * valorDependente;
+      const deducoesLegais = inss + pensao + deducaoDependentes;
       const baseLegal = Math.max(0, bruto - deducoesLegais);
       const baseSimplificada = Math.max(0, bruto - deducaoSimplificada);
       
@@ -351,7 +354,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (irrf < 0) irrf = 0;
     const liquido = Math.max(0, bruto - inss - irrf - pensao);
     
-    return { bruto, inss, irrf, pensao, liquido };
+    return { bruto, inss, irrf, pensao, liquido, deducaoDependentes, dependentes };
   }
 
   function calcularEAtualizarTela() {
@@ -376,6 +379,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       els.resLiquido.innerText = 'R$ 0,00';
       els.displayLiquido.innerText = 'R$ 0,00';
       els.tituloPainel.innerText = `Seu salário líquido:`;
+      
+      const linhaDep = document.getElementById('linhaDependentes');
+      if (linhaDep) linhaDep.style.display = 'none';
+      const qtdDep = document.getElementById('resQtdDep');
+      if (qtdDep) qtdDep.innerText = '0';
+      const valorDep = document.getElementById('resValorDep');
+      if (valorDep) valorDep.innerText = 'R$ 0,00';
+      
       return;
     }
     
@@ -398,6 +409,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     els.resPensao.innerText = formatCurrency(pensao);
     els.resLiquido.innerText = formatCurrency(res.liquido);
     els.displayLiquido.innerText = formatCurrency(res.liquido);
+    
+    const linhaDep = document.getElementById('linhaDependentes');
+    const qtdDep = document.getElementById('resQtdDep');
+    const valorDep = document.getElementById('resValorDep');
+    if (linhaDep && qtdDep && valorDep) {
+      if (res.deducaoDependentes > 0) {
+        linhaDep.style.display = 'flex';
+        qtdDep.innerText = res.dependentes;
+        valorDep.innerText = formatCurrency(res.deducaoDependentes);
+      } else {
+        linhaDep.style.display = 'none';
+      }
+    }
     
     let nome = els.nome.value.trim() || "Simulação";
     els.tituloPainel.innerText = `Salário Líquido de ${nome}:`;

@@ -2165,3 +2165,4 @@ section[id],
   background-color: var(--primary-color);
   color: white;
 }
+@media (max-width: 900px) { .calc-layout-wrapper { flex-direction: column-reverse; } }

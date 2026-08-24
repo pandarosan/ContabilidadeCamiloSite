@@ -233,7 +233,7 @@ main {
 
 /* Hero Section */
 .hero {
-  background: url('/Contabilidade-Camilo-Fundo.jpg') right center/cover;
+  background: url('/contabilidade-camilo-fundo.jpg') right center/cover;
   color: white;
   padding: 8rem 0 6rem 0;
   text-align: center;
@@ -643,7 +643,7 @@ textarea.form-control {
   /* Ajuste de Fundo Hero no Celular: Foco no rosto da mulher (85% horizontal) e gradiente escuro na base */
   .hero {
     position: relative !important;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 38%, rgba(0, 5, 15, 0.88) 60%, rgba(0, 5, 15, 0.98) 100%), url('/Contabilidade-Camilo-Fundo.jpg') 85% 15%/cover no-repeat !important;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 38%, rgba(0, 5, 15, 0.88) 60%, rgba(0, 5, 15, 0.98) 100%), url('/contabilidade-camilo-fundo.jpg') 85% 15%/cover no-repeat !important;
     padding: 21rem 0 2.5rem 0 !important;
   }
   /* 1. Selo 17 Anos no topo da imagem, em uma única linha */

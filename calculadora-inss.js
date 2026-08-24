@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   let inssData = { parametros: {}, tabelaProgressiva: [], outrasCategorias: [] };
-    let colaboradores = [];
+  let colaboradores = [];
 
   const els = {
     form: document.getElementById('calcForm'),
@@ -38,9 +38,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     e.target.value = 'R$ ' + value;
   };
 
-  els.bruto.addEventListener('input', formatInputCurrency);
-  
-  // Função de resolução de caminho e quebra de cache
+  if(els.bruto) els.bruto.addEventListener('input', formatInputCurrency);
+
   function resolveExcelPath(path, defaultPath) {
     const cacheBuster = `?v=${new Date().getTime()}`;
     let finalUrl = path || defaultPath;
@@ -88,87 +87,44 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    const nomeRefINSS = workbook.SheetNames.find(n => n.trim().toLowerCase() === "tabelas_referencia");
-    if (nomeRefINSS) {
-      // Normaliza as chaves removendo espaços extras que o usuário pode digitar acidentalmente no Excel
-      const normalizeKeys = (obj) => {
-        const newObj = {};
-        for (let key in obj) {
-          newObj[key.trim()] = obj[key];
-        }
-        return newObj;
-      };
-
-      inssData.tabelaProgressiva = XLSX.utils.sheet_to_json(workbook.Sheets[nomeRefINSS]).map(rawRow => {
-        const row = normalizeKeys(rawRow);
-        let limite = row.Limite_Ate !== undefined ? row.Limite_Ate : (row.Limite || row.limite);
-        if (limite === undefined || limite === null || isNaN(parseFloat(limite))) limite = Infinity;
-        
-        let aliq = parseFloat(row.Aliquota !== undefined ? row.Aliquota : row.aliquota) || 0;
-        let ded = parseFloat(row.Parcela_Deduzir !== undefined ? row.Parcela_Deduzir : (row.Deducao || row.deducao)) || 0;
-        
-        return {
-          limite: limite === Infinity ? Infinity : parseFloat(limite),
-          aliquota: aliq > 1 ? aliq / 100 : aliq,
-          deducao: ded
-        };
-      });
+    const nomeAbaOutras = workbook.SheetNames.find(n => n.trim().toLowerCase() === "outras_categorias");
+    if (nomeAbaOutras) {
+      inssData.outrasCategorias = XLSX.utils.sheet_to_json(workbook.Sheets[nomeAbaOutras]);
     }
 
-    const nomeCatINSS = workbook.SheetNames.find(n => n.trim().toLowerCase() === "outras_categorias");
-    if (nomeCatINSS) {
-      inssData.outrasCategorias = XLSX.utils.sheet_to_json(workbook.Sheets[nomeCatINSS]).map(rawRow => {
-        const normalizeKeys = (obj) => {
-          const newObj = {}; for (let k in obj) newObj[k.trim()] = obj[k]; return newObj;
-        };
-        const row = normalizeKeys(rawRow);
-        const catNome = row.Categoria || row.categoria || row.Nome || row.nome || "Outro";
-        const catAliq = parseFloat(row.Aliquota || row.aliquota || 0);
-        const catBase = (row.Base_Calculo || row.base_calculo || "").toString().trim().toLowerCase();
+    const nomeAbaProg = workbook.SheetNames.find(n => n.trim().toLowerCase() === "tabela_progressiva");
+    if (nomeAbaProg) {
+      inssData.tabelaProgressiva = XLSX.utils.sheet_to_json(workbook.Sheets[nomeAbaProg]).map(row => {
+        let faixaStr = row.Faixa !== undefined ? row.Faixa : row.faixa;
+        let deVal = parseFloat(row.De !== undefined ? row.De : row.de) || 0;
+        let ateVal = row.Ate !== undefined ? row.Ate : row.ate;
+        if (ateVal === undefined || ateVal === null || ateVal.toString().trim().toLowerCase() === 'teto' || isNaN(parseFloat(ateVal))) {
+          ateVal = Infinity;
+        } else {
+          ateVal = parseFloat(ateVal);
+        }
+        let aliq = parseFloat(row.Aliquota !== undefined ? row.Aliquota : row.aliquota) || 0;
+
         return {
-          nome: catNome,
-          aliquota: catAliq > 1 ? catAliq / 100 : catAliq,
-          base: catBase
+          Faixa: faixaStr,
+          De: deVal,
+          Ate: ateVal,
+          Aliquota: aliq > 1 ? aliq / 100 : aliq
         };
       });
     }
   }
 
-  async function loadIRPF(path) {
-    const res = await fetch(path);
-    const arrayBuffer = await res.arrayBuffer();
-    const workbook = XLSX.read(arrayBuffer, { type: 'array' });
-
-    const nomeAbaParams = workbook.SheetNames.find(n => n.trim().toLowerCase() === "parametros_gerais");
-    if (nomeAbaParams) {
-      const pData = XLSX.utils.sheet_to_json(workbook.Sheets[nomeAbaParams]);
-      pData.forEach(row => {
-        const paramName = (row.Parametro || row.parametro || row.Variavel || "").toString().trim();
-        if (paramName) irpfData.parametros[paramName] = row.Valor !== undefined ? row.Valor : row.valor;
-      });
+  function getParam(data, chavesPossiveis, defaultName = '') {
+    const keys = Object.keys(data.parametros);
+    for (let c of chavesPossiveis) {
+      const foundKey = keys.find(k => k.toLowerCase() === c.toLowerCase());
+      if (foundKey) return data.parametros[foundKey];
     }
-
-    const nomeAbaRef = workbook.SheetNames.find(n => n.trim().toLowerCase() === "tabelas_referencia");
-    if (nomeAbaRef) {
-      irpfData.tabelaProgressiva = XLSX.utils.sheet_to_json(workbook.Sheets[nomeAbaRef]).map(row => {
-        let limite = row.Limite_Ate !== undefined ? row.Limite_Ate : (row.Limite !== undefined ? row.Limite : row.limite);
-        if (limite === undefined || limite === null || isNaN(parseFloat(limite))) limite = Infinity;
-        
-        let aliq = parseFloat(row.Aliquota !== undefined ? row.Aliquota : row.aliquota) || 0;
-        let ded = parseFloat(row.Parcela_Deduzir !== undefined ? row.Parcela_Deduzir : (row.Deducao || row.deducao)) || 0;
-        
-        return {
-          limite: limite === Infinity ? Infinity : parseFloat(limite),
-          aliquota: aliq > 1 ? aliq / 100 : aliq,
-          deducao: ded
-        };
-      });
-    }
+    return undefined;
   }
 
   function atualizarSEO() {
-    const ano = inssData.parametros['Ano_Base'] || new Date().getFullYear();
-    document.querySelectorAll('.dynamic-ano').forEach(el => el.innerText = ano);
     document.title = `Calculadora de INSS - Contabilidade Camilo`;
   }
 
@@ -235,9 +191,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function calcularEAtualizarTela() {
+    if (!els.bruto) return;
     const bruto = parseCurrency(els.bruto.value);
-    
-    // Gerenciar exibição do botão imprimir
+    const cat = els.categoria ? els.categoria.value : 'CLT';
+
     const containerImprimir = document.getElementById('containerImprimir');
     if (containerImprimir) {
       if (bruto > 0 || colaboradores.length > 0) {
@@ -246,136 +203,57 @@ document.addEventListener("DOMContentLoaded", async () => {
         containerImprimir.style.display = 'none';
       }
     }
-    
-    // Lógica de exibição para a Impressão e Card
-    const tabelaContainer = document.getElementById('tabelaColaboradores');
-    if (colaboradores.length > 1) {
-      document.body.classList.add('hide-main-on-print'); // Oculta o card
-      if (tabelaContainer) tabelaContainer.classList.remove('hide-print'); // Garante que a tabela imprima
-    } else {
-      document.body.classList.remove('hide-main-on-print'); // Mostra o card
-      if (tabelaContainer && colaboradores.length <= 1) {
-        tabelaContainer.classList.add('hide-print'); // Se só tem 1 (ou 0), a tabela não imprime
-      }
-    }
 
     if (bruto <= 0) {
-      if (colaboradores.length === 1) {
-        // Se há exatamente 1 colaborador na lista e o input está vazio, populamos o card com ele
-        const c = colaboradores[0];
-        els.resBruto.innerText = formatCurrency(c.bruto);
-        els.resINSS.innerText = formatCurrency(c.inss);
-        els.resIRRF.innerText = formatCurrency(c.irrf);
-        els.resPensao.innerText = formatCurrency(c.pensao);
-        els.resLiquido.innerText = formatCurrency(c.liquido);
-        els.displayLiquido.innerText = formatCurrency(c.liquido);
-        els.tituloPainel.innerText = `Salário Líquido de ${c.nome}:`;
-        
-        const linhaDep = document.getElementById('linhaDependentes');
-        const qtdDep = document.getElementById('resQtdDep');
-        const valorDep = document.getElementById('resValorDep');
-        if (linhaDep && qtdDep && valorDep) {
-          if (c.deducaoDependentes > 0) {
-            linhaDep.style.display = 'flex';
-            qtdDep.innerText = c.dependentes;
-            valorDep.innerText = formatCurrency(c.deducaoDependentes);
-          } else {
-            linhaDep.style.display = 'none';
-          }
-        }
-      } else {
-        // 0 colaboradores e input vazio: Zera o card
-        els.resBruto.innerText = 'R$ 0,00';
-        els.resINSS.innerText = 'R$ 0,00';
-        els.resIRRF.innerText = 'R$ 0,00';
-        els.resPensao.innerText = 'R$ 0,00';
-        els.resLiquido.innerText = 'R$ 0,00';
-        els.displayLiquido.innerText = 'R$ 0,00';
-        els.tituloPainel.innerText = `Seu salário líquido:`;
-        
-        const linhaDep = document.getElementById('linhaDependentes');
-        if (linhaDep) linhaDep.style.display = 'none';
-        const qtdDep = document.getElementById('resQtdDep');
-        if (qtdDep) qtdDep.innerText = '0';
-        const valorDep = document.getElementById('resValorDep');
-        if (valorDep) valorDep.innerText = 'R$ 0,00';
+      if (els.resBruto) els.resBruto.innerText = "R$ 0,00";
+      if (els.resINSS) els.resINSS.innerText = "R$ 0,00";
+      if (els.displayLiquido) els.displayLiquido.innerText = "R$ 0,00";
+      if (document.getElementById('resultadoDestaque')) document.getElementById('resultadoDestaque').style.display = 'none';
+      if (!document.body.classList.contains('hide-main-on-print') && colaboradores.length > 0) {
+         document.body.classList.add('hide-main-on-print');
       }
       return;
     }
-
-    const dependentes = parseInt(els.dependentes.value) || 0;
-    const pensao = parseCurrency(els.pensao.value);
-    const cat = els.categoria.value;
-
-    const res = calcularDescontos(bruto, dependentes, pensao, cat);
-
-    els.resBruto.innerText = formatCurrency(bruto);
-    els.resINSS.innerText = formatCurrency(res.inss);
-    els.resIRRF.innerText = formatCurrency(res.irrf);
-    els.resPensao.innerText = formatCurrency(pensao);
-    els.resLiquido.innerText = formatCurrency(res.liquido);
-    els.displayLiquido.innerText = formatCurrency(res.liquido);
     
-    const linhaDep = document.getElementById('linhaDependentes');
-    const qtdDep = document.getElementById('resQtdDep');
-    const valorDep = document.getElementById('resValorDep');
-    if (linhaDep && qtdDep && valorDep) {
-      if (res.deducaoDependentes > 0) {
-        linhaDep.style.display = 'flex';
-        qtdDep.innerText = res.dependentes;
-        valorDep.innerText = formatCurrency(res.deducaoDependentes);
-      } else {
-        linhaDep.style.display = 'none';
-      }
-    }
+    if (document.getElementById('resultadoDestaque')) document.getElementById('resultadoDestaque').style.display = 'block';
+    document.body.classList.remove('hide-main-on-print');
+
+    const res = calcularDescontos(bruto, cat);
     
-    let nome = els.nome.value.trim() || "Simulação";
-    els.tituloPainel.innerText = `Salário Líquido de ${nome}:`;
-    
-    const cta = document.getElementById('cta-resultado');
-    if (cta && bruto > 0) cta.style.display = 'block';
+    if (els.resBruto) els.resBruto.innerText = formatCurrency(res.bruto);
+    if (els.resINSS) els.resINSS.innerText = formatCurrency(res.inss);
+    if (els.displayLiquido) els.displayLiquido.innerText = formatCurrency(res.inss);
   }
 
   function adicionarColaborador() {
     const bruto = parseCurrency(els.bruto.value);
     if (bruto <= 0) { alert('Insira um salário bruto válido.'); return; }
-    const dependentes = parseInt(els.dependentes.value) || 0;
-    const pensao = parseCurrency(els.pensao.value);
-    const cat = els.categoria.value;
-    const nome = els.nome.value.trim() || `Colaborador ${colaboradores.length + 1}`;
+    const cat = els.categoria ? els.categoria.value : 'CLT';
+    const nome = (els.nome && els.nome.value.trim()) ? els.nome.value.trim() : `Colaborador ${colaboradores.length + 1}`;
     
-    const res = calcularDescontos(bruto, dependentes, pensao, cat);
-    colaboradores.push({ nome, categoria: cat, dependentes, pensao, ...res });
+    const res = calcularDescontos(bruto, cat);
+    colaboradores.push({ nome, categoria: cat, ...res });
     renderTabela();
     
-    els.nome.value = '';
-    els.bruto.value = '';
-    els.dependentes.value = '';
-    els.pensao.value = '';
+    if (els.nome) els.nome.value = '';
+    if (els.bruto) els.bruto.value = '';
     calcularEAtualizarTela();
   }
 
   function renderTabela() {
+    if (!els.tbody || !els.tabela) return;
     els.tbody.innerHTML = '';
-    let totalBruto = 0, totalDep = 0, totalPensao = 0, totalINSS = 0, totalIRRF = 0, totalLiquido = 0;
+    let totalBruto = 0, totalINSS = 0;
     
     colaboradores.forEach((c, index) => {
       totalBruto += c.bruto;
-      totalDep += c.dependentes || 0;
-      totalPensao += c.pensao || 0;
       totalINSS += c.inss;
-      totalIRRF += c.irrf;
-      totalLiquido += c.liquido;
       
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td><strong>${c.nome}</strong><br><small style="color:#64748b;">${c.categoria}</small></td>
         <td>${formatCurrency(c.bruto)}</td>
-        <td style="text-align: center;">${c.dependentes || 0}</td>
-        <td>${formatCurrency(c.pensao || 0)}</td>
-        <td>${formatCurrency(c.inss)}</td>
-        <td>${formatCurrency(c.irrf)}</td>
-        <td style="color:#2563eb; font-weight:bold;">${formatCurrency(c.liquido)}</td>
+        <td style="color:#ef4444; font-weight:bold;">${formatCurrency(c.inss)}</td>
         <td class="hide-print" style="text-align: center;">
           <button type="button" onclick="window.removerColaborador(${index})" style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.2rem;">&times;</button>
         </td>
@@ -390,11 +268,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       trTotal.innerHTML = `
         <td>TOTAIS</td>
         <td>${formatCurrency(totalBruto)}</td>
-        <td style="text-align: center;">${totalDep}</td>
-        <td>${formatCurrency(totalPensao)}</td>
-        <td>${formatCurrency(totalINSS)}</td>
-        <td>${formatCurrency(totalIRRF)}</td>
-        <td style="color:#2563eb;">${formatCurrency(totalLiquido)}</td>
+        <td style="color:#ef4444;">${formatCurrency(totalINSS)}</td>
         <td class="hide-print"></td>
       `;
       els.tbody.appendChild(trTotal);
@@ -411,62 +285,37 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   window.prepararImpressao = function() {
-    const bruto = parseCurrency(els.bruto.value);
-    // Se há dados preenchidos na tela E já existe uma lista, 
-    // a impressão vai ignorar a tela e imprimir a lista.
-    // Portanto, jogamos a simulação atual para dentro da lista antes de imprimir.
-    if (bruto > 0 && colaboradores.length > 0) {
-      adicionarColaborador();
+    if(els.bruto) {
+      const bruto = parseCurrency(els.bruto.value);
+      if (bruto > 0) {
+        adicionarColaborador();
+      }
     }
     window.print();
   };
 
-  els.categoria.addEventListener('change', function() {
-    const isMEI = this.value === 'MEI';
-    const divDep = document.getElementById('divDependentes');
-    const divPen = document.getElementById('divPensao');
-    if (isMEI) {
-      if (divDep) { divDep.style.opacity = '0.5'; els.dependentes.disabled = true; els.dependentes.value = ''; }
-      if (divPen) { divPen.style.opacity = '0.5'; els.pensao.disabled = true; els.pensao.value = ''; }
-    } else {
-      if (divDep) { divDep.style.opacity = '1'; els.dependentes.disabled = false; }
-      if (divPen) { divPen.style.opacity = '1'; els.pensao.disabled = false; }
-    }
-    calcularEAtualizarTela();
-  });
+  if(els.categoria) els.categoria.addEventListener('change', calcularEAtualizarTela);
 
   [els.nome, els.categoria, els.bruto].forEach(input => {
-    input.addEventListener('input', calcularEAtualizarTela);
+    if (input) input.addEventListener('input', calcularEAtualizarTela);
   });
 
-  els.btnAdicionar.addEventListener('click', adicionarColaborador);
-  els.form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const nome = els.nome.value.trim();
-    const bruto = parseCurrency(els.bruto.value);
-    const cat = els.categoria.value;
-
-    if (bruto <= 0) {
-      alert("O Salário Bruto deve ser maior que zero.");
-      return;
-    }
-
-    const res = calcularDescontos(bruto, cat);
-    colaboradores.push({ nome, categoria: cat, ...res });
-    
-    els.nome.value = '';
-    els.bruto.value = '';
-    els.nome.focus();
-    
-    renderizarTabela();
-    calcularEAtualizarTela();
-  });
-  els.btnLimpar.addEventListener('click', () => {
-    els.form.reset();
-    colaboradores = [];
-    renderTabela();
-    calcularEAtualizarTela();
-  });
+  if (els.btnAdicionar) els.btnAdicionar.addEventListener('click', adicionarColaborador);
+  if (els.form) {
+    els.form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      adicionarColaborador();
+    });
+  }
+  
+  if (els.btnLimpar) {
+    els.btnLimpar.addEventListener('click', () => {
+      els.form.reset();
+      colaboradores = [];
+      renderTabela();
+      calcularEAtualizarTela();
+    });
+  }
 
   initCalculadora();
 });

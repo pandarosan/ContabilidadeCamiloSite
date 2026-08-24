@@ -89,6 +89,36 @@
         width: 100%;
       }
     }
+
+    /* Rodapé fixo na impressão */
+    .print-fixed-footer {
+      opacity: 0;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+      position: absolute;
+      pointer-events: none;
+    }
+    
+    @media print {
+      @page { margin: 1.2cm; }
+      body { background: white !important; margin: 0; padding: 0; }
+      .hide-print { display: none !important; }
+      
+      .print-fixed-footer {
+        opacity: 1 !important;
+        visibility: visible !important;
+        height: auto !important;
+        position: fixed !important;
+        display: flex !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        background: white;
+        padding-top: 0.5rem;
+        z-index: 9999;
+      }
+    }
   </style>
   <script type="application/ld+json">
 {

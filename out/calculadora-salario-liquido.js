@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function atualizarSEO() {
     const ano = inssData.parametros['Ano_Base'] || new Date().getFullYear();
     document.querySelectorAll('.dynamic-ano').forEach(el => el.innerText = ano);
-    document.title = `Cálculo Salário Líquido ${ano} - Contabilidade Camilo`;
+    document.title = `Cálculo Salário Líquido - Contabilidade Camilo`;
   }
 
   function popularCategorias() {

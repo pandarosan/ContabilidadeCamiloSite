@@ -220,6 +220,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function calcularEAtualizarTela() {
     const bruto = parseCurrency(els.bruto.value);
     
+    // Gerenciar exibição do botão imprimir
     const containerImprimir = document.getElementById('containerImprimir');
     if (containerImprimir) {
       if (bruto > 0 || colaboradores.length > 0) {
@@ -229,19 +230,39 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
     
+    // Lógica de exibição para a Impressão e Card
+    const tabelaContainer = document.getElementById('tabelaColaboradores');
+    if (colaboradores.length > 1) {
+      document.body.classList.add('hide-main-on-print'); // Oculta o card
+      if (tabelaContainer) tabelaContainer.classList.remove('hide-print'); // Garante que a tabela imprima
+    } else {
+      document.body.classList.remove('hide-main-on-print'); // Mostra o card
+      if (tabelaContainer && colaboradores.length <= 1) {
+        tabelaContainer.classList.add('hide-print'); // Se só tem 1 (ou 0), a tabela não imprime
+      }
+    }
+
     if (bruto <= 0) {
-      if (els.resBruto) els.resBruto.innerText = "R$ 0,00";
-      if (els.resINSS) els.resINSS.innerText = "R$ 0,00";
-      if (els.displayLiquido) els.displayLiquido.innerText = "R$ 0,00";
-      if (document.getElementById('resultadoDestaque')) document.getElementById('resultadoDestaque').style.display = 'none';
-      if (!document.body.classList.contains('hide-main-on-print') && colaboradores.length > 0) {
-         document.body.classList.add('hide-main-on-print');
+      if (colaboradores.length === 1) {
+        // Se há exatamente 1 colaborador na lista e o input está vazio, populamos o card com ele
+        const c = colaboradores[0];
+        if (els.resBruto) els.resBruto.innerText = formatCurrency(c.bruto);
+        if (els.resINSS) els.resINSS.innerText = formatCurrency(c.inss);
+        if (els.displayLiquido) els.displayLiquido.innerText = formatCurrency(c.inss);
+        if (els.tituloPainel) els.tituloPainel.innerText = `Desconto do INSS de ${c.nome}:`;
+        if (document.getElementById('resultadoDestaque')) document.getElementById('resultadoDestaque').style.display = 'block';
+      } else {
+        // 0 colaboradores e input vazio: Zera o card
+        if (els.resBruto) els.resBruto.innerText = 'R$ 0,00';
+        if (els.resINSS) els.resINSS.innerText = 'R$ 0,00';
+        if (els.displayLiquido) els.displayLiquido.innerText = 'R$ 0,00';
+        if (els.tituloPainel) els.tituloPainel.innerText = `Desconto do INSS:`;
+        if (document.getElementById('resultadoDestaque')) document.getElementById('resultadoDestaque').style.display = 'none';
       }
       return;
     }
     
     if (document.getElementById('resultadoDestaque')) document.getElementById('resultadoDestaque').style.display = 'block';
-    document.body.classList.remove('hide-main-on-print');
 
     const cat = els.categoria ? els.categoria.value : 'CLT';
     const res = calcularDescontos(bruto, cat);
@@ -249,17 +270,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (els.resBruto) els.resBruto.innerText = formatCurrency(res.bruto);
     if (els.resINSS) els.resINSS.innerText = formatCurrency(res.inss);
     if (els.displayLiquido) els.displayLiquido.innerText = formatCurrency(res.inss);
-
-    const tabelaContainer = document.getElementById('tabelaColaboradores');
-    if (colaboradores.length > 1) {
-      document.body.classList.add('hide-main-on-print');
-      if (tabelaContainer) tabelaContainer.classList.remove('hide-print');
-    } else {
-      document.body.classList.remove('hide-main-on-print');
-      if (tabelaContainer && colaboradores.length <= 1) {
-        tabelaContainer.classList.add('hide-print'); // Se só tem 1 (ou 0), a tabela não imprime
-      }
-    }
+    
+    let nome = (els.nome && els.nome.value.trim()) ? els.nome.value.trim() : "Simulação";
+    if (els.tituloPainel) els.tituloPainel.innerText = `Desconto do INSS de ${nome}:`;
+    
+    const cta = document.getElementById('cta-resultado');
+    if (cta && bruto > 0) cta.style.display = 'block';
   }
 
   function adicionarColaborador() {

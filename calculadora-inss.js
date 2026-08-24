@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   let inssData = { parametros: {}, tabelaProgressiva: [], outrasCategorias: [] };
+  let irpfData = { parametros: {}, tabelaProgressiva: [] };
   let colaboradores = [];
 
   const els = {
@@ -87,44 +88,54 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    const nomeAbaOutras = workbook.SheetNames.find(n => n.trim().toLowerCase() === "outras_categorias");
-    if (nomeAbaOutras) {
-      inssData.outrasCategorias = XLSX.utils.sheet_to_json(workbook.Sheets[nomeAbaOutras]);
+    const nomeRefINSS = workbook.SheetNames.find(n => n.trim().toLowerCase() === "tabelas_referencia");
+    if (nomeRefINSS) {
+      const normalizeKeys = (obj) => {
+        const newObj = {};
+        for (let key in obj) {
+          newObj[key.trim()] = obj[key];
+        }
+        return newObj;
+      };
+
+      inssData.tabelaProgressiva = XLSX.utils.sheet_to_json(workbook.Sheets[nomeRefINSS]).map(rawRow => {
+        const row = normalizeKeys(rawRow);
+        let limite = row.Limite_Ate !== undefined ? row.Limite_Ate : (row.Limite || row.limite);
+        if (limite === undefined || limite === null || isNaN(parseFloat(limite))) limite = Infinity;
+        
+        let aliq = parseFloat(row.Aliquota !== undefined ? row.Aliquota : row.aliquota) || 0;
+        let ded = parseFloat(row.Parcela_Deduzir !== undefined ? row.Parcela_Deduzir : (row.Deducao || row.deducao)) || 0;
+        
+        return {
+          limite: limite === Infinity ? Infinity : parseFloat(limite),
+          aliquota: aliq > 1 ? aliq / 100 : aliq,
+          deducao: ded
+        };
+      });
     }
 
-    const nomeAbaProg = workbook.SheetNames.find(n => n.trim().toLowerCase() === "tabela_progressiva");
-    if (nomeAbaProg) {
-      inssData.tabelaProgressiva = XLSX.utils.sheet_to_json(workbook.Sheets[nomeAbaProg]).map(row => {
-        let faixaStr = row.Faixa !== undefined ? row.Faixa : row.faixa;
-        let deVal = parseFloat(row.De !== undefined ? row.De : row.de) || 0;
-        let ateVal = row.Ate !== undefined ? row.Ate : row.ate;
-        if (ateVal === undefined || ateVal === null || ateVal.toString().trim().toLowerCase() === 'teto' || isNaN(parseFloat(ateVal))) {
-          ateVal = Infinity;
-        } else {
-          ateVal = parseFloat(ateVal);
-        }
-        let aliq = parseFloat(row.Aliquota !== undefined ? row.Aliquota : row.aliquota) || 0;
-
+    const nomeCatINSS = workbook.SheetNames.find(n => n.trim().toLowerCase() === "outras_categorias");
+    if (nomeCatINSS) {
+      inssData.outrasCategorias = XLSX.utils.sheet_to_json(workbook.Sheets[nomeCatINSS]).map(rawRow => {
+        const normalizeKeys = (obj) => {
+          const newObj = {}; for (let k in obj) newObj[k.trim()] = obj[k]; return newObj;
+        };
+        const row = normalizeKeys(rawRow);
+        const catNome = row.Categoria || row.categoria || row.Nome || row.nome || "Outro";
+        const catAliq = parseFloat(row.Aliquota || row.aliquota || 0);
+        const catBase = (row.Base_Calculo || row.base_calculo || "").toString().trim().toLowerCase();
         return {
-          Faixa: faixaStr,
-          De: deVal,
-          Ate: ateVal,
-          Aliquota: aliq > 1 ? aliq / 100 : aliq
+          nome: catNome,
+          aliquota: catAliq > 1 ? catAliq / 100 : catAliq,
+          base: catBase
         };
       });
     }
   }
 
-  function getParam(data, chavesPossiveis, defaultName = '') {
-    const keys = Object.keys(data.parametros);
-    for (let c of chavesPossiveis) {
-      const foundKey = keys.find(k => k.toLowerCase() === c.toLowerCase());
-      if (foundKey) return data.parametros[foundKey];
-    }
-    return undefined;
-  }
-
   function atualizarSEO() {
+    const ano = inssData.parametros['Ano_Base'] || new Date().getFullYear();
+    document.querySelectorAll('.dynamic-ano').forEach(el => el.innerText = ano);
     document.title = `Calculadora de INSS - Contabilidade Camilo`;
   }
 
@@ -143,58 +154,72 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function calcularDescontos(bruto, categoriaNome) {
-    let inss = 0;
-    const cat = inssData.outrasCategorias.find(c => c.Nome.trim().toLowerCase() === categoriaNome.trim().toLowerCase());
-    
-    if (!cat) {
-      let valorRestante = bruto;
-      for (const faixa of inssData.tabelaProgressiva) {
-        let baseFaixa = 0;
-        if (bruto > faixa.Ate) {
-          baseFaixa = faixa.Ate - faixa.De;
-        } else {
-          baseFaixa = bruto - faixa.De;
-        }
-        if (baseFaixa > 0) {
-          inss += baseFaixa * faixa.Aliquota;
-        }
+    const getParam = (data, keys, label) => {
+      for (let k of keys) {
+        if (data.parametros[k] !== undefined) return parseFloat(data.parametros[k]);
       }
-    } else {
-      const isProgressivo = (cat.Calculo || "").toString().trim().toLowerCase() === 'progressivo';
-      if (isProgressivo) {
-        let valorRestante = bruto;
-        for (const faixa of inssData.tabelaProgressiva) {
-          let baseFaixa = 0;
-          if (bruto > faixa.Ate) {
-            baseFaixa = faixa.Ate - faixa.De;
+      throw new Error(`Falta parâmetro: ${label}`);
+    };
+
+    const calcularINSS = (valorBruto) => {
+      let v_inss = 0;
+      if (categoriaNome === 'CLT') {
+        const tetoValor = getParam(inssData, ['Teto_INSS'], 'Teto INSS');
+        
+        if (valorBruto >= tetoValor && inssData.tabelaProgressiva.length > 0) {
+          const ultimaFaixa = inssData.tabelaProgressiva[inssData.tabelaProgressiva.length - 1];
+          if (ultimaFaixa && ultimaFaixa.deducao > 0) {
+            v_inss = ultimaFaixa.deducao;
           } else {
-            baseFaixa = bruto - faixa.De;
+            let baseAnterior = 0;
+            let inssBrutoTemp = 0;
+            for (const faixa of inssData.tabelaProgressiva) {
+              if (tetoValor > baseAnterior) {
+                let valorNaFaixa = Math.min(tetoValor, faixa.limite) - baseAnterior;
+                inssBrutoTemp += valorNaFaixa * faixa.aliquota;
+                baseAnterior = faixa.limite;
+              } else {
+                break;
+              }
+            }
+            v_inss = Math.floor((inssBrutoTemp + 0.000001) * 100) / 100;
           }
-          if (baseFaixa > 0) {
-            inss += baseFaixa * faixa.Aliquota;
+        } else {
+          let baseAnterior = 0;
+          let inssBrutoTemp = 0;
+          for (const faixa of inssData.tabelaProgressiva) {
+            if (valorBruto > baseAnterior) {
+              let valorNaFaixa = Math.min(valorBruto, faixa.limite) - baseAnterior;
+              inssBrutoTemp += valorNaFaixa * faixa.aliquota;
+              baseAnterior = faixa.limite;
+            } else {
+              break;
+            }
           }
+          v_inss = Math.floor((inssBrutoTemp + 0.000001) * 100) / 100;
         }
       } else {
-        const aliquota = parseFloat(cat.Aliquota) || 0;
-        const usaTeto = (cat.Usa_Teto || "").toString().trim().toLowerCase() === 'sim';
-        const inssTeto = getParam(inssData, ['Teto_INSS', 'Teto', 'teto_inss'], 'Teto do INSS') || 0;
-        
-        let baseCalc = bruto;
-        if (usaTeto && baseCalc > inssTeto) {
-          baseCalc = inssTeto;
+        const cat = inssData.outrasCategorias.find(c => c.nome === categoriaNome);
+        if (cat) {
+          let base = valorBruto;
+          if (cat.base.includes('mínimo') || cat.base.includes('minimo')) {
+            base = getParam(inssData, ['Salario_Minimo'], 'Salário Mínimo');
+          }
+          const teto = getParam(inssData, ['Teto_INSS'], 'Teto INSS');
+          if (base > teto) base = teto;
+          v_inss = base * cat.aliquota;
         }
-        inss = baseCalc * aliquota;
       }
-    }
-    
+      return Math.max(0, v_inss);
+    };
+
+    let inss = calcularINSS(bruto);
     return { bruto, inss };
   }
 
   function calcularEAtualizarTela() {
-    if (!els.bruto) return;
     const bruto = parseCurrency(els.bruto.value);
-    const cat = els.categoria ? els.categoria.value : 'CLT';
-
+    
     const containerImprimir = document.getElementById('containerImprimir');
     if (containerImprimir) {
       if (bruto > 0 || colaboradores.length > 0) {
@@ -203,7 +228,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         containerImprimir.style.display = 'none';
       }
     }
-
+    
     if (bruto <= 0) {
       if (els.resBruto) els.resBruto.innerText = "R$ 0,00";
       if (els.resINSS) els.resINSS.innerText = "R$ 0,00";
@@ -218,11 +243,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (document.getElementById('resultadoDestaque')) document.getElementById('resultadoDestaque').style.display = 'block';
     document.body.classList.remove('hide-main-on-print');
 
+    const cat = els.categoria ? els.categoria.value : 'CLT';
     const res = calcularDescontos(bruto, cat);
     
     if (els.resBruto) els.resBruto.innerText = formatCurrency(res.bruto);
     if (els.resINSS) els.resINSS.innerText = formatCurrency(res.inss);
     if (els.displayLiquido) els.displayLiquido.innerText = formatCurrency(res.inss);
+
+    const tabelaContainer = document.getElementById('tabelaColaboradores');
+    if (colaboradores.length > 1) {
+      document.body.classList.add('hide-main-on-print');
+      if (tabelaContainer) tabelaContainer.classList.remove('hide-print');
+    } else {
+      document.body.classList.remove('hide-main-on-print');
+      if (tabelaContainer && colaboradores.length <= 1) {
+        tabelaContainer.classList.add('hide-print'); // Se só tem 1 (ou 0), a tabela não imprime
+      }
+    }
   }
 
   function adicionarColaborador() {
@@ -285,37 +322,30 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   window.prepararImpressao = function() {
-    if(els.bruto) {
-      const bruto = parseCurrency(els.bruto.value);
-      if (bruto > 0) {
-        adicionarColaborador();
-      }
+    const bruto = parseCurrency(els.bruto.value);
+    // Se há dados preenchidos na tela E já existe uma lista, 
+    // a impressão vai ignorar a tela e imprimir a lista.
+    // Portanto, jogamos a simulação atual para dentro da lista antes de imprimir.
+    if (bruto > 0 && colaboradores.length > 0) {
+      adicionarColaborador();
     }
     window.print();
   };
 
-  if(els.categoria) els.categoria.addEventListener('change', calcularEAtualizarTela);
+  if (els.categoria) els.categoria.addEventListener('change', calcularEAtualizarTela);
 
   [els.nome, els.categoria, els.bruto].forEach(input => {
     if (input) input.addEventListener('input', calcularEAtualizarTela);
   });
 
-  if (els.btnAdicionar) els.btnAdicionar.addEventListener('click', adicionarColaborador);
-  if (els.form) {
-    els.form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      adicionarColaborador();
-    });
-  }
-  
-  if (els.btnLimpar) {
-    els.btnLimpar.addEventListener('click', () => {
-      els.form.reset();
-      colaboradores = [];
-      renderTabela();
-      calcularEAtualizarTela();
-    });
-  }
+  els.btnAdicionar.addEventListener('click', adicionarColaborador);
+  els.form.addEventListener('submit', (e) => { e.preventDefault(); calcularEAtualizarTela(); });
+  els.btnLimpar.addEventListener('click', () => {
+    els.form.reset();
+    colaboradores = [];
+    renderTabela();
+    calcularEAtualizarTela();
+  });
 
   initCalculadora();
 });

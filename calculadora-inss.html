@@ -313,42 +313,141 @@
     </div>
 
     <!-- Seção de FAQ (Acordeon) -->
-    <div class="faq-section hide-print" style="max-width: 900px; margin: 3rem auto; padding: 0 1.5rem;">
-      <h2 style="color: var(--primary-color); text-align: center; margin-bottom: 2rem; font-size: 2rem;">Perguntas Frequentes</h2>
-      
-      <div class="faq-item" style="background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden;">
-        <button class="faq-btn" style="width: 100%; text-align: left; padding: 1.2rem; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.icon').innerText = this.querySelector('.icon').innerText === '+' ? '-' : '+'">
-          O que é o desconto de INSS?
-          <span class="icon" style="font-size: 1.5rem; font-weight: normal;">+</span>
-        </button>
-        <div class="faq-content" style="padding: 0 1.2rem; color: var(--text-color); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
-          <p style="padding-bottom: 1.2rem;">O INSS (Instituto Nacional do Seguro Social) é a contribuição obrigatória descontada da folha de pagamento que garante ao trabalhador benefícios previdenciários, como aposentadoria, auxílio-doença e salário-maternidade.</p>
+    <section id="faq" class="hide-print" style="background-color: #f8fafc; padding: 4rem 1.5rem; margin-top: 3rem;">
+      <div class="container" style="max-width: 1000px; margin: 0 auto;">
+        <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+          <h2 style="color: var(--primary-color); font-size: 2.2rem;">Perguntas Frequentes sobre INSS</h2>
+          <p style="color: var(--text-color); font-size: 1.1rem;">Tire suas dúvidas sobre o cálculo, alíquotas e o sistema de previdência social.</p>
         </div>
-      </div>
+        
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">1. O que é o INSS e para que serve?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">O Instituto Nacional do Seguro Social (INSS) é o órgão responsável pelo pagamento de benefícios e auxílios.</div>
+            <div class="accordion-content">
+              <p>Empresas e trabalhadores contribuem mensalmente ao INSS, e essa contribuição garante que o trabalhador tenha acesso a benefícios essenciais quando necessário. Entre os principais direitos assegurados estão:</p>
+              <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li>Aposentadorias (por idade ou tempo de contribuição);</li>
+                <li>Pensões por morte;</li>
+                <li>Auxílio-doença e auxílio-acidente;</li>
+                <li>Licença-maternidade;</li>
+                <li>Salário-família.</li>
+              </ul>
+            </div>
+          </div>
 
-      <div class="faq-item" style="background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden;">
-        <button class="faq-btn" style="width: 100%; text-align: left; padding: 1.2rem; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.icon').innerText = this.querySelector('.icon').innerText === '+' ? '-' : '+'">
-          Como funciona o desconto para Autônomos e MEI?
-          <span class="icon" style="font-size: 1.5rem; font-weight: normal;">+</span>
-        </button>
-        <div class="faq-content" style="padding: 0 1.2rem; color: var(--text-color); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
-          <p style="padding-bottom: 1.2rem;">MEIs pagam uma taxa fixa de 5% baseada no salário mínimo vigente. Autônomos no Plano Simplificado pagam 11% sobre o mínimo. Já os Autônomos no Plano Normal pagam 20% sobre o rendimento total, sendo o desconto limitado ao Teto máximo do INSS.</p>
-        </div>
-      </div>
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">2. Como funciona o cálculo progressivo para trabalhadores CLT?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">O cálculo segue uma tabela progressiva, onde diferentes faixas do salário sofrem percentuais diferentes.</div>
+            <div class="accordion-content">
+              <p>O INSS utiliza um modelo de cobrança progressivo. Ou seja, a maior alíquota (por exemplo, 14%) não incide sobre todo o rendimento, mas apenas sobre a parcela que ultrapassa os limites anteriores.</p>
+              <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li><strong>Alíquota Nominal:</strong> É a porcentagem associada à faixa salarial final onde seu salário se encontra (7,5%, 9%, 12% ou 14%).</li>
+                <li><strong>Alíquota Efetiva:</strong> É o percentual real e prático descontado. Como as primeiras faixas do seu salário foram tributadas com porcentagens menores, a alíquota efetiva será sempre inferior à alíquota nominal.</li>
+              </ul>
+              <p><strong>Base de Cálculo:</strong> O salário bruto inclui o salário básico mais adicionais (horas extras, adicional noturno, periculosidade, comissões, etc).</p>
+            </div>
+          </div>
 
-      <div class="faq-item" style="background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden;">
-        <button class="faq-btn" style="width: 100%; text-align: left; padding: 1.2rem; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.icon').innerText = this.querySelector('.icon').innerText === '+' ? '-' : '+'">
-          Qual é a diferença entre Salário Bruto e Salário Líquido?
-          <span class="icon" style="font-size: 1.5rem; font-weight: normal;">+</span>
-        </button>
-        <div class="faq-content" style="padding: 0 1.2rem; color: var(--text-color); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
-          <p style="padding-bottom: 1.2rem;">Salário Bruto é o valor total registrado em contrato antes de qualquer desconto. Salário Líquido é o valor real que cai na sua conta bancária após os descontos obrigatórios (INSS e IRPF) e eventuais deduções legais como pensão alimentícia.</p>
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">3. Como é calculado o INSS para Autônomos, Pró-Labore e MEI?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">Ao contrário dos empregados CLT, não há tabela progressiva. O cálculo é uma alíquota direta sobre o valor recebido ou declarado.</div>
+            <div class="accordion-content">
+              <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: decimal;">
+                <li><strong>MEI (Microempreendedor Individual):</strong> Contribui de forma simplificada no documento unificado (DAS). A parcela do INSS equivale a uma taxa fixa de 5% sobre o salário mínimo vigente.</li>
+                <li><strong>Autônomos (Plano Simplificado):</strong> Podem optar por pagar 11% sobre o valor do salário mínimo para garantir os benefícios básicos (exceto aposentadoria por tempo de contribuição).</li>
+                <li><strong>Sócios (Pró-Labore) e Autônomos (Plano Completo):</strong> O desconto geral é de 11% sobre o Pró-Labore recebido, ou 20% para autônomos que desejam todos os benefícios, respeitando sempre o limite máximo (Teto do INSS).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">4. O que é o Teto do INSS?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">É o valor máximo de referência que o INSS utiliza para calcular as contribuições e os pagamentos de benefícios.</div>
+            <div class="accordion-content">
+              <p>Em 2024, o valor do teto do INSS é de <strong>R$ 7.786,02</strong>.</p>
+              <p>Isso significa que existe um valor máximo de desconto. Mesmo que um trabalhador ou empresário receba um salário ou pró-labore de R$ 20.000,00 por mês, o desconto do INSS não ultrapassará o limite estipulado sobre o teto. Da mesma forma, nenhuma aposentadoria paga pelo governo será maior que esse valor.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">5. O que é INSS Patronal (CPP)?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">É a contribuição previdenciária que as empresas pagam para financiar o sistema.</div>
+            <div class="accordion-content">
+              <p>Diferente da contribuição dos empregados (que é descontada diretamente dos seus salários e reduz o valor líquido recebido), o <strong>INSS Patronal (CPP)</strong> é uma responsabilidade da empresa.</p>
+              <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li>Geralmente corresponde a <strong>20% sobre o total da folha de pagamento</strong> dos funcionários. Esse valor não sai do bolso do empregado, mas faz parte do custo total de contratação da empresa.</li>
+                <li><strong>Empresas do Simples Nacional:</strong> Na maioria dos Anexos (I, II, III e V), as empresas não pagam essa taxa de 20% diretamente, pois ela já está embutida de forma simplificada e reduzida dentro do imposto unificado (DAS). A única exceção são as empresas do Anexo IV (construção civil e alguns serviços), que recolhem a patronal à parte.</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      <style>
-        .faq-content.active { max-height: 500px; }
-      </style>
-    </div>
+    </section>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "O que é o INSS e para que serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O Instituto Nacional do Seguro Social (INSS) é o órgão responsável pelo pagamento de aposentadorias, pensões por morte, auxílio-doença, entre outros benefícios. A contribuição mensal garante ao trabalhador acesso a esses direitos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como funciona o cálculo progressivo para trabalhadores CLT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O cálculo segue uma tabela progressiva com alíquotas que variam de 7,5% a 14%. O salário bruto (incluindo horas extras, comissões, etc.) é dividido por faixas, e cada faixa é tributada com sua alíquota específica. A soma desses valores resulta no desconto final, e por isso a 'alíquota efetiva' real é sempre menor que a 'alíquota nominal' da última faixa alcançada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como é calculado o INSS para Autônomos, Pró-Labore e MEI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O MEI contribui com uma taxa fixa de 5% sobre o salário mínimo via DAS. Autônomos no Plano Simplificado contribuem com 11% sobre o salário mínimo. Sócios que recebem pró-labore e autônomos no Plano Normal pagam 11% a 20% (limitado ao Teto do INSS)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O que é o Teto do INSS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O Teto do INSS é o valor máximo que serve de base para calcular a contribuição e para o pagamento de benefícios. Mesmo que o trabalhador ganhe mais que o teto (atualmente R$ 7.786,02 em 2024), o desconto será limitado a esse valor máximo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O que é INSS Patronal (CPP)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Além do desconto que o funcionário sofre na folha (parcela do trabalhador), a empresa (exceto a maioria das enquadradas no Simples Nacional) paga a Contribuição Previdenciária Patronal (CPP), que corresponde a 20% sobre a folha de salários. Esse custo é da empresa e não afeta o salário líquido do funcionário."
+          }
+        }
+      ]
+    }
+    </script>
   </main>
   
   <footer class="footer hide-print">

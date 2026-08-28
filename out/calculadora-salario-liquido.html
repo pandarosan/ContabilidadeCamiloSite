@@ -350,42 +350,106 @@
     </div>
 
     <!-- Seção de FAQ (Acordeon) -->
-    <div class="faq-section hide-print" style="max-width: 900px; margin: 3rem auto; padding: 0 1.5rem;">
-      <h2 style="color: var(--primary-color); text-align: center; margin-bottom: 2rem; font-size: 2rem;">Perguntas Frequentes</h2>
-      
-      <div class="faq-item" style="background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden;">
-        <button class="faq-btn" style="width: 100%; text-align: left; padding: 1.2rem; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.icon').innerText = this.querySelector('.icon').innerText === '+' ? '-' : '+'">
-          O que é o desconto de INSS?
-          <span class="icon" style="font-size: 1.5rem; font-weight: normal;">+</span>
-        </button>
-        <div class="faq-content" style="padding: 0 1.2rem; color: var(--text-color); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
-          <p style="padding-bottom: 1.2rem;">O INSS (Instituto Nacional do Seguro Social) é a contribuição obrigatória descontada da folha de pagamento que garante ao trabalhador benefícios previdenciários, como aposentadoria, auxílio-doença e salário-maternidade.</p>
+    <section id="faq" class="hide-print" style="background-color: #f8fafc; padding: 4rem 1.5rem; margin-top: 3rem;">
+      <div class="container" style="max-width: 1000px; margin: 0 auto;">
+        <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+          <h2 style="color: var(--primary-color); font-size: 2.2rem;">Perguntas Frequentes sobre Salário Líquido</h2>
+          <p style="color: var(--text-color); font-size: 1.1rem;">Entenda como os descontos oficiais afetam o que realmente cai na sua conta.</p>
         </div>
-      </div>
+        
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">1. Qual a diferença entre Salário Bruto e Salário Líquido?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">O Salário Bruto é o valor total registrado em contrato, enquanto o Salário Líquido é o valor real que você recebe após os descontos.</div>
+            <div class="accordion-content">
+              <p>Quando você é contratado por R$ 3.000,00, este é o seu <strong>Salário Bruto</strong>. No entanto, a lei exige que a empresa faça retenções antes de depositar o dinheiro na sua conta. O <strong>Salário Líquido</strong> é o resultado matemático após a subtração de todos esses descontos obrigatórios e eventuais benefícios.</p>
+            </div>
+          </div>
 
-      <div class="faq-item" style="background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden;">
-        <button class="faq-btn" style="width: 100%; text-align: left; padding: 1.2rem; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.icon').innerText = this.querySelector('.icon').innerText === '+' ? '-' : '+'">
-          Como funciona o desconto para Autônomos e MEI?
-          <span class="icon" style="font-size: 1.5rem; font-weight: normal;">+</span>
-        </button>
-        <div class="faq-content" style="padding: 0 1.2rem; color: var(--text-color); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
-          <p style="padding-bottom: 1.2rem;">MEIs pagam uma taxa fixa de 5% baseada no salário mínimo vigente. Autônomos no Plano Simplificado pagam 11% sobre o mínimo. Já os Autônomos no Plano Normal pagam 20% sobre o rendimento total, sendo o desconto limitado ao Teto máximo do INSS.</p>
-        </div>
-      </div>
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">2. Quais são os descontos obrigatórios na folha de pagamento?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">Os principais e obrigatórios para todo trabalhador CLT são o INSS e o Imposto de Renda Retido na Fonte (IRRF).</div>
+            <div class="accordion-content">
+              <ul style="margin-left: 1.5rem; margin-bottom: 1rem; list-style-type: disc;">
+                <li><strong>INSS:</strong> Descontado primeiro. Serve para garantir benefícios da Previdência Social (aposentadoria, auxílio-doença). A alíquota é progressiva, variando de 7,5% a 14%.</li>
+                <li><strong>IRRF (Imposto de Renda):</strong> Calculado <em>depois</em> de descontar o INSS. É uma antecipação do imposto anual, com isenção para as faixas salariais mais baixas.</li>
+              </ul>
+            </div>
+          </div>
 
-      <div class="faq-item" style="background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden;">
-        <button class="faq-btn" style="width: 100%; text-align: left; padding: 1.2rem; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="this.nextElementSibling.classList.toggle('active'); this.querySelector('.icon').innerText = this.querySelector('.icon').innerText === '+' ? '-' : '+'">
-          Qual é a diferença entre Salário Bruto e Salário Líquido?
-          <span class="icon" style="font-size: 1.5rem; font-weight: normal;">+</span>
-        </button>
-        <div class="faq-content" style="padding: 0 1.2rem; color: var(--text-color); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
-          <p style="padding-bottom: 1.2rem;">Salário Bruto é o valor total registrado em contrato antes de qualquer desconto. Salário Líquido é o valor real que cai na sua conta bancária após os descontos obrigatórios (INSS e IRPF) e eventuais deduções legais como pensão alimentícia.</p>
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">3. Como os dependentes afetam o meu Salário Líquido?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">Ter dependentes legais diminui a base de cálculo do Imposto de Renda, o que pode aumentar o seu Salário Líquido.</div>
+            <div class="accordion-content">
+              <p>A Receita Federal permite um abatimento fixo (atualmente R$ 189,59 por dependente) diretamente na base de cálculo do <strong>Imposto de Renda</strong>.</p>
+              <p>Ou seja, se você tem filhos ou cônjuge que dependem financeiramente de você, o governo cobra imposto sobre um valor menor do seu salário. O resultado prático é um desconto de IRPF menor e um Salário Líquido maior no final do mês!</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="accordion-title">4. Outros descontos (como Vale-Transporte e Vale-Refeição) entram na calculadora?</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-summary-text">Nossa calculadora foca exclusivamente nos descontos tributários federais (INSS e IRPF).</div>
+            <div class="accordion-content">
+              <p>Descontos como <strong>Vale-Transporte (limitado a 6%), Vale-Refeição, Plano de Saúde e Contribuição Sindical</strong> dependem exclusivamente de Acordos e Convenções Coletivas do seu sindicato ou da política de benefícios da sua empresa.</p>
+              <p>Por isso, nossa calculadora de Salário Líquido se propõe a mostrar a matemática oficial e exata dos impostos governamentais. Se a sua empresa desconta VT ou Plano de Saúde, você deve subtrair esses valores do resultado final mostrado aqui para encontrar o centavo exato do seu holerite.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <style>
-        .faq-content.active { max-height: 500px; }
-      </style>
-    </div>
+    </section>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qual a diferença entre Salário Bruto e Salário Líquido?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O Salário Bruto é o valor total registrado em contrato antes de qualquer desconto. O Salário Líquido é o valor real que cai na conta bancária do trabalhador após os descontos obrigatórios (como INSS e IRPF) e eventuais deduções."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quais são os descontos obrigatórios na folha de pagamento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Os principais descontos obrigatórios e universais para trabalhadores CLT são a contribuição previdenciária (INSS) e o Imposto de Renda Retido na Fonte (IRRF)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como os dependentes afetam o meu Salário Líquido?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ter dependentes legais permite deduzir um valor fixo da base de cálculo do Imposto de Renda. Isso faz com que o trabalhador pague menos IRRF, resultando em um Salário Líquido maior."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Outros descontos como Vale-Transporte e Vale-Refeição entram na calculadora?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nossa calculadora foca estritamente nos tributos oficiais federais (INSS e IRPF). Descontos como Vale-Transporte (até 6%), Vale-Refeição e Plano de Saúde dependem da Convenção Coletiva de cada sindicato e da política da empresa, devendo ser subtraídos à parte do resultado final."
+          }
+        }
+      ]
+    }
+    </script>
   </main>
   
   <footer class="footer hide-print">

@@ -142,32 +142,36 @@ O Google não ranqueia apenas "palavras isoladas"; ele busca **autoridade em eco
 
 ## 6. 🚀 Fase 3/4: Calculadoras Fisco-Tributárias Interativas (Ativas!)
 
-Nossa plataforma conta com um ecossistema de calculadoras tributárias desenhadas para atrair e converter clientes, englobando a **Calculadora do Simples Nacional** e a **Calculadora de IRPF**.
-
-### 6.1. Integração com Planilha Excel via CMS (Autonomia e Segurança)
-As calculadoras são **100% autônomas** e não dependem de programadores para atualizar limites, faixas ou alíquotas anuais. Ambas leem os parâmetros da mesma planilha Excel hospedada de forma segura na raiz do próprio site, que a equipe da Contabilidade Camilo atualiza diretamente pelo painel administrativo (`/admin`).
-
-> [!NOTE]
-> *Nota Técnica:* Inicialmente, o sistema utilizaria o arquivo público direto do Google Drive. No entanto, os servidores do Google bloqueiam conexões externas (via política de segurança CORS). A solução definitiva e imune a bloqueios foi migrar a planilha para o próprio servidor, sendo atualizada via GitHub (arquitetura Cloudflare Pages).
-
-#### A Arquitetura Invisível (SheetJS)
-Sempre que um lead acessa a página da calculadora, nosso JavaScript (impulsionado pela tecnologia corporativa `SheetJS`) lê o arquivo Excel. Ele varre as abas estruturadas em milissegundos e calibra o motor de cálculo da interface instantaneamente.
-
-### 6.2. Como o Escritório Atualiza as Regras (Fricção Zero)
-Se a Receita Federal alterar as faixas de faturamento, o teto global ou os repasses de ICMS/ISS na virada do ano, siga este roteiro:
-
-1. **Abra a Planilha Localmente:** Abra o arquivo matriz do Excel (`calculadora-ir-configuracoes.xlsx`) no seu computador.
-2. **Edite as Tabelas Progressivas (Abas de Referência):**
-   * **Simples Nacional:** Atualize as faixas e alíquotas na aba `Tabelas_Referencia`.
-   * **IRPF:** Atualize a tabela progressiva e a dedução padrão na aba `IRPF_Tabela`.
-3. **Edite os Parâmetros Gerais (Aba `Parametros_Gerais`):** Ajuste limites e tetos globais para o ano vigente:
-   * **Simples Nacional:** `TETO_GLOBAL`, `SUBLIMITE_GLOBAL`, percentuais de `REPARTICAO`.
-   * **IRPF:** Limites como `Teto_Isencao` (ex: 5000), teto do desconto gradual (`Isencao_Fase_Out`), e as regras da tributação para altas rendas (`Adicional_Limite` e `Adicional_Aliquota`).
-4. **Envie a Nova Planilha pelo Painel (O Segredo da Autonomia):** 
-   * Acesse `contabilidadecamilo.com.br/admin` (ou o domínio provisório atual) e faça login.
-   * No menu esquerdo, clique em **Configurações do Sistema** > **Base de Dados da Calculadora**.
-   * Faça o upload da sua nova planilha `.xlsx` no campo correspondente e clique em **Salvar**.
-   * O sistema acionará a Cloudflare automaticamente e a calculadora será atualizada em menos de 1 minuto em todo o Brasil!
+  Nossa plataforma conta com um ecossistema completo de 4 calculadoras tributárias desenhadas para atrair e converter clientes: **Calculadora do Simples Nacional**, **Calculadora de IRPF**, **Calculadora de Salário Líquido** e **Calculadora de INSS**.
+  
+  ### 6.1. Integração com Planilha Excel via CMS (Autonomia e Segurança)
+  As calculadoras são **100% autônomas** e não dependem de programadores para atualizar limites, faixas ou alíquotas anuais. Elas leem os parâmetros de planilhas Excel hospedadas de forma segura na raiz do próprio site, que a equipe da Contabilidade Camilo atualiza diretamente pelo painel administrativo (`/admin`).
+  - **Simples Nacional e IRPF:** Alimentadas pela planilha `calculadora-ir-configuracoes.xlsx`
+  - **Salário Líquido e INSS:** Alimentadas pela planilha `calculadora-inss-configuracoes.xlsx`
+  
+  > [!NOTE]
+  > *Nota Técnica:* Inicialmente, o sistema utilizaria o arquivo público direto do Google Drive. No entanto, os servidores do Google bloqueiam conexões externas (via política de segurança CORS). A solução definitiva e imune a bloqueios foi migrar a planilha para o próprio servidor, sendo atualizada via GitHub (arquitetura Cloudflare Pages).
+  
+  #### A Arquitetura Invisível (SheetJS)
+  Sempre que um lead acessa a página da calculadora, nosso JavaScript (impulsionado pela tecnologia corporativa `SheetJS`) lê o arquivo Excel. Ele varre as abas estruturadas em milissegundos e calibra o motor de cálculo da interface instantaneamente.
+  
+  ### 6.2. Como o Escritório Atualiza as Regras (Fricção Zero)
+  Se a Receita Federal ou a Previdência Social alterarem faixas, tetos ou alíquotas na virada do ano, siga este roteiro:
+  
+  1. **Abra a Planilha Correspondente Localmente:** Edite `calculadora-ir-configuracoes.xlsx` (para Simples Nacional/IRPF) ou `calculadora-inss-configuracoes.xlsx` (para INSS/Salário Líquido).
+  2. **Edite as Tabelas Progressivas (Abas de Referência):**
+     * **Simples Nacional:** Atualize as faixas e alíquotas na aba `Tabelas_Referencia` (Planilha IR).
+     * **IRPF:** Atualize a tabela progressiva e a dedução padrão na aba `IRPF_Tabela` (Planilha IR).
+     * **INSS / Salário Líquido:** Atualize as faixas da tabela do INSS na aba `Tabelas_Referencia` (Planilha INSS).
+  3. **Edite os Parâmetros Gerais:**
+     * **Simples Nacional:** Ajuste `TETO_GLOBAL` e `SUBLIMITE_GLOBAL` na aba `Parametros_Gerais` (Planilha IR).
+     * **IRPF:** Ajuste `Teto_Isencao` na aba `Parametros_Gerais` (Planilha IR).
+     * **INSS (Autônomos e Pró-Labore):** Atualize o Teto do INSS e as alíquotas de Autônomo (20%) e MEI (5%) na aba `Outras_Categorias` (Planilha INSS). Na aba `Parametros_Gerais`, atualize o Ano Base e o Salário Mínimo vigente.
+  4. **Envie a Nova Planilha pelo Painel (O Segredo da Autonomia):** 
+     * Acesse `contabilidadecamilo.com.br/admin` e faça login.
+     * No menu esquerdo, clique em **Configurações do Sistema** > **Base de Dados da Calculadora**.
+     * Faça o upload da sua nova planilha `.xlsx` no campo correspondente (existem campos separados para a Planilha de IR e a Planilha de INSS) e clique em **Salvar**.
+     * O sistema acionará a Cloudflare automaticamente e a calculadora será atualizada em menos de 1 minuto em todo o Brasil!
 
 ---
 *Documentação elaborada pela equipe de engenharia e arquitetura de software contábil.*  

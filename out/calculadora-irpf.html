@@ -20,6 +20,7 @@
       .btn-wrapper button { width: 100% !important; box-sizing: border-box; margin: 0 !important; }
       .form-control { box-sizing: border-box; width: 100%; }
       .result-cards { flex-direction: column; }
+      .form-grid-mobile { grid-template-columns: 1fr !important; }
     }
   </style>
 
@@ -151,7 +152,7 @@
 
           <form id="irpfForm" class="hide-print">
             <!-- INPUTS -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="form-grid-mobile" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
               <div class="form-group" style="margin: 0; grid-column: 1 / -1;">
                 <label class="form-label" for="rendimentoBase">
                   Rendimentos Tributáveis (Mensal)

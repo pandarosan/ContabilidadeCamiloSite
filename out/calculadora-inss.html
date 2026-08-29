@@ -23,6 +23,7 @@
       body { overflow-x: hidden; }
       .calc-header-global h1 { font-size: 1.8rem !important; }
       .calc-layout-wrapper { padding: 0 1rem !important; gap: 1.5rem !important; flex-direction: column; }
+      .form-grid-mobile { grid-template-columns: 1fr !important; }
       .seo-content, .calc-container-wrapper { width: 100% !important; flex: none !important; }
       .form-control { width: 100%; box-sizing: border-box; }
     }
@@ -248,7 +249,7 @@
             <div class="colaborador-panel">
               <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Dados do Cálculo</h3>
               
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+              <div class="form-grid-mobile" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
                 <div class="form-group" style="grid-column: 1 / -1;">
                   <label class="form-label" for="nomeColaborador">Nome (Opcional)</label>
                   <input type="text" id="nomeColaborador" class="form-control" placeholder="Ex: João Silva">

@@ -309,41 +309,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Tema Escuro (Dark Mode Toggle)
 const initThemeToggle = () => {
-  const nav = document.querySelector('.nav');
-  if (!nav) return;
-
+  // Evita duplicatas
   if (document.querySelector('.theme-toggle-btn')) return;
 
   const themeBtn = document.createElement('button');
   themeBtn.className = 'theme-toggle-btn';
   themeBtn.setAttribute('aria-label', 'Alternar tema');
-  
+
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   themeBtn.innerHTML = isDark ? '☀' : '☾';
-  themeBtn.style.marginRight = '1rem'; // Espaço antes dos botões de ação
 
-  const navList = document.querySelector('.nav-list');
-  const mobileToggle = document.querySelector('.mobile-menu-toggle');
-  
-  if (mobileToggle) {
-    nav.insertBefore(themeBtn, mobileToggle);
-  } else if (navList) {
-    nav.appendChild(themeBtn);
+  // Insere em .header-actions (ao lado dos portais), não dentro do .nav
+  // Isso evita quebra de linha no desktop e funciona em todos os breakpoints
+  const headerActions = document.querySelector('.header-actions');
+  if (headerActions) {
+    headerActions.insertBefore(themeBtn, headerActions.firstChild);
   } else {
-    nav.appendChild(themeBtn);
+    // Fallback: insere antes do mobile toggle, caso header-actions não exista
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('.nav');
+    if (nav && mobileToggle) {
+      nav.insertBefore(themeBtn, mobileToggle);
+    } else if (nav) {
+      nav.appendChild(themeBtn);
+    }
   }
 
   themeBtn.addEventListener('click', () => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
+
     if (newTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
     } else {
-        document.documentElement.removeAttribute('data-theme');
+      document.documentElement.removeAttribute('data-theme');
     }
     localStorage.setItem('theme', newTheme);
-    
+
     themeBtn.innerHTML = newTheme === 'dark' ? '☀' : '☾';
   });
 };

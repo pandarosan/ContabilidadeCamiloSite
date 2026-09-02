@@ -2651,3 +2651,79 @@ html[data-theme="dark"] .seo-content h2,
 html[data-theme="dark"] .seo-content h3 {
   color: var(--primary-color) !important;
 }
+
+/* ================================================================ */
+/* CORREÇÕES E AJUSTES FINOS DO DARK MODE (RODADA 2)                */
+/* ================================================================ */
+
+/* 2 (correção definitiva). O botão agora vive em .header-actions.
+   No desktop: fica ao lado dos portais, sem quebrar o menu nav.
+   No mobile:  .header-actions já é responsivo; o botão some
+               junto com os portais (hamburger assume a nav). */
+.header-actions .theme-toggle-btn {
+  order: -1;             /* Garante que o botão fica antes dos portais */
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  font-size: 1.1rem !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: 1px solid #CBD5E1 !important;
+  color: var(--primary-color) !important;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  margin-right: 0.25rem;
+}
+.header-actions .theme-toggle-btn:hover {
+  background: #f1f5f9 !important;
+}
+html[data-theme="dark"] .header-actions .theme-toggle-btn {
+  border-color: #4a6080 !important;
+  color: #E2E8F0 !important;
+}
+html[data-theme="dark"] .header-actions .theme-toggle-btn:hover {
+  background: #2A3A50 !important;
+}
+
+/* No mobile: oculta o botão junto com .header-actions quando
+   o menu hamburguer está ativo (o toggle de tema some do topo
+   para não poluir). Reexibir no dropdown se quiser no futuro. */
+@media (max-width: 768px) {
+  .header-actions .theme-toggle-btn {
+    display: none !important;
+  }
+}
+
+/* 3 (correção). "Envie uma Mensagem" no .contact-form-container da home */
+html[data-theme="dark"] .contact-form-container h2,
+html[data-theme="dark"] .contact-form-container h3 {
+  color: #ffffff !important;
+}
+
+/* 4.1 a 4.4. Subtítulos "Tire suas dúvidas..." e "Entenda como..."
+   Essas seções FAQ nas páginas de Planos e Calculadoras devem
+   permanecer com as cores do modo claro. */
+html[data-theme="dark"] .faq-section h2,
+html[data-theme="dark"] .faq-section p {
+  color: #1E2D40 !important;
+}
+html[data-theme="dark"] .faq-section {
+  background-color: #ffffff !important;
+  border-top-color: #e2e8f0 !important;
+}
+
+/* Responsivo: garante que os textos subtítulo de calculadoras
+   (inline style color: var(--text-color)) permaneçam legíveis. */
+@media (max-width: 768px) {
+  html[data-theme="dark"] .calc-header-global > p,
+  html[data-theme="dark"] .seo-content p,
+  html[data-theme="dark"] .seo-content li {
+    color: #1E2D40 !important;
+  }
+  html[data-theme="dark"] .faq-section p {
+    color: #1E2D40 !important;
+  }
+}

@@ -2166,3 +2166,366 @@ section[id],
   color: white;
 }
 @media (max-width: 900px) { .calc-layout-wrapper { flex-direction: column-reverse !important; } }
+
+/* ========================================================= */
+/* DARK MODE OVERRIDES (ATIVADO VIA DATA-THEME)              */
+/* ========================================================= */
+html[data-theme="dark"] {
+  --bg-color: #6e8195;
+  --bg-light: #3f577a;
+  --text-color: #E2E8F0;
+  --text-muted: #94A3B8;
+  --border-color: #2A3A50;
+  /* --primary-color e --secondary-color permanecem iguais */
+}
+
+/* 1. Header */
+html[data-theme="dark"] .header {
+  background-color: rgba(63, 87, 122, 0.97);
+}
+html[data-theme="dark"] .nav-link {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .nav-link:hover, 
+html[data-theme="dark"] .nav-link.active {
+  color: var(--secondary-color);
+}
+html[data-theme="dark"] .mobile-menu-toggle {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .dropdown-menu {
+  background-color: #2A3A50;
+  border-color: #2A3A50;
+}
+html[data-theme="dark"] .dropdown-menu li a {
+  color: #CBD5E1;
+}
+html[data-theme="dark"] .dropdown-menu li a:hover {
+  background-color: #3f577a;
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .header-actions .btn-secondary {
+  border-color: #94A3B8;
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .header-actions .btn-secondary:hover {
+  background-color: #94A3B8;
+  color: #0F1923;
+}
+@media (max-width: 768px) {
+  html[data-theme="dark"] .nav-list {
+    background: #3f577a;
+    border-top-color: #2A3A50;
+  }
+  html[data-theme="dark"] .mobile-portal-item {
+    border-top-color: #2A3A50 !important;
+  }
+  html[data-theme="dark"] .mobile-portal-item .btn-secondary {
+    border-color: #94A3B8 !important;
+    color: #E2E8F0 !important;
+  }
+  html[data-theme="dark"] .mobile-portal-item .btn-secondary:hover {
+    background-color: #94A3B8 !important;
+    color: #0F1923 !important;
+  }
+}
+
+/* 3. Trust Section */
+html[data-theme="dark"] .trust-section {
+  background-color: #3f577a;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+}
+html[data-theme="dark"] .trust-item p {
+  color: #E2E8F0;
+}
+
+/* 4. Seções com fundo claro */
+html[data-theme="dark"] .services-section,
+html[data-theme="dark"] .pricing-section {
+  background-color: #2a3a50;
+}
+html[data-theme="dark"] .section-header h2,
+html[data-theme="dark"] .service-main-text h2 {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .section-header p {
+  color: #a3bfe7;
+}
+
+/* 5. Cards de Serviços */
+html[data-theme="dark"] .service-card {
+  background-color: #2a3a50;
+  border-color: transparent;
+}
+html[data-theme="dark"] .service-icon {
+  background-color: #2A3A50;
+  color: #93C5FD;
+}
+html[data-theme="dark"] .service-card h3 {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .service-card p {
+  color: #dedede;
+}
+html[data-theme="dark"] .service-card:hover {
+  border-color: var(--secondary-color);
+}
+
+/* 6. Depoimentos */
+html[data-theme="dark"] .testimonials-section {
+  background-color: #6e8195;
+}
+html[data-theme="dark"] .testimonial-card {
+  background-color: #2c4263;
+  border-color: #cda043;
+  transition: border-color 0.3s ease;
+}
+html[data-theme="dark"] .testimonial-card:hover {
+  border-color: #ffdd95;
+}
+html[data-theme="dark"] .testimonial-card p {
+  color: #CBD5E1;
+}
+html[data-theme="dark"] .testimonial-card h4 {
+  color: #93C5FD;
+}
+html[data-theme="dark"] .testimonial-card span {
+  color: #94A3B8;
+}
+
+/* 7. Formulário de Contato */
+html[data-theme="dark"] .contact-form-container {
+  background-color: #2a3a50;
+}
+html[data-theme="dark"] .form-group label {
+  color: #93C5FD;
+}
+html[data-theme="dark"] .form-control {
+  background-color: #0F1923;
+  border-color: #cda043;
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .form-control::placeholder {
+  color: #64748B;
+}
+
+/* 8. Footer */
+html[data-theme="dark"] .footer {
+  background-color: #3f577a;
+  border-top-color: #2A3A50;
+}
+html[data-theme="dark"] .logo-text-footer {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .footer-brand p,
+html[data-theme="dark"] .footer-links a,
+html[data-theme="dark"] .footer-contact p {
+  color: #94A3B8;
+}
+html[data-theme="dark"] .footer-links a:hover {
+  color: #93C5FD;
+}
+html[data-theme="dark"] .footer-bottom {
+  /* Mantém azul marinho original */
+}
+
+/* 9. Calculadoras */
+html[data-theme="dark"] .calc-container {
+  background-color: #2a3a50;
+  box-shadow: none;
+}
+html[data-theme="dark"] .calc-container-wrapper {
+  background-color: transparent;
+}
+html[data-theme="dark"] .calc-table {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .calc-table th {
+  background-color: #1E2D40;
+  border-bottom-color: #2A3A50;
+}
+html[data-theme="dark"] .calc-table td {
+  border-bottom-color: #2A3A50;
+}
+
+/* 10. Artigos e Notícias */
+html[data-theme="dark"] .article-card {
+  background-color: #1E2D40;
+  border-color: #2A3A50;
+}
+html[data-theme="dark"] .article-title {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .article-summary {
+  color: #CBD5E1;
+}
+html[data-theme="dark"] .article-meta,
+html[data-theme="dark"] .article-meta-time {
+  color: #94A3B8;
+}
+html[data-theme="dark"] .article-read-more {
+  color: #93C5FD;
+}
+html[data-theme="dark"] .tag-btn {
+  background: #2a3a50;
+  border-color: #2A3A50;
+  color: #CBD5E1;
+}
+html[data-theme="dark"] .tag-btn:hover,
+html[data-theme="dark"] .tag-btn.active {
+  background: var(--primary-color);
+  color: white;
+}
+html[data-theme="dark"] .share-bar {
+  background-color: #2a3a50;
+  border-color: #2A3A50;
+}
+html[data-theme="dark"] .btn-share-copy {
+  background-color: #1E2D40;
+  border-color: #2A3A50;
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .article-body {
+  color: #CBD5E1;
+}
+html[data-theme="dark"] .article-body h2,
+html[data-theme="dark"] .article-body h3 {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .article-body blockquote {
+  background-color: #1E2D40;
+  color: #E2E8F0;
+  border-left-color: var(--primary-color);
+}
+html[data-theme="dark"] .article-callout-box {
+  background: #1E2D40;
+  border-color: #2A3A50;
+}
+html[data-theme="dark"] .article-callout-title {
+  color: #E2E8F0;
+}
+
+/* 11. Planos */
+html[data-theme="dark"] .plan-card {
+  background-color: #1E2D40;
+  border-color: #5472ad;
+}
+html[data-theme="dark"] .plan-popular {
+  border-color: var(--secondary-color);
+}
+html[data-theme="dark"] .plan-name {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .plan-desc {
+  color: #94A3B8;
+}
+html[data-theme="dark"] .plan-price-wrapper {
+  border-bottom-color: #5472ad;
+}
+html[data-theme="dark"] .plan-currency,
+html[data-theme="dark"] .plan-amount {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .plan-features li {
+  color: #CBD5E1;
+}
+html[data-theme="dark"] .plan-btn.btn-outline {
+  border-color: #93C5FD;
+  color: #93C5FD;
+}
+html[data-theme="dark"] .plan-btn.btn-outline:hover {
+  background-color: #93C5FD;
+  color: #0F1923;
+}
+
+/* 12. Acordeão / Glossário */
+html[data-theme="dark"] .accordion-item {
+  background-color: #1E2D40;
+}
+html[data-theme="dark"] .accordion-header {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .accordion-header:hover {
+  background-color: #2A3A50;
+}
+html[data-theme="dark"] .accordion-content {
+  background-color: #2a3a50;
+}
+html[data-theme="dark"] .accordion-summary-text {
+  color: #CBD5E1;
+}
+
+/* 13. Modais */
+html[data-theme="dark"] .modal-container {
+  background-color: #2a3b53;
+}
+html[data-theme="dark"] .modal-header h3 {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .modal-header {
+  border-bottom-color: #2A3A50;
+}
+html[data-theme="dark"] .modal-close {
+  background-color: #2A3A50;
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .custom-modal-form input,
+html[data-theme="dark"] .custom-modal-form select {
+  background-color: #0F1923;
+  border-color: #2A3A50;
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .custom-modal-form select {
+  background-color: #0F1923;
+}
+
+/* 14. Páginas Internas */
+html[data-theme="dark"] .benefit-item {
+  background-color: #1E2D40;
+}
+html[data-theme="dark"] .benefit-item h4 {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .benefit-item p {
+  color: #CBD5E1;
+}
+html[data-theme="dark"] .service-sidebar .cta-box {
+  background-color: #1E2D40;
+  border-color: #2A3A50;
+}
+html[data-theme="dark"] .service-sidebar h3 {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .service-sidebar p {
+  color: #94A3B8;
+}
+html[data-theme="dark"] .service-main-text p,
+html[data-theme="dark"] .service-main-text li {
+  color: #E2E8F0;
+}
+
+/* Toggle Dark Mode Button */
+.theme-toggle-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: var(--primary-color);
+  width: 44px;
+  height: 44px;
+}
+.theme-toggle-btn:hover {
+  background-color: var(--bg-light);
+}
+html[data-theme="dark"] .theme-toggle-btn {
+  color: #E2E8F0;
+}
+html[data-theme="dark"] .theme-toggle-btn:hover {
+  background-color: #2A3A50;
+}

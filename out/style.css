@@ -109,6 +109,11 @@ a {
   color: var(--secondary-color);
 }
 
+.nav {
+  display: flex;
+  align-items: center;
+}
+
 .nav-list {
   display: flex;
   list-style: none;
@@ -2613,7 +2618,6 @@ html[data-theme="dark"] form a {
 }
 
 /* 7. Textos "entre aspas" nas calculadoras e planos (subtítulos) */
-html[data-theme="dark"] .service-main-text > p,
 html[data-theme="dark"] .calc-header-global > p {
   color: #1E2D40 !important;
 }
@@ -2688,9 +2692,22 @@ html[data-theme="dark"] .faq-section {
   }
 }
 
-/* Calculadora Simples Nacional: Seção Informações Importantes (Light Mode forçado) */
-html[data-theme="dark"] .calc-container .seo-content,
-html[data-theme="dark"] .calc-container .seo-content p,
-html[data-theme="dark"] .calc-container .seo-content li {
-  color: #1E2D40 !important;
+/* 8. Secao Informações Importantes (Dark Mode override for inline styles) */
+html[data-theme="dark"] .info-importantes-section {
+  background-color: transparent !important;
 }
+html[data-theme="dark"] .info-importantes-section .container {
+  background-color: #1E2D40 !important;
+}
+html[data-theme="dark"] .info-importantes-section h3 {
+  color: #E2E8F0 !important;
+}
+html[data-theme="dark"] .info-importantes-section ul,
+html[data-theme="dark"] .info-importantes-section li {
+  color: #CBD5E1 !important;
+}
+html[data-theme="dark"] .info-importantes-section svg {
+  stroke: #E2E8F0 !important;
+}
+
+

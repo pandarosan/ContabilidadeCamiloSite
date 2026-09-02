@@ -40,17 +40,41 @@ document.addEventListener('DOMContentLoaded', () => {
   // Menu Hambúrguer Mobile (Injeção Dinâmica para todas as páginas)
   const nav = document.querySelector('.nav');
   const navList = document.querySelector('.nav-list');
-  const navList = document.querySelector('.nav-list');
-  if (navList) {
-    const li = document.createElement('li');
-    li.style.display = 'flex';
-    li.style.alignItems = 'center';
-    li.appendChild(themeBtn);
-    navList.appendChild(li);
-  } else {
-    const nav = document.querySelector('.nav');
-    if (nav) nav.appendChild(themeBtn);
-  }
+  const headerActions = document.querySelector('.header-actions');
+  
+  if (nav && navList && !document.querySelector('.mobile-menu-toggle')) {
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'mobile-menu-toggle';
+    toggleBtn.innerHTML = '☰';
+    toggleBtn.setAttribute('aria-label', 'Abrir menu de navegação');
+    nav.insertBefore(toggleBtn, navList);
+
+    // Injetar os 2 botões de Portal dentro do menu hambúrguer no mobile (Padrão Razonet)
+    if (headerActions && !navList.querySelector('.mobile-portal-item')) {
+      const portalLi = document.createElement('li');
+      portalLi.className = 'mobile-portal-item';
+      portalLi.style.cssText = 'display: flex; flex-direction: column; gap: 0.6rem; padding: 1.2rem 1rem 0.5rem 1rem; border-top: 1px solid #E5E7EB; margin-top: 0.8rem; width: 100%;';
+      
+      const btnCliente = document.createElement('a');
+      btnCliente.href = 'https://onvio.com.br/clientcenter/pt/auth?r=%2Fhome';
+      btnCliente.target = '_blank';
+      btnCliente.rel = 'noopener noreferrer';
+      btnCliente.className = 'btn-primary';
+      btnCliente.style.cssText = 'padding: 0.7rem 1rem; font-size: 0.95rem; text-align: center; width: 100%; display: block; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);';
+      btnCliente.textContent = 'Portal do Cliente';
+
+      const btnEmpregado = document.createElement('a');
+      btnEmpregado.href = 'https://onvio.com.br/login/#/';
+      btnEmpregado.target = '_blank';
+      btnEmpregado.rel = 'noopener noreferrer';
+      btnEmpregado.className = 'btn-secondary';
+      btnEmpregado.style.cssText = 'padding: 0.7rem 1rem; font-size: 0.95rem; text-align: center; width: 100%; display: block; border-radius: 8px; color: var(--primary-color); border: 2px solid var(--primary-color); background: transparent; font-weight: 600;';
+      btnEmpregado.textContent = 'Portal do Empregado';
+
+      portalLi.appendChild(btnCliente);
+      portalLi.appendChild(btnEmpregado);
+      navList.appendChild(portalLi);
+    }
 
     toggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -295,19 +319,13 @@ const initThemeToggle = () => {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   themeBtn.innerHTML = isDark ? '☀' : '☾';
 
-  // Insere em .header-actions (ao lado dos portais), não dentro do .nav
-  // Isso evita quebra de linha no desktop e funciona em todos os breakpoints
-  const navList = document.querySelector('.nav-list');
-  if (navList) {
-    const li = document.createElement('li');
-    li.style.display = 'flex';
-    li.style.alignItems = 'center';
-    li.appendChild(themeBtn);
-    navList.appendChild(li);
-  } else {
-    const nav = document.querySelector('.nav');
-    if (nav) nav.appendChild(themeBtn);
-  }
+  const nav = document.querySelector('.nav');
+  const mobileToggle = document.querySelector('.mobile-menu-toggle');
+  
+  if (nav && mobileToggle) {
+    nav.insertBefore(themeBtn, mobileToggle);
+  } else if (nav) {
+    nav.appendChild(themeBtn);
   }
 
   themeBtn.addEventListener('click', () => {

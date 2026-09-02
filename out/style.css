@@ -112,7 +112,7 @@ a {
 .nav-list {
   display: flex;
   list-style: none;
-  gap: 1.2rem;
+  gap: 0.8rem;
   align-items: center;
 }
 
@@ -2540,13 +2540,18 @@ html[data-theme="dark"] .logo-text-footer {
   color: #ffffff !important;
 }
 
-/* 2. Ajuste do ícone de toggle para desktop (menos de botão, mais de texto) */
+/* 2. Ajuste do ícone de toggle para desktop e mobile */
 html[data-theme="dark"] .theme-toggle-btn,
 .theme-toggle-btn {
-  width: auto !important;
-  height: auto !important;
-  padding: 0.25rem 0.5rem !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
   font-size: 1.1rem !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 0.5rem !important;
   background-color: transparent !important;
 }
 .theme-toggle-btn:hover {
@@ -2653,19 +2658,9 @@ html[data-theme="dark"] .seo-content h3 {
 }
 
 /* ================================================================ */
-/* CORREÇÕES E AJUSTES FINOS DO DARK MODE (RODADA 2)                */
+/* CORREÇÕES E AJUSTES FINOS DO DARK MODE                           */
 /* ================================================================ */
 
-/* 2 (correção definitiva). O botão agora vive em .header-actions.
-   No desktop: fica ao lado dos portais, sem quebrar o menu nav.
-   No mobile:  .header-actions já é responsivo; o botão some
-               junto com os portais (hamburger assume a nav). */
-html[data-theme="dark"] html[data-theme="dark"] 
-/* No mobile: oculta o botão junto com .header-actions quando
-   o menu hamburguer está ativo (o toggle de tema some do topo
-   para não poluir). Reexibir no dropdown se quiser no futuro. */
-@media (max-width: 768px) {
-  
 /* 3 (correção). "Envie uma Mensagem" no .contact-form-container da home */
 html[data-theme="dark"] .contact-form-container h2,
 html[data-theme="dark"] .contact-form-container h3 {
@@ -2688,37 +2683,9 @@ html[data-theme="dark"] .faq-section {
    (inline style color: var(--text-color)) permaneçam legíveis. */
 @media (max-width: 768px) {
   html[data-theme="dark"] .calc-header-global > p,
-  
   html[data-theme="dark"] .faq-section p {
     color: #1E2D40 !important;
   }
-}
-
-/* Ajuste do botão de tema dentro do nav-list */
-.nav-list .theme-toggle-btn {
-  width: 36px !important;
-  height: 36px !important;
-  padding: 0 !important;
-  font-size: 1.1rem !important;
-  border-radius: 50% !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: transparent !important;
-  border: 1px solid #CBD5E1 !important;
-  color: var(--primary-color) !important;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-.nav-list .theme-toggle-btn:hover {
-  background: #f1f5f9 !important;
-}
-html[data-theme="dark"] .nav-list .theme-toggle-btn {
-  border-color: #4a6080 !important;
-  color: #E2E8F0 !important;
-}
-html[data-theme="dark"] .nav-list .theme-toggle-btn:hover {
-  background: #2A3A50 !important;
 }
 
 /* Calculadora Simples Nacional: Seção Informações Importantes (Light Mode forçado) */

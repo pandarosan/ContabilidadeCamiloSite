@@ -2529,3 +2529,125 @@ html[data-theme="dark"] .theme-toggle-btn {
 html[data-theme="dark"] .theme-toggle-btn:hover {
   background-color: #2A3A50;
 }
+
+/* ========================================================= */
+/* AJUSTES SOLICITADOS PELO CLIENTE (PÓS FASE 1)             */
+/* ========================================================= */
+
+/* 1 e 6.1. Nome Contabilidade em branco no escuro */
+html[data-theme="dark"] .logo-text, 
+html[data-theme="dark"] .logo-text-footer {
+  color: #ffffff !important;
+}
+
+/* 2. Ajuste do ícone de toggle para desktop (menos de botão, mais de texto) */
+html[data-theme="dark"] .theme-toggle-btn,
+.theme-toggle-btn {
+  width: auto !important;
+  height: auto !important;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 1.1rem !important;
+  background-color: transparent !important;
+}
+.theme-toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 3. Card Diagnóstico Fiscal -> Light mode only */
+html[data-theme="dark"] .service-card:has(#diagnostico-form) {
+  background-color: #f8fafc !important;
+  border-color: var(--secondary-color) !important;
+}
+html[data-theme="dark"] .service-card:has(#diagnostico-form) h3 {
+  color: var(--primary-color) !important;
+}
+html[data-theme="dark"] .service-card:has(#diagnostico-form) p {
+  color: #1E2D40 !important;
+}
+html[data-theme="dark"] #diagnostico-form label {
+  color: #1E2D40 !important;
+}
+html[data-theme="dark"] #diagnostico-form input,
+html[data-theme="dark"] #diagnostico-form select {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  border: 1px solid #ccc !important;
+}
+
+/* 4. Textos do Guia Rápido & Glossário */
+html[data-theme="dark"] #guia-rapido h2,
+html[data-theme="dark"] #guia-rapido > .container > .section-header > p {
+  color: #1E2D40 !important;
+}
+html[data-theme="dark"] .glossary-section {
+    background-color: #ffffff !important; 
+}
+
+/* 5. "Nosso Canal no YouTube" e "Acompanhe as últimas..." */
+html[data-theme="dark"] .youtube-section h2,
+html[data-theme="dark"] .youtube-section p {
+  color: #1E2D40 !important;
+}
+html[data-theme="dark"] .youtube-section {
+  background-color: #f8fafc !important; 
+}
+
+/* 6.2 Envie uma Mensagem no Modal */
+html[data-theme="dark"] .modal-header h3 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .service-sidebar h3 {
+  color: #ffffff !important;
+}
+
+/* 6.3 Política de Privacidade no modal */
+html[data-theme="dark"] .modal-terms a,
+html[data-theme="dark"] .custom-modal-form a,
+html[data-theme="dark"] form a {
+  color: #ffffff !important;
+}
+
+/* 7. Textos "entre aspas" nas calculadoras e planos (subtítulos) */
+html[data-theme="dark"] .service-main-text > p,
+html[data-theme="dark"] .calc-header-global > p {
+  color: #1E2D40 !important;
+}
+
+/* 7.5 Calculadoras (seções) -> Light mode only */
+html[data-theme="dark"] .calc-container {
+  background-color: #ffffff !important;
+  color: #1E2D40 !important;
+  border: 2px solid var(--secondary-color) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+html[data-theme="dark"] .calc-container h2,
+html[data-theme="dark"] .calc-container h3,
+html[data-theme="dark"] .calc-container h4,
+html[data-theme="dark"] .calc-container p,
+html[data-theme="dark"] .calc-container label {
+  color: #1E2D40 !important;
+}
+html[data-theme="dark"] .calc-container input,
+html[data-theme="dark"] .calc-container select {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  border-color: #ccc !important;
+}
+html[data-theme="dark"] .calc-table th {
+  background-color: #f8fafc !important;
+  color: #1E2D40 !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+html[data-theme="dark"] .calc-table td {
+  border-bottom-color: #e2e8f0 !important;
+  color: #1E2D40 !important;
+}
+
+/* 7.5 Simples Nacional - Informações Importantes (Light mode) */
+html[data-theme="dark"] .seo-content {
+  color: #1E2D40 !important;
+}
+html[data-theme="dark"] .seo-content h2,
+html[data-theme="dark"] .seo-content h3 {
+  color: var(--primary-color) !important;
+}

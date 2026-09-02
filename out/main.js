@@ -319,7 +319,7 @@ const initThemeToggle = () => {
   themeBtn.setAttribute('aria-label', 'Alternar tema');
   
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  themeBtn.innerHTML = isDark ? '☀️' : '🌙';
+  themeBtn.innerHTML = isDark ? '☀' : '☾';
   themeBtn.style.marginRight = '1rem'; // Espaço antes dos botões de ação
 
   const navList = document.querySelector('.nav-list');
@@ -344,7 +344,7 @@ const initThemeToggle = () => {
     }
     localStorage.setItem('theme', newTheme);
     
-    themeBtn.innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
+    themeBtn.innerHTML = newTheme === 'dark' ? '☀' : '☾';
   });
 };
 

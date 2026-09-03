@@ -2335,9 +2335,6 @@ html[data-theme="dark"] .footer-contact p {
 html[data-theme="dark"] .footer-links a:hover {
   color: #93C5FD;
 }
-html[data-theme="dark"] .footer-bottom {
-  /* Mantém azul marinho original */
-}
 
 /* 9. Calculadoras */
 html[data-theme="dark"] .calc-container {
@@ -2550,22 +2547,24 @@ html[data-theme="dark"] .logo-text-footer {
   color: #ffffff !important;
 }
 
-/* 2. Ajuste do ícone de toggle para desktop e mobile */
-html[data-theme="dark"] .theme-toggle-btn,
-.theme-toggle-btn {
-  width: 36px !important;
-  height: 36px !important;
-  padding: 0 !important;
-  font-size: 1.1rem !important;
-  border-radius: 50% !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  margin-right: 0.5rem !important;
-  background-color: transparent !important;
-}
-.theme-toggle-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+/* 2. Ajuste do ícone de toggle apenas para desktop */
+@media (min-width: 769px) {
+  html[data-theme="dark"] .theme-toggle-btn,
+  .theme-toggle-btn {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    font-size: 1.1rem !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 0.5rem !important;
+    background-color: transparent !important;
+  }
+  .theme-toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
 }
 
 /* 3. Card Diagnóstico Fiscal -> Light mode only */

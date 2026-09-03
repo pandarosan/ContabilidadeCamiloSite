@@ -2715,3 +2715,8 @@ html[data-theme="dark"] .info-importantes-section svg {
 }
 
 
+
+/* 9. Pagina de Artigos / Noticias - Ajustes Finais */
+html[data-theme="dark"] .related-articles-section {
+  border-top-color: #2A3A50 !important;
+}

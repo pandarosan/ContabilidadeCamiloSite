@@ -2391,7 +2391,7 @@ html[data-theme="dark"] .btn-share-copy {
   color: #E2E8F0;
 }
 html[data-theme="dark"] .article-body {
-  color: #CBD5E1;
+  color: #ffffff;
 }
 html[data-theme="dark"] .article-body h2,
 html[data-theme="dark"] .article-body h3 {
@@ -2719,4 +2719,16 @@ html[data-theme="dark"] .info-importantes-section svg {
 /* 9. Pagina de Artigos / Noticias - Ajustes Finais */
 html[data-theme="dark"] .related-articles-section {
   border-top-color: #2A3A50 !important;
+}
+
+html[data-theme="dark"] .related-articles-section h3 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .share-bar > span {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .article-header-meta,
+html[data-theme="dark"] .article-header-meta span,
+html[data-theme="dark"] .article-header-meta strong {
+  color: #ffffff !important;
 }

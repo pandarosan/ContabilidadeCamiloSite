@@ -317,7 +317,7 @@ const initThemeToggle = () => {
   themeBtn.setAttribute('aria-label', 'Alternar tema');
 
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  themeBtn.innerHTML = isDark ? '☀' : '☾';
+  themeBtn.innerHTML = isDark ? '☀️' : '🌙';
 
   const nav = document.querySelector('.nav');
   const mobileToggle = document.querySelector('.mobile-menu-toggle');
@@ -339,7 +339,7 @@ const initThemeToggle = () => {
     }
     localStorage.setItem('theme', newTheme);
 
-    themeBtn.innerHTML = newTheme === 'dark' ? '☀' : '☾';
+    themeBtn.innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
   });
 };
 

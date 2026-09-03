@@ -2359,10 +2359,10 @@ html[data-theme="dark"] .article-card {
   border-color: #2A3A50;
 }
 html[data-theme="dark"] .article-title {
-  color: #E2E8F0;
+  color: #ffffff;
 }
 html[data-theme="dark"] .article-summary {
-  color: #CBD5E1;
+  color: #ffffff;
 }
 html[data-theme="dark"] .article-meta,
 html[data-theme="dark"] .article-meta-time {
@@ -2730,5 +2730,9 @@ html[data-theme="dark"] .share-bar > span {
 html[data-theme="dark"] .article-header-meta,
 html[data-theme="dark"] .article-header-meta span,
 html[data-theme="dark"] .article-header-meta strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] #recommended-articles-grid .article-content h4 {
   color: #ffffff !important;
 }

@@ -2618,7 +2618,11 @@ html[data-theme="dark"] form a {
 }
 
 /* 7. Textos "entre aspas" nas calculadoras e planos (subtítulos) */
-html[data-theme="dark"] .calc-header-global > p {
+html[data-theme="dark"] .calc-header-global > p,
+html[data-theme="dark"] .seo-text-block h2,
+html[data-theme="dark"] .seo-text-block p,
+html[data-theme="dark"] #faq .section-header h2,
+html[data-theme="dark"] #faq .section-header p {
   color: #1E2D40 !important;
 }
 
@@ -2674,8 +2678,8 @@ html[data-theme="dark"] .contact-form-container h3 {
 /* 4.1 a 4.4. Subtítulos "Tire suas dúvidas..." e "Entenda como..."
    Essas seções FAQ nas páginas de Planos e Calculadoras devem
    permanecer com as cores do modo claro. */
-html[data-theme="dark"] .faq-section h2,
-html[data-theme="dark"] .faq-section p {
+html[data-theme="dark"] .faq-section .section-header h2,
+html[data-theme="dark"] .faq-section .section-header p {
   color: #1E2D40 !important;
 }
 html[data-theme="dark"] .faq-section {
@@ -2687,7 +2691,7 @@ html[data-theme="dark"] .faq-section {
    (inline style color: var(--text-color)) permaneçam legíveis. */
 @media (max-width: 768px) {
   html[data-theme="dark"] .calc-header-global > p,
-  html[data-theme="dark"] .faq-section p {
+  html[data-theme="dark"] .faq-section .section-header p {
     color: #1E2D40 !important;
   }
 }

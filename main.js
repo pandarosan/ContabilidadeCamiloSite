@@ -316,8 +316,15 @@ const initThemeToggle = () => {
   themeBtn.className = 'theme-toggle-btn';
   themeBtn.setAttribute('aria-label', 'Alternar tema');
 
+  const updateIcons = (theme) => {
+    const isDarkTheme = theme === 'dark';
+    const desktopIcon = isDarkTheme ? '☀' : '☾';
+    const mobileIcon = isDarkTheme ? '☀️' : '🌙';
+    themeBtn.innerHTML = `<span class="icon-desktop">${desktopIcon}</span><span class="icon-mobile">${mobileIcon}</span>`;
+  };
+
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  themeBtn.innerHTML = isDark ? '☀️' : '🌙';
+  updateIcons(isDark ? 'dark' : 'light');
 
   const nav = document.querySelector('.nav');
   const mobileToggle = document.querySelector('.mobile-menu-toggle');
@@ -339,7 +346,7 @@ const initThemeToggle = () => {
     }
     localStorage.setItem('theme', newTheme);
 
-    themeBtn.innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
+    updateIcons(newTheme);
   });
 };
 

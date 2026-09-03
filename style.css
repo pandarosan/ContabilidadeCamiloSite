@@ -2547,8 +2547,16 @@ html[data-theme="dark"] .logo-text-footer {
   color: #ffffff !important;
 }
 
-/* 2. Ajuste do ícone de toggle apenas para desktop */
+/* 2. Ajuste do ícone de toggle (Responsivo) */
+/* Mobile First: mostra apenas o ícone mobile (emojis) */
+.theme-toggle-btn .icon-desktop { display: none !important; }
+.theme-toggle-btn .icon-mobile { display: inline !important; }
+
 @media (min-width: 769px) {
+  /* No Desktop: mostra apenas o ícone desktop (símbolos monocromáticos) */
+  .theme-toggle-btn .icon-desktop { display: inline !important; }
+  .theme-toggle-btn .icon-mobile { display: none !important; }
+
   html[data-theme="dark"] .theme-toggle-btn,
   .theme-toggle-btn {
     width: 36px !important;

@@ -2728,7 +2728,7 @@ html[data-theme="dark"] .share-bar > span {
   color: #ffffff !important;
 }
 html[data-theme="dark"] .article-header-meta,
-html[data-theme="dark"] .article-header-meta span,
+html[data-theme="dark"] .article-header-meta span:not(.article-meta-time-span),
 html[data-theme="dark"] .article-header-meta strong {
   color: #ffffff !important;
 }

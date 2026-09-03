@@ -10,7 +10,7 @@
   <meta property="og:description" content="Confira em detalhes como ficam as alíquotas, anexos de partilha e o sublimite de faturamento para micro e pequenas empresas no Simples Nacional 2026." />
     <meta property="og:url" content="https://contabilidadecamilo.com.br/artigo-modelo.html" />
   <meta property="og:site_name" content="Contabilidade Camilo" />
-  <link rel="stylesheet" href="/style.css?v=22">
+  <link rel="stylesheet" href="/style.css?v=23">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -98,7 +98,7 @@
         <span>&rsaquo;</span>
         <a href="noticias-e-artigos.html" target="_blank">Notícias & Artigos</a>
         <span>&rsaquo;</span>
-        <span style=" font-weight: 600;">Simples Nacional</span>
+        <span id="breadcrumb-category" style="color: var(--secondary-color); font-weight: 600;">Simples Nacional</span>
       </nav>
 
       <!-- Cabeçalho do Artigo -->
@@ -114,7 +114,7 @@
         <div class="article-header-meta">
           <span>✍️ <strong>Por:</strong> Equipe Contabilidade Camilo</span>
           <span>📅 <strong>Publicado em:</strong> 25 de Julho, 2026</span>
-          <span style="color: var(--secondary-color); font-weight: 600;">⏱️ 4 min de leitura</span>
+          <span class="article-meta-time-span" style="color: var(--secondary-color); font-weight: 600;">⏱️ 4 min de leitura</span>
         </div>
       </header>
 
@@ -360,7 +360,7 @@
     </p>
   </div>
 
-  <script type="module" src="/main.js?v=22"></script>
+  <script type="module" src="/main.js?v=23"></script>
 
   <!-- Leitor de Markdown -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -405,9 +405,13 @@
                 metaDiv.innerHTML = `
                   <span>✍️ <strong>Por:</strong> Equipe Contabilidade Camilo</span>
                   <span>📅 <strong>Publicado em:</strong> ${dataFormatada}</span>
-                  <span style=" font-weight: 600;">⏱️ ${readingTime} min de leitura</span>
+                  <span class="article-meta-time-span" style="color: var(--secondary-color); font-weight: 600;">⏱️ ${readingTime} min de leitura</span>
                 `;
               }
+              
+              // Atualizar Breadcrumb
+              const breadcrumbEl = document.getElementById('breadcrumb-category');
+              if (breadcrumbEl) breadcrumbEl.textContent = article.category;
               
               // 3. Resumo no Cabeçalho
               const summaryEl = document.querySelector('.article-read-header p');

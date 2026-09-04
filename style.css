@@ -216,7 +216,7 @@ main {
   max-width: 300px;
 }
 
-.footer-links h4, .footer-contact h4 {
+.footer h4, .footer-col h4, .footer-links h4, .footer-contact h4 {
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
 }
@@ -2335,8 +2335,11 @@ html[data-theme="dark"] .footer-contact p {
 html[data-theme="dark"] .footer-links a:hover {
   color: #93C5FD;
 }
-html[data-theme="dark"] .footer-col h4 {
-  color: #ffffff;
+html[data-theme="dark"] .footer h4,
+html[data-theme="dark"] .footer-col h4,
+html[data-theme="dark"] .footer-content h4,
+html[data-theme="dark"] .footer-contact h4 {
+  color: #ffffff !important;
 }
 
 /* 9. Calculadoras */

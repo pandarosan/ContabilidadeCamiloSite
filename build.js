@@ -59,7 +59,16 @@ const artigosLista = files.map(file => {
   }
   
   return articleData;
-}).filter(a => a !== null);
+}).filter(a => {
+  if (a === null) return false;
+  // Oculta artigos com data de publicação no futuro (Agendados)
+  try {
+    if (a.date && new Date(a.date).getTime() > new Date().getTime()) {
+      return false;
+    }
+  } catch (e) {}
+  return true;
+});
 
 // Ordenar do mais novo pro mais velho
 artigosLista.sort((a, b) => new Date(b.date) - new Date(a.date));

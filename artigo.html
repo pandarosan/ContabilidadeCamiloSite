@@ -393,6 +393,21 @@
               if (ogUrlMeta) {
                 ogUrlMeta.setAttribute('content', `https://contabilidadecamilo.com.br/artigo.html?id=${article.slug}`);
               }
+              
+              // Atualizar botões de compartilhamento
+              const urlEncoded = encodeURIComponent(`https://contabilidadecamilo.com.br/artigo.html?id=${article.slug}`);
+              const titleEncoded = encodeURIComponent(article.title);
+              
+              const btnWa = document.querySelector('.btn-share-wa');
+              if (btnWa) {
+                btnWa.href = `https://api.whatsapp.com/send?text=Confira%20este%20artigo%20da%20Contabilidade%20Camilo%3A%20${titleEncoded}%20-%20${urlEncoded}`;
+              }
+              
+              const btnLi = document.querySelector('.btn-share-li');
+              if (btnLi) {
+                btnLi.href = `https://www.linkedin.com/sharing/share-offsite/?url=${urlEncoded}`;
+              }
+
               const titleEl = document.getElementById('articleTitle');
               if (titleEl) titleEl.textContent = article.title;
               

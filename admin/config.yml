@@ -17,6 +17,7 @@ collections:
     folder: "artigos"
     create: true
     slug: "{{slug}}"
+    preview_path: "artigo.html?id={{slug}}"
     summary: "{{date | date('DD/MM/YYYY HH:mm')}} - {{title}}"
     fields:
       - { label: "Título do Artigo", name: "title", widget: "string", required: true }

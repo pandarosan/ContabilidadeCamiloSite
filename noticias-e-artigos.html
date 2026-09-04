@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notícias & Artigos Fiscais | Contabilidade Camilo em Jundiaí</title>
   <meta name="description" content="Central de Conhecimento e Legislação Tributária. Artigos sobre Simples Nacional, Reforma Tributária, eSocial e BPO Financeiro produzidos por quem tem mais de 17 anos de autoridade." />
-  <link rel="stylesheet" href="/style.css?v=28">
+  <link rel="stylesheet" href="/style.css?v=29">
 
   <script type="application/ld+json">
   {
@@ -130,7 +130,7 @@
               <p class="article-summary">
                 Confira como ficam as alíquotas, anexos de partilha e o sublimite de faturamento para micro e pequenas empresas neste exercício fiscal, evitando surpresas na emissão de notas.
               </p>
-              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+              <a href="artigo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
             </div>
           </div>
 
@@ -149,7 +149,7 @@
               <p class="article-summary">
                 Entenda a substituição gradual do PIS, COFINS e ISS pelo sistema de IVA dual. Saiba como o período de transição afeta o fluxo de caixa do seu negócio B2B.
               </p>
-              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+              <a href="artigo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
             </div>
           </div>
 
@@ -168,7 +168,7 @@
               <p class="article-summary">
                 As novas diretrizes de cruzamento eletrônico da Receita e do Ministério do Trabalho não toleram atrasos nos avisos de férias e SST. Veja o checklist obrigatório do DP.
               </p>
-              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+              <a href="artigo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
             </div>
           </div>
 
@@ -187,7 +187,7 @@
               <p class="article-summary">
                 Descubra a diferença entre apenas apurar guias de impostos e ter especialistas cuidando de todo o seu fluxo de caixa, contas a pagar, receber e conciliação bancária diária.
               </p>
-              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+              <a href="artigo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
             </div>
           </div>
 
@@ -206,7 +206,7 @@
               <p class="article-summary">
                 Para retirar lucro isento de imposto na pessoa física, a empresa precisa manter a escrituração contábil rigorosa e estar sem débitos tributários. Conheça as regras.
               </p>
-              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+              <a href="artigo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
             </div>
           </div>
 
@@ -225,7 +225,7 @@
               <p class="article-summary">
                 A equiparação hospitalar e a correta opção de regime podem gerar economias expressivas no IRPJ e CSLL para clínicas. Veja como aplicamos essa tese com segurança.
               </p>
-              <a href="artigo-modelo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
+              <a href="artigo.html" target="_blank" class="article-read-more">Ler Artigo Completo &rarr;</a>
             </div>
           </div>
 
@@ -461,7 +461,7 @@
               </div>
               <h3 class="article-title">${article.title}</h3>
               <p class="article-summary">${article.summary}</p>
-              <a href="artigo-modelo?id=${article.slug}" class="article-read-more">Ler Artigo Completo &rarr;</a>
+              <a href="artigo.html?id=${article.slug}" class="article-read-more">Ler Artigo Completo &rarr;</a>
             </div>
           `;
           
@@ -470,7 +470,7 @@
           card.addEventListener('click', (e) => {
             // Evitar clique duplo se o usuário clicar exatamente em cima da tag <a> ou outro elemento iterativo
             if (e.target.tagName.toLowerCase() !== 'a') {
-              window.location.href = `artigo-modelo?id=${article.slug}`;
+              window.location.href = `artigo.html?id=${article.slug}`;
             }
           });
           

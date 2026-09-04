@@ -23,7 +23,7 @@ O módulo de blog e artigos foi concebido para ser uma **máquina contínua de a
 * **Auto-Limpeza:** Se um novo artigo com a categoria `"Holding Familiar"` for publicado amanhã, o botão aparecerá no topo do site sozinho com a contagem `(1)`. Se todos os artigos de um tema forem excluídos, o botão desaparecerá automaticamente, impedindo categorias vazias ou links quebrados.
 
 ### 2.2. A Mágica do WhatsApp Dinâmico (CTA de Conversão)
-Ao final de todo artigo individual (como no modelo `artigo-modelo.html`), há um box premium de atendimento consultivo com um botão de WhatsApp.
+Ao final de todo artigo individual (como no modelo `artigo.html`), há um box premium de atendimento consultivo com um botão de WhatsApp.
 * **O Diferencial:** O botão não envia uma mensagem genérica! Nosso script lê em tempo real o título oficial do artigo (`<h1>`) na tela do visitante e monta um convite personalizado:
   > *"Olá! Li o artigo **'[Título Exato do Artigo Lido]'** no site de vocês e gostaria de conversar com um especialista para receber orientação técnica sobre este assunto."*
 * **Benefício Comercial:** O contador ou atendente que receber a mensagem no WhatsApp saberá exatamente qual foi a dor fiscal ou tributária que motivou o contato do lead!
@@ -39,7 +39,7 @@ Para o cliente e sua agência de marketing, manter o site atualizado é simples,
    * Através da integração com ferramentas modernas sem banco de dados (como *Decap CMS* ou *Netlify CMS*), o usuário acessa um link seguro na web (ex: `/admin`), digita seu login e senha e entra em um editor visual similar ao Word.
    * Basta clicar em *"Novo Artigo"*, digitar o título, escolher ou criar uma tag de categoria, fazer o upload da foto de capa e clicar em **"Publicar"**.
    * O próprio gerenciador gera o arquivo em plano de fundo e atualiza a central automaticamente.
-   * O texto e a imagem são enviados para o suporte técnico ou agência, que duplica o modelo estático (`artigo-modelo.html`), insere as informações em 2 minutos e publica diretamente nos arquivos do servidor com máximo controle de qualidade e formatação.
+   * O texto e a imagem são enviados para o suporte técnico ou agência, que duplica o modelo estático (`artigo.html`), insere as informações em 2 minutos e publica diretamente nos arquivos do servidor com máximo controle de qualidade e formatação.
 
 ### 3.2. ⚠️ Regras Importantes de Preenchimento (Formatação e SEO)
 

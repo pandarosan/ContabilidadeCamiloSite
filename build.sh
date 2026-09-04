@@ -16,6 +16,8 @@ cp *.png out/ 2>/dev/null || true
 cp *.svg out/ 2>/dev/null || true
 cp *.webp out/ 2>/dev/null || true
 cp *.gif out/ 2>/dev/null || true
+cp *.xml out/ 2>/dev/null || true
+cp *.txt out/ 2>/dev/null || true
 cp artigos.json out/ 2>/dev/null || true
 
 # 4. Copia a pasta admin do CMS e a pasta data (configurações)

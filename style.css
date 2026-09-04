@@ -2335,8 +2335,7 @@ html[data-theme="dark"] .footer-contact p {
 html[data-theme="dark"] .footer-links a:hover {
   color: #93C5FD;
 }
-html[data-theme="dark"] .footer-links h4,
-html[data-theme="dark"] .footer-contact h4 {
+html[data-theme="dark"] .footer-col h4 {
   color: #ffffff;
 }
 

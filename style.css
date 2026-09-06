@@ -2690,10 +2690,12 @@ html[data-theme="dark"] .calc-container .result-card {
 html[data-theme="dark"] .calc-container .result-card h3 {
   color: #cbd5e1 !important;
 }
-html[data-theme="dark"] .calc-container .result-card .value {
+html[data-theme="dark"] .calc-container .result-card .value,
+html[data-theme="dark"] .calc-container .result-card #valBaseCalculo {
   color: #d4af37 !important;
 }
-html[data-theme="dark"] .calc-container .result-card.highlight .value {
+html[data-theme="dark"] .calc-container .result-card.highlight .value,
+html[data-theme="dark"] .calc-container .result-card #valImpostoPagar {
   color: #ffffff !important;
 }
 html[data-theme="dark"] .calc-container .result-card #valRendaLiquida {

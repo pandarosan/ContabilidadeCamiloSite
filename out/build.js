@@ -59,7 +59,16 @@ const artigosLista = files.map(file => {
   }
   
   return articleData;
-}).filter(a => a !== null);
+}).filter(a => {
+  if (a === null) return false;
+  // Oculta artigos com data de publicação no futuro (Agendados)
+  try {
+    if (a.date && new Date(a.date).getTime() > new Date().getTime()) {
+      return false;
+    }
+  } catch (e) {}
+  return true;
+});
 
 // Ordenar do mais novo pro mais velho
 artigosLista.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -71,4 +80,75 @@ const finalOutput = {
 fs.writeFileSync(outputFile, JSON.stringify(finalOutput, null, 2));
 console.log('Build de artigos completo usando Markdown!');
 
+// ==========================================
+// SEO: Geração de sitemap.xml e robots.txt
+// ==========================================
 
+const escapeXml = (unsafe) => {
+    if (!unsafe) return '';
+    return unsafe.replace(/[<>&'"]/g, (c) => {
+        switch (c) {
+            case '<': return '&lt;';
+            case '>': return '&gt;';
+            case '&': return '&amp;';
+            case '\'': return '&apos;';
+            case '"': return '&quot;';
+        }
+    });
+};
+
+const generateSitemap = () => {
+    const baseUrl = 'https://contabilidadecamilo.com.br';
+    const now = new Date().toISOString().split('T')[0];
+    
+    // Ler todos os arquivos HTML na raiz
+    const ignoreFiles = ['demo.html', 'artigo-modelo.html'];
+    const staticPages = fs.readdirSync(__dirname)
+        .filter(f => f.endsWith('.html') && !ignoreFiles.includes(f))
+        .map(f => f === 'index.html' ? '' : f); 
+
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+    // 1. Páginas estáticas
+    staticPages.forEach(page => {
+        const url = page === '' ? baseUrl + '/' : `${baseUrl}/${page}`;
+        xml += `  <url>\n`;
+        xml += `    <loc>${url}</loc>\n`;
+        xml += `    <lastmod>${now}</lastmod>\n`;
+        xml += `  </url>\n`;
+    });
+
+    // 2. Páginas dinâmicas (Artigos)
+    artigosLista.forEach(article => {
+        const url = `${baseUrl}/artigo.html?id=${article.slug}`;
+        
+        let articleDate = now;
+        try {
+            if (article.date) {
+                articleDate = new Date(article.date).toISOString().split('T')[0];
+            }
+        } catch (e) {
+            console.warn(`Data inválida para o artigo ${article.slug}`);
+        }
+
+        xml += `  <url>\n`;
+        xml += `    <loc>${escapeXml(url)}</loc>\n`;
+        xml += `    <lastmod>${articleDate}</lastmod>\n`;
+        xml += `  </url>\n`;
+    });
+
+    xml += `</urlset>`;
+
+    fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), xml);
+    console.log('sitemap.xml gerado com sucesso!');
+};
+
+const generateRobots = () => {
+    const robotsContent = `User-agent: *\nAllow: /\n\nSitemap: https://contabilidadecamilo.com.br/sitemap.xml\n`;
+    fs.writeFileSync(path.join(__dirname, 'robots.txt'), robotsContent);
+    console.log('robots.txt gerado com sucesso!');
+};
+
+generateSitemap();
+generateRobots();

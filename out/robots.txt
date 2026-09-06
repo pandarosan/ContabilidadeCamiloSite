@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://contabilidadecamilo.com.br/sitemap.xml

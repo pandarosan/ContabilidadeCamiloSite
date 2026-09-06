@@ -216,7 +216,7 @@ main {
   max-width: 300px;
 }
 
-.footer-links h4, .footer-contact h4 {
+.footer h4, .footer-col h4, .footer-links h4, .footer-contact h4 {
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
 }
@@ -1012,6 +1012,11 @@ textarea.form-control {
   .footer-content {
     grid-template-columns: 1fr;
   }
+  .footer-content .footer-col:nth-child(1) { order: 1; }
+  .footer-content .footer-col:nth-child(2) { order: 2; }
+  .footer-content .footer-col:nth-child(3) { order: 3; }
+  .footer-content .footer-col:nth-child(4) { order: 5; }
+  .footer-content .footer-col:nth-child(5) { order: 4; }
 }
 
 /* Modais Flutuantes */
@@ -2330,8 +2335,11 @@ html[data-theme="dark"] .footer-contact p {
 html[data-theme="dark"] .footer-links a:hover {
   color: #93C5FD;
 }
-html[data-theme="dark"] .footer-bottom {
-  /* Mantém azul marinho original */
+html[data-theme="dark"] .footer h4,
+html[data-theme="dark"] .footer-col h4,
+html[data-theme="dark"] .footer-content h4,
+html[data-theme="dark"] .footer-contact h4 {
+  color: #ffffff !important;
 }
 
 /* 9. Calculadoras */
@@ -2359,10 +2367,10 @@ html[data-theme="dark"] .article-card {
   border-color: #2A3A50;
 }
 html[data-theme="dark"] .article-title {
-  color: #E2E8F0;
+  color: #ffffff;
 }
 html[data-theme="dark"] .article-summary {
-  color: #CBD5E1;
+  color: #ffffff;
 }
 html[data-theme="dark"] .article-meta,
 html[data-theme="dark"] .article-meta-time {
@@ -2391,7 +2399,7 @@ html[data-theme="dark"] .btn-share-copy {
   color: #E2E8F0;
 }
 html[data-theme="dark"] .article-body {
-  color: #CBD5E1;
+  color: #ffffff;
 }
 html[data-theme="dark"] .article-body h2,
 html[data-theme="dark"] .article-body h3 {
@@ -2545,22 +2553,32 @@ html[data-theme="dark"] .logo-text-footer {
   color: #ffffff !important;
 }
 
-/* 2. Ajuste do ícone de toggle para desktop e mobile */
-html[data-theme="dark"] .theme-toggle-btn,
-.theme-toggle-btn {
-  width: 36px !important;
-  height: 36px !important;
-  padding: 0 !important;
-  font-size: 1.1rem !important;
-  border-radius: 50% !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  margin-right: 0.5rem !important;
-  background-color: transparent !important;
-}
-.theme-toggle-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+/* 2. Ajuste do ícone de toggle (Responsivo) */
+/* Mobile First: mostra apenas o ícone mobile (emojis) */
+.theme-toggle-btn .icon-desktop { display: none !important; }
+.theme-toggle-btn .icon-mobile { display: inline !important; }
+
+@media (min-width: 769px) {
+  /* No Desktop: mostra apenas o ícone desktop (símbolos monocromáticos) */
+  .theme-toggle-btn .icon-desktop { display: inline !important; }
+  .theme-toggle-btn .icon-mobile { display: none !important; }
+
+  html[data-theme="dark"] .theme-toggle-btn,
+  .theme-toggle-btn {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    font-size: 1.1rem !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 0.5rem !important;
+    background-color: transparent !important;
+  }
+  .theme-toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
 }
 
 /* 3. Card Diagnóstico Fiscal -> Light mode only */
@@ -2618,7 +2636,11 @@ html[data-theme="dark"] form a {
 }
 
 /* 7. Textos "entre aspas" nas calculadoras e planos (subtítulos) */
-html[data-theme="dark"] .calc-header-global > p {
+html[data-theme="dark"] .calc-header-global > p,
+html[data-theme="dark"] .seo-text-block h2,
+html[data-theme="dark"] .seo-text-block p,
+html[data-theme="dark"] #faq .section-header h2,
+html[data-theme="dark"] #faq .section-header p {
   color: #1E2D40 !important;
 }
 
@@ -2661,6 +2683,34 @@ html[data-theme="dark"] .seo-content h3 {
   color: var(--primary-color) !important;
 }
 
+/* 7.6 Calculadora IRPF - Result Cards (.result-card) no Dark Mode */
+html[data-theme="dark"] .calc-container .result-card {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .calc-container .result-card h3 {
+  color: #cbd5e1 !important;
+}
+html[data-theme="dark"] .calc-container .result-card .value,
+html[data-theme="dark"] .calc-container .result-card #valBaseCalculo {
+  color: #d4af37 !important;
+}
+html[data-theme="dark"] .calc-container .result-card.highlight .value,
+html[data-theme="dark"] .calc-container .result-card #valImpostoPagar {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .calc-container .result-card #valRendaLiquida {
+  color: #10b981 !important;
+}
+
+/* 7.7 Calculadoras - Caixa CTA de Resultado (#cta-resultado) no Dark Mode */
+html[data-theme="dark"] #cta-resultado {
+  background-color: #f0fdf4 !important;
+  border-color: #dcfce3 !important;
+}
+html[data-theme="dark"] #cta-resultado p {
+  color: #1E2D40 !important;
+}
+
 /* ================================================================ */
 /* CORREÇÕES E AJUSTES FINOS DO DARK MODE                           */
 /* ================================================================ */
@@ -2674,8 +2724,8 @@ html[data-theme="dark"] .contact-form-container h3 {
 /* 4.1 a 4.4. Subtítulos "Tire suas dúvidas..." e "Entenda como..."
    Essas seções FAQ nas páginas de Planos e Calculadoras devem
    permanecer com as cores do modo claro. */
-html[data-theme="dark"] .faq-section h2,
-html[data-theme="dark"] .faq-section p {
+html[data-theme="dark"] .faq-section .section-header h2,
+html[data-theme="dark"] .faq-section .section-header p {
   color: #1E2D40 !important;
 }
 html[data-theme="dark"] .faq-section {
@@ -2687,7 +2737,7 @@ html[data-theme="dark"] .faq-section {
    (inline style color: var(--text-color)) permaneçam legíveis. */
 @media (max-width: 768px) {
   html[data-theme="dark"] .calc-header-global > p,
-  html[data-theme="dark"] .faq-section p {
+  html[data-theme="dark"] .faq-section .section-header p {
     color: #1E2D40 !important;
   }
 }
@@ -2711,3 +2761,24 @@ html[data-theme="dark"] .info-importantes-section svg {
 }
 
 
+
+/* 9. Pagina de Artigos / Noticias - Ajustes Finais */
+html[data-theme="dark"] .related-articles-section {
+  border-top-color: #2A3A50 !important;
+}
+
+html[data-theme="dark"] .related-articles-section h3 {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .share-bar > span {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .article-header-meta,
+html[data-theme="dark"] .article-header-meta span:not(.article-meta-time-span),
+html[data-theme="dark"] .article-header-meta strong {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] #recommended-articles-grid .article-content h4 {
+  color: #ffffff !important;
+}

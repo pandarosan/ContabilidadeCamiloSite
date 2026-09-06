@@ -8,6 +8,8 @@
     content="Contabilidade digital e consultiva para empresas em Jundiaí e todo o Brasil. Abertura de empresas, gestão fiscal, folha de pagamento e planejamento tributário com mais de 17 anos de experiência.">
   <title>Contabilidade em Jundiaí e Gestão Digital para PMEs | Contabilidade Camilo</title>
   <link rel="stylesheet" href="/style.css?v=31">
+  <link rel="stylesheet" href="/enquete.css">
+  <script src="/enquete.js" defer></script>
 
   <script type="application/ld+json">
 {
@@ -299,6 +301,12 @@
             <h3><a href="calculadora-inss.html" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Cálculo de INSS</a></h3>
             <p>Simulador de contribuição e retenção do INSS para CLT, Autônomos e Pró-Labore.</p>
             <a href="calculadora-inss.html" target="_blank" rel="noopener noreferrer" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;"></a>
+          </div>
+
+          <div class="enquete-card" style="grid-column: 1 / -1; margin: 2rem auto 0 auto; max-width: 650px;">
+            <h3>Participe da Escolha da Próxima Ferramenta</h3>
+            <p>Ajude a Contabilidade Camilo a desenvolver novas soluções gratuitas votando na nossa enquete oficial.</p>
+            <button class="enquete-card-btn">Votar Agora</button>
           </div>
 
           <div id="diagnostico-fiscal" class="service-card"
@@ -1246,6 +1254,53 @@
       }
     });
   </script>
+
+  <!-- Enquete Modal -->
+  <div id="enquete-modal" class="hidden">
+    <div class="enquete-content">
+      <button class="enquete-close-btn">&times;</button>
+      <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--secondary, #3b82f6); margin-bottom: 6px;">Participe da Escolha da Próxima Ferramenta</p>
+      <h2>Qual ferramenta você mais gostaria de ver em nosso ecossistema?</h2>
+      <p>Sua opinião é fundamental para a criação de novas soluções gratuitas. Ajude a Contabilidade Camilo a desenvolver novas soluções votando na nossa enquete oficial.</p>
+      
+      <div class="enquete-options">
+        <button class="enquete-option-btn" data-option="opcao_a">Calculadora de Salário Líquido 2026 (CLT &amp; Deduções)</button>
+        <button class="enquete-option-btn" data-option="opcao_b">Cálculo de Depreciação de Ativos Imobilizados</button>
+        <button class="enquete-option-btn" data-option="opcao_c">Simulador de Ganho de Capital na Venda de Bens</button>
+      </div>
+
+      <div class="enquete-results">
+        <div class="enquete-result-item">
+          <div class="enquete-result-header">
+            <span>Calculadora de Salário Líquido 2026 (CLT &amp; Deduções)</span>
+            <span id="pct-opcao_a">0%</span>
+          </div>
+          <div class="enquete-progress-bg">
+            <div class="enquete-progress-bar" id="progress-opcao_a"></div>
+          </div>
+        </div>
+        <div class="enquete-result-item">
+          <div class="enquete-result-header">
+            <span>Cálculo de Depreciação de Ativos Imobilizados</span>
+            <span id="pct-opcao_b">0%</span>
+          </div>
+          <div class="enquete-progress-bg">
+            <div class="enquete-progress-bar" id="progress-opcao_b"></div>
+          </div>
+        </div>
+        <div class="enquete-result-item">
+          <div class="enquete-result-header">
+            <span>Simulador de Ganho de Capital na Venda de Bens</span>
+            <span id="pct-opcao_c">0%</span>
+          </div>
+          <div class="enquete-progress-bg">
+            <div class="enquete-progress-bar" id="progress-opcao_c"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>

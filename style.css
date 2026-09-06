@@ -2683,6 +2683,32 @@ html[data-theme="dark"] .seo-content h3 {
   color: var(--primary-color) !important;
 }
 
+/* 7.6 Calculadora IRPF - Result Cards (.result-card) no Dark Mode */
+html[data-theme="dark"] .calc-container .result-card {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .calc-container .result-card h3 {
+  color: #cbd5e1 !important;
+}
+html[data-theme="dark"] .calc-container .result-card .value {
+  color: #d4af37 !important;
+}
+html[data-theme="dark"] .calc-container .result-card.highlight .value {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .calc-container .result-card #valRendaLiquida {
+  color: #10b981 !important;
+}
+
+/* 7.7 Calculadoras - Caixa CTA de Resultado (#cta-resultado) no Dark Mode */
+html[data-theme="dark"] #cta-resultado {
+  background-color: #f0fdf4 !important;
+  border-color: #dcfce3 !important;
+}
+html[data-theme="dark"] #cta-resultado p {
+  color: #1E2D40 !important;
+}
+
 /* ================================================================ */
 /* CORREÇÕES E AJUSTES FINOS DO DARK MODE                           */
 /* ================================================================ */

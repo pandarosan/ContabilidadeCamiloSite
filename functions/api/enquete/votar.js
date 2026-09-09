@@ -4,17 +4,16 @@ export async function onRequestPost(context) {
         const data = await request.json();
         const optionId = data.option;
 
-        if (!['opcao_a', 'opcao_b', 'opcao_c'].includes(optionId)) {
+        if (!['opcao_a', 'opcao_b'].includes(optionId)) {
             return new Response(JSON.stringify({ error: "Opção inválida" }), { status: 400 });
         }
 
         // Mock fallback para testes locais sem o KV bindado
         if (!env.ENQUETE_VOTOS_KV) {
             return new Response(JSON.stringify({ 
-                opcao_a: optionId === 'opcao_a' ? 46 : 45, 
-                opcao_b: optionId === 'opcao_b' ? 31 : 30, 
-                opcao_c: optionId === 'opcao_c' ? 26 : 25, 
-                total: 101 
+                opcao_a: optionId === 'opcao_a' ? 1 : 0, 
+                opcao_b: optionId === 'opcao_b' ? 1 : 0, 
+                total: 1 
             }), { 
                 headers: { "Content-Type": "application/json" } 
             });
@@ -26,13 +25,11 @@ export async function onRequestPost(context) {
 
         const opcaoA = parseInt(await env.ENQUETE_VOTOS_KV.get('opcao_a')) || 0;
         const opcaoB = parseInt(await env.ENQUETE_VOTOS_KV.get('opcao_b')) || 0;
-        const opcaoC = parseInt(await env.ENQUETE_VOTOS_KV.get('opcao_c')) || 0;
-        const total = opcaoA + opcaoB + opcaoC;
+        const total = opcaoA + opcaoB;
 
         return new Response(JSON.stringify({
             opcao_a: opcaoA,
             opcao_b: opcaoB,
-            opcao_c: opcaoC,
             total: total
         }), {
             headers: {

@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
             showResultsState();
             
             // Simular load progress ou algo assim
-            updateProgressBars({ total: 1, opcao_a: 0, opcao_b: 0, opcao_c: 0 }); 
+            updateProgressBars({ total: 1, opcao_a: 0, opcao_b: 0 }); 
 
             try {
                 const response = await fetch('/api/enquete/votar', {
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateProgressBars(data) {
         const total = data.total || 1; // evitar divisão por zero
-        const options = ['opcao_a', 'opcao_b', 'opcao_c'];
+        const options = ['opcao_a', 'opcao_b'];
         
         options.forEach(opt => {
             const count = data[opt] || 0;

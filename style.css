@@ -2711,6 +2711,22 @@ html[data-theme="dark"] #cta-resultado p {
   color: #1E2D40 !important;
 }
 
+/* 7.8 Card PJ (Pessoa Jurídica) no Dark Mode
+   Segue o mesmo padrão de .seo-content: fundo branco com texto escuro,
+   mantendo consistência visual com o card #resultadoDestaque acima dele. */
+html[data-theme="dark"] #cardPJ {
+  background-color: #ffffff !important;
+  color: #1E2D40 !important;
+}
+html[data-theme="dark"] #cardPJ h2,
+html[data-theme="dark"] #cardPJ p,
+html[data-theme="dark"] #cardPJ small {
+  color: #1E2D40 !important;
+}
+html[data-theme="dark"] #cardPJ #displayValorPJ {
+  color: #16a34a !important;
+}
+
 /* ================================================================ */
 /* CORREÇÕES E AJUSTES FINOS DO DARK MODE                           */
 /* ================================================================ */

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import XLSX from 'xlsx';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -152,3 +153,59 @@ const generateRobots = () => {
 
 generateSitemap();
 generateRobots();
+
+// ==========================================
+// ETAPA 3: Gera data/simples-anexo-iii.json
+// Autonomia do cliente: o administrador atualiza
+// calculadora-simples-nacional-configuracoes.xlsx no CMS
+// e este build extrai apenas o Anexo III para um JSON
+// leve (~250 bytes), sem custo de SheetJS no navegador.
+// ==========================================
+
+const gerarAnexoIII = () => {
+  const planilhaPath = path.join(__dirname, 'public', 'calculadora-simples-nacional-configuracoes.xlsx');
+
+  if (!fs.existsSync(planilhaPath)) {
+    console.warn('AVISO: calculadora-simples-nacional-configuracoes.xlsx não encontrado. simples-anexo-iii.json não gerado.');
+    return;
+  }
+
+  try {
+    const workbook = XLSX.readFile(planilhaPath);
+    const nomeAba = workbook.SheetNames.find(n => n.trim().toLowerCase() === 'tabelas_referencia');
+
+    if (!nomeAba) {
+      console.warn('AVISO: Aba "Tabelas_Referencia" não encontrada na planilha. simples-anexo-iii.json não gerado.');
+      return;
+    }
+
+    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[nomeAba], { defval: null });
+
+    const anexoIII = rows
+      .filter(r => String(r.Anexo || '').trim() === 'III')
+      .map(r => ({
+        rbt12_ate:       parseFloat(r.Limite),
+        aliquota:        parseFloat(r.AliqNom),
+        parcela_deduzir: parseFloat(r.Ded) || 0
+      }))
+      .filter(r => !isNaN(r.rbt12_ate) && !isNaN(r.aliquota));
+
+    if (anexoIII.length === 0) {
+      console.warn('AVISO: Nenhuma linha do Anexo III encontrada na planilha.');
+      return;
+    }
+
+    const dataDir = path.join(__dirname, 'data');
+    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir);
+
+    fs.writeFileSync(
+      path.join(dataDir, 'simples-anexo-iii.json'),
+      JSON.stringify(anexoIII, null, 2)
+    );
+    console.log(`simples-anexo-iii.json gerado com sucesso! (${anexoIII.length} faixas do Anexo III)`);
+  } catch (err) {
+    console.error('ERRO ao gerar simples-anexo-iii.json:', err.message);
+  }
+};
+
+gerarAnexoIII();

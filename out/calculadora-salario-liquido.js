@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let inssData = { parametros: {}, tabelaProgressiva: [], outrasCategorias: [] };
   let irpfData = { parametros: {}, tabelaProgressiva: [] };
   let colaboradores = [];
+  let simplesAnexoIII = []; // Tabela Anexo III — carregada isoladamente com tolerância a falhas
 
   const els = {
     form: document.getElementById('calcForm'),
@@ -80,6 +81,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error("Erro ao carregar dados:", e);
       if (els.displayLiquido) els.displayLiquido.innerText = "Erro ao carregar tabelas";
     }
+
+    // Fetch ISOLADO do Anexo III — independente do Promise.all acima.
+    // Se falhar: a calculadora CLT continua 100% funcional.
+    // O card PJ exibe 'Consulte-nos' até que o JSON seja carregado.
+    try {
+      const cacheBuster = `?v=${new Date().getTime()}`;
+      const simplesRes = await fetch('/data/simples-anexo-iii.json' + cacheBuster);
+      if (simplesRes.ok) {
+        simplesAnexoIII = await simplesRes.json();
+      }
+    } catch (e) {
+      console.warn('Card PJ: simples-anexo-iii.json indisponível. Card exibirá "Consulte-nos".');
+      simplesAnexoIII = [];
+    }
+
+    // Re-atualiza a tela para refletir o card PJ (com ou sem dados)
+    calcularEAtualizarTela();
   }
 
   async function loadINSS(path) {
@@ -185,17 +203,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function popularCategorias() {
-    if (inssData.outrasCategorias.length > 0) {
-      els.categoria.innerHTML = '<option value="CLT">CLT (Carteira Assinada)</option>';
-      inssData.outrasCategorias.forEach(cat => {
-        if (cat.nome && cat.nome !== "undefined") {
-          const opt = document.createElement('option');
-          opt.value = cat.nome;
-          opt.innerText = cat.nome;
-          els.categoria.appendChild(opt);
-        }
-      });
-    }
+    // Apenas CLT conforme solicitado pelo cliente
+    els.categoria.innerHTML = '<option value="CLT">CLT</option>';
   }
 
   function calcularDescontos(bruto, dependentes, pensao, categoriaNome) {
@@ -357,6 +366,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { bruto, inss, irrf, pensao, liquido, deducaoDependentes, dependentes };
   }
 
+  // --- Card PJ (Pessoa Jurídica) ---
+
+  function calcularValorPJ(faturamentoMensal) {
+    if (!faturamentoMensal || faturamentoMensal <= 0 || simplesAnexoIII.length === 0) return 0;
+    const rbt12 = faturamentoMensal * 12;
+    // Lógica idêntica ao calculadora-simples.js (linha 385):
+    // aliqEfetiva = ((rbt12 * aliquota) - parcela_deduzir) / rbt12
+    const faixa = simplesAnexoIII.find(f => rbt12 <= f.rbt12_ate)
+               || simplesAnexoIII[simplesAnexoIII.length - 1];
+    const aliqEfetiva = (rbt12 * faixa.aliquota - faixa.parcela_deduzir) / rbt12;
+    return Math.max(0, Math.round(faturamentoMensal * aliqEfetiva * 100) / 100);
+  }
+
+  function atualizarCardPJ(bruto) {
+    const elPJ = document.getElementById('displayValorPJ');
+    if (!elPJ) return;
+
+    if (simplesAnexoIII.length === 0) {
+      // JSON não carregado (falha de rede ou ambiente sem build):
+      // Exibe mensagem informativa — não imprime zero falso.
+      elPJ.innerText = 'Consulte-nos';
+      elPJ.style.fontSize = '1.3rem';
+    } else if (bruto > 0) {
+      elPJ.innerText = formatCurrency(calcularValorPJ(bruto));
+      elPJ.style.fontSize = '2rem';
+    } else {
+      elPJ.innerText = 'R$ 0,00';
+      elPJ.style.fontSize = '2rem';
+    }
+  }
+
+
   function calcularEAtualizarTela() {
     const bruto = parseCurrency(els.bruto.value);
     
@@ -423,6 +464,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const valorDep = document.getElementById('resValorDep');
         if (valorDep) valorDep.innerText = 'R$ 0,00';
       }
+      atualizarCardPJ(0);
       return;
     }
 
@@ -457,6 +499,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     const cta = document.getElementById('cta-resultado');
     if (cta && bruto > 0) cta.style.display = 'block';
+
+    atualizarCardPJ(bruto);
   }
 
   function adicionarColaborador() {

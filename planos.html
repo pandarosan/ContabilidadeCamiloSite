@@ -14,7 +14,19 @@
       {
         "@type": "AccountingService",
         "name": "Contabilidade Camilo",
-        "url": "https://contabilidadecamilo.com.br/planos.html"
+        "url": "https://contabilidadecamilo.com.br/planos.html",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Planos Mensais de Contabilidade",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "MEI / Autônomo" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 199.00, "priceCurrency": "BRL" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Simples Básico" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 399.00, "priceCurrency": "BRL" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Simples Pro" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 599.00, "priceCurrency": "BRL" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lucro Presumido" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 899.00, "priceCurrency": "BRL" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lucro Real" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1499.00, "priceCurrency": "BRL" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consultivo Premium" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 2499.00, "priceCurrency": "BRL" } }
+          ]
+        }
       },
       {
         "@type": "FAQPage",
@@ -57,7 +69,13 @@
       </a>
       <nav class="nav">
         <ul class="nav-list">
-          <li><a href="planos.html" class="nav-link active">Planos</a></li>
+          <li class="dropdown">
+            <a href="#" class="nav-link active">Planos <span class="caret">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="planos.html">Planos Mensais</a></li>
+              <li><a href="servicos-avulsos.html">Serviços Avulsos</a></li>
+            </ul>
+          </li>
           <li class="dropdown">
             <a href="index.html#solucoes" class="nav-link">Soluções <span class="caret">▾</span></a>
             <ul class="dropdown-menu">
@@ -243,6 +261,15 @@
       </div>
     </section>
 
+    <!-- Chamada para Serviços Avulsos -->
+    <section style="padding: 4rem 1.5rem; background-color: var(--primary-color); color: white; text-align: center;">
+      <div class="container" style="max-width: 800px; margin: 0 auto;">
+        <h2 style="margin-bottom: 1rem; color: white;">Precisa apenas de um Serviço Pontual?</h2>
+        <p style="margin-bottom: 2rem; font-size: 1.1rem; opacity: 0.9;">Não quer um plano mensal? Oferecemos consultoria sob demanda, desde declaração de IRPF e GCAP, até planejamento tributário e apuração de ações e criptoativos.</p>
+        <a href="servicos-avulsos.html" class="btn-secondary" style="font-size: 1.1rem; padding: 0.8rem 2rem;">Ver Serviços Avulsos Especializados</a>
+      </div>
+    </section>
+
     <!-- FAQ Section -->
     <section class="faq-section" style="padding: 4rem 1.5rem; background-color: white; border-top: 1px solid #e2e8f0;">
       <div class="container" style="max-width: 1000px; margin: 0 auto;">
@@ -294,7 +321,8 @@
       <div class="footer-col">
         <h4>Acesso Rápido</h4>
         <ul class="footer-links">
-          <li><a href="planos.html" target="_blank" rel="noopener noreferrer">Planos</a></li>
+          <li><a href="planos.html" target="_blank" rel="noopener noreferrer">Planos Mensais</a></li>
+          <li><a href="servicos-avulsos.html" target="_blank" rel="noopener noreferrer">Serviços Avulsos</a></li>
           <li><a href="noticias-e-artigos.html" target="_blank" rel="noopener noreferrer">Notícias & Artigos</a></li>
           <li><a href="index.html#guia-rapido" target="_blank" rel="noopener noreferrer">Guia Rápido & Glossário Contábil</a></li>
           <li><a href="sobre-nos.html" target="_blank" rel="noopener noreferrer">Sobre Nós</a></li>

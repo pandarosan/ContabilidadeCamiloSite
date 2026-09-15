@@ -1,0 +1,32 @@
+[
+  {
+    "rbt12_ate": 180000,
+    "aliquota": 0.06,
+    "parcela_deduzir": 0
+  },
+  {
+    "rbt12_ate": 360000,
+    "aliquota": 0.112,
+    "parcela_deduzir": 9360
+  },
+  {
+    "rbt12_ate": 720000,
+    "aliquota": 0.135,
+    "parcela_deduzir": 17640
+  },
+  {
+    "rbt12_ate": 1800000,
+    "aliquota": 0.16,
+    "parcela_deduzir": 35640
+  },
+  {
+    "rbt12_ate": 3600000,
+    "aliquota": 0.21,
+    "parcela_deduzir": 125640
+  },
+  {
+    "rbt12_ate": 4800000,
+    "aliquota": 0.33,
+    "parcela_deduzir": 648000
+  }
+]

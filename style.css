@@ -2281,6 +2281,16 @@ html[data-theme="dark"] .service-card:hover {
   border-color: var(--secondary-color);
 }
 
+html[data-theme="dark"] .servico-avulso-item {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+html[data-theme="dark"] .btn-whatsapp-outline:hover {
+  background-color: var(--secondary-color);
+  color: #1a202c;
+}
+
 /* 6. Depoimentos */
 html[data-theme="dark"] .testimonials-section {
   background-color: #6e8195;

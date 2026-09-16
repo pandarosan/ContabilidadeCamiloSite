@@ -2281,7 +2281,12 @@ html[data-theme="dark"] .service-card:hover {
   border-color: var(--secondary-color);
 }
 
-html[data-theme="dark"] .service-card h3 { 
+html[data-theme="dark"] .card-avulso-grupo { 
+  background: #1E2D40; 
+  border-color: #2A3A50; 
+}
+
+html[data-theme="dark"] .card-avulso-grupo h3 { 
   color: #FFFFFF !important; 
 }
 

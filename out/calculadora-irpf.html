@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculadora IRPF - Contabilidade Camilo</title>
   <meta name="description" content="Simule seu Imposto de Renda Pessoa Física com as novas regras da PL 1087 (Isenção até 5 mil e adicional para Altas Rendas)." />
-  <link rel="stylesheet" href="/style.css?v=32">
+  <link rel="stylesheet" href="/style.css?v=35">
   <!-- SheetJS para ler Excel -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <style>
@@ -80,7 +80,13 @@
       </a>
       <nav class="nav">
                 <ul class="nav-list">
-          <li><a href="planos.html" class="nav-link">Planos</a></li>
+          <li class="dropdown">
+            <a href="#" class="nav-link">Planos <span class="caret">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="planos.html">Planos Mensais</a></li>
+              <li><a href="servicos-avulsos.html">Serviços Avulsos</a></li>
+            </ul>
+          </li>
           <li class="dropdown">
             <a href="index.html#solucoes" class="nav-link">Soluções <span class="caret">▾</span></a>
             <ul class="dropdown-menu">
@@ -425,6 +431,7 @@
         <h4>Acesso Rápido</h4>
         <ul class="footer-links">
           <li><a href="planos.html" target="_blank" rel="noopener noreferrer">Planos</a></li>
+          <li><a href="servicos-avulsos.html" target="_blank" rel="noopener noreferrer">Serviços Avulsos</a></li>
           <li><a href="noticias-e-artigos.html" target="_blank" rel="noopener noreferrer">Notícias & Artigos</a></li>
           <li><a href="index.html#guia-rapido" target="_blank" rel="noopener noreferrer">Guia Rápido & Glossário Contábil</a></li>
           <li><a href="sobre-nos.html" target="_blank" rel="noopener noreferrer">Sobre Nós</a></li>
@@ -526,7 +533,7 @@
         Uso</a></p>
     <p class="footer-dev-credit"
       style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.5); position: absolute; left: 2rem; top: 50%; transform: translateY(-50%); z-index: 2;">
-      <a href="https://wa.me/5511998834347?text=Ol%C3%A1%20PandaRoSan%2C%20estou%20entrando%20em%20contato%20atrav%C3%A9s%20da%20assinatura%20no%20site%20da%20Contabilidade%20Camilo."
+      <a href="https://pandarosan.com.br/"
         target="_blank" rel="noopener noreferrer"
         style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;"
         onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">🌐 por
@@ -563,7 +570,7 @@
       &copy; 2026 Contabilidade Camilo. Todos os direitos reservados. | Política de Privacidade | Termos de Uso
     </div>
   </div>
-  <script type="module" src="/main.js?v=28"></script>
+  <script type="module" src="/main.js?v=29"></script>
   <script src="calculadora-irpf.js"></script>
 <!-- Botões Flutuantes -->
   <a href="https://wa.me/5511944913323" class="fab-whatsapp" aria-label="Falar no WhatsApp">

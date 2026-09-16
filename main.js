@@ -80,6 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       navList.classList.toggle('active');
       toggleBtn.innerHTML = navList.classList.contains('active') ? '✕' : '☰';
+      if (!navList.classList.contains('active')) {
+        navList.querySelectorAll('.dropdown.active').forEach(d => d.classList.remove('active'));
+      }
     });
 
     // Fechar menu ao clicar fora
@@ -87,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!nav.contains(e.target)) {
         navList.classList.remove('active');
         toggleBtn.innerHTML = '☰';
+        navList.querySelectorAll('.dropdown.active').forEach(d => d.classList.remove('active'));
       }
     });
 
@@ -95,10 +99,22 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', (e) => {
         if (link.parentElement.classList.contains('dropdown') && window.innerWidth <= 768) {
           e.preventDefault();
-          link.parentElement.classList.toggle('active');
+          const currentDropdown = link.parentElement;
+          const isAlreadyActive = currentDropdown.classList.contains('active');
+
+          // Fecha todos os outros dropdowns abertos no mobile (comportamento harmônico de acordeão)
+          navList.querySelectorAll('.dropdown').forEach(d => {
+            d.classList.remove('active');
+          });
+
+          // Se não estava ativo, abre
+          if (!isAlreadyActive) {
+            currentDropdown.classList.add('active');
+          }
         } else if (window.innerWidth <= 768) {
           navList.classList.remove('active');
           toggleBtn.innerHTML = '☰';
+          navList.querySelectorAll('.dropdown.active').forEach(d => d.classList.remove('active'));
         }
       });
     });

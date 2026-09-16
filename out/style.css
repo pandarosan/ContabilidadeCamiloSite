@@ -1001,13 +1001,42 @@ textarea.form-control {
   .dropdown-menu {
     position: static !important;
     box-shadow: none !important;
-    display: none;
-    background: #f8fafc !important;
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: none !important;
+    background: #f1f5f9 !important;
     padding: 0.5rem 0 !important;
     border: none !important;
+    border-radius: 8px !important;
+    margin: 0.35rem 1rem !important;
+    transition: none !important;
   }
-  .dropdown.active .dropdown-menu {
+  .dropdown.active > .dropdown-menu {
     display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+  .dropdown-menu li a {
+    white-space: normal !important;
+    padding: 0.65rem 1rem !important;
+    font-size: 0.95rem !important;
+    color: #1E293B !important;
+    line-height: 1.35 !important;
+  }
+  .dropdown-menu li a:hover,
+  .dropdown-menu li a:active {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    color: var(--primary-color) !important;
+    padding-left: 1rem !important;
+  }
+  .caret {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .dropdown.active > a .caret {
+    transform: rotate(180deg);
   }
   .footer-content {
     grid-template-columns: 1fr;
@@ -1672,6 +1701,83 @@ textarea.form-control {
   border: 1px solid #cbd5e1;
   cursor: pointer;
 }
+/* ===== Grupos de Serviços Avulsos ===== */
+.card-avulso-grupo {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+.card-avulso-grupo h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+}
+.card-avulso-grupo .service-icon {
+  margin-bottom: 1rem;
+}
+.card-avulso-grupo .service-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* ===== Serviços Avulsos Items ===== */
+.servico-avulso-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  padding: 1rem;
+  border-radius: 8px;
+  gap: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.servico-avulso-item:hover {
+  background-color: #F9FAFB;
+}
+
+.servico-avulso-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.servico-avulso-price {
+  font-weight: 700;
+  color: var(--secondary-color);
+  font-size: 1.1rem;
+}
+
+.btn-whatsapp-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: #25D366 !important;
+  color: #FFFFFF !important;
+  padding: 0.6rem 1.2rem !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  z-index: 10 !important;
+  position: relative !important;
+  transition: transform 0.2s ease, background-color 0.2s ease !important;
+  white-space: nowrap !important;
+}
+
+.btn-whatsapp-item:hover {
+  background-color: #1ea952 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  color: #FFFFFF !important;
+}
 
 @media (max-width: 768px) {
 
@@ -2227,6 +2333,19 @@ html[data-theme="dark"] .header-actions .btn-secondary:hover {
     background: #3f577a;
     border-top-color: #2A3A50;
   }
+  html[data-theme="dark"] .dropdown-menu {
+    background: #1E293B !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  }
+  html[data-theme="dark"] .dropdown-menu li a {
+    color: #F8FAFC !important;
+  }
+  html[data-theme="dark"] .dropdown-menu li a:hover,
+  html[data-theme="dark"] .dropdown-menu li a:active {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: var(--secondary-color) !important;
+  }
   html[data-theme="dark"] .mobile-portal-item {
     border-top-color: #2A3A50 !important;
   }
@@ -2279,6 +2398,35 @@ html[data-theme="dark"] .service-card p {
 }
 html[data-theme="dark"] .service-card:hover {
   border-color: var(--secondary-color);
+}
+
+html[data-theme="dark"] .card-avulso-grupo { 
+  background: #1E2D40; 
+  border-color: #2A3A50; 
+}
+
+html[data-theme="dark"] .card-avulso-grupo h3 { 
+  color: #FFFFFF !important; 
+}
+
+html[data-theme="dark"] .servico-avulso-item {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid #374151;
+  color: #E2E8F0;
+}
+
+html[data-theme="dark"] .servico-avulso-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: #4B5563;
+}
+
+html[data-theme="dark"] .servico-avulso-price {
+  color: var(--secondary-color);
+}
+
+html[data-theme="dark"] .btn-whatsapp-outline:hover {
+  background-color: var(--secondary-color);
+  color: #1a202c;
 }
 
 /* 6. Depoimentos */

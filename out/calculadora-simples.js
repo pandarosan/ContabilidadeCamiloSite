@@ -349,18 +349,6 @@ document.addEventListener("DOMContentLoaded", () => {
       somaFaturamentoMes += parseCurrency(input.value);
     });
 
-    if (somaFaturamentoMes > rbt12 && rbt12 > 0) {
-      const erroDiv = document.getElementById("msg-erro-rbt12");
-      if (erroDiv) {
-        erroDiv.style.display = "block";
-      }
-      clearResults();
-      return;
-    } else {
-      const erroDiv = document.getElementById("msg-erro-rbt12");
-      if (erroDiv) erroDiv.style.display = "none";
-    }
-
     let dasTotal = 0;
 
     fatMesInputs.forEach(input => {

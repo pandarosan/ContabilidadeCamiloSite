@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculadora de INSS - Contabilidade Camilo</title>
   <meta name="description" content="Calculadora de INSS para CLT, Autônomos e Pró-labore. Descubra sua alíquota e o valor exato da contribuição mensal." />
-  <link rel="stylesheet" href="/style.css?v=32">
+  <link rel="stylesheet" href="/style.css?v=35">
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <style>
     .calc-container { padding: 2rem; background-color: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -160,7 +160,13 @@
       </a>
       <nav class="nav">
                 <ul class="nav-list">
-          <li><a href="planos.html" class="nav-link">Planos</a></li>
+          <li class="dropdown">
+            <a href="#" class="nav-link">Planos <span class="caret">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="planos.html">Planos Mensais</a></li>
+              <li><a href="servicos-avulsos.html">Serviços Avulsos</a></li>
+            </ul>
+          </li>
           <li class="dropdown">
             <a href="index.html#solucoes" class="nav-link">Soluções <span class="caret">▾</span></a>
             <ul class="dropdown-menu">
@@ -475,6 +481,7 @@
         <h4>Acesso Rápido</h4>
         <ul class="footer-links">
           <li><a href="planos.html" target="_blank" rel="noopener noreferrer">Planos</a></li>
+          <li><a href="servicos-avulsos.html" target="_blank" rel="noopener noreferrer">Serviços Avulsos</a></li>
           <li><a href="noticias-e-artigos.html" target="_blank" rel="noopener noreferrer">Notícias & Artigos</a></li>
           <li><a href="index.html#guia-rapido" target="_blank" rel="noopener noreferrer">Guia Rápido & Glossário Contábil</a></li>
           <li><a href="sobre-nos.html" target="_blank" rel="noopener noreferrer">Sobre Nós</a></li>
@@ -576,7 +583,7 @@
         Uso</a></p>
     <p class="footer-dev-credit"
       style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.5); position: absolute; left: 2rem; top: 50%; transform: translateY(-50%); z-index: 2;">
-      <a href="https://wa.me/5511998834347?text=Ol%C3%A1%20PandaRoSan%2C%20estou%20entrando%20em%20contato%20atrav%C3%A9s%20da%20assinatura%20no%20site%20da%20Contabilidade%20Camilo."
+      <a href="https://pandarosan.com.br/"
         target="_blank" style="color: rgba(255,255,255,0.5); text-decoration: none;"
         onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">
         <span style="font-size: 0.85rem;">🌐</span> por PandaRoSan.com.br
@@ -614,7 +621,7 @@
     </div>
   </div>
 
-  <script type="module" src="/main.js?v=28"></script>
+  <script type="module" src="/main.js?v=29"></script>
   <script src="/calculadora-inss.js"></script>
 </body>
 </html>

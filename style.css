@@ -1001,13 +1001,42 @@ textarea.form-control {
   .dropdown-menu {
     position: static !important;
     box-shadow: none !important;
-    display: none;
-    background: #f8fafc !important;
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: none !important;
+    background: #f1f5f9 !important;
     padding: 0.5rem 0 !important;
     border: none !important;
+    border-radius: 8px !important;
+    margin: 0.35rem 1rem !important;
+    transition: none !important;
   }
-  .dropdown.active .dropdown-menu {
+  .dropdown.active > .dropdown-menu {
     display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+  .dropdown-menu li a {
+    white-space: normal !important;
+    padding: 0.65rem 1rem !important;
+    font-size: 0.95rem !important;
+    color: #1E293B !important;
+    line-height: 1.35 !important;
+  }
+  .dropdown-menu li a:hover,
+  .dropdown-menu li a:active {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    color: var(--primary-color) !important;
+    padding-left: 1rem !important;
+  }
+  .caret {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .dropdown.active > a .caret {
+    transform: rotate(180deg);
   }
   .footer-content {
     grid-template-columns: 1fr;
@@ -2303,6 +2332,19 @@ html[data-theme="dark"] .header-actions .btn-secondary:hover {
   html[data-theme="dark"] .nav-list {
     background: #3f577a;
     border-top-color: #2A3A50;
+  }
+  html[data-theme="dark"] .dropdown-menu {
+    background: #1E293B !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  }
+  html[data-theme="dark"] .dropdown-menu li a {
+    color: #F8FAFC !important;
+  }
+  html[data-theme="dark"] .dropdown-menu li a:hover,
+  html[data-theme="dark"] .dropdown-menu li a:active {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: var(--secondary-color) !important;
   }
   html[data-theme="dark"] .mobile-portal-item {
     border-top-color: #2A3A50 !important;

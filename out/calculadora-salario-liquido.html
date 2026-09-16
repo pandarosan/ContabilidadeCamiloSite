@@ -7,7 +7,7 @@
   <title>Cálculo Salário Líquido - Contabilidade Camilo</title>
   <meta name="description"
     content="Calculadora de Salário Líquido CLT e Autônomos. Descubra os descontos reais de INSS e IRPF na folha de pagamento." />
-  <link rel="stylesheet" href="/style.css?v=32">
+  <link rel="stylesheet" href="/style.css?v=35">
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <style>
     .calc-container {
@@ -344,7 +344,13 @@
       </a>
       <nav class="nav">
         <ul class="nav-list">
-          <li><a href="planos.html" class="nav-link">Planos</a></li>
+          <li class="dropdown">
+            <a href="#" class="nav-link">Planos <span class="caret">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="planos.html">Planos Mensais</a></li>
+              <li><a href="servicos-avulsos.html">Serviços Avulsos</a></li>
+            </ul>
+          </li>
           <li class="dropdown">
             <a href="index.html#solucoes" class="nav-link">Soluções <span class="caret">▾</span></a>
             <ul class="dropdown-menu">
@@ -460,20 +466,8 @@
           </div>
         </div>
 
-        <div class="seo-text-block hide-print" style="color: var(--text-color); line-height: 1.6; margin-bottom: 2rem;">
-          <h2 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.3rem;">Como funciona o Cálculo do
-            Salário Líquido?</h2>
-          <p style="margin-bottom: 1rem;">O cálculo do salário líquido em <span class="dynamic-ano">2026</span> leva em
-            consideração uma série de regras oficiais da Receita Federal e da Previdência Social. Primeiro, é aplicada a
-            tabela progressiva do <strong>INSS</strong>, que atua em sistema de "cascata" para trabalhadores CLT, ou
-            alíquotas diretas para autônomos (MEI e Carnê-Leão).</p>
-          <p>Após o desconto do INSS e eventuais deduções por dependentes ou pensão alimentícia judicial, aplicamos a
-            tabela do <strong>IRPF (Imposto de Renda Retido na Fonte)</strong>, considerando a regra mais benéfica para
-            o trabalhador, como o Desconto Simplificado legal.</p>
-        </div>
-
         <div id="cta-resultado" class="hide-print"
-          style="display: none; background-color: #f0fdf4; padding: 1rem; border-radius: 8px; margin-top: 2rem; text-align: center; border: 1px solid #dcfce3;">
+          style="display: none; background-color: #f0fdf4; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; text-align: center; border: 1px solid #dcfce3;">
           <p style="color: #1E2D40; font-size: 1.05rem; margin-bottom: 1rem; font-weight: 500;">Os impostos estão
             corroendo seus rendimentos? Descubra como a abertura de um CNPJ pode ser mais lucrativa!</p>
           <a href="https://wa.me/5511944913323?text=Ol%C3%A1%21%20Fiz%20uma%20simula%C3%A7%C3%A3o%20de%20Sal%C3%A1rio%20L%C3%A1quido%20e%20gostaria%20de%20saber%20se%20abrir%20um%20CNPJ%20vale%20a%20pena%20para%20mim."
@@ -485,6 +479,18 @@
             </svg>
             Falar com Especialista
           </a>
+        </div>
+
+        <div class="seo-text-block hide-print" style="color: var(--text-color); line-height: 1.6; margin-bottom: 2rem;">
+          <h2 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.3rem;">Como funciona o Cálculo do
+            Salário Líquido?</h2>
+          <p style="margin-bottom: 1rem;">O cálculo do salário líquido em <span class="dynamic-ano">2026</span> leva em
+            consideração uma série de regras oficiais da Receita Federal e da Previdência Social. Primeiro, é aplicada a
+            tabela progressiva do <strong>INSS</strong>, que atua em sistema de "cascata" para trabalhadores CLT, ou
+            alíquotas diretas para autônomos (MEI e Carnê-Leão).</p>
+          <p>Após o desconto do INSS e eventuais deduções por dependentes ou pensão alimentícia judicial, aplicamos a
+            tabela do <strong>IRPF (Imposto de Renda Retido na Fonte)</strong>, considerando a regra mais benéfica para
+            o trabalhador, como o Desconto Simplificado legal.</p>
         </div>
       </div>
 
@@ -733,6 +739,7 @@
         <h4>Acesso Rápido</h4>
         <ul class="footer-links">
           <li><a href="planos.html" target="_blank" rel="noopener noreferrer">Planos</a></li>
+          <li><a href="servicos-avulsos.html" target="_blank" rel="noopener noreferrer">Serviços Avulsos</a></li>
           <li><a href="noticias-e-artigos.html" target="_blank" rel="noopener noreferrer">Notícias & Artigos</a></li>
           <li><a href="index.html#guia-rapido" target="_blank" rel="noopener noreferrer">Guia Rápido & Glossário
               Contábil</a></li>
@@ -838,7 +845,7 @@
         Uso</a></p>
     <p class="footer-dev-credit"
       style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.5); position: absolute; left: 2rem; top: 50%; transform: translateY(-50%); z-index: 2;">
-      <a href="https://wa.me/5511998834347?text=Ol%C3%A1%20PandaRoSan%2C%20estou%20entrando%20em%20contato%20atrav%C3%A9s%20da%20assinatura%20no%20site%20da%20Contabilidade%20Camilo."
+      <a href="https://pandarosan.com.br/"
         target="_blank" style="color: rgba(255,255,255,0.5); text-decoration: none;"
         onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">
         <span style="font-size: 0.85rem;">🌐</span> por PandaRoSan.com.br
@@ -881,7 +888,7 @@
     </div>
   </div>
 
-  <script type="module" src="/main.js?v=28"></script>
+  <script type="module" src="/main.js?v=29"></script>
   <script src="/calculadora-salario-liquido.js"></script>
 </body>
 

@@ -4,10 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="Contabilidade digital e consultiva para empresas em Jundiaí e todo o Brasil. Abertura de empresas, gestão fiscal, folha de pagamento e planejamento tributário com mais de 17 anos de experiência.">
-  <title>Contabilidade em Jundiaí e Gestão Digital para PMEs | Contabilidade Camilo</title>
-  <link rel="stylesheet" href="/style.css?v=32">
+  <meta name="description" content="Contabilidade consultiva para empresas em todo o Brasil e também para você.">
+  <title>Contabilidade para Empresas e Pessoas</title>
+  
+  <!-- Open Graph / Redes Sociais -->
+  <meta property="og:title" content="Contabilidade para Empresas e Pessoas">
+  <meta property="og:description" content="Contabilidade consultiva para empresas em todo o Brasil e também para você.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://contabilidadecamilo.com.br/">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contabilidade para Empresas e Pessoas">
+  <meta name="twitter:description" content="Contabilidade consultiva para empresas em todo o Brasil e também para você.">
+  <link rel="stylesheet" href="/style.css?v=35">
   <link rel="stylesheet" href="/enquete.css">
   <script src="/enquete.js" defer></script>
 
@@ -50,7 +60,13 @@
       </a>
       <nav class="nav">
         <ul class="nav-list">
-          <li><a href="planos.html" class="nav-link">Planos</a></li>
+          <li class="dropdown">
+            <a href="#" class="nav-link">Planos <span class="caret">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="planos.html">Planos Mensais</a></li>
+              <li><a href="servicos-avulsos.html">Serviços Avulsos</a></li>
+            </ul>
+          </li>
           <li class="dropdown">
             <a href="index.html#solucoes" class="nav-link">Soluções <span class="caret">▾</span></a>
             <ul class="dropdown-menu">
@@ -1067,6 +1083,7 @@
         <h4>Acesso Rápido</h4>
         <ul class="footer-links">
           <li><a href="planos.html" target="_blank" rel="noopener noreferrer">Planos</a></li>
+          <li><a href="servicos-avulsos.html" target="_blank" rel="noopener noreferrer">Serviços Avulsos</a></li>
           <li><a href="noticias-e-artigos.html" target="_blank" rel="noopener noreferrer">Notícias & Artigos</a></li>
           <li><a href="index.html#guia-rapido" target="_blank" rel="noopener noreferrer">Guia Rápido & Glossário Contábil</a></li>
           <li><a href="sobre-nos.html" target="_blank" rel="noopener noreferrer">Sobre Nós</a></li>
@@ -1168,7 +1185,7 @@
         Uso</a></p>
     <p class="footer-dev-credit"
       style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.5); position: absolute; left: 2rem; top: 50%; transform: translateY(-50%); z-index: 2;">
-      <a href="https://wa.me/5511998834347?text=Ol%C3%A1%20PandaRoSan%2C%20estou%20entrando%20em%20contato%20atrav%C3%A9s%20da%20assinatura%20no%20site%20da%20Contabilidade%20Camilo."
+      <a href="https://pandarosan.com.br/"
         target="_blank" rel="noopener noreferrer"
         style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;"
         onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">🌐 por
@@ -1240,7 +1257,7 @@
     </div>
   </div>
 
-  <script type="module" src="/main.js?v=28"></script>
+  <script type="module" src="/main.js?v=29"></script>
   <script>
     // Correção de rota e scroll ao vir de outras páginas
     window.addEventListener('load', function () {

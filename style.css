@@ -2281,9 +2281,23 @@ html[data-theme="dark"] .service-card:hover {
   border-color: var(--secondary-color);
 }
 
+html[data-theme="dark"] .service-card h3 { 
+  color: #FFFFFF !important; 
+}
+
 html[data-theme="dark"] .servico-avulso-item {
   background-color: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid #374151;
+  color: #E2E8F0;
+}
+
+html[data-theme="dark"] .servico-avulso-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: #4B5563;
+}
+
+html[data-theme="dark"] .servico-avulso-price {
+  color: var(--secondary-color);
 }
 
 html[data-theme="dark"] .btn-whatsapp-outline:hover {
